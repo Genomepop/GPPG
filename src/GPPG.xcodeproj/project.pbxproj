@@ -1,0 +1,426 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		50149BDA09E781A5002DEE6A /* GPPG.h in Headers */ = {isa = PBXBuildFile; fileRef = 50149BD909E781A5002DEE6A /* GPPG.h */; };
+		5073E0CB09E734E500EC74B6 /* GPPG.cp in Sources */ = {isa = PBXBuildFile; fileRef = 5073E0C409E734A800EC74B6 /* GPPG.cp */; };
+		BC1972AB15D549B300F21929 /* Genotype.h in Headers */ = {isa = PBXBuildFile; fileRef = BC1972A915D549B300F21929 /* Genotype.h */; };
+		BC1972AC15D549B300F21929 /* Genotype.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC1972AA15D549B300F21929 /* Genotype.cpp */; };
+		BC1972B315D556F900F21929 /* GenotypeOp.h in Headers */ = {isa = PBXBuildFile; fileRef = BC1972B115D556F900F21929 /* GenotypeOp.h */; };
+		BC1972B415D556F900F21929 /* GenotypeOp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC1972B215D556F900F21929 /* GenotypeOp.cpp */; };
+		BC19738B15D8B0E400F21929 /* DNAOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC19738915D8B0E400F21929 /* DNAOperation.cpp */; };
+		BC19738C15D8B0E400F21929 /* DNAOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = BC19738A15D8B0E400F21929 /* DNAOperation.h */; };
+		BC94885E155D8D40001DDF87 /* Operation.h in Headers */ = {isa = PBXBuildFile; fileRef = BC94885D155D8D40001DDF87 /* Operation.h */; };
+		BC948860155D8D79001DDF87 /* OperationHeap.h in Headers */ = {isa = PBXBuildFile; fileRef = BC94885F155D8D79001DDF87 /* OperationHeap.h */; };
+		BC948875155D9ABA001DDF87 /* OperationHeap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC948874155D9ABA001DDF87 /* OperationHeap.cpp */; };
+		BC948878155D9B01001DDF87 /* CompressionPolicy.h in Headers */ = {isa = PBXBuildFile; fileRef = BC948876155D9B01001DDF87 /* CompressionPolicy.h */; };
+		BC948879155D9B01001DDF87 /* CompressionPolicy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC948877155D9B01001DDF87 /* CompressionPolicy.cpp */; };
+		BC948888155D9CD2001DDF87 /* Operation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC948887155D9CD2001DDF87 /* Operation.cpp */; };
+		BC9488D7155DA4A7001DDF87 /* GreedyLoad.h in Headers */ = {isa = PBXBuildFile; fileRef = BC9488D5155DA4A7001DDF87 /* GreedyLoad.h */; };
+		BC9488D8155DA4A7001DDF87 /* GreedyLoad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC9488D6155DA4A7001DDF87 /* GreedyLoad.cpp */; };
+		BC9489961561F81D001DDF87 /* libGPPG.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D2AAC09D05546B4700DB518D /* libGPPG.dylib */; };
+		BC94899A1561F870001DDF87 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC9489991561F870001DDF87 /* main.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		BC9489941561F812001DDF87 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0867D690FE84028FC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC09C05546B4700DB518D;
+			remoteInfo = GPPG;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		32BAE0B70371A74B00C91783 /* GPPG_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPPG_Prefix.pch; sourceTree = "<group>"; };
+		50149BD909E781A5002DEE6A /* GPPG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPPG.h; sourceTree = "<group>"; };
+		5073E0C409E734A800EC74B6 /* GPPG.cp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = GPPG.cp; sourceTree = "<group>"; };
+		5073E0C609E734A800EC74B6 /* GPPGProj.xcconfig */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.xcconfig; path = GPPGProj.xcconfig; sourceTree = "<group>"; };
+		5073E0C709E734A800EC74B6 /* GPPGTarget.xcconfig */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.xcconfig; path = GPPGTarget.xcconfig; sourceTree = "<group>"; };
+		50B2938909F016FC00694E55 /* GPPGPriv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPPGPriv.h; sourceTree = "<group>"; };
+		BC1972A915D549B300F21929 /* Genotype.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Genotype.h; path = Base/Genotype.h; sourceTree = "<group>"; };
+		BC1972AA15D549B300F21929 /* Genotype.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Genotype.cpp; path = Base/Genotype.cpp; sourceTree = "<group>"; };
+		BC1972B115D556F900F21929 /* GenotypeOp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GenotypeOp.h; path = Operation/GenotypeOp.h; sourceTree = "<group>"; };
+		BC1972B215D556F900F21929 /* GenotypeOp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GenotypeOp.cpp; path = Operation/GenotypeOp.cpp; sourceTree = "<group>"; };
+		BC19738915D8B0E400F21929 /* DNAOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DNAOperation.cpp; path = Model/DNA/DNAOperation.cpp; sourceTree = "<group>"; };
+		BC19738A15D8B0E400F21929 /* DNAOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DNAOperation.h; path = Model/DNA/DNAOperation.h; sourceTree = "<group>"; };
+		BC94885D155D8D40001DDF87 /* Operation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Operation.h; path = Operation/Operation.h; sourceTree = "<group>"; };
+		BC94885F155D8D79001DDF87 /* OperationHeap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OperationHeap.h; path = Operation/OperationHeap.h; sourceTree = "<group>"; };
+		BC948874155D9ABA001DDF87 /* OperationHeap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OperationHeap.cpp; path = Operation/OperationHeap.cpp; sourceTree = "<group>"; };
+		BC948876155D9B01001DDF87 /* CompressionPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CompressionPolicy.h; path = Operation/CompressionPolicy.h; sourceTree = "<group>"; };
+		BC948877155D9B01001DDF87 /* CompressionPolicy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CompressionPolicy.cpp; path = Operation/CompressionPolicy.cpp; sourceTree = "<group>"; };
+		BC948887155D9CD2001DDF87 /* Operation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Operation.cpp; path = Operation/Operation.cpp; sourceTree = "<group>"; };
+		BC9488D5155DA4A7001DDF87 /* GreedyLoad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GreedyLoad.h; path = Operation/GreedyLoad.h; sourceTree = "<group>"; };
+		BC9488D6155DA4A7001DDF87 /* GreedyLoad.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GreedyLoad.cpp; path = Operation/GreedyLoad.cpp; sourceTree = "<group>"; };
+		BC9489901561F80A001DDF87 /* GPPGDemo */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GPPGDemo; sourceTree = BUILT_PRODUCTS_DIR; };
+		BC9489991561F870001DDF87 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = Demo/main.cpp; sourceTree = "<group>"; };
+		D2AAC09D05546B4700DB518D /* libGPPG.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libGPPG.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BC94898E1561F80A001DDF87 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BC9489961561F81D001DDF87 /* libGPPG.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D2AAC09B05546B4700DB518D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		034768DDFF38A45A11DB9C8B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D2AAC09D05546B4700DB518D /* libGPPG.dylib */,
+				BC9489901561F80A001DDF87 /* GPPGDemo */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0867D691FE84028FC02AAC07 /* GPPG */ = {
+			isa = PBXGroup;
+			children = (
+				5073E0CA09E734BC00EC74B6 /* Configuration Files */,
+				08FB77ACFE841707C02AAC07 /* Source */,
+				0867D69AFE84028FC02AAC07 /* External Frameworks and Libraries */,
+				034768DDFF38A45A11DB9C8B /* Products */,
+			);
+			name = GPPG;
+			sourceTree = "<group>";
+		};
+		0867D69AFE84028FC02AAC07 /* External Frameworks and Libraries */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "External Frameworks and Libraries";
+			sourceTree = "<group>";
+		};
+		08FB77ACFE841707C02AAC07 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				BC19730215D56E4100F21929 /* Model */,
+				BC1972A815D5496900F21929 /* Base */,
+				BC9489971561F83D001DDF87 /* Demo */,
+				BC94885C155D8D1F001DDF87 /* Operation */,
+				32BAE0B70371A74B00C91783 /* GPPG_Prefix.pch */,
+				50149BD909E781A5002DEE6A /* GPPG.h */,
+				50B2938909F016FC00694E55 /* GPPGPriv.h */,
+				5073E0C409E734A800EC74B6 /* GPPG.cp */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		5073E0CA09E734BC00EC74B6 /* Configuration Files */ = {
+			isa = PBXGroup;
+			children = (
+				5073E0C609E734A800EC74B6 /* GPPGProj.xcconfig */,
+				5073E0C709E734A800EC74B6 /* GPPGTarget.xcconfig */,
+			);
+			name = "Configuration Files";
+			sourceTree = "<group>";
+		};
+		BC1972A815D5496900F21929 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				BC1972A915D549B300F21929 /* Genotype.h */,
+				BC1972AA15D549B300F21929 /* Genotype.cpp */,
+			);
+			name = Base;
+			sourceTree = "<group>";
+		};
+		BC19730215D56E4100F21929 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				BC19730315D56E6700F21929 /* DNA */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		BC19730315D56E6700F21929 /* DNA */ = {
+			isa = PBXGroup;
+			children = (
+				BC19738915D8B0E400F21929 /* DNAOperation.cpp */,
+				BC19738A15D8B0E400F21929 /* DNAOperation.h */,
+			);
+			name = DNA;
+			sourceTree = "<group>";
+		};
+		BC94885C155D8D1F001DDF87 /* Operation */ = {
+			isa = PBXGroup;
+			children = (
+				BC94885D155D8D40001DDF87 /* Operation.h */,
+				BC94885F155D8D79001DDF87 /* OperationHeap.h */,
+				BC948874155D9ABA001DDF87 /* OperationHeap.cpp */,
+				BC948876155D9B01001DDF87 /* CompressionPolicy.h */,
+				BC948877155D9B01001DDF87 /* CompressionPolicy.cpp */,
+				BC948887155D9CD2001DDF87 /* Operation.cpp */,
+				BC9488D5155DA4A7001DDF87 /* GreedyLoad.h */,
+				BC9488D6155DA4A7001DDF87 /* GreedyLoad.cpp */,
+				BC1972B115D556F900F21929 /* GenotypeOp.h */,
+				BC1972B215D556F900F21929 /* GenotypeOp.cpp */,
+			);
+			name = Operation;
+			sourceTree = "<group>";
+		};
+		BC9489971561F83D001DDF87 /* Demo */ = {
+			isa = PBXGroup;
+			children = (
+				BC9489991561F870001DDF87 /* main.cpp */,
+			);
+			name = Demo;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		D2AAC09905546B4700DB518D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				50149BDA09E781A5002DEE6A /* GPPG.h in Headers */,
+				BC94885E155D8D40001DDF87 /* Operation.h in Headers */,
+				BC948860155D8D79001DDF87 /* OperationHeap.h in Headers */,
+				BC948878155D9B01001DDF87 /* CompressionPolicy.h in Headers */,
+				BC9488D7155DA4A7001DDF87 /* GreedyLoad.h in Headers */,
+				BC1972AB15D549B300F21929 /* Genotype.h in Headers */,
+				BC1972B315D556F900F21929 /* GenotypeOp.h in Headers */,
+				BC19738C15D8B0E400F21929 /* DNAOperation.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		BC94898F1561F80A001DDF87 /* GPPGDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BC9489981561F83D001DDF87 /* Build configuration list for PBXNativeTarget "GPPGDemo" */;
+			buildPhases = (
+				BC94898D1561F80A001DDF87 /* Sources */,
+				BC94898E1561F80A001DDF87 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BC9489951561F812001DDF87 /* PBXTargetDependency */,
+			);
+			name = GPPGDemo;
+			productName = GPPGDemo;
+			productReference = BC9489901561F80A001DDF87 /* GPPGDemo */;
+			productType = "com.apple.product-type.tool";
+		};
+		D2AAC09C05546B4700DB518D /* GPPG */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DEB916008733D950010E9CD /* Build configuration list for PBXNativeTarget "GPPG" */;
+			buildPhases = (
+				D2AAC09905546B4700DB518D /* Headers */,
+				D2AAC09B05546B4700DB518D /* Frameworks */,
+				D2AAC09A05546B4700DB518D /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GPPG;
+			productName = libGPPG;
+			productReference = D2AAC09D05546B4700DB518D /* libGPPG.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0867D690FE84028FC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+			};
+			buildConfigurationList = 1DEB916408733D950010E9CD /* Build configuration list for PBXProject "GPPG" */;
+			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
+			mainGroup = 0867D691FE84028FC02AAC07 /* GPPG */;
+			productRefGroup = 034768DDFF38A45A11DB9C8B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D2AAC09C05546B4700DB518D /* GPPG */,
+				BC94898F1561F80A001DDF87 /* GPPGDemo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BC94898D1561F80A001DDF87 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BC94899A1561F870001DDF87 /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D2AAC09A05546B4700DB518D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5073E0CB09E734E500EC74B6 /* GPPG.cp in Sources */,
+				BC948875155D9ABA001DDF87 /* OperationHeap.cpp in Sources */,
+				BC948879155D9B01001DDF87 /* CompressionPolicy.cpp in Sources */,
+				BC948888155D9CD2001DDF87 /* Operation.cpp in Sources */,
+				BC9488D8155DA4A7001DDF87 /* GreedyLoad.cpp in Sources */,
+				BC1972AC15D549B300F21929 /* Genotype.cpp in Sources */,
+				BC1972B415D556F900F21929 /* GenotypeOp.cpp in Sources */,
+				BC19738B15D8B0E400F21929 /* DNAOperation.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BC9489951561F812001DDF87 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D2AAC09C05546B4700DB518D /* GPPG */;
+			targetProxy = BC9489941561F812001DDF87 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		1DEB916108733D950010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5073E0C709E734A800EC74B6 /* GPPGTarget.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = GPPG_Prefix.pch;
+			};
+			name = Debug;
+		};
+		1DEB916208733D950010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5073E0C709E734A800EC74B6 /* GPPGTarget.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = GPPG_Prefix.pch;
+				STRIP_INSTALLED_PRODUCT = YES;
+				STRIP_STYLE = "non-global";
+			};
+			name = Release;
+		};
+		1DEB916508733D950010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5073E0C609E734A800EC74B6 /* GPPGProj.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.6;
+			};
+			name = Debug;
+		};
+		1DEB916608733D950010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5073E0C609E734A800EC74B6 /* GPPGProj.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.6;
+			};
+			name = Release;
+		};
+		BC9489921561F80A001DDF87 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INSTALL_PATH = /usr/local/bin;
+				PREBINDING = NO;
+				PRODUCT_NAME = GPPGDemo;
+			};
+			name = Debug;
+		};
+		BC9489931561F80A001DDF87 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/bin;
+				PREBINDING = NO;
+				PRODUCT_NAME = GPPGDemo;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DEB916008733D950010E9CD /* Build configuration list for PBXNativeTarget "GPPG" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB916108733D950010E9CD /* Debug */,
+				1DEB916208733D950010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DEB916408733D950010E9CD /* Build configuration list for PBXProject "GPPG" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB916508733D950010E9CD /* Debug */,
+				1DEB916608733D950010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BC9489981561F83D001DDF87 /* Build configuration list for PBXNativeTarget "GPPGDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BC9489921561F80A001DDF87 /* Debug */,
+				BC9489931561F80A001DDF87 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0867D690FE84028FC02AAC07 /* Project object */;
+}
