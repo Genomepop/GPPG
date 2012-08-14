@@ -43,19 +43,19 @@ namespace GPPG {
 		void setFrequency(double f);
 		
 		double total() const;
-		void setTotal(double t) const;
+		void setTotal(double t);
 		
 		virtual T* data() const;
-		
-		
+
 	protected:
-		T* _data;
-		
+		void setData(T* data);		
+	
 	private:
 		// Disable copy-construction
 		Genotype<T>(Genotype<T> const& g) {}
 		Genotype<T>& operator=(Genotype<T> const& g) {}
 		
+		T* _data;				
 		double _freq, _total;
 		
 	};

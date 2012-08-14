@@ -7,14 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		50149BDA09E781A5002DEE6A /* GPPG.h in Headers */ = {isa = PBXBuildFile; fileRef = 50149BD909E781A5002DEE6A /* GPPG.h */; };
-		5073E0CB09E734E500EC74B6 /* GPPG.cp in Sources */ = {isa = PBXBuildFile; fileRef = 5073E0C409E734A800EC74B6 /* GPPG.cp */; };
 		BC1972AB15D549B300F21929 /* Genotype.h in Headers */ = {isa = PBXBuildFile; fileRef = BC1972A915D549B300F21929 /* Genotype.h */; };
 		BC1972AC15D549B300F21929 /* Genotype.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC1972AA15D549B300F21929 /* Genotype.cpp */; };
-		BC1972B315D556F900F21929 /* GenotypeOp.h in Headers */ = {isa = PBXBuildFile; fileRef = BC1972B115D556F900F21929 /* GenotypeOp.h */; };
-		BC1972B415D556F900F21929 /* GenotypeOp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC1972B215D556F900F21929 /* GenotypeOp.cpp */; };
 		BC19738B15D8B0E400F21929 /* DNAOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC19738915D8B0E400F21929 /* DNAOperation.cpp */; };
 		BC19738C15D8B0E400F21929 /* DNAOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = BC19738A15D8B0E400F21929 /* DNAOperation.h */; };
+		BC6FC51315D997CC0094FEF1 /* SequenceOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = BC6FC51115D997CC0094FEF1 /* SequenceOperation.h */; };
+		BC6FC51415D997CC0094FEF1 /* SequenceOperation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC6FC51215D997CC0094FEF1 /* SequenceOperation.cpp */; };
 		BC94885E155D8D40001DDF87 /* Operation.h in Headers */ = {isa = PBXBuildFile; fileRef = BC94885D155D8D40001DDF87 /* Operation.h */; };
 		BC948860155D8D79001DDF87 /* OperationHeap.h in Headers */ = {isa = PBXBuildFile; fileRef = BC94885F155D8D79001DDF87 /* OperationHeap.h */; };
 		BC948875155D9ABA001DDF87 /* OperationHeap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC948874155D9ABA001DDF87 /* OperationHeap.cpp */; };
@@ -38,18 +36,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		32BAE0B70371A74B00C91783 /* GPPG_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPPG_Prefix.pch; sourceTree = "<group>"; };
-		50149BD909E781A5002DEE6A /* GPPG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPPG.h; sourceTree = "<group>"; };
-		5073E0C409E734A800EC74B6 /* GPPG.cp */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.cpp.cpp; path = GPPG.cp; sourceTree = "<group>"; };
 		5073E0C609E734A800EC74B6 /* GPPGProj.xcconfig */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.xcconfig; path = GPPGProj.xcconfig; sourceTree = "<group>"; };
 		5073E0C709E734A800EC74B6 /* GPPGTarget.xcconfig */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.xcconfig; path = GPPGTarget.xcconfig; sourceTree = "<group>"; };
-		50B2938909F016FC00694E55 /* GPPGPriv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPPGPriv.h; sourceTree = "<group>"; };
 		BC1972A915D549B300F21929 /* Genotype.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Genotype.h; path = Base/Genotype.h; sourceTree = "<group>"; };
 		BC1972AA15D549B300F21929 /* Genotype.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Genotype.cpp; path = Base/Genotype.cpp; sourceTree = "<group>"; };
-		BC1972B115D556F900F21929 /* GenotypeOp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GenotypeOp.h; path = Operation/GenotypeOp.h; sourceTree = "<group>"; };
-		BC1972B215D556F900F21929 /* GenotypeOp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GenotypeOp.cpp; path = Operation/GenotypeOp.cpp; sourceTree = "<group>"; };
 		BC19738915D8B0E400F21929 /* DNAOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DNAOperation.cpp; path = Model/DNA/DNAOperation.cpp; sourceTree = "<group>"; };
 		BC19738A15D8B0E400F21929 /* DNAOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DNAOperation.h; path = Model/DNA/DNAOperation.h; sourceTree = "<group>"; };
+		BC6FC51115D997CC0094FEF1 /* SequenceOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SequenceOperation.h; path = Model/SequenceOperation.h; sourceTree = "<group>"; };
+		BC6FC51215D997CC0094FEF1 /* SequenceOperation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SequenceOperation.cpp; path = Model/SequenceOperation.cpp; sourceTree = "<group>"; };
 		BC94885D155D8D40001DDF87 /* Operation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Operation.h; path = Operation/Operation.h; sourceTree = "<group>"; };
 		BC94885F155D8D79001DDF87 /* OperationHeap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OperationHeap.h; path = Operation/OperationHeap.h; sourceTree = "<group>"; };
 		BC948874155D9ABA001DDF87 /* OperationHeap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OperationHeap.cpp; path = Operation/OperationHeap.cpp; sourceTree = "<group>"; };
@@ -116,10 +110,6 @@
 				BC1972A815D5496900F21929 /* Base */,
 				BC9489971561F83D001DDF87 /* Demo */,
 				BC94885C155D8D1F001DDF87 /* Operation */,
-				32BAE0B70371A74B00C91783 /* GPPG_Prefix.pch */,
-				50149BD909E781A5002DEE6A /* GPPG.h */,
-				50B2938909F016FC00694E55 /* GPPGPriv.h */,
-				5073E0C409E734A800EC74B6 /* GPPG.cp */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -145,6 +135,7 @@
 		BC19730215D56E4100F21929 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				BC6FC51015D997AF0094FEF1 /* Sequence */,
 				BC19730315D56E6700F21929 /* DNA */,
 			);
 			name = Model;
@@ -159,6 +150,15 @@
 			name = DNA;
 			sourceTree = "<group>";
 		};
+		BC6FC51015D997AF0094FEF1 /* Sequence */ = {
+			isa = PBXGroup;
+			children = (
+				BC6FC51115D997CC0094FEF1 /* SequenceOperation.h */,
+				BC6FC51215D997CC0094FEF1 /* SequenceOperation.cpp */,
+			);
+			name = Sequence;
+			sourceTree = "<group>";
+		};
 		BC94885C155D8D1F001DDF87 /* Operation */ = {
 			isa = PBXGroup;
 			children = (
@@ -170,8 +170,6 @@
 				BC948887155D9CD2001DDF87 /* Operation.cpp */,
 				BC9488D5155DA4A7001DDF87 /* GreedyLoad.h */,
 				BC9488D6155DA4A7001DDF87 /* GreedyLoad.cpp */,
-				BC1972B115D556F900F21929 /* GenotypeOp.h */,
-				BC1972B215D556F900F21929 /* GenotypeOp.cpp */,
 			);
 			name = Operation;
 			sourceTree = "<group>";
@@ -191,14 +189,13 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				50149BDA09E781A5002DEE6A /* GPPG.h in Headers */,
 				BC94885E155D8D40001DDF87 /* Operation.h in Headers */,
 				BC948860155D8D79001DDF87 /* OperationHeap.h in Headers */,
 				BC948878155D9B01001DDF87 /* CompressionPolicy.h in Headers */,
 				BC9488D7155DA4A7001DDF87 /* GreedyLoad.h in Headers */,
 				BC1972AB15D549B300F21929 /* Genotype.h in Headers */,
-				BC1972B315D556F900F21929 /* GenotypeOp.h in Headers */,
 				BC19738C15D8B0E400F21929 /* DNAOperation.h in Headers */,
+				BC6FC51315D997CC0094FEF1 /* SequenceOperation.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,6 +208,7 @@
 			buildPhases = (
 				BC94898D1561F80A001DDF87 /* Sources */,
 				BC94898E1561F80A001DDF87 /* Frameworks */,
+				BC6FC38A15D94CAE0094FEF1 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -268,6 +266,22 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		BC6FC38A15D94CAE0094FEF1 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		BC94898D1561F80A001DDF87 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -281,14 +295,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5073E0CB09E734E500EC74B6 /* GPPG.cp in Sources */,
 				BC948875155D9ABA001DDF87 /* OperationHeap.cpp in Sources */,
 				BC948879155D9B01001DDF87 /* CompressionPolicy.cpp in Sources */,
 				BC948888155D9CD2001DDF87 /* Operation.cpp in Sources */,
 				BC9488D8155DA4A7001DDF87 /* GreedyLoad.cpp in Sources */,
 				BC1972AC15D549B300F21929 /* Genotype.cpp in Sources */,
-				BC1972B415D556F900F21929 /* GenotypeOp.cpp in Sources */,
 				BC19738B15D8B0E400F21929 /* DNAOperation.cpp in Sources */,
+				BC6FC51415D997CC0094FEF1 /* SequenceOperation.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

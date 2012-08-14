@@ -12,9 +12,13 @@
 
 #include "Operation.h"
 
-namespace GPPG {
+using namespace GPPG;
 
+namespace Model {
 
+/**
+ * A simple data structure for holding sequence information.
+ */
 struct DNAData {
 	short* seq;
 	int length;

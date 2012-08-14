@@ -10,7 +10,7 @@
 #ifndef CORE_COMPRESSION_POLICY_
 #define CORE_COMPRESSION_POLICY_
 
-#include "Operation.h"
+//#include "Operation.h"
 
 namespace GPPG {
 
