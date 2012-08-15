@@ -11,15 +11,20 @@
 #include <iostream>
 using namespace std;
 
-#include "GreedyLoad.h"
-#include "DNAOperation.h"
+//#include "GreedyLoad.h"
+#include "SequenceOperation.h"
 
 using namespace GPPG;
+using namespace GPPG::Model;
 
 int main ()
 {
-	GreedyLoad gl(3);
-	//DNAOperation dop;
+	//GreedyLoad gl(3);
+	SequenceData* sd = new SequenceData();
+
+	SequenceOperationRoot dop(sd);
+	
+	SequenceData* sd2 = dop.evaluate();
 	
 	cout << "Hello World!";
 	return 0;

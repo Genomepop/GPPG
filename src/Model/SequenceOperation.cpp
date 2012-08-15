@@ -9,11 +9,14 @@
 
 #include "SequenceOperation.h"
 
+
 using namespace GPPG::Model;
+//using namespace GPPG; 
 
 /*******************************************************************
  *				SEQUENCE OPERATION
  */
+/*
 SequenceOperation::SequenceOperation( double cost, int length ) : 
 	Operation<SequenceData>(cost), _length(length) {}
 
@@ -36,11 +39,37 @@ STYPE SequenceOperation::get(int i) const {
 int SequenceOperation::length() const {
 	return _length; 
 }
+*/
 
-/*******************************************************************
- *				SEQUENCE DATA ROOT
- */
-SequenceOperationRoot::SequenceOperationRoot( SequenceData* data ) : SequenceOperation(0, data->length) {
+SequenceData* SequenceData::copy() const
+{
+	SequenceData* other = new SequenceData();
+	other->length = length;
+	other->sequence = (STYPE*)malloc(sizeof(STYPE)*length);
+	memcpy( other->sequence, sequence, sizeof(STYPE)*length);
+	return other;
+}
+
+SequenceOperationRoot::SequenceOperationRoot( SequenceData* data ) : Operation<SequenceData>(0) {
 	setData( data );
 }
 
+
+
+SequencePointChange::SequencePointChange(Operation<SequenceData>& op, int* locs, int numLocs, STYPE* dest) : 
+Operation<SequenceData>(numLocs, op), _loc(locs), _numlocs(numLocs), _c(dest) {}
+
+SequencePointChange::~SequencePointChange() { delete _loc; delete _c; }
+
+SequenceData* SequencePointChange::evaluate() const {
+	
+	SequenceData* sd = Operation<SequenceData>::evaluate();
+	if (sd) return sd;
+	
+	// Get the sequence from the parent and add the point changes
+	sd = parent(0)->evaluate();
+	for (int i=0; i<_numlocs; i++) {
+		sd->sequence[ _loc[i] ] = _c[i];
+	}
+	return sd;
+}

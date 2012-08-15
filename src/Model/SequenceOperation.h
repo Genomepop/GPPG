@@ -9,6 +9,7 @@
 
 #ifndef SEQUENCE_OPERATION_
 #define SEQUENCE_OPERATION_
+
 #include "Operation.h"
 
 namespace GPPG {
@@ -22,44 +23,23 @@ namespace Model {
 	public:
 		STYPE* sequence;
 		int length;
+		
+		SequenceData* copy() const;
+		
 	};
 	
-	class SequenceOperation : public Operation<SequenceData> {
-	public:
-		SequenceOperation( double cost, int length );
-		SequenceOperation( double cost, int length, SequenceOperation& parent1 );
-		SequenceOperation( double cost, int length, SequenceOperation& parent1, SequenceOperation& parent2 );
-		
-		
-		/** Gets the character at position i.
-		 * @param i - location to retrieve
-		 */
-		virtual STYPE get(int i) const;
-		
-		/** Returns the length of the sequence.
-		 *
-		 */
-		int length() const;
-
-		
-	private:
-		int _length;
-	};
 	
-	class SequenceOperationRoot: public SequenceOperation {
+	class SequenceOperationRoot: public Operation<SequenceData> {
 	public:
 		SequenceOperationRoot( SequenceData* data );
 	};
 	
-	class SequencePointChange: public SequenceOperation {
+	class SequencePointChange: public Operation<SequenceData> {
 	public:
-		SequencePointChange(SequenceOperation& op, int* locs, int numLocs, STYPE* dest);
+		SequencePointChange(Operation<SequenceData>& op, int* locs, int numLocs, STYPE* dest);
 		
-		~SequencePointChange();
+		~SequencePointChange(); 
 		
-		STYPE get(int i) const;
-		
-	protected:
 		SequenceData* evaluate() const;
 		
 	private:
@@ -68,24 +48,20 @@ namespace Model {
 		STYPE* _c;		/* Characters to be changed to */
 	};
 	
-	class SequenceDeletion: public SequenceOperation {
+	class SequenceDeletion: public Operation<SequenceData> {
 		
-		SequenceDeletion(SequenceOperation& op, int loc, int span);
+		SequenceDeletion(Operation<SequenceData>& op, int loc, int span);
 		
-		STYPE get(int i) const;
-
-	protected:
 		SequenceData* evaluate() const;
 		
 	private:
 		int _loc, _span;
 	};
 	
-	class SequenceInsertion: public SequenceOperation {
+	class SequenceInsertion: public Operation<SequenceData> {
 	public:
-		SequenceInsertion(SequenceOperation& op, int loc, SequenceData* span);
+		SequenceInsertion(Operation<SequenceData>& op, int loc, SequenceData* span);
 		
-	protected:
 		SequenceData* evaluate() const;
 		
 	private:
@@ -97,4 +73,27 @@ namespace Model {
 }
 
 #endif
+
+//class SequenceOperation : public Operation<SequenceData> {
+//public:
+//	SequenceOperation( double cost, int length );
+//	SequenceOperation( double cost, int length, SequenceOperation& parent1 );
+//	SequenceOperation( double cost, int length, SequenceOperation& parent1, SequenceOperation& parent2 );
+//	
+//	
+//	/** Gets the character at position i.
+//	 * @param i - location to retrieve
+//	 */
+//	virtual STYPE get(int i) const;
+//	
+//	/** Returns the length of the sequence.
+//	 *
+//	 */
+//	int length() const;
+//	
+//	
+//private:
+//	int _length;
+//};
+
 

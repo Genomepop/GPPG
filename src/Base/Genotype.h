@@ -23,8 +23,25 @@ namespace GPPG {
 		virtual double total() const = 0;
 		virtual void setTotal(double total) = 0;
 		
-		//virtual bool operator==(IGenotype const& other) const;
+		virtual bool isActive() const = 0;
 		
+	};
+	
+	class BaseGenotype : public IGenotype {
+	public:
+		BaseGenotype();
+		
+		void configure();
+		double frequency() const;
+		void setFrequency(double freq);
+		
+		double total() const;
+		void setTotal(double total);
+		
+		bool isActive() const;
+		
+	private:
+		double _freq, _total;
 	};
 	
 	/*
@@ -32,23 +49,16 @@ namespace GPPG {
 	 * Subclass this genotype class or use the Template parameter to provide your own content.
 	 * The template is the GenotypeData (e.g. DNA, pathway, etc.)
 	 */
-	template <typename T> class Genotype : public IGenotype {
+	template <typename T> class Genotype : public BaseGenotype {
 		
 	public:
-		Genotype<T>(T* genoData);
+		Genotype<T>(T* genoData) : BaseGenotype(), _data(genoData) {}
 		
-		void configure();
 		
-		double frequency() const;
-		void setFrequency(double f);
-		
-		double total() const;
-		void setTotal(double t);
-		
-		virtual T* data() const;
+		virtual T* data() const { return _data; }
 
 	protected:
-		void setData(T* data);		
+		void setData(T* data) { _data = data; }
 	
 	private:
 		// Disable copy-construction
@@ -56,8 +66,6 @@ namespace GPPG {
 		Genotype<T>& operator=(Genotype<T> const& g) {}
 		
 		T* _data;				
-		double _freq, _total;
-		
 	};
 
 }

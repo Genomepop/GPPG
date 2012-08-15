@@ -7,11 +7,13 @@
  *
  */
 
+// TODO: Move this template code into the header!
 
 #include "Operation.h"
 
 using namespace GPPG;
 
+/*
 template <typename T> Operation<T>::Operation(double cost): 
 Genotype<T>(0) 
 { innerConstructor(cost, 0, 0); }
@@ -24,6 +26,11 @@ template <typename T> Operation<T>::Operation(double cost, Operation<T>& parent,
 Genotype<T>(0)
 { innerConstructor(cost, &parent, &parent2); }
 
+template <typename T>
+Operation<T>::~Operation() {
+	// TODO: What to do about children and parents?
+
+}
 
 template <typename T> void Operation<T>::innerConstructor(double cost, Operation<T>* parent1, Operation<T>* parent2) {
 	_cost = cost;
@@ -93,9 +100,11 @@ int Operation<T>::dataSize() const {
 //	return _genotype;
 //}
 
-template <typename T> double Operation<T>::cost() const { return _cost; }
+template <typename T> 
+double Operation<T>::cost() const { return _cost; }
 
-template <typename T> void Operation<T>::setCompressed(bool compress) {
+template <typename T> 
+void Operation<T>::setCompressed(bool compress) {
 	if (compress && !isCompressed()) {
 		Genotype<T>::setData(0);
 	} else if (!compress && isCompressed()) {
@@ -105,8 +114,14 @@ template <typename T> void Operation<T>::setCompressed(bool compress) {
 }
 
 template <typename T>
-T* Operation<T>::evaluate() const { return NULL; }
+T* Operation<T>::evaluate() const { 
+	if (isCompressed()) {
+		return NULL;
+	}
+	return Genotype<T>::data()->copy();
+}
 
 template <typename T> bool Operation<T>::isCompressed() const {
 	return data() == NULL;
 }
+*/
