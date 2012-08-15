@@ -12,6 +12,8 @@
 
 
 #include "Genotype.h"
+#include "GenotypeFactory.h"
+#include "Mutator.h"
 #include <list>
 
 
@@ -211,6 +213,30 @@ namespace GPPG {
 		
 		
 	};
+	
+	template <typename T> class OperationRoot : public Operation<T> {
+	public:
+		OperationRoot<T>(T* data) : Operation<T>(0) { setData(data); }
+		
+	};
+	
+	template <typename T> class OperationFactory : public GenotypeFactory<T> {
+	public:
+		OperationRoot<T>* random() const { return new OperationRoot<T>( randomData() ); }
+		
+		virtual T* randomData() const = 0;
+	};
+	
+	template <typename T, typename K>
+	class OperationMutator : public IMutator {
+	public:
+		IGenotype* mutate(const IGenotype& geno) const {
+			return mutate( (const Operation<T>&)geno);
+		}
+		
+		virtual Operation<T>* mutate(const Operation<T>& op) const = 0;
+	};
 }
+
 
 #endif

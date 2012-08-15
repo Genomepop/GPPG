@@ -40,3 +40,4 @@ Thumbs.db
 # BUILD PATH #
 ##############
 build/
+boost/

@@ -12,20 +12,21 @@
 using namespace std;
 
 //#include "GreedyLoad.h"
-#include "SequenceOperation.h"
+//#include "SequenceOperation.h"
 
-using namespace GPPG;
-using namespace GPPG::Model;
+//using namespace GPPG;
+//using namespace GPPG::Model;
 
-int main ()
+int main (int argc, char * const argv[])
 {
 	//GreedyLoad gl(3);
+	/*
 	SequenceData* sd = new SequenceData();
 
-	SequenceOperationRoot dop(sd);
+	SequenceRoot dop(sd);
 	
 	SequenceData* sd2 = dop.evaluate();
-	
-	cout << "Hello World!";
+	*/
+	cout << "Hello World!\n";
 	return 0;
 }

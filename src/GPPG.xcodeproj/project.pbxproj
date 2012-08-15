@@ -21,19 +21,7 @@
 		BC948888155D9CD2001DDF87 /* Operation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC948887155D9CD2001DDF87 /* Operation.cpp */; };
 		BC9488D7155DA4A7001DDF87 /* GreedyLoad.h in Headers */ = {isa = PBXBuildFile; fileRef = BC9488D5155DA4A7001DDF87 /* GreedyLoad.h */; };
 		BC9488D8155DA4A7001DDF87 /* GreedyLoad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC9488D6155DA4A7001DDF87 /* GreedyLoad.cpp */; };
-		BC9489961561F81D001DDF87 /* libGPPG.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D2AAC09D05546B4700DB518D /* libGPPG.dylib */; };
-		BC94899A1561F870001DDF87 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC9489991561F870001DDF87 /* main.cpp */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		BC9489941561F812001DDF87 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 0867D690FE84028FC02AAC07 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = D2AAC09C05546B4700DB518D;
-			remoteInfo = GPPG;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		5073E0C609E734A800EC74B6 /* GPPGProj.xcconfig */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.xcconfig; path = GPPGProj.xcconfig; sourceTree = "<group>"; };
@@ -52,20 +40,11 @@
 		BC948887155D9CD2001DDF87 /* Operation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Operation.cpp; path = Operation/Operation.cpp; sourceTree = "<group>"; };
 		BC9488D5155DA4A7001DDF87 /* GreedyLoad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GreedyLoad.h; path = Operation/GreedyLoad.h; sourceTree = "<group>"; };
 		BC9488D6155DA4A7001DDF87 /* GreedyLoad.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GreedyLoad.cpp; path = Operation/GreedyLoad.cpp; sourceTree = "<group>"; };
-		BC9489901561F80A001DDF87 /* GPPGDemo */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GPPGDemo; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC9489991561F870001DDF87 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = Demo/main.cpp; sourceTree = "<group>"; };
 		D2AAC09D05546B4700DB518D /* libGPPG.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libGPPG.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		BC94898E1561F80A001DDF87 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BC9489961561F81D001DDF87 /* libGPPG.dylib in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		D2AAC09B05546B4700DB518D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -80,7 +59,6 @@
 			isa = PBXGroup;
 			children = (
 				D2AAC09D05546B4700DB518D /* libGPPG.dylib */,
-				BC9489901561F80A001DDF87 /* GPPGDemo */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -202,24 +180,6 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		BC94898F1561F80A001DDF87 /* GPPGDemo */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = BC9489981561F83D001DDF87 /* Build configuration list for PBXNativeTarget "GPPGDemo" */;
-			buildPhases = (
-				BC94898D1561F80A001DDF87 /* Sources */,
-				BC94898E1561F80A001DDF87 /* Frameworks */,
-				BC6FC38A15D94CAE0094FEF1 /* ShellScript */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				BC9489951561F812001DDF87 /* PBXTargetDependency */,
-			);
-			name = GPPGDemo;
-			productName = GPPGDemo;
-			productReference = BC9489901561F80A001DDF87 /* GPPGDemo */;
-			productType = "com.apple.product-type.tool";
-		};
 		D2AAC09C05546B4700DB518D /* GPPG */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1DEB916008733D950010E9CD /* Build configuration list for PBXNativeTarget "GPPG" */;
@@ -261,36 +221,11 @@
 			projectRoot = "";
 			targets = (
 				D2AAC09C05546B4700DB518D /* GPPG */,
-				BC94898F1561F80A001DDF87 /* GPPGDemo */,
 			);
 		};
 /* End PBXProject section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		BC6FC38A15D94CAE0094FEF1 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "";
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
-		BC94898D1561F80A001DDF87 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BC94899A1561F870001DDF87 /* main.cpp in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		D2AAC09A05546B4700DB518D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -306,14 +241,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		BC9489951561F812001DDF87 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = D2AAC09C05546B4700DB518D /* GPPG */;
-			targetProxy = BC9489941561F812001DDF87 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		1DEB916108733D950010E9CD /* Debug */ = {
@@ -386,36 +313,6 @@
 			};
 			name = Release;
 		};
-		BC9489921561F80A001DDF87 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				COPY_PHASE_STRIP = NO;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
-				GCC_MODEL_TUNING = G5;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				INSTALL_PATH = /usr/local/bin;
-				PREBINDING = NO;
-				PRODUCT_NAME = GPPGDemo;
-			};
-			name = Debug;
-		};
-		BC9489931561F80A001DDF87 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				GCC_MODEL_TUNING = G5;
-				INSTALL_PATH = /usr/local/bin;
-				PREBINDING = NO;
-				PRODUCT_NAME = GPPGDemo;
-				ZERO_LINK = NO;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -433,15 +330,6 @@
 			buildConfigurations = (
 				1DEB916508733D950010E9CD /* Debug */,
 				1DEB916608733D950010E9CD /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		BC9489981561F83D001DDF87 /* Build configuration list for PBXNativeTarget "GPPGDemo" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				BC9489921561F80A001DDF87 /* Debug */,
-				BC9489931561F80A001DDF87 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

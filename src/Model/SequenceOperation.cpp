@@ -8,7 +8,12 @@
  */
 
 #include "SequenceOperation.h"
+#include <boost/random/mersenne_twister.hpp>
+#include <boost/random/discrete_distribution.hpp>
+#include <boost/numeric/ublas/io.hpp>
 
+// Seed for RNG
+boost::mt19937 gen;
 
 using namespace GPPG::Model;
 //using namespace GPPG; 
@@ -43,16 +48,50 @@ int SequenceOperation::length() const {
 
 SequenceData* SequenceData::copy() const
 {
-	SequenceData* other = new SequenceData();
-	other->length = length;
-	other->sequence = (STYPE*)malloc(sizeof(STYPE)*length);
-	memcpy( other->sequence, sequence, sizeof(STYPE)*length);
+	SequenceData* other = new SequenceData(_length);
+	memcpy( other->sequence(), _sequence, sizeof(STYPE)*_length);
 	return other;
 }
 
-SequenceOperationRoot::SequenceOperationRoot( SequenceData* data ) : Operation<SequenceData>(0) {
-	setData( data );
+SequenceData::SequenceData(int length) : _length(length) {
+	_sequence = (STYPE*)malloc(sizeof(STYPE)*_length);
 }
+
+STYPE* SequenceData::sequence() { return _sequence; }
+int SequenceData::length() const { return _length; }
+
+STYPE SequenceData::get(int i) const { return _sequence[i]; }
+
+void SequenceData::set(int i, STYPE c) { _sequence[i] = c; }
+
+ostream& operator<<(ostream& output, const SequenceData& s) {
+	output << "[";
+	for (int i=0; i<s.length(); i++) output << s.get(i);
+	output << "]";
+	return output;
+}
+
+ostream& operator<<(ostream& output, const SequencePointMutator& s) {
+	output << "SequencePointMutator(rate=" << s.rate() << "): " << s.transition();
+	return output;
+}
+
+SequenceFactory::SequenceFactory(int length, const ublas::vector<double>& distr ) : _length(length), _distr(distr) {}
+
+SequenceData* SequenceFactory::randomData() const {
+	SequenceData* sd = new SequenceData(_length);
+	boost::random::discrete_distribution<> dist(_distr);
+	gen.seed((unsigned int)time(0));
+	for (int i=0; i<_length; i++) {
+		STYPE c = (STYPE)dist(gen);
+		sd->set(i, c);
+	}
+	return sd;
+}
+
+//SequenceOperationRoot::SequenceOperationRoot( SequenceData* data ) : Operation<SequenceData>(0) {
+//	setData( data );
+//}
 
 
 
@@ -68,8 +107,22 @@ SequenceData* SequencePointChange::evaluate() const {
 	
 	// Get the sequence from the parent and add the point changes
 	sd = parent(0)->evaluate();
+
 	for (int i=0; i<_numlocs; i++) {
-		sd->sequence[ _loc[i] ] = _c[i];
+		sd->set(_loc[i], _c[i]);
 	}
 	return sd;
 }
+
+SequencePointMutator::SequencePointMutator(double rate, const ublas::matrix<double> &T) : _rate(rate), _M(T) {}
+
+Operation<SequenceData>* SequencePointMutator::mutate( const Operation<SequenceData>& g) const {
+	
+	return 1;
+}
+
+double SequencePointMutator::rate() const { return _rate; }
+
+const ublas::matrix<double>& SequencePointMutator::transition() const { return _M; }
+
+
