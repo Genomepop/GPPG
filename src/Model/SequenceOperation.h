@@ -92,13 +92,13 @@ namespace Model {
 		STYPE* _c;		/* Characters to be changed to */
 	};
 	
-	class SequencePointMutator : public OperationMutator<SequenceData, SequencePointChange> {
+	class SequencePointMutator : OperationMutator<SequenceData> {
 	public:
 		/** Generates point mutations with \param rate and transition matrix \T.
 		 */
 		SequencePointMutator(double rate, const ublas::matrix<double> &T);
 		
-		Operation<SequenceData>* mutate( const Operation<SequenceData>& g ) const; 
+		Operation<SequenceData>* mutate( Operation<SequenceData>& g ) const; 
 		
 		double rate() const;
 		const ublas::matrix<double>& transition() const;

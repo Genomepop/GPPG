@@ -16,7 +16,7 @@
 boost::mt19937 gen;
 
 using namespace GPPG::Model;
-//using namespace GPPG; 
+using namespace GPPG; 
 
 /*******************************************************************
  *				SEQUENCE OPERATION
@@ -114,11 +114,16 @@ SequenceData* SequencePointChange::evaluate() const {
 	return sd;
 }
 
-SequencePointMutator::SequencePointMutator(double rate, const ublas::matrix<double> &T) : _rate(rate), _M(T) {}
+SequencePointMutator::SequencePointMutator(double rate, const ublas::matrix<double> &T) : 
+	OperationMutator<SequenceData>(), _rate(rate), _M(T) {}
 
-Operation<SequenceData>* SequencePointMutator::mutate( const Operation<SequenceData>& g) const {
+Operation<SequenceData>* SequencePointMutator::mutate( Operation<SequenceData>& g) const {
 	
-	return 1;
+	int* locs;
+	int numLocs = 3;
+	STYPE* dest;
+	SequencePointChange* spc = new SequencePointChange(g, locs, 5, dest);
+	return spc;
 }
 
 double SequencePointMutator::rate() const { return _rate; }

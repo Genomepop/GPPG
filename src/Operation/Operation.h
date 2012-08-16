@@ -227,14 +227,14 @@ namespace GPPG {
 		virtual T* randomData() const = 0;
 	};
 	
-	template <typename T, typename K>
+	template <typename T>
 	class OperationMutator : public IMutator {
 	public:
-		IGenotype* mutate(const IGenotype& geno) const {
-			return mutate( (const Operation<T>&)geno);
+		IGenotype* mutate(IGenotype& geno) const {
+			return mutate( (Operation<T>&)geno );
 		}
 		
-		virtual Operation<T>* mutate(const Operation<T>& op) const = 0;
+		virtual Operation<T>* mutate(Operation<T>& op) const = 0;
 	};
 }
 

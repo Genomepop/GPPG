@@ -17,7 +17,7 @@ namespace GPPG {
 	public:
 		~IMutator() {}
 		
-		virtual IGenotype* mutate(const IGenotype& geno) const = 0;
+		virtual IGenotype* mutate( IGenotype& geno) const = 0;
 	};
 	
 	
