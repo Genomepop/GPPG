@@ -11,6 +11,7 @@
 #include <boost/random/mersenne_twister.hpp>
 #include <boost/random/discrete_distribution.hpp>
 #include <boost/numeric/ublas/io.hpp>
+#include <boost/random/binomial_distribution.hpp>
 
 // Seed for RNG
 boost::mt19937 gen;
@@ -118,11 +119,26 @@ SequencePointMutator::SequencePointMutator(double rate, const ublas::matrix<doub
 	OperationMutator<SequenceData>(), _rate(rate), _M(T) {}
 
 Operation<SequenceData>* SequencePointMutator::mutate( Operation<SequenceData>& g) const {
+	// Get the sequence data
+	int isCopy;
+	SequenceData* data = g.data(isCopy);
 	
-	int* locs;
-	int numLocs = 3;
-	STYPE* dest;
-	SequencePointChange* spc = new SequencePointChange(g, locs, 5, dest);
+	// Calculate the number of sites to mutate (use binomial)
+	binomial_distribution dist( data->length(), _rate );
+
+	int numLocs = dist(gen);
+	if (numLocs == 0) numLocs = 1;
+	uniform_int_distribution idist( 0, data->length()-1 );	
+	
+	int* locs = (int*) malloc(sizeof(int)*numLocs);
+	STYPE* dest = (STYPE*) malloc(sizeof(STYPE)*numLocs);
+	for (int i=0; i<numLocs; i++) {
+		
+	}
+	SequencePointChange* spc = new SequencePointChange(g, locs, numLocs, dest);
+	
+	if (isCopy) delete data;
+	
 	return spc;
 }
 

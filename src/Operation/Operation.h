@@ -152,6 +152,19 @@ namespace GPPG {
 		 */
 		T* data() const { return Genotype<T>::data(); }
 		
+		/** Returns the data cache.
+		 * This function will NOT return a NULL pointer.  However, it may cause an evaluation of the operation.  
+		 * If an evaluation occurs, then \param isCopy is set to 1 and the data should be deleted by the caller.
+		 */
+		T* data(int& isCopy) {
+			if (isCompressed()) {
+				isCopy = 1;
+				return evaluate();
+			} 
+			isCopy = 0;
+			return data();
+		}
+
 		bool isCompressed() const { return data() == NULL; }
 		
 		// Manage Load
