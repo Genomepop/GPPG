@@ -2,7 +2,8 @@
 using namespace std;
 
 //#include "GreedyLoad.h"
-#include "SequenceOperation.h"
+#include <Model/Sequence/Operation.h>
+#include <Model/Sequence/IO.h>
 #include <boost/numeric/ublas/vector.hpp>
 #include <boost/numeric/ublas/io.hpp>
 
@@ -20,7 +21,7 @@ int main (int argc, char * const argv[])
 	}
 	
 	cout << distr << endl;
-	SequenceFactory factory(20, distr);
+	SequenceFactory factory(500, distr);
 	
 	SequenceRoot* sr = factory.random();
 	SequenceData& sd = *sr->data();
@@ -31,11 +32,14 @@ int main (int argc, char * const argv[])
         for (unsigned j = 0; j < T.size2(); ++ j)
             T (i, j) = 0.25;
 	
-	SequencePointMutator spm(0.00001, T);
+	SequencePointMutator spm(0.1, T);
 	
 	cout << spm << endl;
-	//SequencePointChange( dop, 
-	//SequenceData* sr = dop.evaluate();
+	
+	cout << "About to mutate.\n";
+	SequenceOperation* m1 = spm.mutate( *sr );
+	cout << "Finished mutate.\n";
+	cout << *m1 << endl;
 	
 	cout << "Hello World2!\n";
 	return 0;

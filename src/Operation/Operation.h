@@ -11,11 +11,12 @@
 #define CORE_OPERATION_
 
 
-#include "Genotype.h"
-#include "GenotypeFactory.h"
-#include "Mutator.h"
-#include <list>
+#include "Base/Genotype.h"
+#include "Base/GenotypeFactory.h"
+#include "Base/Mutator.h"
 
+#include <list>
+#include <iostream>
 
 namespace GPPG {
 	
@@ -150,7 +151,7 @@ namespace GPPG {
 		/** Returns the data cache.
 		 * It may return a NULL pointer.
 		 */
-		T* data() const { return Genotype<T>::data(); }
+		virtual T* data() const { return Genotype<T>::data(); }
 		
 		/** Returns the data cache.
 		 * This function will NOT return a NULL pointer.  However, it may cause an evaluation of the operation.  
@@ -182,13 +183,16 @@ namespace GPPG {
 		/** Returns a no-strings attached evaluation of this Operation.
 		 * Consuming code must delete the result when finished with it.
 		 */
-		T* evaluate() const {
+		virtual T* evaluate() const {
 			if (isCompressed()) {
 				return NULL;
 			}
 			return Genotype<T>::data()->copy();	
 		}
 	
+		virtual std::string toString() const {
+			return "<No Content>";
+		}
 		
 	private:
 		Operation<T>(Operation<T> const& op) {}
@@ -231,6 +235,7 @@ namespace GPPG {
 	public:
 		OperationRoot<T>(T* data) : Operation<T>(0) { setData(data); }
 		
+		std::string toString() const { return "OperationRoot"; }
 	};
 	
 	template <typename T> class OperationFactory : public GenotypeFactory<T> {
@@ -247,9 +252,24 @@ namespace GPPG {
 			return mutate( (Operation<T>&)geno );
 		}
 		
+		
 		virtual Operation<T>* mutate(Operation<T>& op) const = 0;
 	};
 }
 
+template <typename T>
+std::ostream& operator<<(std::ostream& output, const GPPG::Operation<T>& op) {
+	// Print the Operation
+	output << "Operation (" << op.isCompressed() << "): \n";
+	for (int i=0; i<op.numParents(); i++) {
+		output << "\tParent[" << i << "]: " << op.parent(i)->toString() << std::endl;
+	}
+	
+	output << "\tContent: " << op.toString() << std::endl;
+	T* data = op.evaluate();
+	output << "\tData: " << *data << std::endl;
+	delete data;
+	return output;
+}
 
 #endif

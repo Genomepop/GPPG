@@ -9,7 +9,7 @@
 #ifndef GENOTYPE_FACTORY_
 #define GENOTYPE_FACTORY_
 
-#include "Genotype.h"
+#include "Base/Genotype.h"
 
 namespace GPPG {
 

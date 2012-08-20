@@ -25,6 +25,11 @@ namespace GPPG {
 		
 		virtual bool isActive() const = 0;
 		
+		virtual int index() const = 0;
+		virtual void setIndex(int i) = 0;
+		
+		virtual int order() const = 0;
+		virtual void setOrder(int i) = 0;
 	};
 	
 	class BaseGenotype : public IGenotype {
@@ -40,8 +45,15 @@ namespace GPPG {
 		
 		bool isActive() const;
 		
+		int index() const;
+		void setIndex(int i);
+		
+		int order() const;
+		void setOrder(int i);
+		
 	private:
 		double _freq, _total;
+		int _index, _order;
 	};
 	
 	/*
