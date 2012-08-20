@@ -25,13 +25,13 @@ using namespace GPPG;
  */
 /*
  SequenceOperation::SequenceOperation( double cost, int length ) : 
- Operation<SequenceData>(cost), _length(length) {}
+ SequenceOperation(cost), _length(length) {}
  
  SequenceOperation::SequenceOperation( double cost, int length, SequenceOperation& parent1 ) : 
- Operation<SequenceData>(cost, parent1), _length(length) {}
+ SequenceOperation(cost, parent1), _length(length) {}
  
  SequenceOperation::SequenceOperation( double cost, int length, SequenceOperation& parent1, SequenceOperation& parent2 ) :
- Operation<SequenceData>(cost, parent1, parent2), _length(length) {}
+ SequenceOperation(cost, parent1, parent2), _length(length) {}
  
  STYPE SequenceOperation::get(int i) const { 
  if (isCompressed()) {
@@ -48,11 +48,30 @@ using namespace GPPG;
  }
  */
 
+OpSequenceBase::OpSequenceBase( double cost, int length, OpSequence& parent1 ):
+OpSequence(cost, parent1), _length(length) {}
+
+OpSequenceBase::OpSequenceBase( double cost, int length, OpSequence& parent1, OpSequence& parent2 ):
+OpSequence(cost, parent1, parent2), _length(length) {}
+
+int OpSequenceBase::length() const { return _length; }
+
+STYPE OpSequenceBase::get(int i) const {
+	if (isCompressed()) {
+		return proxyGet(i);
+	}
+	return data()->get(i);
+}
+
+SequenceRoot::SequenceRoot(SequenceData* d) : OperationRoot<SequenceData, ISequence>(d) {}
+
+int SequenceRoot::length() const { return data()->length(); }
+STYPE SequenceRoot::get(int i) const { return data()->get(i); }
 
 
-SequenceFactory::SequenceFactory(int length, const ublas::vector<double>& distr ) : _length(length), _distr(distr) {}
+SequenceRootFactory::SequenceRootFactory(int length, const ublas::vector<double>& distr ) : _length(length), _distr(distr) {}
 
-SequenceData* SequenceFactory::randomData() const {
+SequenceRoot* SequenceRootFactory::random() const {
 	SequenceData* sd = new SequenceData(_length);
 	boost::random::discrete_distribution<> dist(_distr);
 	gen.seed((unsigned int)time(0));
@@ -60,22 +79,21 @@ SequenceData* SequenceFactory::randomData() const {
 		STYPE c = (STYPE)dist(gen);
 		sd->set(i, c);
 	}
-	return sd;
+	return new SequenceRoot(sd);
 }
 
-//SequenceOperationRoot::SequenceOperationRoot( SequenceData* data ) : Operation<SequenceData>(0) {
+//SequenceOperationRoot::SequenceOperationRoot( SequenceData* data ) : SequenceOperation(0) {
 //	setData( data );
 //}
 
 
-
-SequencePointChange::SequencePointChange(Operation<SequenceData>& op, int* locs, int numLocs, STYPE* dest) : 
-Operation<SequenceData>(numLocs, op), _loc(locs), _numlocs(numLocs), _c(dest) {}
+SequencePointChange::SequencePointChange(OpSequence& op, int* locs, int numLocs, STYPE* dest) : 
+OpSequenceBase(numLocs,op.length(), op), _loc(locs), _numlocs(numLocs), _c(dest) {}
 
 SequencePointChange::~SequencePointChange() { delete _loc; delete _c; }
 
 SequenceData* SequencePointChange::evaluate() const {
-	SequenceData* sd = Operation<SequenceData>::evaluate();
+	SequenceData* sd = OpSequence::evaluate();
 	if (sd != NULL) return sd;
 	
 	// Get the sequence from the parent and add the point changes
@@ -102,8 +120,17 @@ STYPE SequencePointChange::getMutation(int i) const { return _c[i]; }
 
 int SequencePointChange::getSite(int i) const { return _loc[i]; }
 
+
+STYPE SequencePointChange::proxyGet(int l) const {
+	// See if the index is in the list
+	for (int i=0; i<_numlocs; i++) {
+		if (_loc[i] == l) return _c[i];
+	}
+	return parent(0)->get(l);
+}
+
 SequencePointMutator::SequencePointMutator(double rate, const ublas::matrix<double> &T) : 
-OperationMutator<SequenceData>(), _rate(rate), _M(T) {
+OperationMutator<OpSequence>(), _rate(rate), _M(T) {
 	// Create random discrete distributions for each character
 	
 	std::vector<double> weights( _M.size1() );
@@ -116,11 +143,9 @@ OperationMutator<SequenceData>(), _rate(rate), _M(T) {
 	}
 }
 
-int SequencePointMutator::numMutants(IGenotype& g, long N, double f) const {
-	return 1;
-}
 
-Operation<SequenceData>* SequencePointMutator::mutate( Operation<SequenceData>& g) const {
+
+OpSequence* SequencePointMutator::mutate( OpSequence& g) const {
 	// Get the sequence data
 	int isCopy;
 	SequenceData* data = g.data(isCopy);
@@ -152,7 +177,10 @@ double SequencePointMutator::rate() const { return _rate; }
 
 const ublas::matrix<double>& SequencePointMutator::transition() const { return _M; }
 
-
+int SequencePointMutator::numMutants(OpSequence& g, long N, double f) const {
+	boost::random::binomial_distribution<> dist( N*f, _rate*g.length() );
+	return dist(gen);
+}
 
 ostream& operator<<(ostream& output, const SequencePointMutator& s) {
 	output << "SequencePointMutator(rate=" << s.rate() << "): " << s.transition();

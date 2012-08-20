@@ -75,17 +75,17 @@ namespace GPPG {
 	};
 	
 	
-	template <typename T> class Operation : public Genotype<T>, public IOperation {
+	template <typename T, class P> class Operation : public Genotype<T>, public IOperation, public P {
 			
 	public:
-		Operation<T>(double cost): Genotype<T>(0) { innerConstructor(cost, 0, 0); }
-		Operation<T>(double cost, Operation<T> &parent) : Genotype<T>(0) { innerConstructor(cost, &parent, 0); }
-		Operation<T>(double cost, Operation<T> &parent1, Operation<T> &parent2): Genotype<T>(0) { innerConstructor(cost, &parent1, &parent2); }
+		Operation<T,P>(double cost): Genotype<T>(0) { innerConstructor(cost, 0, 0); }
+		Operation<T,P>(double cost, Operation<T,P> &parent) : Genotype<T>(0) { innerConstructor(cost, &parent, 0); }
+		Operation<T,P>(double cost, Operation<T,P> &parent1, Operation<T,P> &parent2): Genotype<T>(0) { innerConstructor(cost, &parent1, &parent2); }
 		
-		~Operation<T>() {}
+		~Operation<T,P>() {}
 		
 		
-		Operation<T> const* parent(int i) const {
+		Operation<T,P> const* parent(int i) const {
 			if( i<0 || i>=numParents()) { throw "Incorrect index"; }
 			
 			switch( i ){
@@ -96,7 +96,7 @@ namespace GPPG {
 			throw "Index is too high";
 		}
 		
-		Operation<T>* parent(int i) {
+		Operation<T,P>* parent(int i) {
 			if( i<0 || i>=numParents()) { throw "Incorrect index"; }
 			
 			switch( i ){
@@ -136,7 +136,7 @@ namespace GPPG {
 			return _children.size();
 		}
 		
-		//set<Operation<T>& >& children() const;
+		//set<Operation<T,P>& >& children() const;
 		
 		// Manage compression
 		void setCompressed(bool compress) {
@@ -195,10 +195,10 @@ namespace GPPG {
 		}
 		
 	private:
-		Operation<T>(Operation<T> const& op) {}
-		Operation<T>& operator=(Operation<T> const& op) {}
+		Operation<T,P>(Operation<T,P> const& op) {}
+		Operation<T,P>& operator=(Operation<T,P> const& op) {}
 		
-		void inline innerConstructor(double cost, Operation<T>* parent1, Operation<T>* parent2) {
+		void inline innerConstructor(double cost, Operation<T,P>* parent1, Operation<T,P>* parent2) {
 			_cost = cost;
 			_parent1 = parent1;
 			_parent2 = parent2;
@@ -213,34 +213,34 @@ namespace GPPG {
 			_load = 0;
 		}
 		
-		void addChild(Operation<T>* op) {
+		void addChild(Operation<T,P>* op) {
 			_children.push_back(op);
 		}
 		
-		void removeChild(Operation<T>* op) {
+		void removeChild(Operation<T,P>* op) {
 			_children.remove( op );
 		}
 		
-		std::list< Operation<T> *> _children;
+		std::list< Operation<T,P> *> _children;
 		
 		
 		double _load;
 		double _cost;
-		Operation<T> *_parent1, *_parent2;
+		Operation<T,P> *_parent1, *_parent2;
 		
 		
 	};
 	
-	template <typename T> class OperationRoot : public Operation<T> {
+	template <typename T, class P> class OperationRoot : public Operation<T,P> {
 	public:
-		OperationRoot<T>(T* data) : Operation<T>(0) { setData(data); }
+		OperationRoot<T,P>(T* data) : Operation<T,P>(0) { setData(data); }
 		
 		std::string toString() const { return "OperationRoot"; }
 	};
 	
-	template <typename T> class OperationFactory : public GenotypeFactory<T> {
+	template <typename T, class P> class OperationFactory : public GenotypeFactory<T> {
 	public:
-		OperationRoot<T>* random() const { return new OperationRoot<T>( randomData() ); }
+		OperationRoot<T,P>* random() const { return new OperationRoot<T,P>( randomData() ); }
 		
 		virtual T* randomData() const = 0;
 	};
@@ -249,16 +249,21 @@ namespace GPPG {
 	class OperationMutator : public IMutator {
 	public:
 		IGenotype* mutate(IGenotype& geno) const {
-			return mutate( (Operation<T>&)geno );
+			return mutate( (T&)geno );
 		}
 		
+		int numMutants(IGenotype& geno, long N, double f) const {
+			return numMutants( (T&)geno, N, f);
+		}
 		
-		virtual Operation<T>* mutate(Operation<T>& op) const = 0;
+		virtual int numMutants(T& g, long N, double f) const = 0;
+		
+		virtual T* mutate(T& op) const = 0;
 	};
 }
 
-template <typename T>
-std::ostream& operator<<(std::ostream& output, const GPPG::Operation<T>& op) {
+template <typename T, class P>
+std::ostream& operator<<(std::ostream& output, const GPPG::Operation<T,P>& op) {
 	// Print the Operation
 	output << "Operation (" << op.isCompressed() << "): \n";
 	for (int i=0; i<op.numParents(); i++) {

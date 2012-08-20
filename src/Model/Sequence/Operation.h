@@ -28,22 +28,48 @@ using std::ostream;
 namespace GPPG {
 	
 	namespace Model {
+				
+		//typedef Operation<SequenceData, ISequenceData> SequenceOperation;	
+		typedef Operation<SequenceData, ISequence> OpSequence;		
 		
-		typedef Operation<SequenceData> SequenceOperation;	
 		
+		class OpSequenceBase : public OpSequence {
+		public:
+			OpSequenceBase(double cost, int length, OpSequence& parent1);
+			OpSequenceBase(double cost, int length, OpSequence& parent1, OpSequence& parent2);
+			
+			int length() const;
+			
+			STYPE get(int i) const;
+			
+		protected:
+			virtual STYPE proxyGet(int i) const = 0;
+			
+		private:
+			int _length;
+		};
+		
+
 		/** Provides a root (non-op) storage for SequenceData.
 		 * We just need to typedef it because the template does all the work.
 		 */
-		typedef OperationRoot<SequenceData> SequenceRoot;
+		class SequenceRoot : public OperationRoot<SequenceData,ISequence> {
+		public:
+			SequenceRoot( SequenceData* d);
+			int length() const;
+			STYPE get(int i) const;
+			
+		}; 
+		//OperationRoot<SequenceData, ISequenceData> SequenceRoot;
 		
-		class SequenceFactory : public OperationFactory<SequenceData> {
+		class SequenceRootFactory : public GenotypeFactory<SequenceRoot> {
 		public:
 			/** Creates a SequenceFactory that returns sequences of length \param length and character distribution \param distr
 			 * This factory returns SequenceRoot objects.
 			 */
-			SequenceFactory(int length, const ublas::vector<double>& distr );
+			SequenceRootFactory(int length, const ublas::vector<double>& distr );
 			
-			SequenceData* randomData() const;
+			SequenceRoot* random() const;
 			
 		private:
 			int _length;
@@ -53,9 +79,9 @@ namespace GPPG {
 
 		
 		
-		class SequencePointChange: public Operation<SequenceData> {
+		class SequencePointChange: public OpSequenceBase {
 		public:
-			SequencePointChange(Operation<SequenceData>& op, int* locs, int numLocs, STYPE* dest);
+			SequencePointChange(OpSequence& op, int* locs, int numLocs, STYPE* dest);
 			
 			~SequencePointChange(); 
 			
@@ -75,21 +101,25 @@ namespace GPPG {
 			 */
 			int getSite(int i) const;
 			
+		protected:
+			STYPE proxyGet(int i) const;
+			
 		private:
 			int* _loc;		/* Locations array */
 			int _numlocs;	/* Number of locations to change */
 			STYPE* _c;		/* Characters to be changed to */
+			int _length;
 		};
 		
-		class SequencePointMutator : OperationMutator<SequenceData> {
+		class SequencePointMutator : OperationMutator< OpSequence > {
 		public:
 			/** Generates point mutations with \param rate and transition matrix \T.
 			 */
 			SequencePointMutator(double rate, const ublas::matrix<double> &T);
 			
-			Operation<SequenceData>* mutate( Operation<SequenceData>& g ) const; 
+			OpSequence* mutate( OpSequence& g ) const; 
 			
-			int numMutants(IGenotype& g, long N, double f) const;
+			int numMutants(OpSequence& g, long N, double f) const;
 			
 			double rate() const;
 			const ublas::matrix<double>& transition() const;
@@ -100,9 +130,9 @@ namespace GPPG {
 			std::vector<boost::random::discrete_distribution<> > _transition;
 		};
 		
-		class SequenceDeletion: public Operation<SequenceData> {
+		class SequenceDeletion: public OpSequence {
 			
-			SequenceDeletion(Operation<SequenceData>& op, int loc, int span);
+			SequenceDeletion(OpSequence& op, int loc, int span);
 			
 			SequenceData* evaluate() const;
 			
@@ -110,9 +140,9 @@ namespace GPPG {
 			int _loc, _span;
 		};
 		
-		class SequenceInsertion: public Operation<SequenceData> {
+		class SequenceInsertion: public OpSequence {
 		public:
-			SequenceInsertion(Operation<SequenceData>& op, int loc, SequenceData* span);
+			SequenceInsertion(OpSequence& op, int loc, SequenceData* span);
 			
 			SequenceData* evaluate() const;
 			

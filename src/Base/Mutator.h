@@ -22,6 +22,5 @@ namespace GPPG {
 		virtual IGenotype* mutate( IGenotype& geno) const = 0;
 	};
 	
-	
 }
 #endif MUTATOR_

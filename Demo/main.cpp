@@ -21,7 +21,7 @@ int main (int argc, char * const argv[])
 	}
 	
 	cout << distr << endl;
-	SequenceFactory factory(500, distr);
+	SequenceRootFactory factory(10, distr);
 	
 	SequenceRoot* sr = factory.random();
 	SequenceData& sd = *sr->data();
@@ -37,10 +37,14 @@ int main (int argc, char * const argv[])
 	cout << spm << endl;
 	
 	cout << "About to mutate.\n";
-	SequenceOperation* m1 = spm.mutate( *sr );
+	OpSequence* m1 = spm.mutate( *sr );
 	cout << "Finished mutate.\n";
 	cout << *m1 << endl;
-	
+	cout << m1->length() << endl;
+	for (int i=0; i<m1->length(); i++) {
+		cout << m1->get(i);
+	}
+	cout << endl;
 	cout << "Hello World2!\n";
 	return 0;
 }

@@ -31,9 +31,10 @@ public:
 template <typename T>
 class GenotypeFactory : public IGenotypeFactory {
 public:
-	virtual Genotype<T>* random() const { return new Genotype<T>( randomData() ); }
+	//virtual Genotype<T>* random() const { return new Genotype<T>( randomData() ); }
 	
-	virtual T* randomData() const = 0;
+	//virtual T* randomData() const = 0;
+	virtual T* random() const = 0;
 };
 
 }

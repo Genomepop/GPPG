@@ -15,11 +15,21 @@ namespace GPPG {
 	namespace Model {
 		typedef short STYPE;	
 		
+		class ISequence {
+		public:
+			/** Retrieve the length of the sequence.
+			 */
+			virtual int length() const = 0;
+			
+			/** Gets the item at location i
+			 */
+			virtual STYPE get(int i) const = 0;
+		};
 		
 		/**
 		 * A simple data structure for holding sequence information.
 		 */
-		class SequenceData {
+		class SequenceData : ISequence {
 		public:
 			/** Allocates \param length sequence.
 			 *
@@ -30,6 +40,8 @@ namespace GPPG {
 			 */
 			SequenceData* copy() const;
 			
+			/** Get a pointer to the raw sequence data.
+			 */
 			STYPE* sequence();
 			
 			int length() const;
