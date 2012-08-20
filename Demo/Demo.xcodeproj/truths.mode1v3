@@ -202,14 +202,21 @@
 			<key>Content</key>
 			<dict>
 				<key>PBXProjectModuleGUID</key>
+<<<<<<< HEAD
 				<string>BCF4E0FF15E1EAB000B25C9F</string>
 				<key>PBXProjectModuleLabel</key>
 				<string>Simulator.cpp</string>
+=======
+				<string>BC08E9BA15E28F0900B183A3</string>
+				<key>PBXProjectModuleLabel</key>
+				<string>SequenceOperation.cpp</string>
+>>>>>>> Closed project
 				<key>PBXSplitModuleInNavigatorKey</key>
 				<dict>
 					<key>Split0</key>
 					<dict>
 						<key>PBXProjectModuleGUID</key>
+<<<<<<< HEAD
 						<string>BCF4E10015E1EAB000B25C9F</string>
 						<key>PBXProjectModuleLabel</key>
 						<string>Simulator.cpp</string>
@@ -220,6 +227,18 @@
 						<key>history</key>
 						<array>
 							<string>BCF4E0FC15E1EAA600B25C9F</string>
+=======
+						<string>BC08E9BB15E28F0900B183A3</string>
+						<key>PBXProjectModuleLabel</key>
+						<string>SequenceOperation.cpp</string>
+						<key>_historyCapacity</key>
+						<integer>0</integer>
+						<key>bookmark</key>
+						<string>BC08E9BC15E28F0900B183A3</string>
+						<key>history</key>
+						<array>
+							<string>BC08E9B415DD441A00B183A3</string>
+>>>>>>> Closed project
 						</array>
 					</dict>
 					<key>SplitCount</key>
@@ -231,6 +250,7 @@
 			<key>Geometry</key>
 			<dict>
 				<key>Frame</key>
+<<<<<<< HEAD
 				<string>{{0, 20}, {931, 781}}</string>
 				<key>PBXModuleWindowStatusBarHidden2</key>
 				<false/>
@@ -436,6 +456,13 @@
 				<false/>
 				<key>RubberWindowFrame</key>
 				<string>29 360 931 818 0 0 1920 1178 </string>
+=======
+				<string>{{0, 20}, {1166, 965}}</string>
+				<key>PBXModuleWindowStatusBarHidden2</key>
+				<false/>
+				<key>RubberWindowFrame</key>
+				<string>425 172 1166 1006 0 0 1920 1178 </string>
+>>>>>>> Closed project
 			</dict>
 		</dict>
 	</array>
@@ -517,8 +544,13 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
+<<<<<<< HEAD
 									<integer>26</integer>
 									<integer>21</integer>
+=======
+									<integer>8</integer>
+									<integer>2</integer>
+>>>>>>> Closed project
 									<integer>1</integer>
 									<integer>0</integer>
 								</array>
@@ -561,7 +593,11 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
+<<<<<<< HEAD
 								<string>Mutator.h</string>
+=======
+								<string>Operation.h</string>
+>>>>>>> Closed project
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -569,6 +605,7 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
+<<<<<<< HEAD
 										<string>Mutator.h</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
@@ -593,6 +630,21 @@
 											<string>BCF4E10E15E1EB8700B25C9F</string>
 											<string>BCF4E11E15E1EC1300B25C9F</string>
 											<string>BCF4E11F15E1EC1300B25C9F</string>
+=======
+										<string>Operation.h</string>
+										<key>_historyCapacity</key>
+										<integer>0</integer>
+										<key>bookmark</key>
+										<string>BC08E9B915E28F0900B183A3</string>
+										<key>history</key>
+										<array>
+											<string>BC08E81415DC100700B183A3</string>
+											<string>BC08E8E115DC2CB400B183A3</string>
+											<string>BC08E96115DC35CE00B183A3</string>
+											<string>BC08E97215DC375F00B183A3</string>
+											<string>BC08E9B715E28F0900B183A3</string>
+											<string>BC08E9B815E28F0900B183A3</string>
+>>>>>>> Closed project
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -794,6 +846,7 @@
 		<string>BCF4DEC015DEC0E800B25C9F</string>
 		<string>1CD10A99069EF8BA00B06720</string>
 		<string>BC08E7CB15DBF95800B183A3</string>
+<<<<<<< HEAD
 		<string>BCF4DFF715DEEC8D00B25C9F</string>
 		<string>BCF4DFC915DEE2E400B25C9F</string>
 		<string>BCF4DFCC15DEE2E400B25C9F</string>
@@ -802,6 +855,11 @@
 		<string>BCF4E05915DF307F00B25C9F</string>
 		<string>BCF4E0FF15E1EAB000B25C9F</string>
 		<string>/Users/truths/github/local/GPPG/Demo/Demo.xcodeproj</string>
+=======
+		<string>1C78EAAD065D492600B07095</string>
+		<string>/Users/truths/github/GPPG/Demo/Demo.xcodeproj</string>
+		<string>BC08E9BA15E28F0900B183A3</string>
+>>>>>>> Closed project
 	</array>
 	<key>WindowString</key>
 	<string>639 359 1280 819 0 0 1920 1178 </string>

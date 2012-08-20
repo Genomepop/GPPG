@@ -100,6 +100,7 @@
 			PBXWorkspaceStateSaveDate = 366910062;
 		};
 		perUserProjectItems = {
+<<<<<<< HEAD
 			BC08E81415DC100700B183A3 = BC08E81415DC100700B183A3 /* PBXTextBookmark */;
 			BC08E8E115DC2CB400B183A3 = BC08E8E115DC2CB400B183A3 /* PBXTextBookmark */;
 			BC08E96115DC35CE00B183A3 = BC08E96115DC35CE00B183A3 /* PBXTextBookmark */;
@@ -501,6 +502,17 @@
 			BCF4E12415E1EC1300B25C9F /* PBXTextBookmark */ = BCF4E12415E1EC1300B25C9F /* PBXTextBookmark */;
 			BCF4E12515E1EC1300B25C9F /* PBXTextBookmark */ = BCF4E12515E1EC1300B25C9F /* PBXTextBookmark */;
 			BCF4E12615E1EC1300B25C9F /* PBXTextBookmark */ = BCF4E12615E1EC1300B25C9F /* PBXTextBookmark */;
+=======
+			BC08E81415DC100700B183A3 /* PBXTextBookmark */ = BC08E81415DC100700B183A3 /* PBXTextBookmark */;
+			BC08E8E115DC2CB400B183A3 /* PBXTextBookmark */ = BC08E8E115DC2CB400B183A3 /* PBXTextBookmark */;
+			BC08E96115DC35CE00B183A3 /* PBXTextBookmark */ = BC08E96115DC35CE00B183A3 /* PBXTextBookmark */;
+			BC08E97215DC375F00B183A3 /* PBXTextBookmark */ = BC08E97215DC375F00B183A3 /* PBXTextBookmark */;
+			BC08E9B415DD441A00B183A3 /* PBXBookmark */ = BC08E9B415DD441A00B183A3 /* PBXBookmark */;
+			BC08E9B715E28F0900B183A3 /* PBXTextBookmark */ = BC08E9B715E28F0900B183A3 /* PBXTextBookmark */;
+			BC08E9B815E28F0900B183A3 /* PBXTextBookmark */ = BC08E9B815E28F0900B183A3 /* PBXTextBookmark */;
+			BC08E9B915E28F0900B183A3 /* PBXTextBookmark */ = BC08E9B915E28F0900B183A3 /* PBXTextBookmark */;
+			BC08E9BC15E28F0900B183A3 /* PBXTextBookmark */ = BC08E9BC15E28F0900B183A3 /* PBXTextBookmark */;
+>>>>>>> Closed project
 		};
 		sourceControlManager = BC08E7A815DBF90F00B183A3 /* Source Control */;
 		userBuildSettings = {
@@ -588,10 +600,17 @@
 		path = /Users/truths/github/local/GPPG/src/Model/SequenceOperation.cpp;
 		sourceTree = "<absolute>";
 		uiCtxt = {
+<<<<<<< HEAD
 			sepNavIntBoundsRect = "{{0, 0}, {1032, 2288}}";
 			sepNavSelRange = "{4321, 0}";
 			sepNavVisRange = "{2682, 2281}";
 			sepNavWindowFrame = "{{846, 2}, {1091, 1174}}";
+=======
+			sepNavIntBoundsRect = "{{0, 0}, {1107, 1950}}";
+			sepNavSelRange = "{2964, 0}";
+			sepNavVisRange = "{2168, 2068}";
+			sepNavWindowFrame = "{{425, 116}, {1166, 1062}}";
+>>>>>>> Closed project
 		};
 	};
 	BC08E7B315DBF92B00B183A3 /* SequenceOperation.h */ = {
@@ -602,10 +621,17 @@
 		path = /Users/truths/github/local/GPPG/src/Model/SequenceOperation.h;
 		sourceTree = "<absolute>";
 		uiCtxt = {
+<<<<<<< HEAD
 			sepNavIntBoundsRect = "{{0, 0}, {906, 1963}}";
 			sepNavSelRange = "{431, 0}";
 			sepNavVisRange = "{1031, 1942}";
 			sepNavWindowFrame = "{{1103, 4}, {965, 1174}}";
+=======
+			sepNavIntBoundsRect = "{{0, 0}, {991, 2041}}";
+			sepNavSelRange = "{243, 0}";
+			sepNavVisRange = "{27, 523}";
+			sepNavWindowFrame = "{{472, 4}, {966, 874}}";
+>>>>>>> Closed project
 		};
 	};
 	BC08E7BB15DBF93900B183A3 /* Operation.cpp */ = {
@@ -618,10 +644,17 @@
 	};
 	BC08E7BC15DBF93900B183A3 /* Operation.h */ = {
 		uiCtxt = {
+<<<<<<< HEAD
 			sepNavIntBoundsRect = "{{0, 0}, {955, 3679}}";
 			sepNavSelRange = "{6327, 0}";
 			sepNavVisRange = "{5686, 1188}";
 			sepNavWindowFrame = "{{942, 68}, {966, 874}}";
+=======
+			sepNavIntBoundsRect = "{{0, 0}, {1013, 3328}}";
+			sepNavSelRange = "{4222, 0}";
+			sepNavVisRange = "{0, 1538}";
+			sepNavWindowFrame = "{{0, 4}, {966, 874}}";
+>>>>>>> Closed project
 		};
 	};
 	BC08E7E315DC07C400B183A3 /* GenotypeFactory.h */ = {
@@ -675,6 +708,7 @@
 		vrLen = 758;
 		vrLoc = 0;
 	};
+<<<<<<< HEAD
 	BC08E96215DC35CE00B183A3 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = BC08E7B315DBF92B00B183A3 /* SequenceOperation.h */;
@@ -685,19 +719,26 @@
 		vrLen = 1551;
 		vrLoc = 917;
 	};
+=======
+>>>>>>> Closed project
 	BC08E97215DC375F00B183A3 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = BC08E7B215DBF92B00B183A3 /* SequenceOperation.cpp */;
 		name = "SequenceOperation.cpp: 120";
 		rLen = 0;
+<<<<<<< HEAD
 		rLoc = 3516;
+=======
+		rLoc = 4071;
+>>>>>>> Closed project
 		rType = 0;
 		vrLen = 1649;
 		vrLoc = 1949;
 	};
-	BC08E97B15DC3FD000B183A3 /* PBXTextBookmark */ = {
-		isa = PBXTextBookmark;
+	BC08E9B415DD441A00B183A3 /* PBXBookmark */ = {
+		isa = PBXBookmark;
 		fRef = BC08E7B215DBF92B00B183A3 /* SequenceOperation.cpp */;
+<<<<<<< HEAD
 		name = "SequenceOperation.cpp: 117";
 		rLen = 0;
 		rLoc = 2985;
@@ -820,22 +861,29 @@
 		rType = 0;
 		vrLen = 949;
 		vrLoc = 0;
+=======
+>>>>>>> Closed project
 	};
-	BC21F60F15DC584900F9A201 /* PBXTextBookmark */ = {
+	BC08E9B715E28F0900B183A3 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = BC08E7B315DBF92B00B183A3 /* SequenceOperation.h */;
-		name = "SequenceOperation.h: 101";
+		name = "SequenceOperation.h: 120";
 		rLen = 0;
+<<<<<<< HEAD
 		rLoc = 2197;
+=======
+		rLoc = 2701;
+>>>>>>> Closed project
 		rType = 0;
-		vrLen = 1611;
-		vrLoc = 2030;
+		vrLen = 1198;
+		vrLoc = 170;
 	};
-	BC21F61015DC584900F9A201 /* PBXTextBookmark */ = {
+	BC08E9B815E28F0900B183A3 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = BC08E7BC15DBF93900B183A3 /* Operation.h */;
 		name = "Operation.h: 237";
 		rLen = 0;
+<<<<<<< HEAD
 		rLoc = 5998;
 		rType = 0;
 		vrLen = 1111;
@@ -1464,10 +1512,17 @@
 		rType = 0;
 		vrLen = 1077;
 		vrLoc = 4761;
+=======
+		rLoc = 6178;
+		rType = 0;
+		vrLen = 1094;
+		vrLoc = 4744;
+>>>>>>> Closed project
 	};
-	BCF4DE1A15DD359300B25C9F /* PBXTextBookmark */ = {
+	BC08E9B915E28F0900B183A3 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = BC08E7BC15DBF93900B183A3 /* Operation.h */;
+<<<<<<< HEAD
 		name = "Operation.h: 82";
 		rLen = 0;
 		rLoc = 2377;
@@ -1499,13 +1554,19 @@
 		name = "Mutator.h: 20";
 		rLen = 0;
 		rLoc = 358;
+=======
+		name = "Operation.h: 158";
+		rLen = 0;
+		rLoc = 4222;
+>>>>>>> Closed project
 		rType = 0;
-		vrLen = 333;
+		vrLen = 1538;
 		vrLoc = 0;
 	};
-	BCF4DE1E15DD359F00B25C9F /* PBXTextBookmark */ = {
+	BC08E9BC15E28F0900B183A3 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
 		fRef = BC08E7B215DBF92B00B183A3 /* SequenceOperation.cpp */;
+<<<<<<< HEAD
 		name = "SequenceOperation.cpp: 120";
 		rLen = 0;
 		rLoc = 3399;
@@ -1539,9 +1600,14 @@
 		name = "Operation.h: 237";
 		rLen = 0;
 		rLoc = 5975;
+=======
+		name = "SequenceOperation.cpp: 103";
+		rLen = 0;
+		rLoc = 2964;
+>>>>>>> Closed project
 		rType = 0;
-		vrLen = 1077;
-		vrLoc = 4761;
+		vrLen = 2068;
+		vrLoc = 2168;
 	};
 	BCF4DE2F15DE9AC400B25C9F /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
