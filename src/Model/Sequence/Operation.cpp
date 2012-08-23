@@ -7,7 +7,9 @@
  *
  */
 
+#include "GPPG.h"
 #include "Operation.h"
+//#include "Util/Random.h"
 #include <boost/random/mersenne_twister.hpp>
 #include <boost/random/discrete_distribution.hpp>
 #include <boost/numeric/ublas/io.hpp>
@@ -21,31 +23,7 @@ using namespace GPPG::Model;
 using namespace GPPG; 
 
 /*******************************************************************
- *				SEQUENCE OPERATION
- */
-/*
- SequenceOperation::SequenceOperation( double cost, int length ) : 
- SequenceOperation(cost), _length(length) {}
- 
- SequenceOperation::SequenceOperation( double cost, int length, SequenceOperation& parent1 ) : 
- SequenceOperation(cost, parent1), _length(length) {}
- 
- SequenceOperation::SequenceOperation( double cost, int length, SequenceOperation& parent1, SequenceOperation& parent2 ) :
- SequenceOperation(cost, parent1, parent2), _length(length) {}
- 
- STYPE SequenceOperation::get(int i) const { 
- if (isCompressed()) {
- if (numParents() > 0) {
- return ((SequenceOperation&)parent(0)).get(i);
- }
- throw "No Parent to propogate get() request";
- }
- return data()->sequence[i];
- }
- 
- int SequenceOperation::length() const {
- return _length; 
- }
+ *				OPSEQUENCEBASE OPERATION
  */
 
 OpSequenceBase::OpSequenceBase( double cost, int length, OpSequence& parent1 ):
@@ -82,9 +60,6 @@ SequenceRoot* SequenceRootFactory::random() const {
 	return new SequenceRoot(sd);
 }
 
-//SequenceOperationRoot::SequenceOperationRoot( SequenceData* data ) : SequenceOperation(0) {
-//	setData( data );
-//}
 
 
 SequencePointChange::SequencePointChange(OpSequence& op, int* locs, int numLocs, STYPE* dest) : 
@@ -147,28 +122,33 @@ OperationMutator<OpSequence>(), _rate(rate), _M(T) {
 
 OpSequence* SequencePointMutator::mutate( OpSequence& g) const {
 	// Get the sequence data
-	int isCopy;
-	SequenceData* data = g.data(isCopy);
+	//int isCopy;
+	//SequenceData* data = g.data(isCopy);
 	
 	// Calculate the number of sites to mutate (use binomial)
-	boost::random::binomial_distribution<> dist( data->length(), _rate );
+	int length = g.length(); //data->length()
+	boost::random::binomial_distribution<> dist( length, _rate );
 	
 	int numLocs = dist(gen);
 	if (numLocs == 0) numLocs = 1;
-	boost::random::uniform_int_distribution<> idist( 0, data->length()-1 );	
+	boost::random::uniform_int_distribution<> idist( 0, length-1 );	
+	
+#ifdef DEBUG_0
+	std::cout << "SequencePointMutator: mutating..." << std::endl;
+#endif
 	
 	int* locs = (int*) malloc(sizeof(int)*numLocs);
 	STYPE* dest = (STYPE*) malloc(sizeof(STYPE)*numLocs);
 	for (int i=0; i<numLocs; i++) {
 		int loc = idist(gen);
-		STYPE c = data->get(loc);
+		STYPE c = g.get(loc); //data->get(loc);
 		locs[i] = loc;
 		dest[i] = (STYPE)( _transition[c](gen) );
 		
 	}
 	SequencePointChange* spc = new SequencePointChange(g, locs, numLocs, dest);
 	
-	if (isCopy) delete data;
+	//if (isCopy) delete data;
 	
 	return spc;
 }
@@ -187,21 +167,3 @@ ostream& operator<<(ostream& output, const SequencePointMutator& s) {
 	return output;
 }
 
-/*
- ostream& operator<<(ostream& output, const SequencePointChange& s) {
- output << "Point Change(s):\n ";
- for (int i=0; i<s.numSites(); i++) {
- output << "[" << i << "] " << s.getSite(i) << " -> " << s.getMutation(i) << "\n";
- }
- return output;
- }
- 
- 
- ostream& operator<<(ostream& output, const GPPG::Model::SequenceOperation& s) {
- SequenceData* sd = s.evaluate();
- output << "SequenceOperation [" << typeid(s).name() << "]: " << *sd;
- delete sd;
- 
- return output;
- }
- */

@@ -7,11 +7,66 @@
  *
  */
 
+#include "GPPG.h"
 #include "Simulator.h"
 #include "Base/Genotype.h"
 #include "Base/Mutator.h"
+//#include "Util/Random.h"
+#include <boost/random/mersenne_twister.hpp>
+#include <boost/random/binomial_distribution.hpp>
 
 using namespace GPPG;
+
+void printArray(std::vector<double>& arr) {
+	std::cout << "[";
+	for (int i=0; i<arr.size(); i++) {
+		std::cout << arr[i] << " ";
+	}
+	std::cout << "]";
+}
+
+inline void normalizeArray( std::vector<double>& arr ) {
+	double csum = 0.0;
+	for (int i=0; i<arr.size(); i++) csum += arr[i];
+	for (int i=0; i<arr.size(); i++) arr[i] /= csum;
+}
+
+extern boost::mt19937 gen;
+
+inline int binomial(int n, double r) {
+	boost::random::binomial_distribution<> dist( n, r );
+	return dist(gen);
+}
+
+
+void samplePopulation( std::vector<double>& F, long N, std::vector<double>& res ) {
+	int ig = 0;
+	long n = N;
+	int draw = -1;
+	double sump, pp, tot;
+	sump = 0.0;
+	tot = 0.0;
+	int k = F.size();
+	
+	while (ig < k) {
+		if (n > 0 && F[ig] > 0) {
+			pp = F[ig]/(1.0-sump);
+			if (pp >= 1.0)
+				draw = n;
+			else 
+				draw = binomial(n, pp);
+
+			res[ig] = (1.0*draw)/N;
+			tot == res[ig];
+			n = n-draw;
+			sump += F[ig];
+		} else {
+			res[ig] = 0;
+		}
+		ig += 1;
+	}
+
+}
 
 GenotypeSimulator::GenotypeSimulator() {}
 
@@ -51,6 +106,9 @@ PopulationSimulator::PopulationSimulator(): _curr_gen(0) {}
 
 void PopulationSimulator::addGenotype(IGenotype* g, double freq) {
 	GenotypeSimulator::addGenotype(g);
+#ifdef DEBUG_0
+	std::cout << "PopulationSimulator::addGenotype " << g << ": " << freq;
+#endif
 	g->setIndex(-1);
 	if (freq > 0.0) {
 		activateGenotype(g, freq);
@@ -83,6 +141,10 @@ void PopulationSimulator::evolve(long N, long G) {
 	int num_active;
 	double one_individual = 1.0/N;
 	
+	gen.seed((unsigned int)time(0));
+	
+	normalizeArray( _freqs );
+	
 	while (_curr_gen < G) {
 		// Clear the frequency arrays, reset status of genotypes
 		for (int i=0; i<_freqs.size(); i++) {
@@ -95,15 +157,59 @@ void PopulationSimulator::evolve(long N, long G) {
 			for (int gi=0; gi<num_active; gi++) {
 				IGenotype* g1 = _active[i];
 				int num_mutants = mutator->numMutants(*g1, N, _freqs[gi]);
-				for (int muti; muti<num_mutants; muti++) {
-					IGenotype* g2 = handleGenotype( mutator->mutate( *g1 ) );
-					if (g2 != NULL)
-						_freqs_m[ g2->index() ] += one_individual;
+#ifdef DEBUG_0
+				std::cout << num_mutants << " Mutants\n";
+#endif
+				for (int muti=0; muti<num_mutants; muti++) {
+#ifdef DEBUG_0
+					std::cout << "Mutating " << muti << std::endl;
+#endif
+					addGenotype( mutator->mutate( *g1 ), one_individual );
+					//if (g2 != NULL)
+					//	_freqs_m[ g2->index() ] += one_individual;
 				}
 				_freqs_m [ g1->index() ] -= num_mutants*one_individual;
 			}
 		}
+		
+		// Do recombination
+		// TODO: recombination
+		
+		// Apply fitness
+		for (int i=0; i<_active.size(); i++) {
+			_freqs_m[i] *= _active[i]->fitness();
+		}
+		
+		// Normalize array
+		normalizeArray( _freqs_m );
+		
+		// Genetic Drift
+		//std::cout << "DRIFT\n";
+		//printArray( _freqs_m ); std::cout<<std::endl;
+		samplePopulation( _freqs_m, N, _freqs);
+		//printArray( _freqs); std::cout<<std::endl;
+		
+
+		compactActive(N);
+		
+		//std::cout << "COMPACT ACTIVE\n";
+		//printArray( _freqs); std::cout<<std::endl;
+
+		normalizeArray( _freqs );
+		
+		//std::cout << "NORMED\n";
+		//printArray( _freqs); std::cout<<std::endl;
+		
+		finishGeneration();
+		
+		
 		_curr_gen ++;
+		
+		// TODO: Record information
+	}
+	
+	for (int i=0; i<_active.size(); i++) {
+		_active[i]->setFrequency( _freqs[i] );
 	}
 }
 

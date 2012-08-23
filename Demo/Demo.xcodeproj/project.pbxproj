@@ -20,6 +20,7 @@
 		BCF4DF9B15DEE20900B25C9F /* IO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCF4DF9A15DEE20900B25C9F /* IO.cpp */; };
 		BCF4DFE515DEEAF400B25C9F /* Operation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCF4DFE415DEEAF400B25C9F /* Operation.cpp */; };
 		BCF4E03315DF263B00B25C9F /* Simulator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCF4E03215DF263B00B25C9F /* Simulator.cpp */; };
+		BCF4E15715E48ACB00B25C9F /* Random.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCF4E15615E48ACB00B25C9F /* Random.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -61,6 +62,9 @@
 		BCF4DFE415DEEAF400B25C9F /* Operation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Operation.cpp; path = Sequence/Operation.cpp; sourceTree = "<group>"; };
 		BCF4E03115DF263B00B25C9F /* Simulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Simulator.h; sourceTree = "<group>"; };
 		BCF4E03215DF263B00B25C9F /* Simulator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Simulator.cpp; sourceTree = "<group>"; };
+		BCF4E15515E48ACB00B25C9F /* Random.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Random.h; path = ../src/Util/Random.h; sourceTree = SOURCE_ROOT; };
+		BCF4E15615E48ACB00B25C9F /* Random.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Random.cpp; path = ../src/Util/Random.cpp; sourceTree = SOURCE_ROOT; };
+		BCF4E1F915E5C40900B25C9F /* GPPG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GPPG.h; path = ../src/GPPG.h; sourceTree = SOURCE_ROOT; };
 		C6859E8B029090EE04C91782 /* Demo.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = Demo.1; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -93,6 +97,7 @@
 				BC08E7AE15DBF92B00B183A3 /* Model */,
 				BC08E7AA15DBF91900B183A3 /* Base */,
 				08FB7796FE84155DC02AAC07 /* main.cpp */,
+				BCF4E1F915E5C40900B25C9F /* GPPG.h */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -150,6 +155,8 @@
 			isa = PBXGroup;
 			children = (
 				BCF4DE3915DE9C0500B25C9F /* binomial.h */,
+				BCF4E15515E48ACB00B25C9F /* Random.h */,
+				BCF4E15615E48ACB00B25C9F /* Random.cpp */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -237,6 +244,7 @@
 				BCF4DF9B15DEE20900B25C9F /* IO.cpp in Sources */,
 				BCF4DFE515DEEAF400B25C9F /* Operation.cpp in Sources */,
 				BCF4E03315DF263B00B25C9F /* Simulator.cpp in Sources */,
+				BCF4E15715E48ACB00B25C9F /* Random.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

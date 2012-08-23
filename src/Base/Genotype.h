@@ -30,6 +30,9 @@ namespace GPPG {
 		
 		virtual int order() const = 0;
 		virtual void setOrder(int i) = 0;
+		
+		virtual double fitness() const = 0;
+		virtual void setFitness(double f) = 0;
 	};
 	
 	class BaseGenotype : public IGenotype {
@@ -51,8 +54,11 @@ namespace GPPG {
 		int order() const;
 		void setOrder(int i);
 		
+		double fitness() const;
+		void setFitness(double f);
+		
 	private:
-		double _freq, _total;
+		double _freq, _total, _fitness;
 		int _index, _order;
 	};
 	

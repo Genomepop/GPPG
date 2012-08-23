@@ -11,7 +11,7 @@
 
 using namespace GPPG;
 
-BaseGenotype::BaseGenotype() : _index(-1), _freq(0), _total(0), _order(-1) {}
+BaseGenotype::BaseGenotype() : _index(-1), _freq(0), _total(0), _order(-1), _fitness(1.0) {}
 
 void BaseGenotype::configure() {}
 
@@ -39,3 +39,6 @@ int BaseGenotype::order() const {
 void BaseGenotype::setOrder(int i) {
 	_order = i;
 }
+
+double BaseGenotype::fitness() const { return _fitness; }
+void BaseGenotype::setFitness(double f) { _fitness = f; }

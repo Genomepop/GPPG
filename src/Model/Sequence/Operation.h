@@ -29,7 +29,6 @@ namespace GPPG {
 	
 	namespace Model {
 				
-		//typedef Operation<SequenceData, ISequenceData> SequenceOperation;	
 		typedef Operation<SequenceData, ISequence> OpSequence;		
 		
 		
@@ -136,6 +135,9 @@ namespace GPPG {
 			
 			SequenceData* evaluate() const;
 			
+		protected:
+			STYPE proxyGet(int i) const;
+			
 		private:
 			int _loc, _span;
 		};
@@ -145,6 +147,9 @@ namespace GPPG {
 			SequenceInsertion(OpSequence& op, int loc, SequenceData* span);
 			
 			SequenceData* evaluate() const;
+			
+		protected:
+			STYPE proxyGet(int i) const;
 			
 		private:
 			int _loc;
