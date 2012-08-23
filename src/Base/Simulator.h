@@ -15,14 +15,17 @@
 namespace GPPG {
 	class IMutator;
 	class IGenotype;
+	class IGenotypeHeap;
 	
 	class GenotypeSimulator {
 	public:
-		GenotypeSimulator();
+		GenotypeSimulator(IGenotypeHeap* heap);
 			
 		void addMutator(IMutator* mutator);
 		
 		virtual void addGenotype(IGenotype* g);
+		
+		IGenotypeHeap* heap();
 		
 	protected:
 		virtual void configureGenotype(IGenotype *g);
@@ -31,11 +34,16 @@ namespace GPPG {
 		
 		std::vector<IMutator*> _mutators;
 		std::vector<IGenotype*> _genotypes;
+		
+	private:
+		IGenotypeHeap* _heap;
 	};
 	
 	class PopulationSimulator : public GenotypeSimulator {
 	public:
-		PopulationSimulator();
+		PopulationSimulator(IGenotypeHeap* heap);
+		
+		void addGenotype(IGenotype* g);
 		
 		void addGenotype(IGenotype* g, double freq);
 		

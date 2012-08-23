@@ -11,17 +11,15 @@
 #ifndef CORE_OPERATION_HEAP_
 #define CORE_OPERATION_HEAP_
 
-// This needs to be thread safe, since it is a singleton
-// But I won't do that in v1.
-
-#include "CompressionPolicy.h"
-#include "Operation.h"
+//#include "Operation/CompressionPolicy.h"
+//#include "Operation/Operation.h"
+#include "Base/GenotypeHeap.h"
 
 namespace GPPG {
-	template <typename T> class OperationHeap {
+	class ICompressionPolicy;
+	
+	template <typename T> class OperationGraph : IGenotypeHeap {
 	public:
-		static OperationHeap<T>& Instance();
-		static OperationHeap<T>* InstancePtr();
 		
 		/**
 		 Sets the policy for the @ref OperationHeap.  If there is already a policy in place, then this throws an error.
@@ -34,20 +32,14 @@ namespace GPPG {
 		 */
 		static ICompressionPolicy& compressionPolicy();
 		
-		void setPoolSize(int k);
-		int poolSize() const;
 		
-		void operationAttached(IOperation& parent, IOperation& child);
-		void operationRemoved(IOperation& parent, IOperation& child);
-		
-		T* malloc();
-		void free(T* chunk);
-		
+		//void operationAttached(IOperation& parent, IOperation& child);
+		//void operationRemoved(IOperation& parent, IOperation& child);
+				
 	private:
-		OperationHeap<T>();
-		OperationHeap<T>(OperationHeap<T> const&);
-		OperationHeap<T>& operator=(OperationHeap<T> const&);
-		static OperationHeap<T>* m_pInstance;
+		OperationGraph<T>();
+		OperationGraph<T>(OperationGraph<T> const&);
+		OperationGraph<T>& operator=(OperationGraph<T> const&);
 		
 		ICompressionPolicy* policy;
 	};

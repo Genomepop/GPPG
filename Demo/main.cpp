@@ -50,7 +50,7 @@ void testSequence() {
 }
 
 void testSimulator() {
-	PopulationSimulator psim;
+	PopulationSimulator psim(0);
 	
 	ublas::vector<double> distr = ublas::vector<double>(4);
 	for (int i=0; i<distr.size(); i++) {
@@ -69,7 +69,7 @@ void testSimulator() {
 	psim.addGenotype( sr, 1.0 );
 	psim.addMutator( (IMutator*)spm );
 	
-	psim.evolve( 1000, 100000 );
+	psim.evolve( 20, 10 );
 	
 	cout << "Generation: " << psim.clock() << endl;
 	for (int i=0; i<psim.activeCount(); i++) {

@@ -16,6 +16,7 @@
 		BC08E7C215DBF93900B183A3 /* OperationHeap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC08E7BD15DBF93900B183A3 /* OperationHeap.cpp */; };
 		BC08E7E515DC07C400B183A3 /* GenotypeFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC08E7E415DC07C400B183A3 /* GenotypeFactory.cpp */; };
 		BC08E92C15DC2F9500B183A3 /* Mutator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC08E92B15DC2F9500B183A3 /* Mutator.cpp */; };
+		BC22921115E67C3C00730837 /* GenotypeHeap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC22921015E67C3C00730837 /* GenotypeHeap.cpp */; };
 		BCF4DF7115DEDDE600B25C9F /* Data.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCF4DF7015DEDDE600B25C9F /* Data.cpp */; };
 		BCF4DF9B15DEE20900B25C9F /* IO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCF4DF9A15DEE20900B25C9F /* IO.cpp */; };
 		BCF4DFE515DEEAF400B25C9F /* Operation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCF4DFE415DEEAF400B25C9F /* Operation.cpp */; };
@@ -53,6 +54,8 @@
 		BC08E7E415DC07C400B183A3 /* GenotypeFactory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GenotypeFactory.cpp; sourceTree = "<group>"; };
 		BC08E92A15DC2F9500B183A3 /* Mutator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mutator.h; sourceTree = "<group>"; };
 		BC08E92B15DC2F9500B183A3 /* Mutator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Mutator.cpp; sourceTree = "<group>"; };
+		BC22920F15E67C3C00730837 /* GenotypeHeap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenotypeHeap.h; sourceTree = "<group>"; };
+		BC22921015E67C3C00730837 /* GenotypeHeap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GenotypeHeap.cpp; sourceTree = "<group>"; };
 		BCF4DE3915DE9C0500B25C9F /* binomial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = binomial.h; path = ../src/Util/binomial.h; sourceTree = SOURCE_ROOT; };
 		BCF4DF6F15DEDDE600B25C9F /* Data.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Data.h; path = Sequence/Data.h; sourceTree = "<group>"; };
 		BCF4DF7015DEDDE600B25C9F /* Data.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Data.cpp; path = Sequence/Data.cpp; sourceTree = "<group>"; };
@@ -121,6 +124,8 @@
 				BC08E92B15DC2F9500B183A3 /* Mutator.cpp */,
 				BCF4E03115DF263B00B25C9F /* Simulator.h */,
 				BCF4E03215DF263B00B25C9F /* Simulator.cpp */,
+				BC22920F15E67C3C00730837 /* GenotypeHeap.h */,
+				BC22921015E67C3C00730837 /* GenotypeHeap.cpp */,
 			);
 			name = Base;
 			path = ../src/Base;
@@ -245,6 +250,7 @@
 				BCF4DFE515DEEAF400B25C9F /* Operation.cpp in Sources */,
 				BCF4E03315DF263B00B25C9F /* Simulator.cpp in Sources */,
 				BCF4E15715E48ACB00B25C9F /* Random.cpp in Sources */,
+				BC22921115E67C3C00730837 /* GenotypeHeap.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

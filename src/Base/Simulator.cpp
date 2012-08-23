@@ -11,6 +11,8 @@
 #include "Simulator.h"
 #include "Base/Genotype.h"
 #include "Base/Mutator.h"
+#include "Base/GenotypeHeap.h"
+
 //#include "Util/Random.h"
 #include <boost/random/mersenne_twister.hpp>
 #include <boost/random/binomial_distribution.hpp>
@@ -68,7 +70,9 @@ void samplePopulation( std::vector<double>& F, long N, std::vector<double>& res 
 
 }
 
-GenotypeSimulator::GenotypeSimulator() {}
+GenotypeSimulator::GenotypeSimulator(IGenotypeHeap* h): _heap(h) {}
+
+IGenotypeHeap* GenotypeSimulator::heap() { return _heap; }
 
 void GenotypeSimulator::addMutator(IMutator* mutator) {
 	_mutators.push_back( mutator );
@@ -99,10 +103,14 @@ IGenotype* GenotypeSimulator::handleGenotype(IGenotype *g) {
 }
 
 void GenotypeSimulator::removeGenotype(IGenotype *g) {
-	
+	//delete g;
 }
 
-PopulationSimulator::PopulationSimulator(): _curr_gen(0) {}
+PopulationSimulator::PopulationSimulator(IGenotypeHeap* h): GenotypeSimulator(h), _curr_gen(0) {}
+
+void PopulationSimulator::addGenotype(IGenotype* g) {
+	addGenotype(g, 0.0);
+}
 
 void PopulationSimulator::addGenotype(IGenotype* g, double freq) {
 	GenotypeSimulator::addGenotype(g);
