@@ -9,3 +9,8 @@
 
 #define DEBUG
 //#define DEBUG_0
+
+// This turns on Ubigraph Support
+#define UBIGRAPH
+//#define UBIGRAPH_GL
+//#define UBIGRAPH_SIM

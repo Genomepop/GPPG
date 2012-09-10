@@ -10,6 +10,9 @@
 #ifndef GENOTYPE_HEAP_
 #define GENOTYPE_HEAP_
 
+#include <vector>
+#include <set>
+
 namespace GPPG {
 
 	class IGenotype;
@@ -20,10 +23,10 @@ enum HeapRemovalPolicy {
 	
 class IGenotypeHeap {
 public:
-	virtual ~IGenotypeHeap() = 0;
+	virtual ~IGenotypeHeap() {};
 	
 	virtual void setHeapRemovalPolicy(HeapRemovalPolicy policy) = 0;
-	virtual HeapRemovalPolicy heapRemovalPolicy() const;
+	virtual HeapRemovalPolicy heapRemovalPolicy() const = 0;
 	
 	/** Calling this function gives ownership of the \param g to the heap.  
 	 * The lifespan of g is now tied to this heap.
@@ -33,6 +36,10 @@ public:
 	/** The simulator uses this function to notify the Heap that the genotype may be removed.
 	 */
 	virtual void removeGenotype(IGenotype* g) = 0;
+	
+	virtual void generationFinished(const std::vector<IGenotype*>&) = 0;
+	virtual void generationFinished(const std::set<IGenotype*>&) = 0;
+	
 };
 
 class BasicGenotypeHeap : public IGenotypeHeap {
@@ -49,6 +56,7 @@ public:
 	
 	void removeGenotype(IGenotype* g);
 	
+	void generationFinished(const std::vector<IGenotype*>&);
 };
 	
 }

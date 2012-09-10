@@ -17,11 +17,22 @@
 		BC08E7E515DC07C400B183A3 /* GenotypeFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC08E7E415DC07C400B183A3 /* GenotypeFactory.cpp */; };
 		BC08E92C15DC2F9500B183A3 /* Mutator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC08E92B15DC2F9500B183A3 /* Mutator.cpp */; };
 		BC22921115E67C3C00730837 /* GenotypeHeap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC22921015E67C3C00730837 /* GenotypeHeap.cpp */; };
+		BC894AFC15E7F5610064FD2C /* Tools.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC894AFB15E7F5610064FD2C /* Tools.cpp */; };
+		BCD4F3AA15E9299B00BA9D5E /* EvoSimulator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCD4F3A915E9299B00BA9D5E /* EvoSimulator.cpp */; };
 		BCF4DF7115DEDDE600B25C9F /* Data.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCF4DF7015DEDDE600B25C9F /* Data.cpp */; };
 		BCF4DF9B15DEE20900B25C9F /* IO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCF4DF9A15DEE20900B25C9F /* IO.cpp */; };
 		BCF4DFE515DEEAF400B25C9F /* Operation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCF4DFE415DEEAF400B25C9F /* Operation.cpp */; };
 		BCF4E03315DF263B00B25C9F /* Simulator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCF4E03215DF263B00B25C9F /* Simulator.cpp */; };
 		BCF4E15715E48ACB00B25C9F /* Random.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCF4E15615E48ACB00B25C9F /* Random.cpp */; };
+		BCF4E2D615E6E92100B25C9F /* Simulator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCF4E2D515E6E92100B25C9F /* Simulator.cpp */; };
+		BCF4E2D915E6EA0C00B25C9F /* BaseCompressionPolicy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCF4E2D815E6EA0C00B25C9F /* BaseCompressionPolicy.cpp */; };
+		BCF4E35F15E7301B00B25C9F /* UbiOperationGraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCF4E35E15E7301B00B25C9F /* UbiOperationGraph.cpp */; };
+		BCF4E39E15E735E500B25C9F /* libxmlrpc_xmlparse.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BCF4E39D15E735E500B25C9F /* libxmlrpc_xmlparse.dylib */; };
+		BCF4E3A015E735EE00B25C9F /* libxmlrpc_util.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BCF4E39F15E735EE00B25C9F /* libxmlrpc_util.dylib */; };
+		BCF4E3A215E735FF00B25C9F /* libxmlrpc.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BCF4E3A115E735FF00B25C9F /* libxmlrpc.dylib */; };
+		BCF4E3A415E7360600B25C9F /* libxmlrpc_xmltok.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BCF4E3A315E7360600B25C9F /* libxmlrpc_xmltok.dylib */; };
+		BCF4E3A615E7361200B25C9F /* libxmlrpc_client.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BCF4E3A515E7361200B25C9F /* libxmlrpc_client.dylib */; };
+		BCF4E3BC15E7376400B25C9F /* ubiclient.c in Sources */ = {isa = PBXBuildFile; fileRef = BCF4E3BB15E7376400B25C9F /* ubiclient.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -56,6 +67,10 @@
 		BC08E92B15DC2F9500B183A3 /* Mutator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Mutator.cpp; sourceTree = "<group>"; };
 		BC22920F15E67C3C00730837 /* GenotypeHeap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenotypeHeap.h; sourceTree = "<group>"; };
 		BC22921015E67C3C00730837 /* GenotypeHeap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GenotypeHeap.cpp; sourceTree = "<group>"; };
+		BC894AFA15E7F5610064FD2C /* Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Tools.h; path = ../src/Util/Tools.h; sourceTree = SOURCE_ROOT; };
+		BC894AFB15E7F5610064FD2C /* Tools.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Tools.cpp; path = ../src/Util/Tools.cpp; sourceTree = SOURCE_ROOT; };
+		BCD4F3A815E9299B00BA9D5E /* EvoSimulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EvoSimulator.h; path = ../src/Simulator/EvoSimulator.h; sourceTree = SOURCE_ROOT; };
+		BCD4F3A915E9299B00BA9D5E /* EvoSimulator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EvoSimulator.cpp; path = ../src/Simulator/EvoSimulator.cpp; sourceTree = SOURCE_ROOT; };
 		BCF4DE3915DE9C0500B25C9F /* binomial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = binomial.h; path = ../src/Util/binomial.h; sourceTree = SOURCE_ROOT; };
 		BCF4DF6F15DEDDE600B25C9F /* Data.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Data.h; path = Sequence/Data.h; sourceTree = "<group>"; };
 		BCF4DF7015DEDDE600B25C9F /* Data.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Data.cpp; path = Sequence/Data.cpp; sourceTree = "<group>"; };
@@ -68,6 +83,20 @@
 		BCF4E15515E48ACB00B25C9F /* Random.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Random.h; path = ../src/Util/Random.h; sourceTree = SOURCE_ROOT; };
 		BCF4E15615E48ACB00B25C9F /* Random.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Random.cpp; path = ../src/Util/Random.cpp; sourceTree = SOURCE_ROOT; };
 		BCF4E1F915E5C40900B25C9F /* GPPG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GPPG.h; path = ../src/GPPG.h; sourceTree = SOURCE_ROOT; };
+		BCF4E2D415E6E92100B25C9F /* Simulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Simulator.h; sourceTree = "<group>"; };
+		BCF4E2D515E6E92100B25C9F /* Simulator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Simulator.cpp; sourceTree = "<group>"; };
+		BCF4E2D715E6EA0C00B25C9F /* BaseCompressionPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseCompressionPolicy.h; sourceTree = "<group>"; };
+		BCF4E2D815E6EA0C00B25C9F /* BaseCompressionPolicy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BaseCompressionPolicy.cpp; sourceTree = "<group>"; };
+		BCF4E35D15E7301B00B25C9F /* UbiOperationGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UbiOperationGraph.h; sourceTree = "<group>"; };
+		BCF4E35E15E7301B00B25C9F /* UbiOperationGraph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UbiOperationGraph.cpp; sourceTree = "<group>"; };
+		BCF4E38215E732F200B25C9F /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		BCF4E39D15E735E500B25C9F /* libxmlrpc_xmlparse.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxmlrpc_xmlparse.dylib; path = usr/local/lib/libxmlrpc_xmlparse.dylib; sourceTree = SDKROOT; };
+		BCF4E39F15E735EE00B25C9F /* libxmlrpc_util.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxmlrpc_util.dylib; path = usr/local/lib/libxmlrpc_util.dylib; sourceTree = SDKROOT; };
+		BCF4E3A115E735FF00B25C9F /* libxmlrpc.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxmlrpc.dylib; path = usr/local/lib/libxmlrpc.dylib; sourceTree = SDKROOT; };
+		BCF4E3A315E7360600B25C9F /* libxmlrpc_xmltok.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxmlrpc_xmltok.dylib; path = usr/local/lib/libxmlrpc_xmltok.dylib; sourceTree = SDKROOT; };
+		BCF4E3A515E7361200B25C9F /* libxmlrpc_client.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxmlrpc_client.dylib; path = usr/local/lib/libxmlrpc_client.dylib; sourceTree = SDKROOT; };
+		BCF4E3BA15E7376400B25C9F /* ubiclient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ubiclient.h; path = ../src/Util/Ubigraph/ubiclient.h; sourceTree = SOURCE_ROOT; };
+		BCF4E3BB15E7376400B25C9F /* ubiclient.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ubiclient.c; path = ../src/Util/Ubigraph/ubiclient.c; sourceTree = SOURCE_ROOT; };
 		C6859E8B029090EE04C91782 /* Demo.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = Demo.1; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -76,6 +105,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BCF4E39E15E735E500B25C9F /* libxmlrpc_xmlparse.dylib in Frameworks */,
+				BCF4E3A015E735EE00B25C9F /* libxmlrpc_util.dylib in Frameworks */,
+				BCF4E3A215E735FF00B25C9F /* libxmlrpc.dylib in Frameworks */,
+				BCF4E3A415E7360600B25C9F /* libxmlrpc_xmltok.dylib in Frameworks */,
+				BCF4E3A615E7361200B25C9F /* libxmlrpc_client.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,6 +122,12 @@
 				08FB7795FE84155DC02AAC07 /* Source */,
 				C6859E8C029090F304C91782 /* Documentation */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
+				BCF4E38215E732F200B25C9F /* libxml2.dylib */,
+				BCF4E39D15E735E500B25C9F /* libxmlrpc_xmlparse.dylib */,
+				BCF4E39F15E735EE00B25C9F /* libxmlrpc_util.dylib */,
+				BCF4E3A115E735FF00B25C9F /* libxmlrpc.dylib */,
+				BCF4E3A315E7360600B25C9F /* libxmlrpc_xmltok.dylib */,
+				BCF4E3A515E7361200B25C9F /* libxmlrpc_client.dylib */,
 			);
 			name = Demo;
 			sourceTree = "<group>";
@@ -95,6 +135,7 @@
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				BCD4F3A715E9297F00BA9D5E /* Simulator */,
 				BCF4DE3715DE9B8700B25C9F /* Util */,
 				BC08E7B615DBF93900B183A3 /* Operation */,
 				BC08E7AE15DBF92B00B183A3 /* Model */,
@@ -151,17 +192,35 @@
 				BC08E7BC15DBF93900B183A3 /* Operation.h */,
 				BC08E7BD15DBF93900B183A3 /* OperationHeap.cpp */,
 				BC08E7BE15DBF93900B183A3 /* OperationHeap.h */,
+				BCF4E2D415E6E92100B25C9F /* Simulator.h */,
+				BCF4E2D515E6E92100B25C9F /* Simulator.cpp */,
+				BCF4E2D715E6EA0C00B25C9F /* BaseCompressionPolicy.h */,
+				BCF4E2D815E6EA0C00B25C9F /* BaseCompressionPolicy.cpp */,
+				BCF4E35D15E7301B00B25C9F /* UbiOperationGraph.h */,
+				BCF4E35E15E7301B00B25C9F /* UbiOperationGraph.cpp */,
 			);
 			name = Operation;
 			path = ../src/Operation;
 			sourceTree = SOURCE_ROOT;
 		};
+		BCD4F3A715E9297F00BA9D5E /* Simulator */ = {
+			isa = PBXGroup;
+			children = (
+				BCD4F3A815E9299B00BA9D5E /* EvoSimulator.h */,
+				BCD4F3A915E9299B00BA9D5E /* EvoSimulator.cpp */,
+			);
+			name = Simulator;
+			sourceTree = "<group>";
+		};
 		BCF4DE3715DE9B8700B25C9F /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				BCF4E3B215E7372100B25C9F /* Ubigraph */,
 				BCF4DE3915DE9C0500B25C9F /* binomial.h */,
 				BCF4E15515E48ACB00B25C9F /* Random.h */,
 				BCF4E15615E48ACB00B25C9F /* Random.cpp */,
+				BC894AFA15E7F5610064FD2C /* Tools.h */,
+				BC894AFB15E7F5610064FD2C /* Tools.cpp */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -177,6 +236,15 @@
 				BCF4DFE415DEEAF400B25C9F /* Operation.cpp */,
 			);
 			name = Sequence;
+			sourceTree = "<group>";
+		};
+		BCF4E3B215E7372100B25C9F /* Ubigraph */ = {
+			isa = PBXGroup;
+			children = (
+				BCF4E3BA15E7376400B25C9F /* ubiclient.h */,
+				BCF4E3BB15E7376400B25C9F /* ubiclient.c */,
+			);
+			name = Ubigraph;
 			sourceTree = "<group>";
 		};
 		C6859E8C029090F304C91782 /* Documentation */ = {
@@ -251,6 +319,12 @@
 				BCF4E03315DF263B00B25C9F /* Simulator.cpp in Sources */,
 				BCF4E15715E48ACB00B25C9F /* Random.cpp in Sources */,
 				BC22921115E67C3C00730837 /* GenotypeHeap.cpp in Sources */,
+				BCF4E2D615E6E92100B25C9F /* Simulator.cpp in Sources */,
+				BCF4E2D915E6EA0C00B25C9F /* BaseCompressionPolicy.cpp in Sources */,
+				BCF4E35F15E7301B00B25C9F /* UbiOperationGraph.cpp in Sources */,
+				BCF4E3BC15E7376400B25C9F /* ubiclient.c in Sources */,
+				BC894AFC15E7F5610064FD2C /* Tools.cpp in Sources */,
+				BCD4F3AA15E9299B00BA9D5E /* EvoSimulator.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,10 +341,15 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				HEADER_SEARCH_PATHS = (
+					/usr/local/include,
 					../,
 					../src,
 				);
 				INSTALL_PATH = /usr/local/bin;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../UbiGraph/examples/C\"",
+				);
 				PRODUCT_NAME = Demo;
 			};
 			name = Debug;
@@ -282,10 +361,15 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_MODEL_TUNING = G5;
 				HEADER_SEARCH_PATHS = (
+					/usr/local/include,
 					../,
 					../src,
 				);
 				INSTALL_PATH = /usr/local/bin;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../UbiGraph/examples/C\"",
+				);
 				PRODUCT_NAME = Demo;
 			};
 			name = Release;

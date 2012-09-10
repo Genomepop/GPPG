@@ -1,13 +1,17 @@
 #include <iostream>
 using namespace std;
 
-//#include "GreedyLoad.h"
+#include "Operation/GreedyLoad.h"
 #include <Model/Sequence/Operation.h>
 #include <Model/Sequence/IO.h>
 #include <boost/numeric/ublas/vector.hpp>
 #include <boost/numeric/ublas/io.hpp>
 
 #include <Base/Simulator.h>
+#include <Operation/OperationHeap.h>
+#include <Operation/BaseCompressionPolicy.h>
+#include <Operation/UbiOperationGraph.h>
+#include <Simulator/EvoSimulator.h>
 
 using namespace GPPG;
 using namespace GPPG::Model;
@@ -50,7 +54,10 @@ void testSequence() {
 }
 
 void testSimulator() {
-	PopulationSimulator psim(0);
+	
+	//PopulationSimulator psim( new OperationGraph(new BaseCompressionPolicy(STORE_ACTIVE)) );
+	EvoSimulator psim( new OperationGraph(new BaseCompressionPolicy(STORE_ROOT)) );
+	//EvoSimulator psim( new OperationGraph(new GreedyLoad(10, 10) ));
 	
 	ublas::vector<double> distr = ublas::vector<double>(4);
 	for (int i=0; i<distr.size(); i++) {
@@ -67,15 +74,21 @@ void testSimulator() {
 	SequencePointMutator *spm = new SequencePointMutator(0.01, T);
 	
 	psim.addGenotype( sr, 1.0 );
-	psim.addMutator( (IMutator*)spm );
+	psim.addMutator( spm );
 	
-	psim.evolve( 20, 10 );
+	for (int i=0; i<100; i++) {
+		psim.evolve( 300, 20 );	
+		usleep(50000);
+		cout << "Done with " << i << endl;
+	}
+	//psim.evolve( 500, 300 );
 	
 	cout << "Generation: " << psim.clock() << endl;
+	/*
 	for (int i=0; i<psim.activeCount(); i++) {
 		IGenotype& g = psim.genotype(i);
 		cout << "Genotype " << i << "/" << g.order() << ": " << g.frequency() << endl;
-	}
+	}*/
 	
 }
 

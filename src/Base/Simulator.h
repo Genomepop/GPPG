@@ -10,6 +10,7 @@
 #ifndef	SIMULATOR_
 #define SIMULATOR_
 
+#include <set>
 #include <vector>
 
 namespace GPPG {
@@ -32,11 +33,11 @@ namespace GPPG {
 		virtual void removeGenotype(IGenotype *g);
 		virtual IGenotype* handleGenotype(IGenotype *g);
 		
-		std::vector<IMutator*> _mutators;
-		std::vector<IGenotype*> _genotypes;
-		
-	private:
+		std::set<IMutator*> _mutators;
+		//std::set<IGenotype*> _genotypes;
+	
 		IGenotypeHeap* _heap;
+		int _gcount;
 	};
 	
 	class PopulationSimulator : public GenotypeSimulator {

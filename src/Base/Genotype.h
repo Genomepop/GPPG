@@ -15,6 +15,8 @@ namespace GPPG {
 	public:
 		virtual ~IGenotype(){}
 		
+		virtual void setKey(int k) = 0;
+		virtual int key() const = 0;
 		virtual void configure() = 0;
 		
 		virtual double frequency() const = 0;
@@ -38,6 +40,8 @@ namespace GPPG {
 	class BaseGenotype : public IGenotype {
 	public:
 		BaseGenotype();
+		
+		int key() const;
 		
 		void configure();
 		double frequency() const;

@@ -17,31 +17,54 @@
 
 namespace GPPG {
 	class ICompressionPolicy;
+	class IOperation;
 	
-	template <typename T> class OperationGraph : IGenotypeHeap {
+	
+	class OperationGraph : public IGenotypeHeap {
 	public:
+		OperationGraph(ICompressionPolicy* policy);
 		
-		/**
-		 Sets the policy for the @ref OperationHeap.  If there is already a policy in place, then this throws an error.
-		 @param cp	The @ref CompressionPolicy.
-		 */
-		static void setCompressionPolicy(ICompressionPolicy& cp);
+		~OperationGraph();
 		
 		/**
 		 Retrieves the policy
 		 */
-		static ICompressionPolicy& compressionPolicy();
+		ICompressionPolicy& compressionPolicy();
+		
+		void setHeapRemovalPolicy(HeapRemovalPolicy policy);
+		
+		HeapRemovalPolicy heapRemovalPolicy() const;
+		
+		/** Casts the genotype to an IOperation
+		 */
+		void addGenotype(IGenotype* g);
+		
+		/** Casts the genotype to an IOperation.
+		 */
+		void removeGenotype(IGenotype* g);
+		
+		void generationFinished(const std::vector<IGenotype*>&);
+		
+		void generationFinished(const std::set<IGenotype*>&);
+		
+		/** Sets this IOperation to be owned by the graph
+		 */
+		virtual void addOperation(IOperation* op);
+		
+		/** Removes this IOperation from control of the graph.
+		 * This may result in the deletion of this operation and any defuct operations resulting from its deletion.
+		 */
+		virtual void removeOperation(IOperation* op);
 		
 		
 		//void operationAttached(IOperation& parent, IOperation& child);
 		//void operationRemoved(IOperation& parent, IOperation& child);
-				
-	private:
-		OperationGraph<T>();
-		OperationGraph<T>(OperationGraph<T> const&);
-		OperationGraph<T>& operator=(OperationGraph<T> const&);
 		
-		ICompressionPolicy* policy;
+	private:
+		OperationGraph(OperationGraph const&);
+		OperationGraph& operator=(OperationGraph const&);
+		
+		ICompressionPolicy* _policy;
 	};
 }
 #endif

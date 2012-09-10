@@ -70,20 +70,22 @@ void samplePopulation( std::vector<double>& F, long N, std::vector<double>& res 
 
 }
 
-GenotypeSimulator::GenotypeSimulator(IGenotypeHeap* h): _heap(h) {}
+GenotypeSimulator::GenotypeSimulator(IGenotypeHeap* h): _heap(h), _gcount(0) {}
 
 IGenotypeHeap* GenotypeSimulator::heap() { return _heap; }
 
 void GenotypeSimulator::addMutator(IMutator* mutator) {
-	_mutators.push_back( mutator );
+	_mutators.insert( mutator );
 }
 
 void GenotypeSimulator::addGenotype(IGenotype* g) {
 	configureGenotype( g );
+	_heap->addGenotype( g );	
 }
 
 void GenotypeSimulator::configureGenotype(IGenotype *g) {
-
+	// Give the genotype a unique key
+	g->setKey(_gcount++);
 	g->configure();
 	
 	//TODO: Evaluate phenotype function
@@ -93,7 +95,7 @@ void GenotypeSimulator::configureGenotype(IGenotype *g) {
 	g->setTotal(0);
 	
 	// Add genotype to lookup
-	_genotypes.push_back(g);
+	//_genotypes.insert(g);
 	
 }
 
@@ -103,10 +105,12 @@ IGenotype* GenotypeSimulator::handleGenotype(IGenotype *g) {
 }
 
 void GenotypeSimulator::removeGenotype(IGenotype *g) {
-	//delete g;
+	_heap->removeGenotype( g );
 }
 
-PopulationSimulator::PopulationSimulator(IGenotypeHeap* h): GenotypeSimulator(h), _curr_gen(0) {}
+PopulationSimulator::PopulationSimulator(IGenotypeHeap* h): GenotypeSimulator(h), _curr_gen(0) {
+	gen.seed((unsigned int)time(0));
+}
 
 void PopulationSimulator::addGenotype(IGenotype* g) {
 	addGenotype(g, 0.0);
@@ -149,21 +153,21 @@ void PopulationSimulator::evolve(long N, long G) {
 	int num_active;
 	double one_individual = 1.0/N;
 	
-	gen.seed((unsigned int)time(0));
-	
 	normalizeArray( _freqs );
+	long Gtot = _curr_gen + G;
 	
-	while (_curr_gen < G) {
+	while (_curr_gen < Gtot) {
 		// Clear the frequency arrays, reset status of genotypes
 		for (int i=0; i<_freqs.size(); i++) {
 			_freqs_m[i] = _freqs[i];
 		}
 		num_active = _freqs.size();
 		
-		for (int i=0; i<_mutators.size(); i++) {
-			IMutator* mutator = _mutators[i];
+		for (std::set<IMutator*>::iterator it = _mutators.begin(); it!=_mutators.end(); it++) {
+		//for (int i=0; i<_mutators.size(); i++) {
+			IMutator* mutator = *it; //_mutators[i];
 			for (int gi=0; gi<num_active; gi++) {
-				IGenotype* g1 = _active[i];
+				IGenotype* g1 = _active[gi];
 				int num_mutants = mutator->numMutants(*g1, N, _freqs[gi]);
 #ifdef DEBUG_0
 				std::cout << num_mutants << " Mutants\n";
@@ -213,7 +217,12 @@ void PopulationSimulator::evolve(long N, long G) {
 		
 		_curr_gen ++;
 		
+		
+		
 		// TODO: Record information
+		//for (int i=0; i<_active.size(); i++) {
+		//	_active[i]->setFrequency( _freqs[i] );
+		//}
 	}
 	
 	for (int i=0; i<_active.size(); i++) {
@@ -277,5 +286,5 @@ void PopulationSimulator::retireGenotype(IGenotype* g) {
 }
 
 void PopulationSimulator::finishGeneration() {
-
+	_heap->generationFinished( _active );
 }

@@ -13,6 +13,8 @@ using namespace GPPG;
 
 BaseGenotype::BaseGenotype() : _index(-1), _freq(0), _total(0), _order(-1), _fitness(1.0) {}
 
+int BaseGenotype::key() const { return (long)this; }
+
 void BaseGenotype::configure() {}
 
 double BaseGenotype::frequency() const { return _freq; }

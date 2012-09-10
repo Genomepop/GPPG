@@ -148,6 +148,9 @@ OpSequence* SequencePointMutator::mutate( OpSequence& g) const {
 	}
 	SequencePointChange* spc = new SequencePointChange(g, locs, numLocs, dest);
 	
+#ifdef DEBUG_0
+	std::cout << "Created Operation (" << spc->numParents() << "): " << spc->toString() << std::endl;
+#endif
 	//if (isCopy) delete data;
 	
 	return spc;

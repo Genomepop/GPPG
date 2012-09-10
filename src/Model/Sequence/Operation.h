@@ -110,7 +110,7 @@ namespace GPPG {
 			int _length;
 		};
 		
-		class SequencePointMutator : OperationMutator< OpSequence > {
+		class SequencePointMutator : public OperationMutator< OpSequence > {
 		public:
 			/** Generates point mutations with \param rate and transition matrix \T.
 			 */
