@@ -14,11 +14,13 @@
 #include "Base/Genotype.h"
 #include "Base/GenotypeFactory.h"
 #include "Base/Mutator.h"
+#include "Base/Recombinator.h"
 
 #include <set>
 #include <iostream>
 
 namespace GPPG {
+
 	
 	/** IOperation adds additional functions to the IGenotype interface.  In doing so,
 	 * Genotypes may be represented as a cascade of Operations, which is much more memory efficient.
@@ -39,13 +41,11 @@ namespace GPPG {
 		virtual bool isCompressed() const = 0;
 		
 		// Should this be a part of the interface?
-		virtual void setLoad(double value) = 0;
+		virtual void setLoad(double value, double freq) = 0;
 		virtual double load() const = 0;
+		virtual double loadFreq() const = 0;
 		
-		/** Returns whether or not the genotype of this operation is active
-		 * 
-		 */
-		//virtual bool isActive() const = 0;
+		
 		
 		/** Returns the cost of applying this operation.
 		 * The cost is provided in the construction of the operation and should take into account
@@ -105,8 +105,9 @@ namespace GPPG {
 		void setFitness(double f);
 		
 		// Manage Load
-		void setLoad(double value);
+		void setLoad(double val, double freq);
 		double load() const;
+		double loadFreq() const;
 		
 		void setCompressed( bool c );
 		
@@ -120,7 +121,7 @@ namespace GPPG {
 	protected:
 		double _freq, _total, _fitness;
 		int _index, _order, _key;
-		double _load;
+		double _load, _loadFreq;
 		double _cost;
 	};
 	
@@ -333,6 +334,22 @@ namespace GPPG {
 		virtual int numMutants(T& g, long N, double f) const = 0;
 		
 		virtual T* mutate(T& op) const = 0;
+	};
+	
+	template <typename T>
+	class OperationRecombinator : public IRecombinator {
+	public:
+		IGenotype* recombine(IGenotype& geno1, IGenotype& geno2) const {
+			return recombine( (T&)geno1, (T&)geno2 );
+		}
+		
+		int numMutants(IGenotype& geno1, IGenotype& geno2, long N) const {
+			return numMutants( (T&)geno1, (T&)geno2, N);
+		}
+		
+		virtual int numMutants(T& g, T& g2, long N) const = 0;
+		
+		virtual T* recombine(T& op, T& op2) const = 0;
 	};
 }
 

@@ -65,7 +65,7 @@ std::ostream& operator<<(std::ostream& output, const GPPG::IOperation& op) {
 	return output;
 }
 
-BaseOperation::BaseOperation(double cost) : _index(-1), _freq(0), _total(0), _order(-1), _fitness(1.0), _cost(cost), _load(0) {
+BaseOperation::BaseOperation(double cost) : _index(-1), _freq(0), _total(0), _order(-1), _fitness(1.0), _cost(cost), _load(0), _loadFreq(0) {
 #ifdef UBIGRAPH
 	//ubigraph_new_vertex_w_id( (long)this );
 #endif
@@ -151,8 +151,14 @@ void BaseOperation::setCompressed( bool c ) {
 double BaseOperation::fitness() const { return _fitness; }
 void BaseOperation::setFitness(double f) { _fitness = f; }
 
-void BaseOperation::setLoad(double value) { 
+void BaseOperation::setLoad(double value, double f) { 
+#ifdef DEBUG_0
+	if (value < 0 || f < 0) {
+		std::cout << "Load cannot be NEG: " << value << ", " << f << std::endl;
+	}
+#endif
 	_load = value; 
+	_loadFreq = f;
 #ifdef UBIGRAPH_GL
 	int i = 255*_load;
 	if(i > 255) i = 255;
@@ -168,6 +174,8 @@ void BaseOperation::setLoad(double value) {
 #endif
 }
 double BaseOperation::load() const { return _load; }
+
+double BaseOperation::loadFreq() const { return _loadFreq; }
 
 double BaseOperation::cost() const { return _cost; }
 

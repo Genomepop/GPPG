@@ -129,8 +129,10 @@ namespace GPPG {
 			std::vector<boost::random::discrete_distribution<> > _transition;
 		};
 		
-		class SequenceDeletion: public OpSequence {
-			
+		
+		
+		class SequenceDeletion: public OpSequenceBase {
+		public:
 			SequenceDeletion(OpSequence& op, int loc, int span);
 			
 			SequenceData* evaluate() const;
@@ -142,7 +144,26 @@ namespace GPPG {
 			int _loc, _span;
 		};
 		
-		class SequenceInsertion: public OpSequence {
+		class SequenceDeletionMutator : public OperationMutator< OpSequence > {
+		public:
+			/** Generates sequence deletions mutations with \param rate and length between \param minL and \param maxL.
+			 */
+			SequenceDeletionMutator(double rate, int minL, int maxL);
+			
+			OpSequence* mutate( OpSequence& g ) const; 
+			
+			int numMutants(OpSequence& g, long N, double f) const;
+			
+			double rate() const;
+			
+			
+		private:
+			int _minL, _maxL;
+			double _rate;
+		};
+		
+		
+		class SequenceInsertion: public OpSequenceBase {
 		public:
 			SequenceInsertion(OpSequence& op, int loc, SequenceData* span);
 			~SequenceInsertion();
@@ -157,6 +178,52 @@ namespace GPPG {
 			SequenceData* _span;
 		};
 		
+		class SequenceInsertionMutator : public OperationMutator< OpSequence > {
+		public:
+			/** Generates sequence deletions mutations with \param rate and length between \param minL and \param maxL.
+			 */
+			SequenceInsertionMutator(double rate, int minL, int maxL, const ublas::vector<double>& distr);
+			
+			OpSequence* mutate( OpSequence& g ) const; 
+			
+			int numMutants(OpSequence& g, long N, double f) const;
+			
+			double rate() const;
+			
+			
+		private:
+			int _minL, _maxL;
+			double _rate;
+			ublas::vector<double> _distr;
+		};
+		
+		class SequenceCrossover: public OpSequenceBase {
+		public:
+			SequenceCrossover(OpSequence& op1, OpSequence& op2, const std::vector<int>& locs);
+			SequenceCrossover();
+			
+			SequenceData* evaluate() const;
+			
+		protected:
+			STYPE proxyGet(int i) const;
+			
+		private:
+			std::vector<int> _locs;
+		};
+		
+		class SequenceRecombinator : public OperationRecombinator< OpSequence > {
+		public:
+			SequenceRecombinator(double rate);
+			
+			int numMutants(OpSequence& g, OpSequence& g2, long N) const;
+			
+			OpSequence* recombine(OpSequence& g1, OpSequence& g2) const;
+			
+			double rate() const;
+			
+		private:
+			double _rate;
+		};
 	}
 }
 

@@ -7,6 +7,8 @@
  *
  */
 
+#ifdef UBIGRAPH
+
 #include "UbiOperationGraph.h"
 #include <Operation/Operation.h>
 #include <Operation/CompressionPolicy.h>
@@ -46,3 +48,4 @@ void UbiOperationGraph::removeOperation(IOperation* op) {
 	OperationGraph::removeOperation( op );
 	cout << "Ubi RemoveOperation: " << op << endl;
 }
+#endif

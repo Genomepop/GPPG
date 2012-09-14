@@ -12,6 +12,7 @@
 #include "Base/Genotype.h"
 #include "Base/Mutator.h"
 #include "Base/GenotypeHeap.h"
+#include "Base/Recombinator.h"
 
 //#include "Util/Random.h"
 #include <boost/random/mersenne_twister.hpp>
@@ -76,6 +77,10 @@ IGenotypeHeap* GenotypeSimulator::heap() { return _heap; }
 
 void GenotypeSimulator::addMutator(IMutator* mutator) {
 	_mutators.insert( mutator );
+}
+
+void GenotypeSimulator::addRecombinator(IRecombinator* r) {
+	_recombinators.insert( r );
 }
 
 void GenotypeSimulator::addGenotype(IGenotype* g) {

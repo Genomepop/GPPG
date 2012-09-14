@@ -12,6 +12,7 @@
 #include "Base/Genotype.h"
 #include "Base/Mutator.h"
 #include "Base/GenotypeHeap.h"
+#include "Base/Recombinator.h"
 
 #include <iostream>
 #include <sstream>
@@ -163,7 +164,43 @@ void EvoSimulator::evolve(long N, long G) {
 		}
 		
 		// Do recombination
-		// TODO: recombination
+		for (std::set<IRecombinator*>::iterator it = _recombinators.begin(); it!=_recombinators.end(); it++) {
+			IRecombinator* recombinator = *it;
+#ifdef DEBUG_0
+			cout <<	"Using Recombinator: " << recombinator << endl;
+#endif
+			for (GIter git = _active.begin(); git != _active.end(); git++) {
+				IGenotype* g1 = *git;
+				if (g1->frequency() == 0) continue;
+#ifdef DEBUG_0
+				cout <<	"Geno: (" << g1->key() << ", " << g1->order() << ")" << endl;
+#endif
+				//if (g1->order() == _curr_gen) continue;
+				for (GIter git2 = git; git2 != _active.end(); git2++) {
+					if (git2==git) continue;
+					IGenotype* g2 = *git2;
+					if (g2->frequency() == 0) continue;
+				
+#ifdef DEBUG_0
+					cout <<	"Recombining: (" << g1->key() << ", " << g2->key() << ") " << g1->frequency() << ": " << g2->frequency()<< endl;
+#endif
+				
+
+					int num_mutants = recombinator->numMutants(*g1, *g2, N);
+#ifdef DEBUG_0
+					cout <<	"Num Genos: " << num_mutants << endl;
+#endif
+					for (int muti=0; muti<num_mutants; muti++) {
+					
+						addGenotype( recombinator->recombine( *g1, *g2 ), one_individual );
+					}
+					
+					g1->setFrequency( g1->frequency() - num_mutants*one_individual/2 );
+					g2->setFrequency( g2->frequency() - num_mutants*one_individual/2 );
+				}
+				
+			}
+		}
 		
 		// Apply fitness
 		for (GIter git = _active.begin(); git != _active.end(); git++) {

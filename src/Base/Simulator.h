@@ -17,12 +17,15 @@ namespace GPPG {
 	class IMutator;
 	class IGenotype;
 	class IGenotypeHeap;
+	class IRecombinator;
 	
 	class GenotypeSimulator {
 	public:
 		GenotypeSimulator(IGenotypeHeap* heap);
 			
 		void addMutator(IMutator* mutator);
+		
+		void addRecombinator(IRecombinator* recomb);
 		
 		virtual void addGenotype(IGenotype* g);
 		
@@ -34,6 +37,7 @@ namespace GPPG {
 		virtual IGenotype* handleGenotype(IGenotype *g);
 		
 		std::set<IMutator*> _mutators;
+		std::set<IRecombinator*> _recombinators;		
 		//std::set<IGenotype*> _genotypes;
 	
 		IGenotypeHeap* _heap;

@@ -178,10 +178,10 @@ void GreedyLoad::split( IOperation* op, int& s1, int& s2, IOperation*& g1, IOper
 		g1 = 0;
 		return;
 	}
-	double r = c->load();
+	
+	op->setLoad( op->load() - c->load() - op->cost()*c->loadFreq(), op->loadFreq()-c->loadFreq() );
 	c = findMaxAdvance( c, true );
 	add( c ); //false
-	op->setLoad( op->load() - r );
 	g1 = c;
 	s1 = 1;
 	
@@ -291,7 +291,7 @@ void annotate( const std::set<IOperation*>& active) {
 }
 
 void innerAnnotate( IOperation* op, double freq, double cost ) {
-	op->setLoad( op->load()+freq*cost );
+	op->setLoad( op->load()+freq*cost, op->loadFreq()+freq );
 
 	if (op->isCompressed() && op->numParents() > 0) {
 		innerAnnotate( op->parent(0), freq, cost+op->cost() );
@@ -300,7 +300,7 @@ void innerAnnotate( IOperation* op, double freq, double cost ) {
 
 void reset(IOperation* op) {
 	if (op->load() > 0 || op->isActive()) {
-		op->setLoad(0);
+		op->setLoad(0,0);
 		for (int i=0; i<op->numParents(); i++) {
 			reset( op->parent(i) );
 		}
@@ -312,7 +312,6 @@ void resetAnnotation( const std::set<IOperation*>& active) {
 	for (OpIter it=active.begin(); it!=active.end(); it++) {
 		reset( *it );
 	}
-	
 	
 }
 
