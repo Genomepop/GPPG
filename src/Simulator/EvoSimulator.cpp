@@ -210,6 +210,8 @@ void EvoSimulator::compactActive(long N) {
 	
 }
 
+const set<IGenotype*>& EvoSimulator::activeGenotypes() const { return _active; }
+
 IGenotype* EvoSimulator::activateGenotype(IGenotype* g, double freq) {
 	//if (g->order() <= _curr_gen) {
 	//	return g;

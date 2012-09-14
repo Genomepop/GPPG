@@ -145,6 +145,7 @@ namespace GPPG {
 		class SequenceInsertion: public OpSequence {
 		public:
 			SequenceInsertion(OpSequence& op, int loc, SequenceData* span);
+			~SequenceInsertion();
 			
 			SequenceData* evaluate() const;
 			

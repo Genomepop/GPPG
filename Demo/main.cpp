@@ -56,14 +56,23 @@ void testSequence() {
 void testSimulator() {
 	
 	//PopulationSimulator psim( new OperationGraph(new BaseCompressionPolicy(STORE_ACTIVE)) );
-	EvoSimulator psim( new OperationGraph(new BaseCompressionPolicy(STORE_ROOT)) );
-	//EvoSimulator psim( new OperationGraph(new GreedyLoad(10, 10) ));
+	//EvoSimulator psim( new OperationGraph(new BaseCompressionPolicy(STORE_ACTIVE)) );
+	EvoSimulator psim( new OperationGraph(new GreedyLoad(10, 10) ));
 	
 	ublas::vector<double> distr = ublas::vector<double>(4);
 	for (int i=0; i<distr.size(); i++) {
 		distr(i) = 1.0/distr.size();
 	}
-	SequenceRootFactory factory(10, distr);
+	double scaling = 1e4;
+	long N = 1e6;
+	long L = 1e7;
+	long G = 1e7;
+	double u = 1e-9;
+	cout << "N = " << N/scaling << endl;
+	cout << "G = " << G/scaling << endl;
+	cout << "u = " << u*scaling << endl;
+	
+	SequenceRootFactory factory(L, distr);
 	SequenceRoot* sr = factory.random();
 	
 	ublas::matrix<double> T(4,4);
@@ -71,24 +80,27 @@ void testSimulator() {
         for (unsigned j = 0; j < T.size2(); ++ j)
             T (i, j) = 0.25;
 	
-	SequencePointMutator *spm = new SequencePointMutator(0.01, T);
+	SequencePointMutator *spm = new SequencePointMutator( u*scaling, T);
 	
 	psim.addGenotype( sr, 1.0 );
 	psim.addMutator( spm );
-	
+
 	for (int i=0; i<100; i++) {
-		psim.evolve( 300, 20 );	
-		usleep(50000);
+		psim.evolve( N/scaling, (G/scaling)/100 );	
+		//usleep(50000);
 		cout << "Done with " << i << endl;
 	}
-	//psim.evolve( 500, 300 );
+	//psim.evolve( 500, 10000 );
 	
 	cout << "Generation: " << psim.clock() << endl;
-	/*
-	for (int i=0; i<psim.activeCount(); i++) {
-		IGenotype& g = psim.genotype(i);
-		cout << "Genotype " << i << "/" << g.order() << ": " << g.frequency() << endl;
-	}*/
+	set<IGenotype*>::iterator git;
+	const set<IGenotype*>& active = psim.activeGenotypes();
+	int i=0;
+	for (git=active.begin(); git!=active.end(); git++) {
+		IGenotype* g = *git;
+		cout << "Genotype " << i << "/" << g->order() << ": " << g->frequency() << endl;
+		i++;
+	}
 	
 }
 

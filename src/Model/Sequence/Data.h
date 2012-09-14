@@ -36,6 +36,8 @@ namespace GPPG {
 			 */
 			SequenceData(int length);
 			
+			~SequenceData();
+			
 			/** Deep-copy
 			 */
 			SequenceData* copy() const;

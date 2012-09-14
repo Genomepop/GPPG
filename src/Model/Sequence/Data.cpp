@@ -24,6 +24,10 @@ SequenceData::SequenceData(int length) : _length(length) {
 	_sequence = (STYPE*)malloc(sizeof(STYPE)*_length);
 }
 
+SequenceData::~SequenceData() { 
+	delete _sequence;
+}
+
 STYPE* SequenceData::sequence() { return _sequence; }
 
 int SequenceData::length() const { return _length; }

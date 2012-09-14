@@ -12,5 +12,5 @@
 
 // This turns on Ubigraph Support
 #define UBIGRAPH
-//#define UBIGRAPH_GL
+#define UBIGRAPH_GL
 //#define UBIGRAPH_SIM

@@ -41,11 +41,13 @@ template <class T> std::string TToStr( const T &t )
 GreedyLoad::GreedyLoad(int maxExplicit, int numGens) : _root(0),_maxExplicit(maxExplicit), _waitGens(numGens), _elapsedGens(0), _numExplicit(0) {}
 
 void GreedyLoad::decompressionReleased( IOperation* op ) {
+#ifdef DEBUG_0
 	std::cout << "Releasing decompression... " << op->key() << " count=" << _U.count( op ) << std::endl;
 	for (OpIter it=_U.begin(); it!=_U.end(); it++) {
 		std::cout << (*it)->key() << ",";
 	}
 	std::cout << std::endl;
+#endif
 	_U.erase( op );
 }
 
