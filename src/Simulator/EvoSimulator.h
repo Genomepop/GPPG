@@ -34,8 +34,8 @@ namespace GPPG {
 		
 		/** Evolve the population of size \param N for \param G generations.
 		 */
+		void evolve2(long N, long G);
 		void evolve(long N, long G);
-		
 		
 	protected:
 		IGenotype* activateGenotype(IGenotype* g, double freq);
@@ -48,9 +48,18 @@ namespace GPPG {
 		
 		void compactActive(long N);
 		
+		/** Generates a random parent from the individual array
+		 */
+		int randomParent();
+		
 	private:
+		void checkIndividuals(long N);
+		
 		int _curr_gen;
 		std::set<IGenotype*> _active;
+		std::vector<IGenotype*> _ind1, _ind2;
+		std::vector<IGenotype*> *_indIn, *_indOut;
+		bool _indDirty;
 	};
 	
 }

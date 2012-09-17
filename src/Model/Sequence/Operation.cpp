@@ -136,6 +136,8 @@ OpSequence* SequencePointMutator::mutate( OpSequence& g) const {
 	boost::random::binomial_distribution<> dist( length, _rate );
 	
 	int numLocs = dist(gen);
+	//if (numLocs == 0) return &g; 
+	
 	if (numLocs == 0) numLocs = 1;
 	boost::random::uniform_int_distribution<> idist( 0, length-1 );	
 	
@@ -366,11 +368,15 @@ int SequenceRecombinator::numMutants(OpSequence& g, OpSequence& g2, long N) cons
 }
 
 OpSequence* SequenceRecombinator::recombine(OpSequence& g1, OpSequence& g2) const {
+	if (g1.key() == g2.key()) return &g1;
+	
 	int length = (g1.length() < g2.length()) ? g1.length() : g2.length();
 	boost::random::binomial_distribution<> dist( length , _rate );
 	boost::random::uniform_int_distribution<> idist( 0, length-10 );
 	int num_sites = dist(gen);
-	if (num_sites == 0) num_sites = 1;
+	if (num_sites == 0) return &g1;
+
+	//if (num_sites == 0) num_sites = 1;
 	std::vector<int> locs;
 	for (int i=0; i<num_sites; i++) {
 		locs.push_back( idist(gen) );

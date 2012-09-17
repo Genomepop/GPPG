@@ -63,14 +63,14 @@ void testSimulator() {
 	for (int i=0; i<distr.size(); i++) {
 		distr(i) = 1.0/distr.size();
 	}
-	double scaling = 1e1;
-	long N = 2.1e4;
-	long L = 1e6;
-	long G = 2e5;
-	double u = 2.3e-8;
+	double scaling = 1e2;
+	long N = 1e4;
+	long L = 1e5;
+	long G = 2e7;
+	double u = 1e-9;
 	double ud = 1e-10;
 	double ui = 1e-10;
-	double ur = 1e-12;
+	double ur = 1e-8;
 	cout << "N = " << N/scaling << endl;
 	cout << "G = " << G/scaling << endl;
 	cout << "u = " << u*scaling << endl;
@@ -92,7 +92,7 @@ void testSimulator() {
 	//psim.addMutator(sdm);
 	//psim.addMutator(sim);
 
-	//psim.addRecombinator(new SequenceRecombinator(ur*scaling) );
+	psim.addRecombinator(new SequenceRecombinator(ur*scaling) );
 	
 	for (int i=0; i<100; i++) {
 		psim.evolve( N/scaling, (G/scaling)/100 );	

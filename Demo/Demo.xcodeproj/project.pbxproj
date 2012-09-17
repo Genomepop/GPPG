@@ -24,7 +24,6 @@
 		BCF4DF9B15DEE20900B25C9F /* IO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCF4DF9A15DEE20900B25C9F /* IO.cpp */; };
 		BCF4DFE515DEEAF400B25C9F /* Operation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCF4DFE415DEEAF400B25C9F /* Operation.cpp */; };
 		BCF4E03315DF263B00B25C9F /* Simulator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCF4E03215DF263B00B25C9F /* Simulator.cpp */; };
-		BCF4E15715E48ACB00B25C9F /* Random.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCF4E15615E48ACB00B25C9F /* Random.cpp */; };
 		BCF4E2D615E6E92100B25C9F /* Simulator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCF4E2D515E6E92100B25C9F /* Simulator.cpp */; };
 		BCF4E2D915E6EA0C00B25C9F /* BaseCompressionPolicy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCF4E2D815E6EA0C00B25C9F /* BaseCompressionPolicy.cpp */; };
 		BCF4E35F15E7301B00B25C9F /* UbiOperationGraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCF4E35E15E7301B00B25C9F /* UbiOperationGraph.cpp */; };
@@ -84,7 +83,6 @@
 		BCF4E03115DF263B00B25C9F /* Simulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Simulator.h; sourceTree = "<group>"; };
 		BCF4E03215DF263B00B25C9F /* Simulator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Simulator.cpp; sourceTree = "<group>"; };
 		BCF4E15515E48ACB00B25C9F /* Random.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Random.h; path = ../src/Util/Random.h; sourceTree = SOURCE_ROOT; };
-		BCF4E15615E48ACB00B25C9F /* Random.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Random.cpp; path = ../src/Util/Random.cpp; sourceTree = SOURCE_ROOT; };
 		BCF4E1F915E5C40900B25C9F /* GPPG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GPPG.h; path = ../src/GPPG.h; sourceTree = SOURCE_ROOT; };
 		BCF4E2D415E6E92100B25C9F /* Simulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Simulator.h; sourceTree = "<group>"; };
 		BCF4E2D515E6E92100B25C9F /* Simulator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Simulator.cpp; sourceTree = "<group>"; };
@@ -223,7 +221,6 @@
 				BCF4E3B215E7372100B25C9F /* Ubigraph */,
 				BCF4DE3915DE9C0500B25C9F /* binomial.h */,
 				BCF4E15515E48ACB00B25C9F /* Random.h */,
-				BCF4E15615E48ACB00B25C9F /* Random.cpp */,
 				BC894AFA15E7F5610064FD2C /* Tools.h */,
 				BC894AFB15E7F5610064FD2C /* Tools.cpp */,
 			);
@@ -322,7 +319,6 @@
 				BCF4DF9B15DEE20900B25C9F /* IO.cpp in Sources */,
 				BCF4DFE515DEEAF400B25C9F /* Operation.cpp in Sources */,
 				BCF4E03315DF263B00B25C9F /* Simulator.cpp in Sources */,
-				BCF4E15715E48ACB00B25C9F /* Random.cpp in Sources */,
 				BC22921115E67C3C00730837 /* GenotypeHeap.cpp in Sources */,
 				BCF4E2D615E6E92100B25C9F /* Simulator.cpp in Sources */,
 				BCF4E2D915E6EA0C00B25C9F /* BaseCompressionPolicy.cpp in Sources */,

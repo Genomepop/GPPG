@@ -17,7 +17,7 @@
 #include <iostream>
 #include <sstream>
 
-//#include "Util/Random.h"
+#include "Util/Random.h"
 #include <boost/random/mersenne_twister.hpp>
 #include <boost/random/binomial_distribution.hpp>
 
@@ -31,8 +31,9 @@ using namespace GPPG;
 using std::set;
 using std::cout;
 using std::endl;
+using std::vector;
 
-extern boost::mt19937 gen;
+//extern boost::mt19937 gen;
 
 typedef set<IGenotype*>::iterator GIter;
 
@@ -49,10 +50,12 @@ inline void normalizeArray( std::set<IGenotype*>& genos ) {
 	for (GIter git=genos.begin(); git!=genos.end(); git++) (*git)->setFrequency((*git)->frequency()/csum);	
 }
 
+/*
 inline int binomial(int n, double r) {
 	boost::random::binomial_distribution<> dist( n, r );
 	return dist(gen);
 }
+*/
 
 void printGenos( set<IGenotype*>& genos ) {
 	cout << "[";
@@ -93,8 +96,10 @@ void samplePopulation( set<IGenotype*>& genos, long N) {
 	
 }
 
-EvoSimulator::EvoSimulator(IGenotypeHeap* h): GenotypeSimulator(h), _curr_gen(0) {
+EvoSimulator::EvoSimulator(IGenotypeHeap* h): 
+	GenotypeSimulator(h), _curr_gen(0), _indDirty(true), _indIn(0), _indOut(0) {
 	gen.seed((unsigned int)time(0));
+	initRandom();
 }
 
 void EvoSimulator::addGenotype(IGenotype* g) {
@@ -122,8 +127,133 @@ int EvoSimulator::clock() const {
 	return _curr_gen;
 }
 
+void EvoSimulator::checkIndividuals(long N) {
+	if (!_indDirty) return;
+
+	_ind1.resize(N);
+	_ind2.resize(N);
+	int l = 0;
+	for(GIter git = _active.begin(); git != _active.end(); git++) {
+		IGenotype* g = *git;
+		for (int i=0; i<N*g->frequency() ; i++) {
+			_ind1[l] = g;
+			l++;
+		}
+	}
+	_indIn = &_ind1;
+	_indOut = &_ind2;
+}
+
+template <typename T> void swap(T& a, T& b) {
+	T& temp = a;
+	a = b;
+	b = temp;
+}
+
+int EvoSimulator::randomParent() {
+	return (int)(random01()*(_indIn->size()));
+}
 
 void EvoSimulator::evolve(long N, long G) {
+	
+	double one_individual = 1.0/N;
+	
+	normalizeArray( _active );
+	long Gtot = _curr_gen + G;
+	
+#ifdef DEBUG_0
+	cout <<	"Starting evolution with " << _active.size() << " genotypes.\n";
+#endif
+	
+	// Make sure the individual arrays have been set up and are correct
+	checkIndividuals(N);
+	
+	// References are nicer to use than pointers
+	vector<IGenotype*>& indIn = *_indIn;
+	vector<IGenotype*>& indOut = *_indOut;
+
+	IRecombinator* recombinator = 0;
+	if (_recombinators.size() == 1)
+		recombinator = *_recombinators.begin();
+	else if(_recombinators.size() > 1)
+		throw "There can only be one recombinator right now";
+	
+	int p1,p2;
+	IGenotype *g1, *g2, *gOut;
+	while (_curr_gen < Gtot) {
+		// Clear the frequency for all the genotypes
+		for (GIter git=_active.begin(); git!=_active.end(); git++) {
+			(*git)->setFrequency(0);
+		}
+		
+#ifdef DEBUG_0
+		cout <<	_curr_gen << " Resampling " << N << " individuals.\n";
+#endif
+		for (int i=0; i<N; i++) {
+			// For each individual in the next generation, select a random parent
+			p1 = randomParent();
+			g1 = indIn[p1];
+			
+
+			if (recombinator) {
+				// If recombination, select another parent, and perform a recombination (maybe)
+				p2 = randomParent();
+				g2 = indIn[p2];
+				gOut = recombinator->recombine(*g1, *g2);
+
+			} else {
+				// If no recombination, directly inherit from the parent				
+				gOut = g1;
+				g2 = 0;
+			}
+
+			if (gOut == g1) {
+
+
+			// Mutate the zygote
+			for (std::set<IMutator*>::iterator it = _mutators.begin(); it!=_mutators.end(); it++) {
+				IMutator* mutator = *it;
+				gOut = mutator->mutate( *gOut );
+			}
+			}
+			
+			if (gOut != g1 && gOut != g2) {
+				// A new genotype has been created, so we need to record it
+				// We assume that any new genotype has never been seen before
+				addGenotype( gOut, one_individual );
+			} else {
+				gOut->setFrequency( gOut->frequency() + one_individual);
+			}
+
+			// Store it			
+			//TODO: Put defunct (fitness = 0) genotypes at the back, and valid genotypes in the front, then resample from the valid genotypes to populate the defunct individuals
+			indOut[i] = gOut;
+		}
+		
+		// Get rid of genotypes which are not present in the subsequent generation
+		GIter git = _active.begin();
+		while (git != _active.end()) {
+			g1 = *git;
+			git++;
+			if (g1->frequency() <= 0) {
+				retireGenotype( g1 );
+				removeGenotype( g1 );
+			}
+		}
+
+		
+		// Swap references to the array
+		swap< vector<IGenotype*> >(indIn, indOut);
+		
+		finishGeneration();
+		
+		_curr_gen++;
+	}
+	_indIn = &indIn;
+	_indOut = &indOut;
+}
+
+void EvoSimulator::evolve2(long N, long G) {
 	
 	double one_individual = 1.0/N;
 	
@@ -252,6 +382,10 @@ void EvoSimulator::compactActive(long N) {
 const set<IGenotype*>& EvoSimulator::activeGenotypes() const { return _active; }
 
 IGenotype* EvoSimulator::activateGenotype(IGenotype* g, double freq) {
+	if (g->index() >= 0) {
+		g->setFrequency(g->frequency()+freq);
+		return g;
+	}
 	//if (g->order() <= _curr_gen) {
 	//	return g;
 	//}
