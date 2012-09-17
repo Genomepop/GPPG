@@ -11,7 +11,7 @@
 
 using namespace GPPG;
 
-BaseGenotype::BaseGenotype() : _index(-1), _freq(0), _total(0), _order(-1), _fitness(1.0) {}
+BaseGenotype::BaseGenotype() : _index(-1), _freq(0), _total(0), _order(-1), _state(-1), _fitness(1.0) {}
 
 int BaseGenotype::key() const { return (long)this; }
 
@@ -33,6 +33,9 @@ bool BaseGenotype::isActive() const { return _freq > 0; }
 int BaseGenotype::index() const { return _index; }
 
 void BaseGenotype::setIndex(int i) { _index = i; }
+
+int BaseGenotype::state() const { return _state; }
+void BaseGenotype::setState(int i) { _state = i; }
 
 int BaseGenotype::order() const {
 	return _order;

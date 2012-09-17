@@ -56,18 +56,18 @@ void testSequence() {
 void testSimulator() {
 	
 	//PopulationSimulator psim( new OperationGraph(new BaseCompressionPolicy(STORE_ACTIVE)) );
-	EvoSimulator psim( new OperationGraph(new BaseCompressionPolicy(STORE_ACTIVE)) );
-	//EvoSimulator psim( new OperationGraph(new GreedyLoad(10, 10) ));
+	//EvoSimulator psim( new OperationGraph(new BaseCompressionPolicy(STORE_ROOT)) );
+	EvoSimulator psim( new OperationGraph(new GreedyLoad(40, 5) ));
 	
 	ublas::vector<double> distr = ublas::vector<double>(4);
 	for (int i=0; i<distr.size(); i++) {
 		distr(i) = 1.0/distr.size();
 	}
-	double scaling = 1e4;
-	long N = 1e6;
-	long L = 1e7;
-	long G = 1e7;
-	double u = 1e-9;
+	double scaling = 1e1;
+	long N = 2.1e4;
+	long L = 1e6;
+	long G = 2e5;
+	double u = 2.3e-8;
 	double ud = 1e-10;
 	double ui = 1e-10;
 	double ur = 1e-12;
@@ -92,7 +92,7 @@ void testSimulator() {
 	//psim.addMutator(sdm);
 	//psim.addMutator(sim);
 
-	psim.addRecombinator(new SequenceRecombinator(ur*scaling) );
+	//psim.addRecombinator(new SequenceRecombinator(ur*scaling) );
 	
 	for (int i=0; i<100; i++) {
 		psim.evolve( N/scaling, (G/scaling)/100 );	

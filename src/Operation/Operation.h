@@ -40,12 +40,6 @@ namespace GPPG {
 		virtual void setCompressed(bool compress) = 0;
 		virtual bool isCompressed() const = 0;
 		
-		// Should this be a part of the interface?
-		virtual void setLoad(double value, double freq) = 0;
-		virtual double load() const = 0;
-		virtual double loadFreq() const = 0;
-		
-		
 		
 		/** Returns the cost of applying this operation.
 		 * The cost is provided in the construction of the operation and should take into account
@@ -98,16 +92,15 @@ namespace GPPG {
 		int index() const;
 		void setIndex(int i);
 		
+		int state() const;
+		void setState(int i);
+		
 		int order() const;
 		void setOrder(int i);
 		
 		double fitness() const;
 		void setFitness(double f);
-		
-		// Manage Load
-		void setLoad(double val, double freq);
-		double load() const;
-		double loadFreq() const;
+		 
 		
 		void setCompressed( bool c );
 		
@@ -120,8 +113,8 @@ namespace GPPG {
 		
 	protected:
 		double _freq, _total, _fitness;
-		int _index, _order, _key;
-		double _load, _loadFreq;
+		int _index, _order, _key, _state;
+		double _load, _loadFreq, _loadCost;
 		double _cost;
 	};
 	

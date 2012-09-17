@@ -105,6 +105,8 @@ void EvoSimulator::addGenotype(IGenotype* g, double freq) {
 	GenotypeSimulator::addGenotype(g);
 	
 	g->setIndex(-1);
+	g->setState(-1);
+	
 	if (freq > 0.0) {
 		activateGenotype(g, freq);
 	}
@@ -177,7 +179,7 @@ void EvoSimulator::evolve(long N, long G) {
 #endif
 				//if (g1->order() == _curr_gen) continue;
 				for (GIter git2 = git; git2 != _active.end(); git2++) {
-					if (git2==git) continue;
+					if (*git2==*git) continue;
 					IGenotype* g2 = *git2;
 					if (g2->frequency() == 0) continue;
 				
@@ -239,7 +241,7 @@ void EvoSimulator::compactActive(long N) {
 	while (git != _active.end()) {
 		IGenotype* g = *git;
 		git++;
-		if (g->frequency()*N < 1) {
+		if (g->frequency() <= 0) {
 			retireGenotype( g );
 			removeGenotype( g );
 		}
@@ -256,6 +258,7 @@ IGenotype* EvoSimulator::activateGenotype(IGenotype* g, double freq) {
 	
 	// Put g at the end of the list
 	g->setIndex(1);
+	g->setState(1);
 	g->setOrder( clock() );
 	g->setFrequency( freq );
 	_active.insert( g );
@@ -267,6 +270,7 @@ IGenotype* EvoSimulator::activateGenotype(IGenotype* g, double freq) {
 void EvoSimulator::retireGenotype(IGenotype* g) {
 	g->setFrequency(0);
 	g->setIndex(-1);
+	g->setState(-1);
 	_active.erase( g );
 }
 

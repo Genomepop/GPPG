@@ -30,6 +30,9 @@ namespace GPPG {
 		virtual int index() const = 0;
 		virtual void setIndex(int i) = 0;
 		
+		virtual int state() const = 0;
+		virtual void setState(int i) = 0;
+		
 		virtual int order() const = 0;
 		virtual void setOrder(int i) = 0;
 		
@@ -55,6 +58,9 @@ namespace GPPG {
 		int index() const;
 		void setIndex(int i);
 		
+		int state() const;
+		void setState(int i);
+		
 		int order() const;
 		void setOrder(int i);
 		
@@ -63,7 +69,7 @@ namespace GPPG {
 		
 	private:
 		double _freq, _total, _fitness;
-		int _index, _order;
+		int _index, _order, _state;
 	};
 	
 	/*

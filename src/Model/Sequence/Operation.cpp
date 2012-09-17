@@ -308,7 +308,7 @@ double SequenceInsertionMutator::rate() const { return _rate; }
  *******************************************************************/
 
 SequenceCrossover::SequenceCrossover(OpSequence& op1, OpSequence& op2, const std::vector<int>& locs) :
-OpSequenceBase(1, (locs.size()%2==0)? op1.length(): op2.length(), op1, op2), _locs(locs) {}
+OpSequenceBase(100, (locs.size()%2==0)? op1.length(): op2.length(), op1, op2), _locs(locs) {}
 
 
 SequenceData* SequenceCrossover::evaluate() const {

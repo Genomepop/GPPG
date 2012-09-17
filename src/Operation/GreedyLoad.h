@@ -12,20 +12,25 @@
 
 #include "Operation/CompressionPolicy.h"
 #include <set>
+#include <map>
 
 namespace GPPG {
+	
+	struct Load  {
+		Load(); 
+		Load(double l, double f, double c);
+		double load, frequency, cost;
+	};
+	
 	class GreedyLoad : public CompressionPolicy {
 	public:
 		/** Create a GreedyLoad policy that uses at most \param maxExplicit uncompressed genotypes and is applied every \param numGens generations.
 		 */
 		GreedyLoad(int maxExplicit, int numGens);
 		
-		
 		void decompressionReleased( IOperation* op );
 		
-		
 		void operationAdded(IOperation* op);
-		
 		
 		void generationFinished( const std::set<IOperation*>& active );
 		
@@ -56,12 +61,30 @@ namespace GPPG {
 		void add(IOperation* op);
 		void remove(IOperation* op, bool cache, bool doRecurse);
 		void move(IOperation* a, IOperation* b);
+		void split( IOperation* op, int& s1, int& s2, IOperation*& g1, IOperation*& g2 );
+		
+		// Methods for annotating load
+		void setLoad(IOperation* op, double freq, double cost);
+		void incrLoad(IOperation* op, double freq, double cost);
+		void decrLoad(IOperation* op, double freq, double cost);
+		double load(IOperation* op);
+		void clearLoadMap();
+		void annotate(const std::set<IOperation*>&);
+		void innerAnnotate(IOperation* op, double freq, double cost);
+		void reset(IOperation* op);
+		IOperation* findMaxAdvance(IOperation* op, bool doReset);
+		IOperation* uncoveredChild(IOperation* op);
+		void reverseAnnotate(IOperation* op, double freq, double cost);
+		void resetAnnotation(IOperation* op);
+		void resetAnnotation(const std::set<IOperation*>&);
+		
 		void update();
 		void clearCache();
-		void split( IOperation* op, int& s1, int& s2, IOperation*& g1, IOperation*& g2 );
+		
 		IOperation* getMaxItem( const std::set<IOperation*>& items, bool compare );
 		
 		std::set<IOperation*> _U;
+		std::map<IOperation*, Load> _L;
 		IOperation* _root;
 		int _maxExplicit, _elapsedGens, _numExplicit, _waitGens;
 	};

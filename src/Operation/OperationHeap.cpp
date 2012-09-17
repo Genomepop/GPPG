@@ -14,6 +14,7 @@
 #include "Operation/CompressionPolicy.h"
 
 #include <iostream>
+#include <list>
 
 #ifdef UBIGRAPH
 extern "C" {
@@ -24,6 +25,7 @@ extern "C" {
 using namespace GPPG;
 using std::cout;
 using std::endl;
+using std::list;
 
 OperationGraph::OperationGraph(ICompressionPolicy* p) : _policy(p) {
 	
@@ -87,7 +89,7 @@ void OperationGraph::addOperation(IOperation* op) {
 	_policy->operationAdded( op );
 }
 
-
+/*
 void OperationGraph::removeOperation(IOperation* op) {
 	_policy->operationRemoved( op );
 	
@@ -120,6 +122,43 @@ void OperationGraph::removeOperation(IOperation* op) {
 	}
 	
 	delete p_end;
+}
+ */
+
+#define QUEUED -2
+#define INACTIVE -1
+
+void OperationGraph::removeOperation(IOperation* op) {
+	_policy->operationRemoved( op );
+	
+	list<IOperation*> ops;
+	ops.push_front(op);
+	op->setState(QUEUED);
+	
+	IOperation* wop, *pop;
+	
+	while (ops.size() > 0) {
+		wop = ops.front();
+		ops.pop_front();
+		wop->setState(INACTIVE);
+#ifdef UBIGRAPH
+		//ubigraph_set_vertex_attribute( wop->key(), "shape", "cone" );
+		//sleep(0.1);
+#endif
+		// If this operation has children, is active, or is the root, bail!
+		if (wop != 0 && wop->numChildren() == 0 && wop->index() < 0 && wop->numParents() > 0) {
+			for (int i=0; i<wop->numParents(); i++) {
+				pop = wop->parent(i);
+				if (pop->state() != QUEUED) {
+					pop->setState(QUEUED);
+					ops.push_front(pop);
+				}
+			}
+			
+			_policy->decompressionReleased(wop);
+			delete wop;
+		}
+	}	
 }
 
 void OperationGraph::generationFinished(const std::vector<IGenotype*>& genos) {
