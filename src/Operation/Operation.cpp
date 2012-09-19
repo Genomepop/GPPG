@@ -66,7 +66,7 @@ std::ostream& operator<<(std::ostream& output, const GPPG::IOperation& op) {
 }
 
 BaseOperation::BaseOperation(double cost) : 
-	_index(-1), _state(-1), _freq(0), _total(0), _order(-1), _fitness(1.0), _cost(cost), _load(0), _loadFreq(0), _loadCost(0) {
+	_key(-1), _index(-1), _state(-1), _freq(0.0), _total(0), _order(-1), _fitness(1.0), _cost(cost), _load(0), _loadFreq(0), _loadCost(0) {
 #ifdef UBIGRAPH
 	//ubigraph_new_vertex_w_id( (long)this );
 #endif
@@ -88,6 +88,17 @@ void BaseOperation::configure() {
 		ubigraph_new_edge_w_id(eid, parent(i)->key(), key() );
 		//ubigraph_set_edge_attribute( eid, "width", TToStr<double>(this->cost()).c_str() );
 	}
+	
+	if (isCompressed()) {
+		
+		if (_freq == 0) {
+			ubigraph_change_vertex_style( key(), 1);	
+		} else if( _freq == 0) {
+			ubigraph_change_vertex_style( key(), 0);
+		}
+		
+	}
+	
 #endif
 }
 

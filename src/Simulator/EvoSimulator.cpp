@@ -14,6 +14,8 @@
 #include "Base/GenotypeHeap.h"
 #include "Base/Recombinator.h"
 
+//#include <omp.h>
+
 #include <iostream>
 #include <sstream>
 
@@ -107,10 +109,13 @@ void EvoSimulator::addGenotype(IGenotype* g) {
 }
 
 void EvoSimulator::addGenotype(IGenotype* g, double freq) {
+	if (g->order() > 0) return;
+
 	GenotypeSimulator::addGenotype(g);
 	
 	g->setIndex(-1);
 	g->setState(-1);
+	g->setOrder( clock() );
 	
 	if (freq > 0.0) {
 		activateGenotype(g, freq);
@@ -154,11 +159,19 @@ int EvoSimulator::randomParent() {
 	return (int)(random01()*(_indIn->size()));
 }
 
+IGenotype* EvoSimulator::primeGenotype(IGenotype* g) {
+	if (g->order() < 0) {
+		addGenotype(g);
+	}
+	return g;
+}
+
 void EvoSimulator::evolve(long N, long G) {
 	
+	//omp_set_num_threads( 4 ); //omp_get_max_threads()
 	double one_individual = 1.0/N;
 	
-	normalizeArray( _active );
+	//normalizeArray( _active );
 	long Gtot = _curr_gen + G;
 	
 #ifdef DEBUG_0
@@ -179,7 +192,7 @@ void EvoSimulator::evolve(long N, long G) {
 		throw "There can only be one recombinator right now";
 	
 	int p1,p2;
-	IGenotype *g1, *g2, *gOut;
+	IGenotype *g1, *g2, *gOut, *gIn;
 	while (_curr_gen < Gtot) {
 		// Clear the frequency for all the genotypes
 		for (GIter git=_active.begin(); git!=_active.end(); git++) {
@@ -189,17 +202,28 @@ void EvoSimulator::evolve(long N, long G) {
 #ifdef DEBUG_0
 		cout <<	_curr_gen << " Resampling " << N << " individuals.\n";
 #endif
+		//#pragma omp parallel for private(p1,p2,g1,g2,gOut,gIn) num_threads(4)
 		for (int i=0; i<N; i++) {
 			// For each individual in the next generation, select a random parent
-			p1 = randomParent();
+			//#pragma omp critical
+			//{
+			//	cout << "Thread " << omp_get_thread_num() << " of " << omp_get_num_threads() << ": " << i << endl;
+			//}
+			p1 = (int)(random01()*N); //randomParent();
 			g1 = indIn[p1];
 			
 
 			if (recombinator) {
 				// If recombination, select another parent, and perform a recombination (maybe)
-				p2 = randomParent();
+				p2 = (int)(random01()*N); //randomParent();
 				g2 = indIn[p2];
 				gOut = recombinator->recombine(*g1, *g2);
+				if (gOut != g1 && gOut != g2) {
+					//#pragma omp critical
+					{
+						GenotypeSimulator::addGenotype(gOut);
+					}
+				}
 
 			} else {
 				// If no recombination, directly inherit from the parent				
@@ -207,22 +231,32 @@ void EvoSimulator::evolve(long N, long G) {
 				g2 = 0;
 			}
 
-			if (gOut == g1) {
-
-
 			// Mutate the zygote
 			for (std::set<IMutator*>::iterator it = _mutators.begin(); it!=_mutators.end(); it++) {
 				IMutator* mutator = *it;
-				gOut = mutator->mutate( *gOut );
+				gIn = gOut;
+				gOut = mutator->mutate( *gIn );
+				if (gOut != gIn) {
+					//#pragma omp critical
+					{
+						GenotypeSimulator::addGenotype(gOut);
+					}
+				}
 			}
-			}
+			
 			
 			if (gOut != g1 && gOut != g2) {
 				// A new genotype has been created, so we need to record it
 				// We assume that any new genotype has never been seen before
-				addGenotype( gOut, one_individual );
+				//#pragma omp critical
+				{
+					activateGenotype( gOut, one_individual );
+				}
 			} else {
-				gOut->setFrequency( gOut->frequency() + one_individual);
+				//#pragma omp critical
+				{
+					gOut->setFrequency( gOut->frequency() + one_individual);	
+				}
 			}
 
 			// Store it			
@@ -231,15 +265,7 @@ void EvoSimulator::evolve(long N, long G) {
 		}
 		
 		// Get rid of genotypes which are not present in the subsequent generation
-		GIter git = _active.begin();
-		while (git != _active.end()) {
-			g1 = *git;
-			git++;
-			if (g1->frequency() <= 0) {
-				retireGenotype( g1 );
-				removeGenotype( g1 );
-			}
-		}
+		compactActive(N);
 
 		
 		// Swap references to the array
@@ -382,21 +408,23 @@ void EvoSimulator::compactActive(long N) {
 const set<IGenotype*>& EvoSimulator::activeGenotypes() const { return _active; }
 
 IGenotype* EvoSimulator::activateGenotype(IGenotype* g, double freq) {
-	if (g->index() >= 0) {
+	if (_active.count(g) > 0) {
 		g->setFrequency(g->frequency()+freq);
 		return g;
 	}
-	//if (g->order() <= _curr_gen) {
-	//	return g;
-	//}
 	
-	// Put g at the end of the list
-	g->setIndex(1);
-	g->setState(1);
 	g->setOrder( clock() );
 	g->setFrequency( freq );
-	_active.insert( g );
-	
+
+	if (freq > 0) {
+		g->setIndex(1);
+		g->setState(1);
+		_active.insert( g );
+	} else {
+		g->setIndex(-1);
+		g->setState(-1);
+	}
+
 	
 	return g;
 }

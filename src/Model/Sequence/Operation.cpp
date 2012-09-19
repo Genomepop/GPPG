@@ -179,7 +179,7 @@ ostream& operator<<(ostream& output, const SequencePointMutator& s) {
 }
 
 
-SequenceDeletion::SequenceDeletion(OpSequence& op, int loc, int span): OpSequenceBase(1, op.length()-span, op), _loc(loc), _span(span) {}
+SequenceDeletion::SequenceDeletion(OpSequence& op, int loc, int span): OpSequenceBase(10, op.length()-span, op), _loc(loc), _span(span) {}
 
 SequenceData* SequenceDeletion::evaluate() const {
 	SequenceData* sd = OpSequenceBase::evaluate();
@@ -195,7 +195,7 @@ SequenceData* SequenceDeletion::evaluate() const {
 	STYPE* pdata = sd->sequence();
 	if (_loc > 0) 
 		memcpy(sdata, pdata, sizeof(STYPE)*_loc);
-	memcpy(&sdata[_loc], &pdata[_loc+_span] , sizeof(STYPE)*(_span-_loc));
+	memcpy(&sdata[_loc], &pdata[_loc+_span] , sizeof(STYPE)*(length()-_loc));
 
 	delete sd;
 	
@@ -211,7 +211,7 @@ STYPE SequenceDeletion::proxyGet(int i) const {
 }
 
 SequenceInsertion::SequenceInsertion(OpSequence& op, int loc, SequenceData* span): 
-	OpSequenceBase(1, op.length()+span->length(), op), _loc(loc), _span(span) {}
+	OpSequenceBase(10, op.length()+span->length(), op), _loc(loc), _span(span) {}
 
 SequenceInsertion::~SequenceInsertion() { delete _span; }
 
@@ -255,6 +255,9 @@ SequenceDeletionMutator::SequenceDeletionMutator(double rate, int minL, int maxL
 OperationMutator<OpSequence>(), _rate(rate), _minL(minL), _maxL(maxL) {}
 
 OpSequence* SequenceDeletionMutator::mutate( OpSequence& g) const {
+	boost::random::binomial_distribution<> distl( g.length(), _rate );
+	if (distl(gen) == 0) return &g;
+	
 	// Perform deletion	
 	int length = g.length(); 
 	
@@ -281,6 +284,10 @@ SequenceInsertionMutator::SequenceInsertionMutator(double rate, int minL, int ma
 OperationMutator<OpSequence>(), _rate(rate), _minL(minL), _maxL(maxL), _distr(distr) {}
 
 OpSequence* SequenceInsertionMutator::mutate( OpSequence& g) const {
+	// See if insertion occurs
+	boost::random::binomial_distribution<> distl( g.length(), _rate );
+	if (distl(gen) == 0) return &g;
+	
 	// Perform insertion
 	int length = g.length(); 
 	

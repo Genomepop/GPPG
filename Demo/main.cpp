@@ -56,8 +56,8 @@ void testSequence() {
 void testSimulator() {
 	
 	//PopulationSimulator psim( new OperationGraph(new BaseCompressionPolicy(STORE_ACTIVE)) );
-	//EvoSimulator psim( new OperationGraph(new BaseCompressionPolicy(STORE_ROOT)) );
-	EvoSimulator psim( new OperationGraph(new GreedyLoad(40, 5) ));
+	//EvoSimulator psim( new OperationGraph(new BaseCompressionPolicy(STORE_ACTIVE)) );
+	EvoSimulator psim( new OperationGraph(new GreedyLoad(20, 10) ));
 	
 	ublas::vector<double> distr = ublas::vector<double>(4);
 	for (int i=0; i<distr.size(); i++) {
@@ -65,12 +65,12 @@ void testSimulator() {
 	}
 	double scaling = 1e2;
 	long N = 1e4;
-	long L = 1e5;
+	long L = 1e6;
 	long G = 2e7;
 	double u = 1e-9;
-	double ud = 1e-10;
-	double ui = 1e-10;
-	double ur = 1e-8;
+	double ud = 1e-9;
+	double ui = 1e-9;
+	double ur = 1e-9;
 	cout << "N = " << N/scaling << endl;
 	cout << "G = " << G/scaling << endl;
 	cout << "u = " << u*scaling << endl;
@@ -84,18 +84,19 @@ void testSimulator() {
             T (i, j) = 0.25;
 	
 	SequencePointMutator *spm = new SequencePointMutator( u*scaling, T);
-	SequenceDeletionMutator *sdm = new SequenceDeletionMutator( ud*scaling , 10, 100);
-	SequenceInsertionMutator *sim = new SequenceInsertionMutator( ui*scaling , 10, 100, distr);
+	SequenceDeletionMutator *sdm = new SequenceDeletionMutator( ud*scaling , 10, 20);
+	SequenceInsertionMutator *sim = new SequenceInsertionMutator( ui*scaling , 10, 20, distr);
 
 	psim.addGenotype( sr, 1.0 );
 	psim.addMutator( spm );
 	//psim.addMutator(sdm);
 	//psim.addMutator(sim);
 
-	psim.addRecombinator(new SequenceRecombinator(ur*scaling) );
 	
-	for (int i=0; i<100; i++) {
-		psim.evolve( N/scaling, (G/scaling)/100 );	
+	psim.addRecombinator(new SequenceRecombinator(ur*scaling) );
+	int steps = 1000;
+	for (int i=0; i<steps; i++) {
+		psim.evolve( N/scaling, (G/scaling)/steps );	
 		//usleep(50000);
 		cout << "Done with " << i << endl;
 	}

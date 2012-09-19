@@ -54,6 +54,7 @@ namespace GPPG {
 		
 	private:
 		void checkIndividuals(long N);
+		IGenotype* primeGenotype(IGenotype* g);
 		
 		int _curr_gen;
 		std::set<IGenotype*> _active;

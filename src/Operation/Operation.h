@@ -253,7 +253,8 @@ namespace GPPG {
 			if (isCompressed()) {
 				return NULL;
 			}
-			return data()->copy();	
+			//return data()->copy();	
+			return _data->copy();
 		}
 	
 		

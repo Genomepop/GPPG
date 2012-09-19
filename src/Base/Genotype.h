@@ -45,6 +45,7 @@ namespace GPPG {
 		BaseGenotype();
 		
 		int key() const;
+		void setKey(int k);
 		
 		void configure();
 		double frequency() const;
@@ -69,7 +70,7 @@ namespace GPPG {
 		
 	private:
 		double _freq, _total, _fitness;
-		int _index, _order, _state;
+		int _index, _order, _state, _key;
 	};
 	
 	/*

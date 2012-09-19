@@ -60,6 +60,7 @@ namespace GPPG {
 		// Methods for managing the compression sets
 		void add(IOperation* op);
 		void remove(IOperation* op, bool cache, bool doRecurse);
+		bool isCompressed(IOperation* op);
 		void move(IOperation* a, IOperation* b);
 		void split( IOperation* op, int& s1, int& s2, IOperation*& g1, IOperation*& g2 );
 		
@@ -75,7 +76,7 @@ namespace GPPG {
 		IOperation* findMaxAdvance(IOperation* op, bool doReset);
 		IOperation* uncoveredChild(IOperation* op);
 		void reverseAnnotate(IOperation* op, double freq, double cost);
-		void resetAnnotation(IOperation* op);
+		void resetAnnotation(IOperation* op, bool reset);
 		void resetAnnotation(const std::set<IOperation*>&);
 		
 		void update();
@@ -83,7 +84,7 @@ namespace GPPG {
 		
 		IOperation* getMaxItem( const std::set<IOperation*>& items, bool compare );
 		
-		std::set<IOperation*> _U;
+		std::set<IOperation*> _U, _V;
 		std::map<IOperation*, Load> _L;
 		IOperation* _root;
 		int _maxExplicit, _elapsedGens, _numExplicit, _waitGens;

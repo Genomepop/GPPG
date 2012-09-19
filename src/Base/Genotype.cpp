@@ -11,9 +11,11 @@
 
 using namespace GPPG;
 
-BaseGenotype::BaseGenotype() : _index(-1), _freq(0), _total(0), _order(-1), _state(-1), _fitness(1.0) {}
+BaseGenotype::BaseGenotype() : _key(-1), _index(-1), _freq(0), _total(0), _order(-1), _state(-1), _fitness(1.0) {}
 
 int BaseGenotype::key() const { return (long)this; }
+
+void BaseGenotype::setKey(int k) { _key = k; }
 
 void BaseGenotype::configure() {}
 

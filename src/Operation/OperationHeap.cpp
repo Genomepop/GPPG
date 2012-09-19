@@ -146,6 +146,7 @@ void OperationGraph::removeOperation(IOperation* op) {
 		//sleep(0.1);
 #endif
 		// If this operation has children, is active, or is the root, bail!
+		//if (wop != 0 && wop->numChildren() == 0 && !wop->isActive() && wop->numParents() > 0) {		
 		if (wop != 0 && wop->numChildren() == 0 && wop->index() < 0 && wop->numParents() > 0) {
 			for (int i=0; i<wop->numParents(); i++) {
 				pop = wop->parent(i);
