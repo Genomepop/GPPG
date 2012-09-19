@@ -18,6 +18,7 @@
 
 #include <iostream>
 #include <sstream>
+#include <time.h>
 
 #include "Util/Random.h"
 #include <boost/random/mersenne_twister.hpp>
@@ -193,7 +194,13 @@ void EvoSimulator::evolve(long N, long G) {
 	
 	int p1,p2;
 	IGenotype *g1, *g2, *gOut, *gIn;
+#ifdef DEBUG
+	time_t tstart, tend;
+	time(&tstart);
+#endif
+	
 	while (_curr_gen < Gtot) {
+
 		// Clear the frequency for all the genotypes
 		for (GIter git=_active.begin(); git!=_active.end(); git++) {
 			(*git)->setFrequency(0);
@@ -274,9 +281,17 @@ void EvoSimulator::evolve(long N, long G) {
 		finishGeneration();
 		
 		_curr_gen++;
+		
 	}
 	_indIn = &indIn;
 	_indOut = &indOut;
+	
+#ifdef DEBUG
+	time(&tend);
+	std::cout << "Gens/Sec [" << G << "]= " << difftime(tend, tstart) << std::endl;
+	//((float)(tend-tstart))/CLOCKS_PER_SEC << std::endl;
+#endif
+	
 }
 
 void EvoSimulator::evolve2(long N, long G) {

@@ -7,7 +7,7 @@
  *
  */
 
-//#define DEBUG
+#define DEBUG
 //#define DEBUG_0
 
 // This turns on Ubigraph Support

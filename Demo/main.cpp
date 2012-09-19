@@ -56,8 +56,8 @@ void testSequence() {
 void testSimulator() {
 	
 	//PopulationSimulator psim( new OperationGraph(new BaseCompressionPolicy(STORE_ACTIVE)) );
-	//EvoSimulator psim( new OperationGraph(new BaseCompressionPolicy(STORE_ACTIVE)) );
-	EvoSimulator psim( new OperationGraph(new GreedyLoad(20, 10) ));
+	EvoSimulator psim( new OperationGraph(new BaseCompressionPolicy(STORE_ROOT)) );
+	//EvoSimulator psim( new OperationGraph(new GreedyLoad(20, 10) ));
 	
 	ublas::vector<double> distr = ublas::vector<double>(4);
 	for (int i=0; i<distr.size(); i++) {
