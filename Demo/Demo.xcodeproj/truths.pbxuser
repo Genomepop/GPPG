@@ -156,9 +156,9 @@
 	};
 	08FB7796FE84155DC02AAC07 /* main.cpp */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {929, 1586}}";
-			sepNavSelRange = "{1469, 0}";
-			sepNavVisRange = "{1207, 1359}";
+			sepNavIntBoundsRect = "{{0, 0}, {875, 1573}}";
+			sepNavSelRange = "{1517, 0}";
+			sepNavVisRange = "{1086, 1697}";
 			sepNavWindowFrame = "{{39, 4}, {1103, 874}}";
 		};
 	};
@@ -320,6 +320,13 @@
 			sepNavIntBoundsRect = "{{0, 0}, {875, 963}}";
 			sepNavSelRange = "{425, 0}";
 			sepNavVisRange = "{0, 453}";
+		};
+	};
+	BC0A614B160A118D008F9D7E /* Data.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {875, 897}}";
+			sepNavSelRange = "{1224, 0}";
+			sepNavVisRange = "{0, 1115}";
 		};
 	};
 	BC22920F15E67C3C00730837 /* GenotypeHeap.h */ = {
@@ -560,7 +567,7 @@
 		fRef = BCD4F3A915E9299B00BA9D5E /* EvoSimulator.cpp */;
 		name = "EvoSimulator.cpp: 278";
 		rLen = 0;
-		rLoc = 6540;
+		rLoc = 6796;
 		rType = 0;
 		vrLen = 1134;
 		vrLoc = 5622;
@@ -697,7 +704,7 @@
 		fRef = BCF4E1F915E5C40900B25C9F /* GPPG.h */;
 		name = "GPPG.h: 10";
 		rLen = 0;
-		rLoc = 131;
+		rLoc = 129;
 		rType = 0;
 		vrLen = 261;
 		vrLoc = 0;
@@ -707,7 +714,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 96";
 		rLen = 0;
-		rLoc = 2567;
+		rLoc = 2565;
 		rType = 0;
 		vrLen = 1346;
 		vrLoc = 1839;
@@ -717,7 +724,7 @@
 		fRef = 08FB7796FE84155DC02AAC07 /* main.cpp */;
 		name = "main.cpp: 59";
 		rLen = 0;
-		rLoc = 1469;
+		rLoc = 1467;
 		rType = 0;
 		vrLen = 1359;
 		vrLoc = 1207;
@@ -781,9 +788,9 @@
 	};
 	BCF4DF6F15DEDDE600B25C9F /* Data.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {875, 963}}";
+			sepNavIntBoundsRect = "{{0, 0}, {875, 871}}";
 			sepNavSelRange = "{329, 0}";
-			sepNavVisRange = "{0, 1069}";
+			sepNavVisRange = "{3, 1011}";
 			sepNavWindowFrame = "{{2005, -65}, {1030, 1104}}";
 		};
 	};
@@ -916,15 +923,15 @@
 	};
 	BCF4E1F915E5C40900B25C9F /* GPPG.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {929, 591}}";
-			sepNavSelRange = "{131, 0}";
-			sepNavVisRange = "{0, 261}";
+			sepNavIntBoundsRect = "{{0, 0}, {875, 744}}";
+			sepNavSelRange = "{129, 0}";
+			sepNavVisRange = "{0, 259}";
 			sepNavWindowFrame = "{{176, 4}, {1013, 874}}";
 		};
 	};
 	BCF4E2D415E6E92100B25C9F /* Simulator.h */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {875, 963}}";
+			sepNavIntBoundsRect = "{{0, 0}, {875, 744}}";
 			sepNavSelRange = "{354, 0}";
 			sepNavVisRange = "{0, 372}";
 			sepNavWindowFrame = "{{61, 253}, {1013, 878}}";
