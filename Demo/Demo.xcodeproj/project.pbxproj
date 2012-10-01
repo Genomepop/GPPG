@@ -19,6 +19,7 @@
 		BC0A5E951603B17B008F9D7E /* Recombinator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC0A5E941603B17B008F9D7E /* Recombinator.cpp */; };
 		BC0A614D160A118D008F9D7E /* Data.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC0A614C160A118D008F9D7E /* Data.cpp */; };
 		BC0A61801610B598008F9D7E /* Operation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC0A617F1610B598008F9D7E /* Operation.cpp */; };
+		BC0A61C2161A17BE008F9D7E /* Random.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC0A61C1161A17BE008F9D7E /* Random.cpp */; };
 		BC22921115E67C3C00730837 /* GenotypeHeap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC22921015E67C3C00730837 /* GenotypeHeap.cpp */; };
 		BC894AFC15E7F5610064FD2C /* Tools.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC894AFB15E7F5610064FD2C /* Tools.cpp */; };
 		BCD4F3AA15E9299B00BA9D5E /* EvoSimulator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCD4F3A915E9299B00BA9D5E /* EvoSimulator.cpp */; };
@@ -73,6 +74,7 @@
 		BC0A614C160A118D008F9D7E /* Data.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Data.cpp; path = Pathway/Data.cpp; sourceTree = "<group>"; };
 		BC0A617E1610B598008F9D7E /* Operation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Operation.h; path = Pathway/Operation.h; sourceTree = "<group>"; };
 		BC0A617F1610B598008F9D7E /* Operation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Operation.cpp; path = Pathway/Operation.cpp; sourceTree = "<group>"; };
+		BC0A61C1161A17BE008F9D7E /* Random.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Random.cpp; path = ../src/Util/Random.cpp; sourceTree = SOURCE_ROOT; };
 		BC22920F15E67C3C00730837 /* GenotypeHeap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenotypeHeap.h; sourceTree = "<group>"; };
 		BC22921015E67C3C00730837 /* GenotypeHeap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GenotypeHeap.cpp; sourceTree = "<group>"; };
 		BC894AFA15E7F5610064FD2C /* Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Tools.h; path = ../src/Util/Tools.h; sourceTree = SOURCE_ROOT; };
@@ -241,6 +243,7 @@
 				BCF4E15515E48ACB00B25C9F /* Random.h */,
 				BC894AFA15E7F5610064FD2C /* Tools.h */,
 				BC894AFB15E7F5610064FD2C /* Tools.cpp */,
+				BC0A61C1161A17BE008F9D7E /* Random.cpp */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -347,6 +350,7 @@
 				BC0A5E951603B17B008F9D7E /* Recombinator.cpp in Sources */,
 				BC0A614D160A118D008F9D7E /* Data.cpp in Sources */,
 				BC0A61801610B598008F9D7E /* Operation.cpp in Sources */,
+				BC0A61C2161A17BE008F9D7E /* Random.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

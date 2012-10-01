@@ -108,8 +108,27 @@ namespace GPPG {
 				
 			};
 			
+			/** The BindingSiteMutator mutates binding sites in a promoter.
+			 * Binding sites correspond to motifs.  Motifs have different spontaneous loss and gain rates.
+			 * This mutator simulates both motif loss and gain for a set of motifs.
+			 */
 			class BindingSiteMutator : public OperationMutator< OpPathway > {
+				BindingSiteMutator( double u, int motifOverlap, const vector<double>& motifGainRates, const vector<double>& motifLossProb);
+				~BindingSiteMutator();
 				
+				OpPathway* mutate( OpPathway& g ) const;
+				
+				int numMutants(OpPathway& g, long N, double f) const;
+				
+				double rate() const;
+				
+			private:
+				double _u;
+				int _overlap;
+				vector<double> _gainRates, _lossProb;
+				int* _bufLoc;
+				PTYPE* _bufC;
+				int _bufSize;
 			};
 			
 			class PromoterRecombinator : public OperationRecombinator< OpPathway > {

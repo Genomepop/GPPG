@@ -36,6 +36,10 @@ int GlobalInfo::numMotifs() const { return _motifs.size(); }
 
 int GlobalInfo::totalRegions() const { return _totalRegions; }
 
+int GlobalInfo::offset(int i) const { return _offset[i]; }
+
+int GlobalInfo::numRegions(int i) const { return _regions[i]; }
+
 const std::string& GlobalInfo::getGeneName(int i) const { return _genes[i]; }
 
 
@@ -64,6 +68,10 @@ PromoterData* PromoterData::copy() const {
 
 void PromoterData::set(int i, PTYPE c) {
 	_pool[i] = c;
+}
+
+void PromoterData::set(int i, int j, PTYPE c) {
+	_pool[ _info.offset(i)+j ] = c;
 }
 
 PTYPE PromoterData::get(int i) const { return _pool[i]; }

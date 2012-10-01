@@ -101,7 +101,7 @@ void samplePopulation( set<IGenotype*>& genos, long N) {
 
 EvoSimulator::EvoSimulator(IGenotypeHeap* h): 
 	GenotypeSimulator(h), _curr_gen(0), _indDirty(true), _indIn(0), _indOut(0) {
-	gen.seed((unsigned int)time(0));
+	
 	initRandom();
 }
 

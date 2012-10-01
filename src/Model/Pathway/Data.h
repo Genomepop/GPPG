@@ -45,6 +45,10 @@ namespace GPPG {
 				
 				int totalRegions() const;
 				
+				int numRegions(int i) const;
+				
+				int offset(int i) const;
+				
 				/** Retrieve network structure from promoter data
 				 */
 				
@@ -118,6 +122,8 @@ namespace GPPG {
 				/** Sets the item at location i
 				 */
 				void set(int i, PTYPE c);
+				
+				void set(int gene, int region, PTYPE c);
 				
 				int numGenes() const;
 				

@@ -1,3 +1,6 @@
+#ifndef BINOMIAL_
+#define BINOMIAL_
+
 #include	<stdio.h>
 #include 	<math.h>
 #include 	<sys/types.h>
@@ -403,3 +406,4 @@ S170:
 }
 
 }
+#endif
