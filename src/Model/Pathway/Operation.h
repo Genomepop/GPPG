@@ -19,8 +19,9 @@ namespace GPPG {
 			typedef Operation<PromoterData, ITransRegPathway> OpPathway;
 			
 			class OpPathwayBase : public OpPathway {
-				OpPathwayBase(double cost, int length, const GlobalInfo& info, OpPathway& parent1);
-				OpPathwayBase(double cost, int length, const GlobalInfo& info, OpPathway& parent1, OpPathway& parent2);
+			public:
+				OpPathwayBase(double cost, const GlobalInfo& info, OpPathway& parent1);
+				OpPathwayBase(double cost, const GlobalInfo& info, OpPathway& parent1, OpPathway& parent2);
 				
 				int numGenes() const;
 				
@@ -34,19 +35,30 @@ namespace GPPG {
 				
 				PTYPE getBinding(int i, int j) const;
 				
+				const GlobalInfo& info() const;
+				
 			protected:
 				virtual PTYPE proxyGet(int i) const = 0;
 				
-			private:
-				int _length;
 				const GlobalInfo& _info;
 			};
 			
-			class PathwayRoot : public OpPathway {
+			class PathwayRoot : public OperationRoot< PromoterData, ITransRegPathway > {
 			public:
 				PathwayRoot( PromoterData* p );
-				int length() const;
+				int numGenes() const;
+				
+				int numTFs() const;
+				
+				int numMotifs() const;
+				
+				int totalRegions() const;
+				
 				PTYPE get(int i) const;
+				
+				PTYPE getBinding(int i, int j) const;
+				
+				const GlobalInfo& info() const;
 			};
 			
 			class PathwayRootFactory : public GenotypeFactory<PathwayRoot> {
@@ -57,8 +69,52 @@ namespace GPPG {
 				
 			private:
 				const GlobalInfo& _info;
-			}
+			};
 			
+			class BindingSiteChange : public OpPathwayBase {
+			public:
+				BindingSiteChange(OpPathway& op, int* locs, int numLocs, PTYPE* dest);
+				
+				~BindingSiteChange(); 
+				
+				std::string toString() const;
+				
+				PromoterData* evaluate() const;
+				
+				/** Get the number of mutated sites
+				 */
+				int numSites() const;
+				
+				/** Retrieve the \param i'th mutation.
+				 */
+				PTYPE getMutation(int i) const;
+				
+				/** Retrieve the \param i'th site.
+				 */
+				int getSite(int i) const;
+				
+				
+			protected:
+				PTYPE proxyGet(int i) const;
+				
+			private:
+				int* _loc;		/* Locations array */
+				int _numlocs;	/* Number of locations to change */
+				PTYPE* _c;		/* Characters to be changed to */
+				
+			};
+			
+			class PromoterCrossover : public OpPathwayBase {
+				
+			};
+			
+			class BindingSiteMutator : public OperationMutator< OpPathway > {
+				
+			};
+			
+			class PromoterRecombinator : public OperationRecombinator< OpPathway > {
+				
+			};
 			
 		}
 	}

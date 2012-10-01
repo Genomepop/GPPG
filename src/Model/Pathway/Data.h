@@ -17,36 +17,10 @@
 namespace GPPG {
 	
 	namespace Model {
+		namespace TransReg {
+			
 		typedef unsigned short PTYPE;	
 		
-		
-		
-		class ITransRegPathway {
-		public:
-			/** Retrieve the number of genes
-			 */
-			virtual int numGenes() const = 0;
-			
-			/** Retrieve the number of TFs
-			 */
-			virtual int numTFs() const = 0;
-			
-			/** Retrieve the number of motifs
-			 */
-			virtual int numMotifs() const = 0;
-			
-			virtual int totalRegions() const = 0;
-			
-			/** Gets the item at location i
-			 */
-			virtual PTYPE get(int i) const = 0;
-			
-			virtual PTYPE getBinding(int i, int j) const = 0;
-			
-		};
-		
-		namespace TransReg {
-
 			class GlobalInfo  {
 			public:
 				GlobalInfo(const std::vector<std::string>& genes,
@@ -69,6 +43,8 @@ namespace GPPG {
 				
 				int getGeneForRegion(int i) const;
 				
+				int totalRegions() const;
+				
 				/** Retrieve network structure from promoter data
 				 */
 				
@@ -76,7 +52,42 @@ namespace GPPG {
 				std::vector<std::string> _genes, _motifs;
 				std::vector<int> _regions, _tfs, _offset;
 				std::map< int, std::vector<int> > _binding;
+				int _totalRegions;
 			};
+			
+		class ITransRegPathway {
+		public:
+			/** Retrieve the number of genes
+			 */
+			virtual int numGenes() const = 0;
+			
+			/** Retrieve the number of TFs
+			 */
+			virtual int numTFs() const = 0;
+			
+			/** Retrieve the number of motifs
+			 */
+			virtual int numMotifs() const = 0;
+			
+			/** Retrieve number of regions which may contain binding sites
+			 */
+			virtual int totalRegions() const = 0;
+			
+			/** Gets the item at location i
+			 */
+			virtual PTYPE get(int i) const = 0;
+			
+			/** Get the binding motif for promoter \param i , location \param j.
+			 */
+			virtual PTYPE getBinding(int i, int j) const = 0;
+			
+			virtual const GlobalInfo& info() const = 0;
+			
+		};
+		
+
+
+
 			
 			/**
 			 * A simple data structure for holding Pathway (promoter) information.
@@ -84,7 +95,7 @@ namespace GPPG {
 			class PromoterData : ITransRegPathway {
 			public:
 				
-				PromoterData(const GlobalInfo& info, int totalRegions);
+				PromoterData(const GlobalInfo& info);
 				
 				~PromoterData();
 				
@@ -94,7 +105,7 @@ namespace GPPG {
 				
 				/** Get a pointer to the raw sequence data.
 				 */
-				PTYPE* sequence();
+				PTYPE* data();
 				
 				/** Gets the number of regions
 				 */
@@ -108,9 +119,18 @@ namespace GPPG {
 				 */
 				void set(int i, PTYPE c);
 				
+				int numGenes() const;
+				
+				int numTFs() const;
+				
+				int numMotifs() const;
+			
+				PTYPE getBinding(int i, int j) const;
+				
+				const GlobalInfo& info() const;
+				
 			private:
 				PTYPE *_pool;
-				int _totalRegions;
 				const GlobalInfo& _info;
 			};
 		}
