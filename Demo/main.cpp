@@ -1,4 +1,6 @@
 #include <iostream>
+#include <fstream>
+
 using namespace std;
 
 #include "Operation/GreedyLoad.h"
@@ -14,6 +16,7 @@ using namespace std;
 #include <Simulator/EvoSimulator.h>
 
 #include <Model/Pathway/Operation.h>
+#include <Util/json/json.h>
 
 using namespace GPPG;
 using namespace GPPG::Model;
@@ -163,11 +166,147 @@ void testPathway() {
 	}
 }
 
+void runSimulation( EvoSimulator* sim, long N, long G, int steps ) {
+	cout << "Running Simulation [N="<<N<<", G="<<G<<"]\n";
+	
+	for (int i=0; i<steps; i++) {
+		sim->evolve( N, G/steps );	
+		cout << "Done with " << i << " of " << steps << endl;
+	}
+	
+}
+
+EvoSimulator* createSimulator( const Json::Value& config ) {
+	double scaling = config.get("scaling",1).asDouble();
+	
+	
+	// Set Compression
+	ICompressionPolicy* policy=0;
+	const Json::Value& compression = config["compression"];
+	const string& compName = compression.get("name","Store-Root").asString();
+	
+	if( compName == "Greedy-Load" ) policy = new GreedyLoad(compression.get("k",20).asInt(), compression.get("t",10).asInt());
+	else if( compName == "Store-Root" ) policy = new BaseCompressionPolicy(STORE_ROOT); 
+	else if( compName == "Store-Active" ) policy = new BaseCompressionPolicy(STORE_ACTIVE);
+	else if( compName == "Store-All" ) policy = new BaseCompressionPolicy(STORE_ALL);
+	
+	if(!policy) {
+		cout << "No valid compression policy provided, got: " << compName << endl;
+		return 0;
+	}
+	
+	EvoSimulator* sim = new EvoSimulator( new OperationGraph( policy ) );
+	
+	// Set Factory & Genotype
+	const Json::Value& geno = config["genotype"];
+	const Json::Value& ops = config["operators"];
+	IGenotype* g = 0;
+	const string& genoName = geno["name"].asString();
+
+	if( genoName == "Sequence" ) {
+		int abet = geno.get("alphabet",4).asInt();
+		
+		ublas::vector<double> distr = ublas::vector<double>(abet);
+		for (int i=0; i<distr.size(); i++) {
+			distr(i) = 1.0/distr.size();
+		}
+		SequenceRootFactory factory(geno["length"].asInt(), distr);
+		g = factory.random();
+		
+		for (int i=0; i<ops.size(); i++) {
+			const Json::Value& gOp = ops[i];
+			const string& opName = gOp["name"].asString();
+			if( opName == "PointMutation" ) {
+				ublas::matrix<double> T(abet, abet);
+				for (unsigned ii = 0; ii < T.size1(); ++ ii)
+					for (unsigned ij = 0; ij < T.size2(); ++ ij)
+						T (ii, ij) = 1.0/abet;
+				sim->addMutator( new SequencePointMutator( gOp["rate"].asDouble()*scaling, T) );
+			} else if( opName == "Insertion" ) {
+				sim->addMutator( new SequenceInsertionMutator( gOp["rate"].asDouble()*scaling, 
+															  gOp["size"][(Json::Value::ArrayIndex)0].asInt(), gOp["size"][1].asInt(), distr ));
+			} else if( opName == "Deletion" ) {
+				sim->addMutator( new SequenceDeletionMutator( gOp["rate"].asDouble()*scaling,
+															 gOp["size"][(Json::Value::ArrayIndex)0].asInt(), gOp["size"][1].asInt() ));
+			} else if( opName == "Recombination" ) {
+				sim->addRecombinator( new SequenceRecombinator( gOp["rate"].asDouble()*scaling ));
+			}
+		}
+	} 
+	
+	else if (genoName == "Pathway") {
+		int numGenes = geno["genes"].asInt();
+		int numTFs = geno["tfs"].asInt();
+		const Json::Value& regions = geno["regions"];
+		int minRegion = regions[(Json::Value::ArrayIndex)0].asInt();
+		int maxRegion = regions[(Json::Value::ArrayIndex)1].asInt();
+		GlobalInfo* info = PathwayRootFactory::randomInfo( numGenes, numTFs, minRegion, maxRegion );
+		
+		PathwayRootFactory factory(*info);
+		g = factory.random();
+		
+		
+		for (int i=0; i<ops.size(); i++) {
+			const Json::Value& gOp = ops[i];
+			const string& opName = gOp["name"].asString();
+			if( opName == "BindingSiteMutation" ) {
+				double u = gOp["lossRate"][(Json::Value::ArrayIndex)0].asDouble();
+				sim->addMutator( new BindingSiteMutator( u*scaling, gOp["overlap"].asInt(), std::vector<double>(numTFs, gOp["gainRate"].asDouble()*scaling), 
+														std::vector<double>(numTFs, gOp["lossRate"][1].asDouble()) ) );
+			}
+		}
+	}
+	
+	if( !g ) {
+		cout << "No valid genotype provided, got: " << genoName << endl;
+		return 0;
+	}
+	sim->addGenotype( g, 1.0 );
+
+	
+	// Return the simulator!
+	return sim;
+}
+
+void createAndRunSimulation( const Json::Value& config ) {
+	EvoSimulator* sim = createSimulator( config );
+
+	if (!sim) {
+		cout << "Failed to create simulator\n";
+		return;
+	}
+	
+	runSimulation(sim, config["individuals"].asInt(), config["generations"].asInt(), config.get("steps", 100).asInt());
+}
+
 int main (int argc, char * const argv[])
 {
 	//testSequence();
-	testSimulator();
+	//testSimulator();
 	//testPathway();
+	
+	// First argument is config file.
+	if( argc < 2 ) {
+		cout << "Please provide a config file\n";
+		return -1;
+	}
+	
+	cout << "Reading configuration file " << argv[1] << endl;
+	ifstream t( argv[1] );
+	stringstream buffer;
+	buffer << t.rdbuf();
+	
+	Json::Value root;
+	Json::Reader reader;
+	bool parsingSuccessful = reader.parse(buffer.str(), root);
+	if (!parsingSuccessful) {
+		cout << "Failed to parse configuration\n" << reader.getFormatedErrorMessages();
+		return -1;
+	}
+	cout << root << endl;
+	
+	createAndRunSimulation(root);
+	
 	return 0;
 }
 

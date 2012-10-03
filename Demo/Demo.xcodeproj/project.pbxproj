@@ -20,6 +20,10 @@
 		BC0A614D160A118D008F9D7E /* Data.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC0A614C160A118D008F9D7E /* Data.cpp */; };
 		BC0A61801610B598008F9D7E /* Operation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC0A617F1610B598008F9D7E /* Operation.cpp */; };
 		BC0A61C2161A17BE008F9D7E /* Random.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC0A61C1161A17BE008F9D7E /* Random.cpp */; };
+		BC0A6255161C8B5B008F9D7E /* json_reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC0A624E161C8B5B008F9D7E /* json_reader.cpp */; };
+		BC0A6256161C8B5B008F9D7E /* json_value.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC0A624F161C8B5B008F9D7E /* json_value.cpp */; };
+		BC0A6257161C8B5B008F9D7E /* json_writer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC0A6250161C8B5B008F9D7E /* json_writer.cpp */; };
+		BC0A626E161C9104008F9D7E /* ex1.js in Sources */ = {isa = PBXBuildFile; fileRef = BC0A626D161C9104008F9D7E /* ex1.js */; };
 		BC22921115E67C3C00730837 /* GenotypeHeap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC22921015E67C3C00730837 /* GenotypeHeap.cpp */; };
 		BC894AFC15E7F5610064FD2C /* Tools.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC894AFB15E7F5610064FD2C /* Tools.cpp */; };
 		BCD4F3AA15E9299B00BA9D5E /* EvoSimulator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCD4F3A915E9299B00BA9D5E /* EvoSimulator.cpp */; };
@@ -75,6 +79,22 @@
 		BC0A617E1610B598008F9D7E /* Operation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Operation.h; path = Pathway/Operation.h; sourceTree = "<group>"; };
 		BC0A617F1610B598008F9D7E /* Operation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Operation.cpp; path = Pathway/Operation.cpp; sourceTree = "<group>"; };
 		BC0A61C1161A17BE008F9D7E /* Random.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Random.cpp; path = ../src/Util/Random.cpp; sourceTree = SOURCE_ROOT; };
+		BC0A6249161C8B5B008F9D7E /* autolink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = autolink.h; path = ../src/Util/json/autolink.h; sourceTree = SOURCE_ROOT; };
+		BC0A624A161C8B5B008F9D7E /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = config.h; path = ../src/Util/json/config.h; sourceTree = SOURCE_ROOT; };
+		BC0A624B161C8B5B008F9D7E /* features.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = features.h; path = ../src/Util/json/features.h; sourceTree = SOURCE_ROOT; };
+		BC0A624C161C8B5B008F9D7E /* forwards.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = forwards.h; path = ../src/Util/json/forwards.h; sourceTree = SOURCE_ROOT; };
+		BC0A624D161C8B5B008F9D7E /* json_batchallocator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = json_batchallocator.h; path = ../src/Util/json/json_batchallocator.h; sourceTree = SOURCE_ROOT; };
+		BC0A624E161C8B5B008F9D7E /* json_reader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = json_reader.cpp; path = ../src/Util/json/json_reader.cpp; sourceTree = SOURCE_ROOT; };
+		BC0A624F161C8B5B008F9D7E /* json_value.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = json_value.cpp; path = ../src/Util/json/json_value.cpp; sourceTree = SOURCE_ROOT; };
+		BC0A6250161C8B5B008F9D7E /* json_writer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = json_writer.cpp; path = ../src/Util/json/json_writer.cpp; sourceTree = SOURCE_ROOT; };
+		BC0A6251161C8B5B008F9D7E /* json.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = json.h; path = ../src/Util/json/json.h; sourceTree = SOURCE_ROOT; };
+		BC0A6252161C8B5B008F9D7E /* reader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = reader.h; path = ../src/Util/json/reader.h; sourceTree = SOURCE_ROOT; };
+		BC0A6253161C8B5B008F9D7E /* value.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = value.h; path = ../src/Util/json/value.h; sourceTree = SOURCE_ROOT; };
+		BC0A6254161C8B5B008F9D7E /* writer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = writer.h; path = ../src/Util/json/writer.h; sourceTree = SOURCE_ROOT; };
+		BC0A6266161C8C14008F9D7E /* json_internalarray.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = json_internalarray.inl; path = ../src/Util/json/json_internalarray.inl; sourceTree = SOURCE_ROOT; };
+		BC0A6267161C8C14008F9D7E /* json_internalmap.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = json_internalmap.inl; path = ../src/Util/json/json_internalmap.inl; sourceTree = SOURCE_ROOT; };
+		BC0A6268161C8C14008F9D7E /* json_valueiterator.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = json_valueiterator.inl; path = ../src/Util/json/json_valueiterator.inl; sourceTree = SOURCE_ROOT; };
+		BC0A626D161C9104008F9D7E /* ex1.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = ex1.js; path = ../input/ex1.js; sourceTree = SOURCE_ROOT; };
 		BC22920F15E67C3C00730837 /* GenotypeHeap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenotypeHeap.h; sourceTree = "<group>"; };
 		BC22921015E67C3C00730837 /* GenotypeHeap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GenotypeHeap.cpp; sourceTree = "<group>"; };
 		BC894AFA15E7F5610064FD2C /* Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Tools.h; path = ../src/Util/Tools.h; sourceTree = SOURCE_ROOT; };
@@ -128,6 +148,7 @@
 		08FB7794FE84155DC02AAC07 /* Demo */ = {
 			isa = PBXGroup;
 			children = (
+				BC0A626B161C907B008F9D7E /* Input */,
 				08FB7795FE84155DC02AAC07 /* Source */,
 				C6859E8C029090F304C91782 /* Documentation */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
@@ -226,6 +247,36 @@
 			name = Pathway;
 			sourceTree = "<group>";
 		};
+		BC0A6258161C8B63008F9D7E /* json */ = {
+			isa = PBXGroup;
+			children = (
+				BC0A6266161C8C14008F9D7E /* json_internalarray.inl */,
+				BC0A6267161C8C14008F9D7E /* json_internalmap.inl */,
+				BC0A6268161C8C14008F9D7E /* json_valueiterator.inl */,
+				BC0A6249161C8B5B008F9D7E /* autolink.h */,
+				BC0A624A161C8B5B008F9D7E /* config.h */,
+				BC0A624B161C8B5B008F9D7E /* features.h */,
+				BC0A624C161C8B5B008F9D7E /* forwards.h */,
+				BC0A624D161C8B5B008F9D7E /* json_batchallocator.h */,
+				BC0A624E161C8B5B008F9D7E /* json_reader.cpp */,
+				BC0A624F161C8B5B008F9D7E /* json_value.cpp */,
+				BC0A6250161C8B5B008F9D7E /* json_writer.cpp */,
+				BC0A6251161C8B5B008F9D7E /* json.h */,
+				BC0A6252161C8B5B008F9D7E /* reader.h */,
+				BC0A6253161C8B5B008F9D7E /* value.h */,
+				BC0A6254161C8B5B008F9D7E /* writer.h */,
+			);
+			name = json;
+			sourceTree = "<group>";
+		};
+		BC0A626B161C907B008F9D7E /* Input */ = {
+			isa = PBXGroup;
+			children = (
+				BC0A626D161C9104008F9D7E /* ex1.js */,
+			);
+			name = Input;
+			sourceTree = "<group>";
+		};
 		BCD4F3A715E9297F00BA9D5E /* Simulator */ = {
 			isa = PBXGroup;
 			children = (
@@ -238,6 +289,7 @@
 		BCF4DE3715DE9B8700B25C9F /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				BC0A6258161C8B63008F9D7E /* json */,
 				BCF4E3B215E7372100B25C9F /* Ubigraph */,
 				BCF4DE3915DE9C0500B25C9F /* binomial.h */,
 				BCF4E15515E48ACB00B25C9F /* Random.h */,
@@ -281,9 +333,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		8DD76F620486A84900D96B5E /* Demo */ = {
+		8DD76F620486A84900D96B5E /* CPGSimulator */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1DEB923108733DC60010E9CD /* Build configuration list for PBXNativeTarget "Demo" */;
+			buildConfigurationList = 1DEB923108733DC60010E9CD /* Build configuration list for PBXNativeTarget "CPGSimulator" */;
 			buildPhases = (
 				8DD76F640486A84900D96B5E /* Sources */,
 				8DD76F660486A84900D96B5E /* Frameworks */,
@@ -293,7 +345,7 @@
 			);
 			dependencies = (
 			);
-			name = Demo;
+			name = CPGSimulator;
 			productInstallPath = "$(HOME)/bin";
 			productName = Demo;
 			productReference = 8DD76F6C0486A84900D96B5E /* Demo */;
@@ -318,7 +370,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8DD76F620486A84900D96B5E /* Demo */,
+				8DD76F620486A84900D96B5E /* CPGSimulator */,
 			);
 		};
 /* End PBXProject section */
@@ -351,6 +403,10 @@
 				BC0A614D160A118D008F9D7E /* Data.cpp in Sources */,
 				BC0A61801610B598008F9D7E /* Operation.cpp in Sources */,
 				BC0A61C2161A17BE008F9D7E /* Random.cpp in Sources */,
+				BC0A6255161C8B5B008F9D7E /* json_reader.cpp in Sources */,
+				BC0A6256161C8B5B008F9D7E /* json_value.cpp in Sources */,
+				BC0A6257161C8B5B008F9D7E /* json_writer.cpp in Sources */,
+				BC0A626E161C9104008F9D7E /* ex1.js in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -434,7 +490,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1DEB923108733DC60010E9CD /* Build configuration list for PBXNativeTarget "Demo" */ = {
+		1DEB923108733DC60010E9CD /* Build configuration list for PBXNativeTarget "CPGSimulator" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1DEB923208733DC60010E9CD /* Debug */,
