@@ -8,9 +8,11 @@
  */
 
 #include "Data.h"
+#include <algorithm>
 
 using namespace GPPG::Model::TransReg;
 using namespace GPPG::Model;
+using namespace std;
 
 GlobalInfo::GlobalInfo(const std::vector<std::string>& genes,
 		   const std::vector<int>& regions,
@@ -48,8 +50,7 @@ const std::string& GlobalInfo::getMotifPWM(int i) const { return _motifs[i]; }
 int GlobalInfo::getTF(int i) const { return _tfs[i]; }
 
 int GlobalInfo::getGeneForRegion(int i) const {
-	throw "Not Implemented";
-	return 0;
+	return *lower_bound( _offset.begin(), _offset.end(), i );
 }
 
 PromoterData::PromoterData(const GlobalInfo& info): _info(info) {
@@ -85,8 +86,7 @@ int PromoterData::numTFs() const { return _info.numTFs(); }
 int PromoterData::numMotifs() const { return _info.numMotifs(); }
 
 PTYPE PromoterData::getBinding(int i, int j) const { 
-	throw "Not Implemented";
-	return 0; 
+	return _pool[ _info.offset(i)+j]; 
 }
 
 const GlobalInfo& PromoterData::info() const { return _info; }

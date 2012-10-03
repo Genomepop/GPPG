@@ -13,8 +13,11 @@ using namespace std;
 #include <Operation/UbiOperationGraph.h>
 #include <Simulator/EvoSimulator.h>
 
+#include <Model/Pathway/Operation.h>
+
 using namespace GPPG;
 using namespace GPPG::Model;
+using namespace GPPG::Model::TransReg;
 using namespace boost::numeric;
 
 void testSequence() {
@@ -56,8 +59,8 @@ void testSequence() {
 void testSimulator() {
 	
 	//PopulationSimulator psim( new OperationGraph(new BaseCompressionPolicy(STORE_ACTIVE)) );
-	EvoSimulator psim( new OperationGraph(new BaseCompressionPolicy(STORE_ROOT)) );
-	//EvoSimulator psim( new OperationGraph(new GreedyLoad(20, 10) ));
+	//EvoSimulator psim( new OperationGraph(new BaseCompressionPolicy(STORE_ROOT)) );
+	EvoSimulator psim( new OperationGraph(new GreedyLoad(20, 5) ));
 	
 	ublas::vector<double> distr = ublas::vector<double>(4);
 	for (int i=0; i<distr.size(); i++) {
@@ -114,10 +117,57 @@ void testSimulator() {
 	
 }
 
+void testPathway() {
+	EvoSimulator psim( new OperationGraph(new BaseCompressionPolicy(STORE_ROOT)) );
+	//EvoSimulator psim( new OperationGraph(new GreedyLoad(20, 10) ));
+	
+	int numGenes = 100;
+	int numTFs = 25;
+	int minRegion = 10;
+	int maxRegion = 100;
+	long N = 1e4;
+	long G = 1e6;
+	
+	double scaling = 1e1;
+	double u = 1e-9;
+	double gain_rate = u*1e-1;
+	double loss_rate = 1e-1;
+	int overlap = 5;
+	
+	GlobalInfo* info = PathwayRootFactory::randomInfo( numGenes, numTFs, minRegion, maxRegion );
+	
+	PathwayRootFactory factory(*info);
+	PathwayRoot* root = factory.random();
+	
+
+	psim.addGenotype( root, 1.0 );
+	psim.addMutator( new BindingSiteMutator( u*scaling, overlap, std::vector<double>(numTFs, gain_rate*scaling), 
+											std::vector<double>(numTFs, loss_rate) ) );
+					
+	int steps = 1000;
+	for (int i=0; i<steps; i++) {
+		psim.evolve( N/scaling, (G/scaling)/steps );	
+		//usleep(50000);
+		cout << "Done with " << i << endl;
+	}
+	//psim.evolve( 500, 10000 );
+	
+	cout << "Generation: " << psim.clock() << endl;
+	set<IGenotype*>::iterator git;
+	const set<IGenotype*>& active = psim.activeGenotypes();
+	int i=0;
+	for (git=active.begin(); git!=active.end(); git++) {
+		IGenotype* g = *git;
+		cout << "Genotype " << i << "/" << g->order() << ": " << g->frequency() << endl;
+		i++;
+	}
+}
+
 int main (int argc, char * const argv[])
 {
 	//testSequence();
 	testSimulator();
+	//testPathway();
 	return 0;
 }
 

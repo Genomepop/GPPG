@@ -67,13 +67,15 @@ namespace GPPG {
 				
 				PathwayRoot* random() const;
 				
+				static GlobalInfo* randomInfo(int numGenes, int numTFs, int minRegions, int maxRegions);
+				
 			private:
 				const GlobalInfo& _info;
 			};
 			
 			class BindingSiteChange : public OpPathwayBase {
 			public:
-				BindingSiteChange(OpPathway& op, int* locs, int numLocs, PTYPE* dest);
+				BindingSiteChange(OpPathway& op, std::vector<int>* locs, std::vector<PTYPE>* dest);
 				
 				~BindingSiteChange(); 
 				
@@ -98,9 +100,8 @@ namespace GPPG {
 				PTYPE proxyGet(int i) const;
 				
 			private:
-				int* _loc;		/* Locations array */
-				int _numlocs;	/* Number of locations to change */
-				PTYPE* _c;		/* Characters to be changed to */
+				std::vector<int>* _locs;		/* Locations array */
+				std::vector<PTYPE>* _c;		/* Characters to be changed to */
 				
 			};
 			
@@ -113,7 +114,8 @@ namespace GPPG {
 			 * This mutator simulates both motif loss and gain for a set of motifs.
 			 */
 			class BindingSiteMutator : public OperationMutator< OpPathway > {
-				BindingSiteMutator( double u, int motifOverlap, const vector<double>& motifGainRates, const vector<double>& motifLossProb);
+			public:
+				BindingSiteMutator( double u, int motifOverlap, const std::vector<double>& motifGainRates, const std::vector<double>& motifLossProb);
 				~BindingSiteMutator();
 				
 				OpPathway* mutate( OpPathway& g ) const;
@@ -123,12 +125,10 @@ namespace GPPG {
 				double rate() const;
 				
 			private:
+				
 				double _u;
 				int _overlap;
-				vector<double> _gainRates, _lossProb;
-				int* _bufLoc;
-				PTYPE* _bufC;
-				int _bufSize;
+				std::vector<double> _gainRates, _lossProb;
 			};
 			
 			class PromoterRecombinator : public OperationRecombinator< OpPathway > {

@@ -19,6 +19,16 @@
 using namespace GPPG;
 using namespace GPPG::Model;
 using namespace GPPG::Model::TransReg;
+using std::vector;
+using std::string;
+using std::map;
+
+template <class T> std::string TToStr( const T &t )
+{
+    std::ostringstream oss;
+    oss << t;
+    return std::string (oss.str());
+}
 
 OpPathwayBase::OpPathwayBase(double cost, const GlobalInfo& info, OpPathway& parent1) : 
 	OpPathway(cost, parent1), _info(info) {
@@ -46,8 +56,7 @@ PTYPE OpPathwayBase::get(int i) const {
 }
 
 PTYPE OpPathwayBase::getBinding(int i, int j) const {
-	throw "Not Implemented";
-	return 0;
+	return get( _info.offset(i) + j );
 }
 
 const GlobalInfo& OpPathwayBase::info() const { return _info; }
@@ -96,15 +105,36 @@ PathwayRoot* PathwayRootFactory::random() const {
 	return new PathwayRoot( randomPromoter( _info ) );
 }
 
+GlobalInfo* PathwayRootFactory::randomInfo(int numGenes, int numTFs, int minRegions, int maxRegions) {
+	vector<int> regions, tfs;
+	vector<string> genes, motifs;
+	map< int, vector<int> > binding;
+	
+	for (int i=0; i<numGenes; i++) {
+		regions.push_back( random01()*(maxRegions-minRegions) + minRegions );
+		genes.push_back( "G" + TToStr<int>(i) );
+	}
+	
+	// Populate a 1 to 1 mapping of motif to TF
+	for (int i=0; i<numTFs; i++) {
+		motifs.push_back( "M" + TToStr<int>(i) );
+		tfs.push_back(i);
+		binding[i].push_back(i);
+	}
+	
+	GlobalInfo* info = new GlobalInfo( genes, regions, motifs, tfs, binding);
+	return info;
+}
+
 /**
  ********************************** OPERATIONS *********************************************
  */
-BindingSiteChange::BindingSiteChange(OpPathway& op, int* locs, int numLocs, PTYPE* dest) :
-OpPathwayBase(1, op.info(), op), _loc(locs), _numlocs(numLocs), _c(dest) {}
+BindingSiteChange::BindingSiteChange(OpPathway& op, std::vector<int>* locs, std::vector<PTYPE>* dest) :
+OpPathwayBase(1, op.info(), op), _locs(locs), _c(dest) {}
 
 
 BindingSiteChange::~BindingSiteChange() {
-	delete _loc;
+	delete _locs;
 	delete _c;
 }
 
@@ -115,8 +145,11 @@ PromoterData* BindingSiteChange::evaluate() const {
 	// Get the sequence from the parent and add the point changes
 	sd = parent(0)->evaluate();
 	
-	for (int i=0; i<_numlocs; i++) {
-		sd->set(_loc[i], _c[i]);
+	vector<int>::iterator it_loc = _locs->begin();
+	vector<PTYPE>::iterator it_c = _c->begin();
+	while (it_loc != _locs->end() ) {
+		sd->set( *it_loc, *it_c);
+		it_loc++; it_c++;
 	}
 	return sd;
 }
@@ -130,42 +163,48 @@ std::string BindingSiteChange::toString() const {
 	return output.str();
 }
 
-int BindingSiteChange::numSites() const { return _numlocs; }
+int BindingSiteChange::numSites() const { return _locs->size(); }
 
-PTYPE BindingSiteChange::getMutation(int i) const { return _c[i]; }
+PTYPE BindingSiteChange::getMutation(int i) const { return (*_c)[i]; }
 
-int BindingSiteChange::getSite(int i) const { return _loc[i]; }
+int BindingSiteChange::getSite(int i) const { return (*_locs)[i]; }
 
 
 PTYPE BindingSiteChange::proxyGet(int l) const {
 	// See if the index is in the list
-	for (int i=0; i<_numlocs; i++) {
-		if (_loc[i] == l) return _c[i];
+	vector<int>::iterator it_loc = _locs->begin();
+	vector<PTYPE>::iterator it_c = _c->begin();
+	while (it_loc != _locs->end() ) {
+		if (*it_loc == l) return *it_c;
+		it_loc++; it_c++;
 	}
 	return parent(0)->get(l);
 }
 
 
 BindingSiteMutator::BindingSiteMutator( double u, int motifOverlap, const vector<double>& motifGainRates, const vector<double>& motifProbLoss) :
-_u(u), _overlap(motifOverlap), _gainRates(motifGainRates), _lossProb(motifLossProb) {
+_u(u), _overlap(motifOverlap), _gainRates(motifGainRates), _lossProb(motifProbLoss) {
 	
-	_bufSize = 10000;
-	_bufLoc = (int*)malloc(sizeof(int)*_bufSize);
-	_bufC = (PTYPE*)malloc(sizeof(PTYPE)*_bufSize);
+	
 }
 
 BindingSiteMutator::~BindingSiteMutator() {
-	delete _bufLoc;
-	delete _bufC;
+
 }
+
 
 OpPathway* BindingSiteMutator::mutate( OpPathway& g ) const {
 	int totalRegions = g.totalRegions();
 	int numMotifs = g.numMotifs();
+	const GlobalInfo& info = g.info();
 	// Calculate the losses
 	int numLosses = binomial( totalRegions, _u );
 	int loc, minSite, maxSite;
+	vector<int>* locs = new vector<int>();
+	vector<PTYPE>* sites = new vector<PTYPE>();
+	
 	PTYPE c;
+	int g_i, g_offset, g_numRegions;
 	for (int i=0; i<numLosses; i++) {
 		loc = (int)(random01()*totalRegions);
 		minSite = loc-_overlap;
@@ -177,11 +216,12 @@ OpPathway* BindingSiteMutator::mutate( OpPathway& g ) const {
 			if (minSite < g_offset) minSite = g_offset;
 			if (maxSite > g_offset+g_numRegions) maxSite = g_offset+g_numRegions;
 		}
-		for (int site_i=minSite; site_i<max_site+1; site_i++) {
-			c = g->get( site_i );
+		for (int site_i=minSite; site_i<maxSite+1; site_i++) {
+			c = g.get( site_i );
 			if (c>0 && random01() <= _lossProb[c]) {
-				// TODO: Save site_i, ->0
-
+				// Save site_i, ->0
+				sites->push_back((PTYPE)0);
+				locs->push_back(site_i);
 			}
 		}
 	}
@@ -191,12 +231,17 @@ OpPathway* BindingSiteMutator::mutate( OpPathway& g ) const {
 		numGains = binomial( totalRegions, _gainRates[i] );
 		for (int j=0; j<numGains; j++) {
 			loc = (int)(random01()*totalRegions);
-			c = g->get( loc );
+			c = g.	get( loc );
 			if (c != (PTYPE)i) {
-				// TODO: Save loc, ->i
+				// Save loc, ->i
+				sites->push_back((PTYPE)i);
+				locs->push_back(loc);
 			}
 		}
 	}
+	
+	// Create mutation
+	return new BindingSiteChange(g, locs, sites);
 }
 
 int BindingSiteMutator::numMutants(OpPathway& g, long N, double f) const {
