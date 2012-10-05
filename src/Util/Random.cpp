@@ -10,17 +10,19 @@
 
 #include "Random.h"
 
-#include <boost/random/mersenne_twister.hpp>
-#include <boost/random/binomial_distribution.hpp>
+//#include <boost/random/mersenne_twister.hpp>
+//#include <boost/random/binomial_distribution.hpp>
 #include <Util/binomial.h>
 
 // Seed for RNG
 		
-boost::mt19937 gen2;
+//boost::mt19937 gen2;
 	
 int GPPG::binomialb(int n, double r) {
-	boost::random::binomial_distribution<> dist( n, r );
-	return dist(gen2);
+	//boost::random::binomial_distribution<> dist( n, r );
+	//return dist(gen2);
+	throw "Not Implemented";
+	return 0;
 }
 	
 double GPPG::random01() { return ranmar(); }
@@ -33,5 +35,5 @@ void GPPG::initRandom2(int a, int b) {
 
 void GPPG::initRandom() {
 	rmarin((int)time(0), (int)time(0));
-	gen2.seed((unsigned int)time(0));
+	//gen2.seed((unsigned int)time(0));
 }

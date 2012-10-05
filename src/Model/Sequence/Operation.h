@@ -14,15 +14,17 @@
 #include <Base/Mutator.h>
 #include <Model/Sequence/Data.h>
 
+/*
 #include <boost/numeric/ublas/matrix.hpp>
 #include <boost/numeric/ublas/vector.hpp>
 #include <boost/random/discrete_distribution.hpp>
 #include <boost/array.hpp>
-
+*/
+#include <vector>
 #include <iostream>
 
 // Use only the end of the boost namespace to avoid collisions
-using namespace boost::numeric;
+//using namespace boost::numeric;
 using std::ostream;
 
 namespace GPPG {
@@ -66,13 +68,13 @@ namespace GPPG {
 			/** Creates a SequenceFactory that returns sequences of length \param length and character distribution \param distr
 			 * This factory returns SequenceRoot objects.
 			 */
-			SequenceRootFactory(int length, const ublas::vector<double>& distr );
+			SequenceRootFactory(int length, const std::vector<double>& distr );
 			
 			SequenceRoot* random() const;
 			
 		private:
 			int _length;
-			ublas::vector<double> _distr;
+			std::vector<double> _distr;
 		};
 		
 
@@ -114,19 +116,19 @@ namespace GPPG {
 		public:
 			/** Generates point mutations with \param rate and transition matrix \T.
 			 */
-			SequencePointMutator(double rate, const ublas::matrix<double> &T);
+			SequencePointMutator(double rate, const std::vector<double> &T);
 			
 			OpSequence* mutate( OpSequence& g ) const; 
 			
 			int numMutants(OpSequence& g, long N, double f) const;
 			
 			double rate() const;
-			const ublas::matrix<double>& transition() const;
+			const std::vector<double>& transition() const;
 			
 		private:
 			double _rate; 
-			ublas::matrix<double> _M; /* Transition matrix */
-			std::vector<boost::random::discrete_distribution<> > _transition;
+			std::vector<double> _M; /* Transition matrix */
+			std::vector< std::vector<double> > _transition;
 		};
 		
 		
@@ -182,7 +184,7 @@ namespace GPPG {
 		public:
 			/** Generates sequence deletions mutations with \param rate and length between \param minL and \param maxL.
 			 */
-			SequenceInsertionMutator(double rate, int minL, int maxL, const ublas::vector<double>& distr);
+			SequenceInsertionMutator(double rate, int minL, int maxL, const std::vector<double>& distr);
 			
 			OpSequence* mutate( OpSequence& g ) const; 
 			
@@ -194,7 +196,7 @@ namespace GPPG {
 		private:
 			int _minL, _maxL;
 			double _rate;
-			ublas::vector<double> _distr;
+			std::vector<double> _distr;
 		};
 		
 		class SequenceCrossover: public OpSequenceBase {

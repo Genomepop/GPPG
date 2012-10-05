@@ -9,16 +9,17 @@
 
 #include "GPPG.h"
 #include "Operation.h"
-//#include "Util/Random.h"
-#include <boost/random/mersenne_twister.hpp>
-#include <boost/random/discrete_distribution.hpp>
-#include <boost/numeric/ublas/io.hpp>
-#include <boost/random/binomial_distribution.hpp>
+#include "Util/Random.h"
+//#include <boost/random/mersenne_twister.hpp>
+//#include <boost/random/discrete_distribution.hpp>
+//#include <boost/numeric/ublas/io.hpp>
+//#include <boost/random/binomial_distribution.hpp>
 //#include <boost/math/distributions/binomial.hpp>
 #include <algorithm>
+#include <sstream>
 
 // Seed for RNG
-boost::mt19937 gen;
+//boost::mt19937 gen;
 
 using namespace GPPG::Model;
 using namespace GPPG; 
@@ -48,18 +49,34 @@ int SequenceRoot::length() const { return data()->length(); }
 STYPE SequenceRoot::get(int i) const { return data()->get(i); }
 
 
-SequenceData* randomSequenceData(int length, const ublas::vector<double>& distr) {
+int discreteDistributionRandom(const std::vector<double>& distr) {
+	double v = random01();
+	for (int i=0;i<distr.size(); i++) 
+		if (v <= distr[i] ) return i;
+	return distr.size()-1;
+}
+
+SequenceData* randomSequenceData(int length, const std::vector<double>& distr) {
 	SequenceData* sd = new SequenceData(length);
-	boost::random::discrete_distribution<> dist(distr);
-	gen.seed((unsigned int)time(0));
+	
 	for (int i=0; i<length; i++) {
-		STYPE c = (STYPE)dist(gen);
+		STYPE c = (STYPE)discreteDistributionRandom(distr);
 		sd->set(i, c);
 	}
 	return sd;
 }
 
-SequenceRootFactory::SequenceRootFactory(int length, const ublas::vector<double>& distr ) : _length(length), _distr(distr) {}
+void cumSum(std::vector<double>& d) {
+	double csum=0;
+	for (int i=0; i<d.size(); i++) {
+		csum += d[i];
+		d[i] = csum;
+	}
+}
+
+SequenceRootFactory::SequenceRootFactory(int length, const std::vector<double>& distr ) : _length(length), _distr(distr) {
+	cumSum(_distr);
+}
 
 SequenceRoot* SequenceRootFactory::random() const {
 	
@@ -110,17 +127,19 @@ STYPE SequencePointChange::proxyGet(int l) const {
 	return parent(0)->get(l);
 }
 
-SequencePointMutator::SequencePointMutator(double rate, const ublas::matrix<double> &T) : 
+SequencePointMutator::SequencePointMutator(double rate, const std::vector<double> &T) : 
 OperationMutator<OpSequence>(), _rate(rate), _M(T) {
 	// Create random discrete distributions for each character
+	int size = _M.size() >> 2;
 	
-	std::vector<double> weights( _M.size1() );
+	std::vector<double> weights( size );
 	
-	for (int i=0; i<_M.size1(); i++) {
-		for (int j=0; j<_M.size2(); j++) {
-			weights[j] = _M(i,j);
+	for (int i=0; i< size; i++) {
+		for (int j=0; j< size; j++) {
+			weights[j] = _M[i*size+j];
 		}
-		_transition.push_back( boost::random::discrete_distribution<>( weights ) );
+		cumSum( weights );
+		_transition.push_back( weights );
 	}
 }
 
@@ -133,13 +152,11 @@ OpSequence* SequencePointMutator::mutate( OpSequence& g) const {
 	
 	// Calculate the number of sites to mutate (use binomial)
 	int length = g.length(); //data->length()
-	boost::random::binomial_distribution<> dist( length, _rate );
 	
-	int numLocs = dist(gen);
+	int numLocs = binomial( length, _rate ); 
 	//if (numLocs == 0) return &g; 
 	
 	if (numLocs == 0) numLocs = 1;
-	boost::random::uniform_int_distribution<> idist( 0, length-1 );	
 	
 #ifdef DEBUG_0
 	std::cout << "SequencePointMutator: mutating..." << std::endl;
@@ -148,10 +165,10 @@ OpSequence* SequencePointMutator::mutate( OpSequence& g) const {
 	int* locs = (int*) malloc(sizeof(int)*numLocs);
 	STYPE* dest = (STYPE*) malloc(sizeof(STYPE)*numLocs);
 	for (int i=0; i<numLocs; i++) {
-		int loc = idist(gen);
+		int loc = (int)(random01()*length);
 		STYPE c = g.get(loc); //data->get(loc);
 		locs[i] = loc;
-		dest[i] = (STYPE)( _transition[c](gen) );
+		dest[i] = (STYPE)( discreteDistributionRandom(_transition[c]) );
 		
 	}
 	SequencePointChange* spc = new SequencePointChange(g, locs, numLocs, dest);
@@ -166,15 +183,14 @@ OpSequence* SequencePointMutator::mutate( OpSequence& g) const {
 
 double SequencePointMutator::rate() const { return _rate; }
 
-const ublas::matrix<double>& SequencePointMutator::transition() const { return _M; }
+const std::vector<double>& SequencePointMutator::transition() const { return _M; }
 
 int SequencePointMutator::numMutants(OpSequence& g, long N, double f) const {
-	boost::random::binomial_distribution<> dist( N*f, _rate*g.length() );
-	return dist(gen);
+	return binomial(N*f, _rate*g.length() );
 }
 
 ostream& operator<<(ostream& output, const SequencePointMutator& s) {
-	output << "SequencePointMutator(rate=" << s.rate() << "): " << s.transition();
+	output << "SequencePointMutator(rate=" << s.rate() << "): ?"; // << s.transition();
 	return output;
 }
 
@@ -255,17 +271,14 @@ SequenceDeletionMutator::SequenceDeletionMutator(double rate, int minL, int maxL
 OperationMutator<OpSequence>(), _rate(rate), _minL(minL), _maxL(maxL) {}
 
 OpSequence* SequenceDeletionMutator::mutate( OpSequence& g) const {
-	boost::random::binomial_distribution<> distl( g.length(), _rate );
-	if (distl(gen) == 0) return &g;
+	if (binomial(g.length(), _rate) == 0) return &g;
 	
 	// Perform deletion	
 	int length = g.length(); 
 	
-	boost::random::uniform_int_distribution<> dist( _minL, _maxL );
-	int spanLength = dist(gen);
+	int spanLength = (int)(random01()*(_maxL-_minL))+_minL;
 	
-	boost::random::uniform_int_distribution<> idist( 0, length-1-spanLength );	
-	int loc = idist(gen);
+	int loc = (int)(random01()*(length-spanLength));
 	
 	SequenceDeletion *sd = new SequenceDeletion(g, loc, spanLength);
 	return sd;
@@ -273,29 +286,27 @@ OpSequence* SequenceDeletionMutator::mutate( OpSequence& g) const {
 }
 
 int SequenceDeletionMutator::numMutants(OpSequence& g, long N, double f) const {
-	boost::random::binomial_distribution<> dist( N*f, _rate*g.length() );
-	return dist(gen);
+	return binomial(N*f, _rate*g.length());
 }
 
 double SequenceDeletionMutator::rate() const { return _rate; }
 
 
-SequenceInsertionMutator::SequenceInsertionMutator(double rate, int minL, int maxL, const ublas::vector<double>& distr) :
-OperationMutator<OpSequence>(), _rate(rate), _minL(minL), _maxL(maxL), _distr(distr) {}
+SequenceInsertionMutator::SequenceInsertionMutator(double rate, int minL, int maxL, const std::vector<double>& distr) :
+OperationMutator<OpSequence>(), _rate(rate), _minL(minL), _maxL(maxL), _distr(distr) {
+	cumSum(_distr);
+}
 
 OpSequence* SequenceInsertionMutator::mutate( OpSequence& g) const {
 	// See if insertion occurs
-	boost::random::binomial_distribution<> distl( g.length(), _rate );
-	if (distl(gen) == 0) return &g;
+	if (binomial(g.length(), _rate) == 0) return &g;
 	
 	// Perform insertion
 	int length = g.length(); 
 	
-	boost::random::uniform_int_distribution<> dist( _minL, _maxL );
-	int spanLength = dist(gen);
+	int spanLength = (int)(random01()*(_maxL-_minL))+_minL;
 	
-	boost::random::uniform_int_distribution<> idist( 0, length-1 );	
-	int loc = idist(gen);
+	int loc = (int)(random01()*length);
 	
 	// Generate random sequence
 	SequenceData* span = randomSequenceData(spanLength, _distr);
@@ -305,8 +316,7 @@ OpSequence* SequenceInsertionMutator::mutate( OpSequence& g) const {
 }
 
 int SequenceInsertionMutator::numMutants(OpSequence& g, long N, double f) const {
-	boost::random::binomial_distribution<> dist( N*f, _rate*g.length() );
-	return dist(gen);
+	return binomial(N*f, _rate*g.length());
 }
 
 double SequenceInsertionMutator::rate() const { return _rate; }
@@ -364,29 +374,26 @@ int SequenceRecombinator::numMutants(OpSequence& g, OpSequence& g2, long N) cons
 	if (amt <= 0) return 0;
 	
 	else if (amt < 1) {
-		boost::random::uniform_01<> r;
-		if (r(gen) < amt) {
+		if (random01() < amt) {
 			amt = 1;
 		}
 	}
 	
-	boost::random::binomial_distribution<> dist( amt, _rate*g.length() );
-	return dist(gen);
+	return binomial(amt, _rate*g.length());
 }
 
 OpSequence* SequenceRecombinator::recombine(OpSequence& g1, OpSequence& g2) const {
 	if (g1.key() == g2.key()) return &g1;
 	
 	int length = (g1.length() < g2.length()) ? g1.length() : g2.length();
-	boost::random::binomial_distribution<> dist( length , _rate );
-	boost::random::uniform_int_distribution<> idist( 0, length-10 );
-	int num_sites = dist(gen);
+
+	int num_sites = binomial(length, _rate);
 	if (num_sites == 0) return &g1;
 
 	//if (num_sites == 0) num_sites = 1;
 	std::vector<int> locs;
 	for (int i=0; i<num_sites; i++) {
-		locs.push_back( idist(gen) );
+		locs.push_back( (int)(random01()*(length-10)) );
 	}
 	
 	sort(locs.begin(), locs.end());

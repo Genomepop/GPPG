@@ -26,6 +26,8 @@
 		BC0A626E161C9104008F9D7E /* ex1.js in Sources */ = {isa = PBXBuildFile; fileRef = BC0A626D161C9104008F9D7E /* ex1.js */; };
 		BC22921115E67C3C00730837 /* GenotypeHeap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC22921015E67C3C00730837 /* GenotypeHeap.cpp */; };
 		BC894AFC15E7F5610064FD2C /* Tools.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BC894AFB15E7F5610064FD2C /* Tools.cpp */; };
+		BC9D2701161CEF0B00B5E252 /* ex2.js in Sources */ = {isa = PBXBuildFile; fileRef = BC9D2700161CEF0B00B5E252 /* ex2.js */; };
+		BC9D270B161CF14000B5E252 /* exp1.js in Sources */ = {isa = PBXBuildFile; fileRef = BC9D270A161CF14000B5E252 /* exp1.js */; };
 		BCD4F3AA15E9299B00BA9D5E /* EvoSimulator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCD4F3A915E9299B00BA9D5E /* EvoSimulator.cpp */; };
 		BCF4DF7115DEDDE600B25C9F /* Data.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCF4DF7015DEDDE600B25C9F /* Data.cpp */; };
 		BCF4DF9B15DEE20900B25C9F /* IO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BCF4DF9A15DEE20900B25C9F /* IO.cpp */; };
@@ -57,7 +59,6 @@
 
 /* Begin PBXFileReference section */
 		08FB7796FE84155DC02AAC07 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		8DD76F6C0486A84900D96B5E /* Demo */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Demo; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC08E7AB15DBF91900B183A3 /* Genotype.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Genotype.cpp; sourceTree = "<group>"; };
 		BC08E7AC15DBF91900B183A3 /* Genotype.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Genotype.h; sourceTree = "<group>"; };
 		BC08E7B715DBF93900B183A3 /* CompressionPolicy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CompressionPolicy.cpp; sourceTree = "<group>"; };
@@ -99,6 +100,9 @@
 		BC22921015E67C3C00730837 /* GenotypeHeap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GenotypeHeap.cpp; sourceTree = "<group>"; };
 		BC894AFA15E7F5610064FD2C /* Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Tools.h; path = ../src/Util/Tools.h; sourceTree = SOURCE_ROOT; };
 		BC894AFB15E7F5610064FD2C /* Tools.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Tools.cpp; path = ../src/Util/Tools.cpp; sourceTree = SOURCE_ROOT; };
+		BC9D2700161CEF0B00B5E252 /* ex2.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = ex2.js; path = ../input/ex2.js; sourceTree = SOURCE_ROOT; };
+		BC9D270A161CF14000B5E252 /* exp1.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = exp1.js; path = ../input/exp1.js; sourceTree = SOURCE_ROOT; };
+		BC9D274B161D3FEA00B5E252 /* Demo */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Demo; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCD4F3A815E9299B00BA9D5E /* EvoSimulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EvoSimulator.h; path = ../src/Simulator/EvoSimulator.h; sourceTree = SOURCE_ROOT; };
 		BCD4F3A915E9299B00BA9D5E /* EvoSimulator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EvoSimulator.cpp; path = ../src/Simulator/EvoSimulator.cpp; sourceTree = SOURCE_ROOT; };
 		BCF4DE3915DE9C0500B25C9F /* binomial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = binomial.h; path = ../src/Util/binomial.h; sourceTree = SOURCE_ROOT; };
@@ -179,7 +183,7 @@
 		1AB674ADFE9D54B511CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8DD76F6C0486A84900D96B5E /* Demo */,
+				BC9D274B161D3FEA00B5E252 /* Demo */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -273,6 +277,8 @@
 			isa = PBXGroup;
 			children = (
 				BC0A626D161C9104008F9D7E /* ex1.js */,
+				BC9D2700161CEF0B00B5E252 /* ex2.js */,
+				BC9D270A161CF14000B5E252 /* exp1.js */,
 			);
 			name = Input;
 			sourceTree = "<group>";
@@ -348,7 +354,7 @@
 			name = CPGSimulator;
 			productInstallPath = "$(HOME)/bin";
 			productName = Demo;
-			productReference = 8DD76F6C0486A84900D96B5E /* Demo */;
+			productReference = BC9D274B161D3FEA00B5E252 /* Demo */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -407,6 +413,8 @@
 				BC0A6256161C8B5B008F9D7E /* json_value.cpp in Sources */,
 				BC0A6257161C8B5B008F9D7E /* json_writer.cpp in Sources */,
 				BC0A626E161C9104008F9D7E /* ex1.js in Sources */,
+				BC9D2701161CEF0B00B5E252 /* ex2.js in Sources */,
+				BC9D270B161CF14000B5E252 /* exp1.js in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -482,8 +490,10 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = ../src;
+				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
 				SDKROOT = macosx10.6;
+				VALID_ARCHS = x86_64;
 			};
 			name = Release;
 		};

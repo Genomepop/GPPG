@@ -1,13 +1,12 @@
 #include <iostream>
 #include <fstream>
+#include <sstream>
 
 using namespace std;
 
 #include "Operation/GreedyLoad.h"
 #include <Model/Sequence/Operation.h>
 #include <Model/Sequence/IO.h>
-#include <boost/numeric/ublas/vector.hpp>
-#include <boost/numeric/ublas/io.hpp>
 
 #include <Base/Simulator.h>
 #include <Operation/OperationHeap.h>
@@ -18,162 +17,68 @@ using namespace std;
 #include <Model/Pathway/Operation.h>
 #include <Util/json/json.h>
 
+#define SUPPORTS_RUSAGE
+
+#ifdef SUPPORTS_RUSAGE
+#include <sys/time.h>
+#include <sys/resource.h>
+#include <unistd.h>
+#endif
+
 using namespace GPPG;
 using namespace GPPG::Model;
 using namespace GPPG::Model::TransReg;
-using namespace boost::numeric;
 
-void testSequence() {
-	//GreedyLoad gl(3);
-	
-	ublas::vector<double> distr = ublas::vector<double>(4);
-	for (int i=0; i<distr.size(); i++) {
-		distr(i) = 1.0/distr.size();
-	}
-	
-	cout << distr << endl;
-	SequenceRootFactory factory(10, distr);
-	
-	SequenceRoot* sr = factory.random();
-	SequenceData& sd = *sr->data();
-	cout << sd << endl; 
-	
-	ublas::matrix<double> T(4,4);
-    for (unsigned i = 0; i < T.size1(); ++ i)
-        for (unsigned j = 0; j < T.size2(); ++ j)
-            T (i, j) = 0.25;
-	
-	SequencePointMutator spm(0.1, T);
-	
-	cout << spm << endl;
-	
-	cout << "About to mutate.\n";
-	OpSequence* m1 = spm.mutate( *sr );
-	cout << "Finished mutate.\n";
-	cout << *m1 << endl;
-	cout << m1->length() << endl;
-	for (int i=0; i<m1->length(); i++) {
-		cout << m1->get(i);
-	}
-	cout << endl;
-	cout << "Hello World2!\n";
+
+inline double timeToDbl(const timeval& t) { return t.tv_sec + 1.0*t.tv_usec/1e6; }
+
+void recordUsage(ofstream* out, int step, int generation) {
+	rusage stats;
+	getrusage( RUSAGE_SELF, &stats );
+	(*out) << step << "," << generation << "," << (clock()*1.0/CLOCKS_PER_SEC) << ","
+			<< timeToDbl(stats.ru_utime) << "," << timeToDbl(stats.ru_stime) << ","
+			<< stats.ru_maxrss << "," << stats.ru_ixrss << "," << stats.ru_idrss << "," << stats.ru_isrss << ","
+			<< stats.ru_minflt << "," << stats.ru_majflt << ","
+			<< stats.ru_nswap << ","
+			<< stats.ru_inblock << "," << stats.ru_oublock << ","
+			<< stats.ru_msgsnd << "," << stats.ru_msgrcv << ","
+			<< stats.ru_nsignals << ","
+			<< stats.ru_nvcsw << "," << stats.ru_nivcsw << endl;
+	out->flush();
 }
 
-void testSimulator() {
-	
-	//PopulationSimulator psim( new OperationGraph(new BaseCompressionPolicy(STORE_ACTIVE)) );
-	//EvoSimulator psim( new OperationGraph(new BaseCompressionPolicy(STORE_ROOT)) );
-	EvoSimulator psim( new OperationGraph(new GreedyLoad(20, 5) ));
-	
-	ublas::vector<double> distr = ublas::vector<double>(4);
-	for (int i=0; i<distr.size(); i++) {
-		distr(i) = 1.0/distr.size();
-	}
-	double scaling = 1e2;
-	long N = 1e4;
-	long L = 1e6;
-	long G = 2e7;
-	double u = 1e-9;
-	double ud = 1e-9;
-	double ui = 1e-9;
-	double ur = 1e-9;
-	cout << "N = " << N/scaling << endl;
-	cout << "G = " << G/scaling << endl;
-	cout << "u = " << u*scaling << endl;
-	
-	SequenceRootFactory factory(L, distr);
-	SequenceRoot* sr = factory.random();
-	
-	ublas::matrix<double> T(4,4);
-    for (unsigned i = 0; i < T.size1(); ++ i)
-        for (unsigned j = 0; j < T.size2(); ++ j)
-            T (i, j) = 0.25;
-	
-	SequencePointMutator *spm = new SequencePointMutator( u*scaling, T);
-	SequenceDeletionMutator *sdm = new SequenceDeletionMutator( ud*scaling , 10, 20);
-	SequenceInsertionMutator *sim = new SequenceInsertionMutator( ui*scaling , 10, 20, distr);
+// http://linux.die.net/man/2/getrusage
 
-	psim.addGenotype( sr, 1.0 );
-	psim.addMutator( spm );
-	//psim.addMutator(sdm);
-	//psim.addMutator(sim);
-
-	
-	psim.addRecombinator(new SequenceRecombinator(ur*scaling) );
-	int steps = 1000;
-	for (int i=0; i<steps; i++) {
-		psim.evolve( N/scaling, (G/scaling)/steps );	
-		//usleep(50000);
-		cout << "Done with " << i << endl;
-	}
-	//psim.evolve( 500, 10000 );
-	
-	cout << "Generation: " << psim.clock() << endl;
-	set<IGenotype*>::iterator git;
-	const set<IGenotype*>& active = psim.activeGenotypes();
-	int i=0;
-	for (git=active.begin(); git!=active.end(); git++) {
-		IGenotype* g = *git;
-		cout << "Genotype " << i << "/" << g->order() << ": " << g->frequency() << endl;
-		i++;
-	}
-	
-}
-
-void testPathway() {
-	EvoSimulator psim( new OperationGraph(new BaseCompressionPolicy(STORE_ROOT)) );
-	//EvoSimulator psim( new OperationGraph(new GreedyLoad(20, 10) ));
-	
-	int numGenes = 100;
-	int numTFs = 25;
-	int minRegion = 10;
-	int maxRegion = 100;
-	long N = 1e4;
-	long G = 1e6;
-	
-	double scaling = 1e1;
-	double u = 1e-9;
-	double gain_rate = u*1e-1;
-	double loss_rate = 1e-1;
-	int overlap = 5;
-	
-	GlobalInfo* info = PathwayRootFactory::randomInfo( numGenes, numTFs, minRegion, maxRegion );
-	
-	PathwayRootFactory factory(*info);
-	PathwayRoot* root = factory.random();
-	
-
-	psim.addGenotype( root, 1.0 );
-	psim.addMutator( new BindingSiteMutator( u*scaling, overlap, std::vector<double>(numTFs, gain_rate*scaling), 
-											std::vector<double>(numTFs, loss_rate) ) );
-					
-	int steps = 1000;
-	for (int i=0; i<steps; i++) {
-		psim.evolve( N/scaling, (G/scaling)/steps );	
-		//usleep(50000);
-		cout << "Done with " << i << endl;
-	}
-	//psim.evolve( 500, 10000 );
-	
-	cout << "Generation: " << psim.clock() << endl;
-	set<IGenotype*>::iterator git;
-	const set<IGenotype*>& active = psim.activeGenotypes();
-	int i=0;
-	for (git=active.begin(); git!=active.end(); git++) {
-		IGenotype* g = *git;
-		cout << "Genotype " << i << "/" << g->order() << ": " << g->frequency() << endl;
-		i++;
-	}
-}
-
-void runSimulation( EvoSimulator* sim, long N, long G, int steps ) {
+void runSimulation( EvoSimulator* sim, long N, long G, int steps, ofstream* out ) {
 	cout << "Running Simulation [N="<<N<<", G="<<G<<"]\n";
-	
+
+#ifdef SUPPORTS_RUSAGE
+	if (out) {
+		(*out) << "step,gen,wtime,utime,stime,maxrss,ixrss,idrss,isrss,minflt,majflt,nswap,inblock,oublock,msgsnd,msgrcv,nsignals,nvcsw,nivcsw\n";
+	}
+#endif
 	for (int i=0; i<steps; i++) {
 		sim->evolve( N, G/steps );	
 		cout << "Done with " << i << " of " << steps << endl;
+#ifdef SUPPORTS_RUSAGE
+		if (out) {
+			recordUsage( out, i, sim->clock() );
+		}
+#endif
 	}
 	
+}
+
+void outputGenotypes( EvoSimulator* sim ) {
+	cout << "Generation: " << sim->clock() << endl;
+	set<IGenotype*>::iterator git;
+	const set<IGenotype*>& active = sim->activeGenotypes();
+	int i=0;
+	for (git=active.begin(); git!=active.end(); git++) {
+		IGenotype* g = *git;
+		cout << "Genotype " << i << "/" << g->order() << ": " << g->frequency() << endl;
+		i++;
+	}
 }
 
 EvoSimulator* createSimulator( const Json::Value& config ) {
@@ -206,10 +111,8 @@ EvoSimulator* createSimulator( const Json::Value& config ) {
 	if( genoName == "Sequence" ) {
 		int abet = geno.get("alphabet",4).asInt();
 		
-		ublas::vector<double> distr = ublas::vector<double>(abet);
-		for (int i=0; i<distr.size(); i++) {
-			distr(i) = 1.0/distr.size();
-		}
+		std::vector<double> distr = std::vector<double>(abet, 1.0/abet);
+
 		SequenceRootFactory factory(geno["length"].asInt(), distr);
 		g = factory.random();
 		
@@ -217,10 +120,10 @@ EvoSimulator* createSimulator( const Json::Value& config ) {
 			const Json::Value& gOp = ops[i];
 			const string& opName = gOp["name"].asString();
 			if( opName == "PointMutation" ) {
-				ublas::matrix<double> T(abet, abet);
-				for (unsigned ii = 0; ii < T.size1(); ++ ii)
-					for (unsigned ij = 0; ij < T.size2(); ++ ij)
-						T (ii, ij) = 1.0/abet;
+				std::vector<double> T(abet*abet);
+				for (unsigned ii = 0; ii < abet; ++ ii)
+					for (unsigned ij = 0; ij < abet; ++ ij)
+						T[ii*abet+ij] = 1.0/abet;
 				sim->addMutator( new SequencePointMutator( gOp["rate"].asDouble()*scaling, T) );
 			} else if( opName == "Insertion" ) {
 				sim->addMutator( new SequenceInsertionMutator( gOp["rate"].asDouble()*scaling, 
@@ -276,15 +179,29 @@ void createAndRunSimulation( const Json::Value& config ) {
 		return;
 	}
 	
-	runSimulation(sim, config["individuals"].asInt(), config["generations"].asInt(), config.get("steps", 100).asInt());
+	const Json::Value& output = config["output"];
+	ofstream* perfFile = 0;
+	if( output.isMember("performance") ) {
+		perfFile = new ofstream();
+		perfFile->open( output["performance"].asCString() );
+	}
+	
+	runSimulation(sim, config["individuals"].asInt(), config["generations"].asInt(), config.get("steps", 100).asInt(), perfFile);
+	
+	if(perfFile) {
+		perfFile->close();
+		delete perfFile;
+	}
+	
+	if( output.isMember("population") ) {
+		outputGenotypes( sim );
+	}
+	
+	delete sim;
 }
 
 int main (int argc, char * const argv[])
 {
-	//testSequence();
-	//testSimulator();
-	//testPathway();
-	
 	// First argument is config file.
 	if( argc < 2 ) {
 		cout << "Please provide a config file\n";

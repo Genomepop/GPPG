@@ -21,8 +21,7 @@
 #include <time.h>
 
 #include "Util/Random.h"
-#include <boost/random/mersenne_twister.hpp>
-#include <boost/random/binomial_distribution.hpp>
+
 
 #ifdef UBIGRAPH
 extern "C" {
@@ -36,7 +35,6 @@ using std::cout;
 using std::endl;
 using std::vector;
 
-//extern boost::mt19937 gen;
 
 typedef set<IGenotype*>::iterator GIter;
 
@@ -148,6 +146,7 @@ void EvoSimulator::checkIndividuals(long N) {
 	}
 	_indIn = &_ind1;
 	_indOut = &_ind2;
+	_indDirty = false;
 }
 
 template <typename T> void swap(T& a, T& b) {

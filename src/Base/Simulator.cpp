@@ -14,9 +14,8 @@
 #include "Base/GenotypeHeap.h"
 #include "Base/Recombinator.h"
 
-//#include "Util/Random.h"
-#include <boost/random/mersenne_twister.hpp>
-#include <boost/random/binomial_distribution.hpp>
+#include "Util/Random.h"
+#include <iostream>
 
 using namespace GPPG;
 
@@ -34,12 +33,7 @@ inline void normalizeArray( std::vector<double>& arr ) {
 	for (int i=0; i<arr.size(); i++) arr[i] /= csum;
 }
 
-extern boost::mt19937 gen;
 
-inline int binomial(int n, double r) {
-	boost::random::binomial_distribution<> dist( n, r );
-	return dist(gen);
-}
 
 
 void samplePopulation( std::vector<double>& F, long N, std::vector<double>& res ) {
@@ -114,7 +108,7 @@ void GenotypeSimulator::removeGenotype(IGenotype *g) {
 }
 
 PopulationSimulator::PopulationSimulator(IGenotypeHeap* h): GenotypeSimulator(h), _curr_gen(0) {
-	gen.seed((unsigned int)time(0));
+	initRandom();
 }
 
 void PopulationSimulator::addGenotype(IGenotype* g) {
