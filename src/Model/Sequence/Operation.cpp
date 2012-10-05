@@ -127,8 +127,8 @@ STYPE SequencePointChange::proxyGet(int l) const {
 	return parent(0)->get(l);
 }
 
-SequencePointMutator::SequencePointMutator(double rate, const std::vector<double> &T) : 
-OperationMutator<OpSequence>(), _rate(rate), _M(T) {
+SequencePointMutator::SequencePointMutator(double cost, double rate, const std::vector<double> &T) : 
+OperationMutator<OpSequence>(cost), _rate(rate), _M(T) {
 	// Create random discrete distributions for each character
 	int size = _M.size() >> 2;
 	
@@ -177,7 +177,7 @@ OpSequence* SequencePointMutator::mutate( OpSequence& g) const {
 	std::cout << "Created Operation (" << spc->numParents() << "): " << spc->toString() << std::endl;
 #endif
 	//if (isCopy) delete data;
-	
+	spc->setCost( cost() );
 	return spc;
 }
 
@@ -267,8 +267,8 @@ STYPE SequenceInsertion::proxyGet(int i) const {
 	return parent(0)->get(index);
 }
 
-SequenceDeletionMutator::SequenceDeletionMutator(double rate, int minL, int maxL) :
-OperationMutator<OpSequence>(), _rate(rate), _minL(minL), _maxL(maxL) {}
+SequenceDeletionMutator::SequenceDeletionMutator(double cost, double rate, int minL, int maxL) :
+OperationMutator<OpSequence>(cost), _rate(rate), _minL(minL), _maxL(maxL) {}
 
 OpSequence* SequenceDeletionMutator::mutate( OpSequence& g) const {
 	if (binomial(g.length(), _rate) == 0) return &g;
@@ -281,6 +281,7 @@ OpSequence* SequenceDeletionMutator::mutate( OpSequence& g) const {
 	int loc = (int)(random01()*(length-spanLength));
 	
 	SequenceDeletion *sd = new SequenceDeletion(g, loc, spanLength);
+	sd->setCost(cost());
 	return sd;
 	
 }
@@ -292,8 +293,8 @@ int SequenceDeletionMutator::numMutants(OpSequence& g, long N, double f) const {
 double SequenceDeletionMutator::rate() const { return _rate; }
 
 
-SequenceInsertionMutator::SequenceInsertionMutator(double rate, int minL, int maxL, const std::vector<double>& distr) :
-OperationMutator<OpSequence>(), _rate(rate), _minL(minL), _maxL(maxL), _distr(distr) {
+SequenceInsertionMutator::SequenceInsertionMutator(double cost, double rate, int minL, int maxL, const std::vector<double>& distr) :
+OperationMutator<OpSequence>(cost), _rate(rate), _minL(minL), _maxL(maxL), _distr(distr) {
 	cumSum(_distr);
 }
 
@@ -312,6 +313,7 @@ OpSequence* SequenceInsertionMutator::mutate( OpSequence& g) const {
 	SequenceData* span = randomSequenceData(spanLength, _distr);
 	
 	SequenceInsertion *sd = new SequenceInsertion(g, loc, span);
+	sd->setCost( cost() );
 	return sd;
 }
 
@@ -367,7 +369,7 @@ STYPE SequenceCrossover::proxyGet(int i) const {
 	return (_locs.size()%2==0) ? parent(0)->get(i) : parent(1)->get(i);
 }
 
-SequenceRecombinator::SequenceRecombinator(double rate) : _rate(rate) {}
+SequenceRecombinator::SequenceRecombinator(double cost, double rate) : OperationRecombinator<OpSequence>(cost), _rate(rate) {}
 
 int SequenceRecombinator::numMutants(OpSequence& g, OpSequence& g2, long N) const {
 	double amt = N*g.frequency()*g2.frequency();
@@ -398,7 +400,9 @@ OpSequence* SequenceRecombinator::recombine(OpSequence& g1, OpSequence& g2) cons
 	
 	sort(locs.begin(), locs.end());
 	
-	return new SequenceCrossover( g1, g2, locs );
+	SequenceCrossover* sc = new SequenceCrossover( g1, g2, locs );
+	sc->setCost( cost() );
+	return sc;
 	
 }
 

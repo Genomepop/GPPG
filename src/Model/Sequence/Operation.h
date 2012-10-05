@@ -116,7 +116,7 @@ namespace GPPG {
 		public:
 			/** Generates point mutations with \param rate and transition matrix \T.
 			 */
-			SequencePointMutator(double rate, const std::vector<double> &T);
+			SequencePointMutator(double cost, double rate, const std::vector<double> &T);
 			
 			OpSequence* mutate( OpSequence& g ) const; 
 			
@@ -150,7 +150,7 @@ namespace GPPG {
 		public:
 			/** Generates sequence deletions mutations with \param rate and length between \param minL and \param maxL.
 			 */
-			SequenceDeletionMutator(double rate, int minL, int maxL);
+			SequenceDeletionMutator(double cost, double rate, int minL, int maxL);
 			
 			OpSequence* mutate( OpSequence& g ) const; 
 			
@@ -184,7 +184,7 @@ namespace GPPG {
 		public:
 			/** Generates sequence deletions mutations with \param rate and length between \param minL and \param maxL.
 			 */
-			SequenceInsertionMutator(double rate, int minL, int maxL, const std::vector<double>& distr);
+			SequenceInsertionMutator(double cost, double rate, int minL, int maxL, const std::vector<double>& distr);
 			
 			OpSequence* mutate( OpSequence& g ) const; 
 			
@@ -215,7 +215,7 @@ namespace GPPG {
 		
 		class SequenceRecombinator : public OperationRecombinator< OpSequence > {
 		public:
-			SequenceRecombinator(double rate);
+			SequenceRecombinator(double cost, double rate);
 			
 			int numMutants(OpSequence& g, OpSequence& g2, long N) const;
 			

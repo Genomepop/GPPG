@@ -182,8 +182,8 @@ PTYPE BindingSiteChange::proxyGet(int l) const {
 }
 
 
-BindingSiteMutator::BindingSiteMutator( double u, int motifOverlap, const vector<double>& motifGainRates, const vector<double>& motifProbLoss) :
-_u(u), _overlap(motifOverlap), _gainRates(motifGainRates), _lossProb(motifProbLoss) {
+BindingSiteMutator::BindingSiteMutator( double cost, double u, int motifOverlap, const vector<double>& motifGainRates, const vector<double>& motifProbLoss) :
+OperationMutator< OpPathway >(cost), _u(u), _overlap(motifOverlap), _gainRates(motifGainRates), _lossProb(motifProbLoss) {
 	
 	
 }
@@ -241,7 +241,9 @@ OpPathway* BindingSiteMutator::mutate( OpPathway& g ) const {
 	}
 	
 	// Create mutation
-	return new BindingSiteChange(g, locs, sites);
+	BindingSiteChange* bsc = new BindingSiteChange(g, locs, sites);
+	bsc->setCost( cost() );
+	return bsc;
 }
 
 int BindingSiteMutator::numMutants(OpPathway& g, long N, double f) const {

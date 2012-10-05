@@ -115,7 +115,7 @@ namespace GPPG {
 			 */
 			class BindingSiteMutator : public OperationMutator< OpPathway > {
 			public:
-				BindingSiteMutator( double u, int motifOverlap, const std::vector<double>& motifGainRates, const std::vector<double>& motifLossProb);
+				BindingSiteMutator( double cost, double u, int motifOverlap, const std::vector<double>& motifGainRates, const std::vector<double>& motifLossProb);
 				~BindingSiteMutator();
 				
 				OpPathway* mutate( OpPathway& g ) const;

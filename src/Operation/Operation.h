@@ -108,6 +108,7 @@ namespace GPPG {
 		 * The cost of applying the operation
 		 */
 		double cost() const;
+		void setCost(double v);
 		
 		std::string toString() const;
 		
@@ -317,6 +318,8 @@ namespace GPPG {
 	template <typename T>
 	class OperationMutator : public IMutator {
 	public:
+		OperationMutator(double cost): _cost(cost) {}
+		
 		IGenotype* mutate(IGenotype& geno) const {
 			return mutate( (T&)geno );
 		}
@@ -328,11 +331,18 @@ namespace GPPG {
 		virtual int numMutants(T& g, long N, double f) const = 0;
 		
 		virtual T* mutate(T& op) const = 0;
+		
+		double cost() const { return _cost; }
+		
+	private:
+		double _cost;
 	};
 	
 	template <typename T>
 	class OperationRecombinator : public IRecombinator {
 	public:
+		OperationRecombinator(double cost) : _cost(cost) {}
+		
 		IGenotype* recombine(IGenotype& geno1, IGenotype& geno2) const {
 			return recombine( (T&)geno1, (T&)geno2 );
 		}
@@ -344,6 +354,11 @@ namespace GPPG {
 		virtual int numMutants(T& g, T& g2, long N) const = 0;
 		
 		virtual T* recombine(T& op, T& op2) const = 0;
+		
+		double cost() const {return _cost; }
+		
+	private:
+		double _cost;
 	};
 }
 

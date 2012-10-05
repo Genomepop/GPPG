@@ -124,15 +124,15 @@ EvoSimulator* createSimulator( const Json::Value& config ) {
 				for (unsigned ii = 0; ii < abet; ++ ii)
 					for (unsigned ij = 0; ij < abet; ++ ij)
 						T[ii*abet+ij] = 1.0/abet;
-				sim->addMutator( new SequencePointMutator( gOp["rate"].asDouble()*scaling, T) );
+				sim->addMutator( new SequencePointMutator( gOp.get("cost",1).asDouble(), gOp["rate"].asDouble()*scaling, T) );
 			} else if( opName == "Insertion" ) {
-				sim->addMutator( new SequenceInsertionMutator( gOp["rate"].asDouble()*scaling, 
+				sim->addMutator( new SequenceInsertionMutator(gOp.get("cost",10).asDouble(), gOp["rate"].asDouble()*scaling, 
 															  gOp["size"][(Json::Value::ArrayIndex)0].asInt(), gOp["size"][1].asInt(), distr ));
 			} else if( opName == "Deletion" ) {
-				sim->addMutator( new SequenceDeletionMutator( gOp["rate"].asDouble()*scaling,
+				sim->addMutator( new SequenceDeletionMutator(gOp.get("cost",10).asDouble(), gOp["rate"].asDouble()*scaling,
 															 gOp["size"][(Json::Value::ArrayIndex)0].asInt(), gOp["size"][1].asInt() ));
 			} else if( opName == "Recombination" ) {
-				sim->addRecombinator( new SequenceRecombinator( gOp["rate"].asDouble()*scaling ));
+				sim->addRecombinator( new SequenceRecombinator(gOp.get("cost",100).asDouble(), gOp["rate"].asDouble()*scaling ));
 			}
 		}
 	} 
@@ -154,7 +154,7 @@ EvoSimulator* createSimulator( const Json::Value& config ) {
 			const string& opName = gOp["name"].asString();
 			if( opName == "BindingSiteMutation" ) {
 				double u = gOp["lossRate"][(Json::Value::ArrayIndex)0].asDouble();
-				sim->addMutator( new BindingSiteMutator( u*scaling, gOp["overlap"].asInt(), std::vector<double>(numTFs, gOp["gainRate"].asDouble()*scaling), 
+				sim->addMutator( new BindingSiteMutator( gOp.get("cost",1).asDouble(), u*scaling, gOp["overlap"].asInt(), std::vector<double>(numTFs, gOp["gainRate"].asDouble()*scaling), 
 														std::vector<double>(numTFs, gOp["lossRate"][1].asDouble()) ) );
 			}
 		}

@@ -171,6 +171,8 @@ void BaseOperation::setFitness(double f) { _fitness = f; }
 
 double BaseOperation::cost() const { return _cost; }
 
+void BaseOperation::setCost(double v) { _cost = v; }
+
 std::string BaseOperation::toString() const {
 	return "<No Content>";
 }

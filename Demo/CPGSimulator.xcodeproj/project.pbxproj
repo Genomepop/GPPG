@@ -102,7 +102,7 @@
 		BC894AFB15E7F5610064FD2C /* Tools.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Tools.cpp; path = ../src/Util/Tools.cpp; sourceTree = SOURCE_ROOT; };
 		BC9D2700161CEF0B00B5E252 /* ex2.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = ex2.js; path = ../input/ex2.js; sourceTree = SOURCE_ROOT; };
 		BC9D270A161CF14000B5E252 /* exp1.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = exp1.js; path = ../input/exp1.js; sourceTree = SOURCE_ROOT; };
-		BC9D274B161D3FEA00B5E252 /* Demo */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Demo; sourceTree = BUILT_PRODUCTS_DIR; };
+		BC9D274B161D3FEA00B5E252 /* CPGSimulator */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CPGSimulator; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCD4F3A815E9299B00BA9D5E /* EvoSimulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EvoSimulator.h; path = ../src/Simulator/EvoSimulator.h; sourceTree = SOURCE_ROOT; };
 		BCD4F3A915E9299B00BA9D5E /* EvoSimulator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EvoSimulator.cpp; path = ../src/Simulator/EvoSimulator.cpp; sourceTree = SOURCE_ROOT; };
 		BCF4DE3915DE9C0500B25C9F /* binomial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = binomial.h; path = ../src/Util/binomial.h; sourceTree = SOURCE_ROOT; };
@@ -183,7 +183,7 @@
 		1AB674ADFE9D54B511CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				BC9D274B161D3FEA00B5E252 /* Demo */,
+				BC9D274B161D3FEA00B5E252 /* CPGSimulator */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -354,7 +354,7 @@
 			name = CPGSimulator;
 			productInstallPath = "$(HOME)/bin";
 			productName = Demo;
-			productReference = BC9D274B161D3FEA00B5E252 /* Demo */;
+			productReference = BC9D274B161D3FEA00B5E252 /* CPGSimulator */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -362,7 +362,7 @@
 /* Begin PBXProject section */
 		08FB7793FE84155DC02AAC07 /* Project object */ = {
 			isa = PBXProject;
-			buildConfigurationList = 1DEB923508733DC60010E9CD /* Build configuration list for PBXProject "Demo" */;
+			buildConfigurationList = 1DEB923508733DC60010E9CD /* Build configuration list for PBXProject "CPGSimulator" */;
 			compatibilityVersion = "Xcode 3.1";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
@@ -440,7 +440,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/../UbiGraph/examples/C\"",
 				);
-				PRODUCT_NAME = Demo;
+				PRODUCT_NAME = CPGSimulator;
 			};
 			name = Debug;
 		};
@@ -460,7 +460,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/../UbiGraph/examples/C\"",
 				);
-				PRODUCT_NAME = Demo;
+				PRODUCT_NAME = CPGSimulator;
 			};
 			name = Release;
 		};
@@ -487,6 +487,7 @@
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				ENABLE_OPENMP_SUPPORT = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_UNROLL_LOOPS = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = ../src;
@@ -509,7 +510,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1DEB923508733DC60010E9CD /* Build configuration list for PBXProject "Demo" */ = {
+		1DEB923508733DC60010E9CD /* Build configuration list for PBXProject "CPGSimulator" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1DEB923608733DC60010E9CD /* Debug */,
