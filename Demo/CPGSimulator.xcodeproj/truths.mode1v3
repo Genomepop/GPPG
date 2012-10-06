@@ -204,7 +204,51 @@
 				<key>PBXProjectModuleGUID</key>
 				<string>BC0A6323161F3176008F9D7E</string>
 				<key>PBXProjectModuleLabel</key>
+<<<<<<< HEAD:Demo/CPGSimulator.xcodeproj/truths.mode1v3
 				<string>main.cpp</string>
+=======
+				<string>Operation.cpp</string>
+				<key>PBXSplitModuleInNavigatorKey</key>
+				<dict>
+					<key>Split0</key>
+					<dict>
+						<key>PBXProjectModuleGUID</key>
+						<string>BC9D27F3161D4F0D00B5E252</string>
+						<key>PBXProjectModuleLabel</key>
+						<string>Operation.cpp</string>
+						<key>_historyCapacity</key>
+						<integer>0</integer>
+						<key>bookmark</key>
+						<string>BC9D2829161E659500B5E252</string>
+						<key>history</key>
+						<array>
+							<string>BC9D27F4161D4F0D00B5E252</string>
+						</array>
+					</dict>
+					<key>SplitCount</key>
+					<string>1</string>
+				</dict>
+				<key>StatusBarVisibility</key>
+				<true/>
+			</dict>
+			<key>Geometry</key>
+			<dict>
+				<key>Frame</key>
+				<string>{{0, 20}, {971, 971}}</string>
+				<key>PBXModuleWindowStatusBarHidden2</key>
+				<false/>
+				<key>RubberWindowFrame</key>
+				<string>728 102 971 1012 0 0 1920 1178 </string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Content</key>
+			<dict>
+				<key>PBXProjectModuleGUID</key>
+				<string>BC9D27F6161D4F0D00B5E252</string>
+				<key>PBXProjectModuleLabel</key>
+				<string>Operation.h</string>
+>>>>>>> Changes?:Demo/Demo.xcodeproj/truths.mode1v3
 				<key>PBXSplitModuleInNavigatorKey</key>
 				<dict>
 					<key>Split0</key>
@@ -216,7 +260,11 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
+<<<<<<< HEAD:Demo/CPGSimulator.xcodeproj/truths.mode1v3
 						<string>BC0A6349161F7324008F9D7E</string>
+=======
+						<string>BC9D282A161E659500B5E252</string>
+>>>>>>> Changes?:Demo/Demo.xcodeproj/truths.mode1v3
 						<key>history</key>
 						<array>
 							<string>BC0A6306161F2AA3008F9D7E</string>
@@ -256,7 +304,11 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
+<<<<<<< HEAD:Demo/CPGSimulator.xcodeproj/truths.mode1v3
 						<string>BC0A634A161F7324008F9D7E</string>
+=======
+						<string>BC9D282B161E659500B5E252</string>
+>>>>>>> Changes?:Demo/Demo.xcodeproj/truths.mode1v3
 						<key>history</key>
 						<array>
 							<string>BC0A6301161F29D6008F9D7E</string>
@@ -296,7 +348,11 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
+<<<<<<< HEAD:Demo/CPGSimulator.xcodeproj/truths.mode1v3
 						<string>BC0A634B161F7324008F9D7E</string>
+=======
+						<string>BC9D282C161E659500B5E252</string>
+>>>>>>> Changes?:Demo/Demo.xcodeproj/truths.mode1v3
 						<key>history</key>
 						<array>
 							<string>BC0A62FE161F2720008F9D7E</string>
@@ -457,7 +513,11 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
+<<<<<<< HEAD:Demo/CPGSimulator.xcodeproj/truths.mode1v3
 										<string>BC0A6348161F7324008F9D7E</string>
+=======
+										<string>BC9D2828161E659500B5E252</string>
+>>>>>>> Changes?:Demo/Demo.xcodeproj/truths.mode1v3
 										<key>history</key>
 										<array>
 											<string>BCF4DFAC15DEE29000B25C9F</string>
@@ -681,9 +741,14 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
+<<<<<<< HEAD:Demo/CPGSimulator.xcodeproj/truths.mode1v3
 		<string>BC0A634C161F7324008F9D7E</string>
 		<string>BC0A62FC161F26CF008F9D7E</string>
 		<string>BC0A62FD161F26CF008F9D7E</string>
+=======
+		<string>BC9D2679161CC8B200B5E252</string>
+		<string>BC9D267A161CC8B200B5E252</string>
+>>>>>>> Changes?:Demo/Demo.xcodeproj/truths.mode1v3
 		<string>1CD10A99069EF8BA00B06720</string>
 		<string>BC08E7CB15DBF95800B183A3</string>
 		<string>BC0A6329161F3176008F9D7E</string>
