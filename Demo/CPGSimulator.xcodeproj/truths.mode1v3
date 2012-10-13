@@ -202,8 +202,9 @@
 			<key>Content</key>
 			<dict>
 				<key>PBXProjectModuleGUID</key>
-				<string>BC0A6323161F3176008F9D7E</string>
+				<string>BC0A6326161F3176008F9D7E</string>
 				<key>PBXProjectModuleLabel</key>
+<<<<<<< HEAD
 <<<<<<< HEAD:Demo/CPGSimulator.xcodeproj/truths.mode1v3
 				<string>main.cpp</string>
 =======
@@ -249,50 +250,9 @@
 				<key>PBXProjectModuleLabel</key>
 				<string>Operation.h</string>
 >>>>>>> Changes?:Demo/Demo.xcodeproj/truths.mode1v3
-				<key>PBXSplitModuleInNavigatorKey</key>
-				<dict>
-					<key>Split0</key>
-					<dict>
-						<key>PBXProjectModuleGUID</key>
-						<string>BC0A6324161F3176008F9D7E</string>
-						<key>PBXProjectModuleLabel</key>
-						<string>main.cpp</string>
-						<key>_historyCapacity</key>
-						<integer>0</integer>
-						<key>bookmark</key>
-<<<<<<< HEAD:Demo/CPGSimulator.xcodeproj/truths.mode1v3
-						<string>BC0A6349161F7324008F9D7E</string>
 =======
-						<string>BC9D282A161E659500B5E252</string>
->>>>>>> Changes?:Demo/Demo.xcodeproj/truths.mode1v3
-						<key>history</key>
-						<array>
-							<string>BC0A6306161F2AA3008F9D7E</string>
-						</array>
-					</dict>
-					<key>SplitCount</key>
-					<string>1</string>
-				</dict>
-				<key>StatusBarVisibility</key>
-				<true/>
-			</dict>
-			<key>Geometry</key>
-			<dict>
-				<key>Frame</key>
-				<string>{{0, 20}, {1288, 914}}</string>
-				<key>PBXModuleWindowStatusBarHidden2</key>
-				<false/>
-				<key>RubberWindowFrame</key>
-				<string>497 184 1288 955 0 0 1920 1178 </string>
-			</dict>
-		</dict>
-		<dict>
-			<key>Content</key>
-			<dict>
-				<key>PBXProjectModuleGUID</key>
-				<string>BC0A6326161F3176008F9D7E</string>
-				<key>PBXProjectModuleLabel</key>
 				<string>Operation.cpp</string>
+>>>>>>> Madesome changes
 				<key>PBXSplitModuleInNavigatorKey</key>
 				<dict>
 					<key>Split0</key>
@@ -304,14 +264,18 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
+<<<<<<< HEAD
 <<<<<<< HEAD:Demo/CPGSimulator.xcodeproj/truths.mode1v3
-						<string>BC0A634A161F7324008F9D7E</string>
+						<string>BC0A6349161F7324008F9D7E</string>
 =======
-						<string>BC9D282B161E659500B5E252</string>
+						<string>BC9D282A161E659500B5E252</string>
 >>>>>>> Changes?:Demo/Demo.xcodeproj/truths.mode1v3
+=======
+						<string>BC407B911625D10E005F0F39</string>
+>>>>>>> Madesome changes
 						<key>history</key>
 						<array>
-							<string>BC0A6301161F29D6008F9D7E</string>
+							<string>BC407B901625D10E005F0F39</string>
 						</array>
 					</dict>
 					<key>SplitCount</key>
@@ -334,6 +298,54 @@
 			<key>Content</key>
 			<dict>
 				<key>PBXProjectModuleGUID</key>
+				<string>BC0A6323161F3176008F9D7E</string>
+				<key>PBXProjectModuleLabel</key>
+				<string>main.cpp</string>
+				<key>PBXSplitModuleInNavigatorKey</key>
+				<dict>
+					<key>Split0</key>
+					<dict>
+						<key>PBXProjectModuleGUID</key>
+						<string>BC0A6324161F3176008F9D7E</string>
+						<key>PBXProjectModuleLabel</key>
+						<string>main.cpp</string>
+						<key>_historyCapacity</key>
+						<integer>0</integer>
+						<key>bookmark</key>
+<<<<<<< HEAD
+<<<<<<< HEAD:Demo/CPGSimulator.xcodeproj/truths.mode1v3
+						<string>BC0A634A161F7324008F9D7E</string>
+=======
+						<string>BC9D282B161E659500B5E252</string>
+>>>>>>> Changes?:Demo/Demo.xcodeproj/truths.mode1v3
+=======
+						<string>BC407B921625D10E005F0F39</string>
+>>>>>>> Madesome changes
+						<key>history</key>
+						<array>
+							<string>BC0A634E161F83A7008F9D7E</string>
+						</array>
+					</dict>
+					<key>SplitCount</key>
+					<string>1</string>
+				</dict>
+				<key>StatusBarVisibility</key>
+				<true/>
+			</dict>
+			<key>Geometry</key>
+			<dict>
+				<key>Frame</key>
+				<string>{{0, 20}, {1288, 914}}</string>
+				<key>PBXModuleWindowStatusBarHidden2</key>
+				<false/>
+				<key>RubberWindowFrame</key>
+				<string>497 184 1288 955 0 0 1920 1178 </string>
+			</dict>
+		</dict>
+		<dict>
+			<key>Content</key>
+			<dict>
+				<key>PBXProjectModuleGUID</key>
 				<string>BC0A6329161F3176008F9D7E</string>
 				<key>PBXProjectModuleLabel</key>
 				<string>Operation.h</string>
@@ -348,14 +360,18 @@
 						<key>_historyCapacity</key>
 						<integer>0</integer>
 						<key>bookmark</key>
+<<<<<<< HEAD
 <<<<<<< HEAD:Demo/CPGSimulator.xcodeproj/truths.mode1v3
 						<string>BC0A634B161F7324008F9D7E</string>
 =======
 						<string>BC9D282C161E659500B5E252</string>
 >>>>>>> Changes?:Demo/Demo.xcodeproj/truths.mode1v3
+=======
+						<string>BC407B931625D10E005F0F39</string>
+>>>>>>> Madesome changes
 						<key>history</key>
 						<array>
-							<string>BC0A62FE161F2720008F9D7E</string>
+							<string>BC0A6350161F83A7008F9D7E</string>
 						</array>
 					</dict>
 					<key>SplitCount</key>
@@ -406,6 +422,8 @@
 			<key>Layout</key>
 			<array>
 				<dict>
+					<key>BecomeActive</key>
+					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -458,13 +476,13 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>4</integer>
-									<integer>1</integer>
+									<integer>46</integer>
+									<integer>5</integer>
 									<integer>0</integer>
 								</array>
 							</array>
 							<key>PBXSmartGroupTreeModuleOutlineStateVisibleRectKey</key>
-							<string>{{0, 0}, {242, 910}}</string>
+							<string>{{0, 163}, {242, 910}}</string>
 						</dict>
 						<key>PBXTopSmartGroupGIDs</key>
 						<array/>
@@ -494,14 +512,12 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>exp1.js</string>
+								<string>main.cpp</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -509,15 +525,19 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>exp1.js</string>
+										<string>main.cpp</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
+<<<<<<< HEAD
 <<<<<<< HEAD:Demo/CPGSimulator.xcodeproj/truths.mode1v3
 										<string>BC0A6348161F7324008F9D7E</string>
 =======
 										<string>BC9D2828161E659500B5E252</string>
 >>>>>>> Changes?:Demo/Demo.xcodeproj/truths.mode1v3
+=======
+										<string>BC407B8D1625D10E005F0F39</string>
+>>>>>>> Madesome changes
 										<key>history</key>
 										<array>
 											<string>BCF4DFAC15DEE29000B25C9F</string>
@@ -532,18 +552,18 @@
 											<string>BC636E6916028C3A00E7ED19</string>
 											<string>BC0A61DE161A1963008F9D7E</string>
 											<string>BC0A61DF161A1963008F9D7E</string>
-											<string>BC0A61E0161A1963008F9D7E</string>
 											<string>BC0A61E1161A1963008F9D7E</string>
 											<string>BC0A61E3161A1963008F9D7E</string>
 											<string>BC0A61E4161A1963008F9D7E</string>
 											<string>BC0A61E5161A1963008F9D7E</string>
 											<string>BC0A6201161A1E9D008F9D7E</string>
-											<string>BC0A62F2161F26CF008F9D7E</string>
 											<string>BC0A631F161F3176008F9D7E</string>
 											<string>BC0A6320161F3176008F9D7E</string>
 											<string>BC0A6321161F3176008F9D7E</string>
 											<string>BC0A6338161F7269008F9D7E</string>
-											<string>BC0A6339161F7269008F9D7E</string>
+											<string>BC407B8B1625D10E005F0F39</string>
+											<string>BC407B8C1625D10E005F0F39</string>
+											<string>BC0A62F2161F26CF008F9D7E</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -555,14 +575,14 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 0}, {936, 767}}</string>
+								<string>{{0, 0}, {936, 763}}</string>
 								<key>RubberWindowFrame</key>
 								<string>-1244 231 1200 969 -1280 176 1280 1024 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
 							<key>Proportion</key>
-							<string>767pt</string>
+							<string>763pt</string>
 						</dict>
 						<dict>
 							<key>ContentConfiguration</key>
@@ -575,14 +595,14 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 772}, {936, 156}}</string>
+								<string>{{0, 768}, {936, 160}}</string>
 								<key>RubberWindowFrame</key>
 								<string>-1244 231 1200 969 -1280 176 1280 1024 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
 							<key>Proportion</key>
-							<string>156pt</string>
+							<string>160pt</string>
 						</dict>
 					</array>
 					<key>Proportion</key>
@@ -601,9 +621,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>BC0A62E7161F2631008F9D7E</string>
+				<string>BC407B8E1625D10E005F0F39</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>BC0A62E8161F2631008F9D7E</string>
+				<string>BC407B8F1625D10E005F0F39</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -741,6 +761,7 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
+<<<<<<< HEAD
 <<<<<<< HEAD:Demo/CPGSimulator.xcodeproj/truths.mode1v3
 		<string>BC0A634C161F7324008F9D7E</string>
 		<string>BC0A62FC161F26CF008F9D7E</string>
@@ -750,12 +771,13 @@
 		<string>BC9D267A161CC8B200B5E252</string>
 >>>>>>> Changes?:Demo/Demo.xcodeproj/truths.mode1v3
 		<string>1CD10A99069EF8BA00B06720</string>
+=======
+>>>>>>> Madesome changes
 		<string>BC08E7CB15DBF95800B183A3</string>
 		<string>BC0A6329161F3176008F9D7E</string>
-		<string>BC0A6326161F3176008F9D7E</string>
 		<string>BC0A6323161F3176008F9D7E</string>
-		<string>1C78EAAD065D492600B07095</string>
 		<string>/Users/truths/github/GPPG/Demo/CPGSimulator.xcodeproj</string>
+		<string>BC0A6326161F3176008F9D7E</string>
 	</array>
 	<key>WindowString</key>
 	<string>-1244 231 1200 969 -1280 176 1280 1024 </string>
@@ -774,14 +796,12 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>Operation.cpp</string>
+								<string></string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -837,7 +857,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>BC08E7CB15DBF95800B183A3</string>
-				<string>BC0A62E9161F2631008F9D7E</string>
+				<string>BC407B941625D10E005F0F39</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>

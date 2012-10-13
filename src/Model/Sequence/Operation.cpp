@@ -154,9 +154,9 @@ OpSequence* SequencePointMutator::mutate( OpSequence& g) const {
 	int length = g.length(); //data->length()
 	
 	int numLocs = binomial( length, _rate ); 
-	//if (numLocs == 0) return &g; 
+	if (numLocs == 0) return &g; 
 	
-	if (numLocs == 0) numLocs = 1;
+	//if (numLocs == 0) numLocs = 1;
 	
 #ifdef DEBUG_0
 	std::cout << "SequencePointMutator: mutating..." << std::endl;
