@@ -1,0 +1,6 @@
+//
+// Prefix header for all source files of the 'GPPG' target in the 'GPPG' project.
+//
+
+
+#include <iostream>
