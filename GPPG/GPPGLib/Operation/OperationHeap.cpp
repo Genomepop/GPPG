@@ -46,7 +46,7 @@ OperationGraph::OperationGraph(ICompressionPolicy* p) : _policy(p) {
 	
 	// For compressed,inactive Operations
 	ubigraph_new_vertex_style_w_id(1, 0);
-	ubigraph_set_vertex_style_attribute( 1, "shape", "none" );
+	ubigraph_set_vertex_style_attribute( 1, "shape", "cube" );
 	ubigraph_set_vertex_style_attribute( 1, "color", "#00FF00" );
 	
 	// For uncompressed Operations
@@ -87,6 +87,12 @@ void OperationGraph::addOperation(IOperation* op) {
 	//ubigraph_change_vertex_style( (long)op, 0);
 #endif
 	_policy->operationAdded( op );
+	_operations.insert(op);
+}
+
+void OperationGraph::clearRequests() {
+	for(std::set<IOperation*>::iterator sit=_operations.begin(); sit!=_operations.end(); sit++)
+		(*sit)->clearRequests();
 }
 
 /*
@@ -157,6 +163,7 @@ void OperationGraph::removeOperation(IOperation* op) {
 			}
 			
 			_policy->decompressionReleased(wop);
+			_operations.erase(wop);
 			delete wop;
 		}
 	}	
@@ -169,4 +176,5 @@ void OperationGraph::generationFinished(const std::vector<IGenotype*>& genos) {
 
 void OperationGraph::generationFinished(const std::set<IGenotype*>& genos) {
 	_policy->generationFinished( (const std::set<IOperation*>&) genos );
+	clearRequests();
 }

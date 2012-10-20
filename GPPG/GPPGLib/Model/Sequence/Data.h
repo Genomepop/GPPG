@@ -23,7 +23,7 @@ namespace GPPG {
 			
 			/** Gets the item at location i
 			 */
-			virtual STYPE get(int i) const = 0;
+			virtual STYPE get(int i)  = 0;
 		};
 		
 		/**
@@ -50,6 +50,8 @@ namespace GPPG {
 			
 			/** Gets the item at location i
 			 */
+			STYPE get(int i) ;
+			
 			STYPE get(int i) const;
 			
 			/** Sets the item at location i

@@ -36,7 +36,8 @@ OpSequence(cost, parent1, parent2), _length(length) {}
 
 int OpSequenceBase::length() const { return _length; }
 
-STYPE OpSequenceBase::get(int i) const {
+STYPE OpSequenceBase::get(int i) {
+	incrRequests(1);
 	if (isCompressed()) {
 		return proxyGet(i);
 	}
@@ -46,7 +47,7 @@ STYPE OpSequenceBase::get(int i) const {
 SequenceRoot::SequenceRoot(SequenceData* d) : OperationRoot<SequenceData, ISequence>(d) {}
 
 int SequenceRoot::length() const { return data()->length(); }
-STYPE SequenceRoot::get(int i) const { return data()->get(i); }
+STYPE SequenceRoot::get(int i) { incrRequests(1); return data()->get(i); }
 
 
 int discreteDistributionRandom(const std::vector<double>& distr) {
@@ -90,7 +91,7 @@ OpSequenceBase(numLocs,op.length(), op), _loc(locs), _numlocs(numLocs), _c(dest)
 
 SequencePointChange::~SequencePointChange() { delete _loc; delete _c; }
 
-SequenceData* SequencePointChange::evaluate() const {
+SequenceData* SequencePointChange::evaluate()  {
 	SequenceData* sd = OpSequenceBase::evaluate();
 	if (sd != NULL) return sd;
 	
@@ -119,7 +120,7 @@ STYPE SequencePointChange::getMutation(int i) const { return _c[i]; }
 int SequencePointChange::getSite(int i) const { return _loc[i]; }
 
 
-STYPE SequencePointChange::proxyGet(int l) const {
+STYPE SequencePointChange::proxyGet(int l)  {
 	// See if the index is in the list
 	for (int i=0; i<_numlocs; i++) {
 		if (_loc[i] == l) return _c[i];
@@ -197,7 +198,7 @@ ostream& operator<<(ostream& output, const SequencePointMutator& s) {
 
 SequenceDeletion::SequenceDeletion(OpSequence& op, int loc, int span): OpSequenceBase(10, op.length()-span, op), _loc(loc), _span(span) {}
 
-SequenceData* SequenceDeletion::evaluate() const {
+SequenceData* SequenceDeletion::evaluate() {
 	SequenceData* sd = OpSequenceBase::evaluate();
 	if (sd != NULL) return sd;
 	
@@ -218,7 +219,7 @@ SequenceData* SequenceDeletion::evaluate() const {
 	return data;
 }
 
-STYPE SequenceDeletion::proxyGet(int i) const {
+STYPE SequenceDeletion::proxyGet(int i)  {
 	// See if the index is in the list
 	if (i >= _loc) {
 		return parent(0)->get(i+_span);
@@ -231,7 +232,7 @@ SequenceInsertion::SequenceInsertion(OpSequence& op, int loc, SequenceData* span
 
 SequenceInsertion::~SequenceInsertion() { delete _span; }
 
-SequenceData* SequenceInsertion::evaluate() const {
+SequenceData* SequenceInsertion::evaluate() {
 	SequenceData* sd = OpSequenceBase::evaluate();
 	if (sd != NULL) return sd;
 	
@@ -255,7 +256,7 @@ SequenceData* SequenceInsertion::evaluate() const {
 	return data;
 }
 
-STYPE SequenceInsertion::proxyGet(int i) const {
+STYPE SequenceInsertion::proxyGet(int i)  {
 	// See if the index is in the list
 	int index = i;
 	if (i >= _loc+_span->length()) {
@@ -332,7 +333,7 @@ SequenceCrossover::SequenceCrossover(OpSequence& op1, OpSequence& op2, const std
 OpSequenceBase(100, (locs.size()%2==0)? op1.length(): op2.length(), op1, op2), _locs(locs) {}
 
 
-SequenceData* SequenceCrossover::evaluate() const {
+SequenceData* SequenceCrossover::evaluate() {
 	SequenceData* sd = OpSequenceBase::evaluate();
 	if (sd != NULL) return sd;
 	
@@ -359,7 +360,7 @@ SequenceData* SequenceCrossover::evaluate() const {
 	return result;
 }
 
-STYPE SequenceCrossover::proxyGet(int i) const {
+STYPE SequenceCrossover::proxyGet(int i)  {
 	// See if the index is in the list
 	for (int j=0; j<_locs.size(); j++) {
 		if (i<j) {

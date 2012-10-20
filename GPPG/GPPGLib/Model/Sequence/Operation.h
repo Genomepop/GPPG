@@ -41,10 +41,10 @@ namespace GPPG {
 			
 			int length() const;
 			
-			STYPE get(int i) const;
+			STYPE get(int i);
 			
 		protected:
-			virtual STYPE proxyGet(int i) const = 0;
+			virtual STYPE proxyGet(int i)  = 0;
 			
 		private:
 			int _length;
@@ -58,7 +58,7 @@ namespace GPPG {
 		public:
 			SequenceRoot( SequenceData* d);
 			int length() const;
-			STYPE get(int i) const;
+			STYPE get(int i) ;
 			
 		}; 
 		//OperationRoot<SequenceData, ISequenceData> SequenceRoot;
@@ -88,7 +88,7 @@ namespace GPPG {
 			
 			std::string toString() const;
 			
-			SequenceData* evaluate() const;
+			SequenceData* evaluate();
 			
 			/** Get the number of mutated sites
 			 */
@@ -103,7 +103,7 @@ namespace GPPG {
 			int getSite(int i) const;
 			
 		protected:
-			STYPE proxyGet(int i) const;
+			STYPE proxyGet(int i) ;
 			
 		private:
 			int* _loc;		/* Locations array */
@@ -137,10 +137,10 @@ namespace GPPG {
 		public:
 			SequenceDeletion(OpSequence& op, int loc, int span);
 			
-			SequenceData* evaluate() const;
+			SequenceData* evaluate();
 			
 		protected:
-			STYPE proxyGet(int i) const;
+			STYPE proxyGet(int i);
 			
 		private:
 			int _loc, _span;
@@ -170,10 +170,10 @@ namespace GPPG {
 			SequenceInsertion(OpSequence& op, int loc, SequenceData* span);
 			~SequenceInsertion();
 			
-			SequenceData* evaluate() const;
+			SequenceData* evaluate();
 			
 		protected:
-			STYPE proxyGet(int i) const;
+			STYPE proxyGet(int i);
 			
 		private:
 			int _loc;
@@ -204,10 +204,10 @@ namespace GPPG {
 			SequenceCrossover(OpSequence& op1, OpSequence& op2, const std::vector<int>& locs);
 			SequenceCrossover();
 			
-			SequenceData* evaluate() const;
+			SequenceData* evaluate();
 			
 		protected:
-			STYPE proxyGet(int i) const;
+			STYPE proxyGet(int i);
 			
 		private:
 			std::vector<int> _locs;

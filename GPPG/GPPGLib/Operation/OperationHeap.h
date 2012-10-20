@@ -14,6 +14,7 @@
 //#include "Operation/CompressionPolicy.h"
 //#include "Operation/Operation.h"
 #include "Base/GenotypeHeap.h"
+#include <set>
 
 namespace GPPG {
 	class ICompressionPolicy;
@@ -56,14 +57,15 @@ namespace GPPG {
 		 */
 		virtual void removeOperation(IOperation* op);
 		
-		
+		void clearRequests();
+	
 		//void operationAttached(IOperation& parent, IOperation& child);
 		//void operationRemoved(IOperation& parent, IOperation& child);
 		
 	private:
 		OperationGraph(OperationGraph const&);
 		OperationGraph& operator=(OperationGraph const&);
-		
+		std::set<IOperation*> _operations;
 		ICompressionPolicy* _policy;
 	};
 }

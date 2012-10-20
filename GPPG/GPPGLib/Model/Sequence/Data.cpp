@@ -32,6 +32,8 @@ STYPE* SequenceData::sequence() { return _sequence; }
 
 int SequenceData::length() const { return _length; }
 
+STYPE SequenceData::get(int i)  { return _sequence[i]; }
+
 STYPE SequenceData::get(int i) const { return _sequence[i]; }
 
 void SequenceData::set(int i, STYPE c) { _sequence[i] = c; }

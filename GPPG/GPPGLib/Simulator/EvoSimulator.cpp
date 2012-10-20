@@ -192,7 +192,7 @@ void EvoSimulator::evolve(long N, long G) {
 		throw "There can only be one recombinator right now";
 	
 	int p1,p2;
-	IGenotype *g1, *g2, *gOut, *gIn;
+	IGenotype *g1, *g2, *gOut, *gIn, *gOut_;
 #ifdef DEBUG
 	time_t tstart, tend;
 	time(&tstart);
@@ -217,7 +217,7 @@ void EvoSimulator::evolve(long N, long G) {
 			//}
 			p1 = (int)(random01()*N); //randomParent();
 			g1 = indIn[p1];
-			
+			gOut_=0;
 
 			if (recombinator) {
 				// If recombination, select another parent, and perform a recombination (maybe)
@@ -225,10 +225,8 @@ void EvoSimulator::evolve(long N, long G) {
 				g2 = indIn[p2];
 				gOut = recombinator->recombine(*g1, *g2);
 				if (gOut != g1 && gOut != g2) {
-					//#pragma omp critical
-					{
-						GenotypeSimulator::addGenotype(gOut);
-					}
+					gOut_ = gOut;
+					//GenotypeSimulator::addGenotype(gOut);
 				}
 
 			} else {
@@ -243,21 +241,20 @@ void EvoSimulator::evolve(long N, long G) {
 				gIn = gOut;
 				gOut = mutator->mutate( *gIn );
 				if (gOut != gIn) {
-					//#pragma omp critical
-					{
-						GenotypeSimulator::addGenotype(gOut);
-					}
+					if(gOut_)
+						GenotypeSimulator::addGenotype(gOut_);
+					gOut_ = gOut;
 				}
 			}
 			
+			if(gOut_) gOut = gOut_;
 			
 			if (gOut != g1 && gOut != g2) {
 				// A new genotype has been created, so we need to record it
 				// We assume that any new genotype has never been seen before
-				//#pragma omp critical
-				{
-					activateGenotype( gOut, one_individual );
-				}
+				gOut->setFrequency(one_individual);
+				GenotypeSimulator::addGenotype(gOut);
+				activateGenotype( gOut, one_individual );
 			} else {
 				//#pragma omp critical
 				{

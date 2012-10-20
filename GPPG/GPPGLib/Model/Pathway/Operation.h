@@ -81,7 +81,7 @@ namespace GPPG {
 				
 				std::string toString() const;
 				
-				PromoterData* evaluate() const;
+				PromoterData* evaluate();
 				
 				/** Get the number of mutated sites
 				 */

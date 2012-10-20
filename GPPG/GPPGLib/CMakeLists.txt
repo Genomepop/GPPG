@@ -61,9 +61,11 @@ set( GPPG_SRC
 )
 
 set( EXTRA_LIBS )
+set( INCL_DIRS ${GPPG_SOURCE_DIR}/GPPGLib ${GPPG_BINARY_DIR}/GPPGLib)
 # --- Ubigraph support ---
 if (USE_UBIGRAPH)
-	set (EXTRA_LIBS ${EXTRA_LIBS} xml)
+	set (EXTRA_LIBS ${EXTRA_LIBS} xmlrpc_client xmlrpc xmlrpc_util xmlrpc_xmlparse xmlrpc_xmltok)
+	set (INCL_DIRS ${INCL_DIRS} /usr/local/include)
 	set( GPPG_HDR ${GPPG_HDR} 
 		Util/Ubigraph/ubiclient.h
 		Operation/UbiOperationGraph.h
@@ -75,15 +77,18 @@ if (USE_UBIGRAPH)
 endif (USE_UBIGRAPH)
 # -----------------------
 
-#configure_file( ${GPPG_SOURCE_DIR}/GPPG.h.in ${GPPG_BINARY_DIR}/GPPG.h )
+configure_file( ${GPPG_SOURCE_DIR}/GPPGLib/GPPG.h.in ${GPPG_BINARY_DIR}/GPPGLib/GPPG.h )
 
-include_directories (${GPPG_SOURCE_DIR}/GPPGLib)
+include_directories (${INCL_DIRS})
 
 #install (TARGETS GPPG DESTINATION lib)
 #install (FILES ${GPPG_HDR} DESTINATION include)
 #add_library (GPPG ${GPPG_SRC})
 add_executable(CPGSimulator ${GPPG_SOURCE_DIR}/CPGSimulator/main.cpp ${GPPG_SRC})
 install (TARGETS CPGSimulator DESTINATION bin)
-#target_link_libraries (GPPG ${EXTRA_LIBS})
+
+if(USE_UBIGRAPH)
+	target_link_libraries (CPGSimulator ${EXTRA_LIBS})
+endif(USE_UBIGRAPH)
 
 

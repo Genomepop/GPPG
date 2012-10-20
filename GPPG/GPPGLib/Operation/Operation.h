@@ -69,6 +69,14 @@ namespace GPPG {
 		 */
 		virtual int numParents() const = 0;
 		
+		/** Requests cache
+		*/
+		virtual int requests() const = 0;
+		virtual void clearRequests() = 0;
+		virtual void setRequests(int i) = 0;
+		virtual void incrRequests(int i) = 0;
+		virtual void decrRequests(int i) = 0;
+		
 		virtual std::string toString() const = 0;
 	};
 	
@@ -101,6 +109,11 @@ namespace GPPG {
 		double fitness() const;
 		void setFitness(double f);
 		 
+		int requests() const;
+		void clearRequests();
+		void setRequests(int i);
+		void incrRequests(int i);
+		void decrRequests(int i);
 		
 		void setCompressed( bool c );
 		
@@ -114,7 +127,7 @@ namespace GPPG {
 		
 	protected:
 		double _freq, _total, _fitness;
-		int _index, _order, _key, _state;
+		int _index, _order, _key, _state, _requests;
 		double _load, _loadFreq, _loadCost;
 		double _cost;
 	};
@@ -250,7 +263,8 @@ namespace GPPG {
 		/** Returns a no-strings attached evaluation of this Operation.
 		 * Consuming code must delete the result when finished with it.
 		 */
-		virtual T* evaluate() const {
+		virtual T* evaluate() {
+			incrRequests(1);
 			if (isCompressed()) {
 				return NULL;
 			}

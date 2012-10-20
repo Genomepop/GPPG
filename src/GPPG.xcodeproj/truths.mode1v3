@@ -307,7 +307,7 @@
 							<real>228</real>
 						</array>
 						<key>RubberWindowFrame</key>
-						<string>29 61 1380 817 0 0 1440 878 </string>
+						<string>261 361 1380 817 0 0 1920 1178 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
@@ -351,14 +351,14 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 0}, {1130, 532}}</string>
+								<string>{{0, 0}, {1130, 525}}</string>
 								<key>RubberWindowFrame</key>
-								<string>29 61 1380 817 0 0 1440 878 </string>
+								<string>261 361 1380 817 0 0 1920 1178 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
 							<key>Proportion</key>
-							<string>532pt</string>
+							<string>525pt</string>
 						</dict>
 						<dict>
 							<key>ContentConfiguration</key>
@@ -371,14 +371,14 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 537}, {1130, 239}}</string>
+								<string>{{0, 530}, {1130, 246}}</string>
 								<key>RubberWindowFrame</key>
-								<string>29 61 1380 817 0 0 1440 878 </string>
+								<string>261 361 1380 817 0 0 1920 1178 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
 							<key>Proportion</key>
-							<string>239pt</string>
+							<string>246pt</string>
 						</dict>
 					</array>
 					<key>Proportion</key>
@@ -397,9 +397,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>BC21F5D815DC541B00F9A201</string>
+				<string>BCB86EF61631B239003270C6</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>BC21F5D915DC541B00F9A201</string>
+				<string>BCB86EF71631B239003270C6</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -538,10 +538,10 @@
 	<key>WindowOrderList</key>
 	<array>
 		<string>BC948857155D825E001DDF87</string>
-		<string>/Users/truths/github/local/GPPG/src/GPPG.xcodeproj</string>
+		<string>/Users/truths/github/GPPG/src/GPPG.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
-	<string>29 61 1380 817 0 0 1440 878 </string>
+	<string>261 361 1380 817 0 0 1920 1178 </string>
 	<key>WindowToolsV3</key>
 	<array>
 		<dict>
@@ -571,7 +571,7 @@
 								<key>Frame</key>
 								<string>{{0, 0}, {1191, 588}}</string>
 								<key>RubberWindowFrame</key>
-								<string>92 60 1191 818 0 0 1440 878 </string>
+								<string>269 360 1191 818 0 0 1920 1178 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
@@ -595,7 +595,7 @@
 								<key>Frame</key>
 								<string>{{0, 593}, {1191, 184}}</string>
 								<key>RubberWindowFrame</key>
-								<string>92 60 1191 818 0 0 1440 878 </string>
+								<string>269 360 1191 818 0 0 1920 1178 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXBuildResultsModule</string>
@@ -618,7 +618,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>BC948857155D825E001DDF87</string>
-				<string>BC21F5DA15DC541B00F9A201</string>
+				<string>BCB86EF81631B239003270C6</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -627,7 +627,7 @@
 			<key>WindowContentMinSize</key>
 			<string>486 300</string>
 			<key>WindowString</key>
-			<string>92 60 1191 818 0 0 1440 878 </string>
+			<string>269 360 1191 818 0 0 1920 1178 </string>
 			<key>WindowToolGUID</key>
 			<string>BC948857155D825E001DDF87</string>
 			<key>WindowToolIsVisible</key>

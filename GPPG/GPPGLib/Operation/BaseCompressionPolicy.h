@@ -36,6 +36,8 @@ namespace GPPG {
 		 */
 		StoreFlag storeFlag() const;
 		
+		void generationFinished( const std::set<IOperation*>& active );
+		
 	private:
 		StoreFlag _flag;
 		

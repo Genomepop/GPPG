@@ -138,7 +138,7 @@ BindingSiteChange::~BindingSiteChange() {
 	delete _c;
 }
 
-PromoterData* BindingSiteChange::evaluate() const {
+PromoterData* BindingSiteChange::evaluate() {
 	PromoterData* sd = OpPathwayBase::evaluate();
 	if (sd != NULL) return sd;
 	

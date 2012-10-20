@@ -28,6 +28,10 @@ void BaseCompressionPolicy::operationAdded(IOperation* op) {
 		case STORE_ROOT:
 			op->setCompressed(true);
 			break;
+		case STORE_ACTIVE:
+			if(op->isActive()) op->setCompressed(false);
+			else op->setCompressed(true);
+			break;
 		default:
 			op->setCompressed(false);
 			break;
@@ -38,5 +42,13 @@ void BaseCompressionPolicy::operationAdded(IOperation* op) {
 void BaseCompressionPolicy::operationRemoved(IOperation* op) {
 	if (_flag == STORE_ACTIVE) {
 		op->setCompressed(true);
+	}
+}
+
+void BaseCompressionPolicy::generationFinished( const std::set<IOperation*>& active ) {
+	if(_flag == STORE_ACTIVE) {
+		//for(std::set<IOperation*>::iterator it=active.begin(); it!=active.end(); it++) 
+		//	(*it)->setCompressed(false);
+		
 	}
 }
