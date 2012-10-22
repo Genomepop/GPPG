@@ -52,7 +52,7 @@ void drawLoad(IOperation* op, double l) {
 
 
 GreedyLoad::GreedyLoad(int maxExplicit, int numGens) : 
-	_root(0),_maxExplicit(maxExplicit), _waitGens(numGens), _elapsedGens(0), _numExplicit(0), _L() {}
+	_root(0),_maxExplicit(maxExplicit), _waitGens(numGens), _elapsedGens(0), _numExplicit(0), _runs(0), _L() {}
 
 void GreedyLoad::decompressionReleased( IOperation* op ) {
 #ifdef DEBUG_0
@@ -139,7 +139,7 @@ void GreedyLoad::apply( const std::set<IOperation*>& active ) {
 	while (_U.size() < _maxExplicit && C.size() > 0) {
 		IOperation* op = getMaxItem( C, false );
 		if (op == 0) {
-			std::cout << "No max item found\n";
+			//std::cout << "No max item found\n";
 			break;
 		}
 		
@@ -166,15 +166,36 @@ void GreedyLoad::apply( const std::set<IOperation*>& active ) {
 	
 	
 	// Step 5: Apply compression
-	for (OpIter it=_U.begin(); it!=_U.end(); it++) 
+	/*
+	for (OpIter it=_V.begin(); it!=_V.end(); it++) 
+		ubigraph_set_vertex_attribute( (*it)->key(), "label", "V" );
+			
+	for (OpIter it=_U.begin(); it!=_U.end(); it++) {
+		if( _runs > 5 ) usleep(100000);
+		ubigraph_set_vertex_attribute( (*it)->key(), "label", "Z" );		
 		(*it)->setCompressed(false);
+		if (_runs > 5 && _root->requests() > 0)
+			ubigraph_set_vertex_attribute( (*it)->key(), "label", "P" );
+		else 
+			ubigraph_set_vertex_attribute( (*it)->key(), "label", "W" );
+	}
 	
 	for (OpIter it=_V.begin(); it!=_V.end(); it++) 
-		if (_U.count( *it ) == 0) 
+		if (_U.count( *it ) == 0) {
 			(*it)->setCompressed(true);
-	
+			ubigraph_set_vertex_attribute( (*it)->key(), "label", "" );
+		}
+	*/
+
+	for (OpIter it=_U.begin(); it!=_U.end(); it++)
+		(*it)->setCompressed(false);
+	for (OpIter it=_V.begin(); it!=_V.end(); it++) 
+		if (_U.count( *it ) == 0) (*it)->setCompressed(true);
+
 	// Step 6: Reset
 	clearLoadMap();
+	
+	_runs++;
 	
 	//resetAnnotation( active );
 	//resetAnnotation(_U);
@@ -270,6 +291,8 @@ void GreedyLoad::clearCache() {
 }
 
 void GreedyLoad::move( IOperation* a, IOperation* b ) {
+	if( a == b) return;
+	
 	add( b );
 	if (a != _root) {
 		remove( a, true, false );

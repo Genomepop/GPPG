@@ -1,9 +1,9 @@
 {
 	"compression" : 
 	{
-		"k" : 20,
+		"k" : 100,
 		"name" : "Greedy-Load",
-		"t" : 2
+		"t" : 15
 	},
 	"generations" : 1000,
 	"genotype" : 
@@ -11,7 +11,7 @@
 		"length" : 10000,
 		"name" : "Sequence"
 	},
-	"individuals" : 50,
+	"individuals" : 1000,
 	"operators" : 
 	[
 		
@@ -36,9 +36,9 @@
 		},
 		
 		{
-			"cost" : 1,
+			"cost" : 100,
 			"name" : "Recombination",
-			"rate" : 1.0e-5
+			"rate" : 1.0e-4
 		}
 		
 	],

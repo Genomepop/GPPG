@@ -45,7 +45,7 @@ namespace GPPG {
 		 * The cost is provided in the construction of the operation and should take into account
 		 * the complexity of the operation and the amount of CPU-time required to apply it.
 		 */
-		virtual double cost() const = 0;
+		virtual int cost() const = 0;
 		
 		/** Returns the data footprint of this operation (plus cache)
 		 *
@@ -76,13 +76,14 @@ namespace GPPG {
 		virtual void setRequests(int i) = 0;
 		virtual void incrRequests(int i) = 0;
 		virtual void decrRequests(int i) = 0;
+		virtual void touch() = 0;
 		
 		virtual std::string toString() const = 0;
 	};
 	
 	class BaseOperation : public IOperation {
 	public:
-		BaseOperation(double cost);
+		BaseOperation(int cost);
 		~BaseOperation();
 		
 		int key() const;
@@ -114,13 +115,14 @@ namespace GPPG {
 		void setRequests(int i);
 		void incrRequests(int i);
 		void decrRequests(int i);
+		void touch();
 		
 		void setCompressed( bool c );
 		
 		/**
 		 * The cost of applying the operation
 		 */
-		double cost() const;
+		int cost() const;
 		void setCost(double v);
 		
 		std::string toString() const;
@@ -129,16 +131,16 @@ namespace GPPG {
 		double _freq, _total, _fitness;
 		int _index, _order, _key, _state, _requests;
 		double _load, _loadFreq, _loadCost;
-		double _cost;
+		int _cost;
 	};
 	
 	
 	template <typename T, class P> class Operation : public BaseOperation, public P {
 			
 	public:
-		Operation<T,P>(double cost): BaseOperation(cost), _data(0) { innerConstructor( 0, 0); }
-		Operation<T,P>(double cost, Operation<T,P> &parent) : BaseOperation(cost), _data(0) { innerConstructor( &parent, 0); }
-		Operation<T,P>(double cost, Operation<T,P> &parent1, Operation<T,P> &parent2): BaseOperation(cost), _data(0) { innerConstructor( &parent1, &parent2); }
+		Operation<T,P>(int cost): BaseOperation(cost), _data(0) { innerConstructor( 0, 0); }
+		Operation<T,P>(int cost, Operation<T,P> &parent) : BaseOperation(cost), _data(0) { innerConstructor( &parent, 0); }
+		Operation<T,P>(int cost, Operation<T,P> &parent1, Operation<T,P> &parent2): BaseOperation(cost), _data(0) { innerConstructor( &parent1, &parent2); }
 		
 		~Operation<T,P>() {
 			if (_data) {
@@ -254,7 +256,7 @@ namespace GPPG {
 			_data = d;
 		}
 		
-		bool isCompressed() const { return data() == NULL; }
+		bool isCompressed() const { return _data == 0; }
 		
 		// Data Size
 		int dataSize() const { return 1; }
@@ -332,7 +334,7 @@ namespace GPPG {
 	template <typename T>
 	class OperationMutator : public IMutator {
 	public:
-		OperationMutator(double cost): _cost(cost) {}
+		OperationMutator(int cost): _cost(cost) {}
 		
 		IGenotype* mutate(IGenotype& geno) const {
 			return mutate( (T&)geno );
@@ -346,16 +348,16 @@ namespace GPPG {
 		
 		virtual T* mutate(T& op) const = 0;
 		
-		double cost() const { return _cost; }
+		int cost() const { return _cost; }
 		
 	private:
-		double _cost;
+		int _cost;
 	};
 	
 	template <typename T>
 	class OperationRecombinator : public IRecombinator {
 	public:
-		OperationRecombinator(double cost) : _cost(cost) {}
+		OperationRecombinator(int cost) : _cost(cost) {}
 		
 		IGenotype* recombine(IGenotype& geno1, IGenotype& geno2) const {
 			return recombine( (T&)geno1, (T&)geno2 );
@@ -369,10 +371,10 @@ namespace GPPG {
 		
 		virtual T* recombine(T& op, T& op2) const = 0;
 		
-		double cost() const {return _cost; }
+		int cost() const {return _cost; }
 		
 	private:
-		double _cost;
+		int _cost;
 	};
 }
 

@@ -65,7 +65,7 @@ std::ostream& operator<<(std::ostream& output, const GPPG::IOperation& op) {
 	return output;
 }
 
-BaseOperation::BaseOperation(double cost) : 
+BaseOperation::BaseOperation(int cost) : 
 	_key(-1), _index(-1), _state(-1), _freq(0.0), _total(0), _order(-1), _fitness(1.0), _cost(cost), _load(0), _loadFreq(0), _loadCost(0), _requests(0) {
 #ifdef UBIGRAPH
 	//ubigraph_new_vertex_w_id( (long)this );
@@ -155,6 +155,7 @@ void BaseOperation::setOrder(int i) {
 
 void BaseOperation::setCompressed( bool c ) {
 #ifdef UBIGRAPH
+	if(key() < 0) return;
 	if(c) {
 		if (isActive()) ubigraph_change_vertex_style( key(), 0);
 		else ubigraph_change_vertex_style( key(), 1);
@@ -169,7 +170,7 @@ void BaseOperation::setCompressed( bool c ) {
 double BaseOperation::fitness() const { return _fitness; }
 void BaseOperation::setFitness(double f) { _fitness = f; }
 
-double BaseOperation::cost() const { return _cost; }
+int BaseOperation::cost() const { return _cost; }
 
 void BaseOperation::setCost(double v) { _cost = v; }
 
@@ -183,16 +184,26 @@ void BaseOperation::setRequests(int i) {
 	if(_requests < 0) _requests = 0;
 	#ifdef UBIGRAPH
 	int s = (_requests > 20) ? 20 : _requests+1;
-	ubigraph_set_vertex_attribute(key(), "size", TToStr<int>(s).c_str());
+	if(key() >= 0)
+		ubigraph_set_vertex_attribute(key(), "size", TToStr<int>(s).c_str());
 	#endif
 }
 void BaseOperation::incrRequests(int i) {
-	setRequests(_requests + i);
+	setRequests(_requests + i*_cost);
 }
 void BaseOperation::decrRequests(int i) { 
 	setRequests(_requests -i); 
 }
 
+void BaseOperation::touch() {
+	if( _requests > 0) return;
+	_requests=_cost;
+	if(isCompressed()) {
+		int p = numParents();
+		if(p>0) parent(0)->touch();
+		if(p>1) parent(1)->touch();
+	}
+}
 std::string BaseOperation::toString() const {
 	return "<No Content>";
 }

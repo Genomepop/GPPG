@@ -87,7 +87,7 @@ namespace GPPG {
 		std::set<IOperation*> _U, _V;
 		std::map<IOperation*, Load> _L;
 		IOperation* _root;
-		int _maxExplicit, _elapsedGens, _numExplicit, _waitGens;
+		int _maxExplicit, _elapsedGens, _numExplicit, _waitGens, _runs;
 	};
 }
 #endif

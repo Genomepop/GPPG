@@ -28,10 +28,10 @@ using namespace GPPG;
  *				OPSEQUENCEBASE OPERATION
  */
 
-OpSequenceBase::OpSequenceBase( double cost, int length, OpSequence& parent1 ):
+OpSequenceBase::OpSequenceBase( int cost, int length, OpSequence& parent1 ):
 OpSequence(cost, parent1), _length(length) {}
 
-OpSequenceBase::OpSequenceBase( double cost, int length, OpSequence& parent1, OpSequence& parent2 ):
+OpSequenceBase::OpSequenceBase( int cost, int length, OpSequence& parent1, OpSequence& parent2 ):
 OpSequence(cost, parent1, parent2), _length(length) {}
 
 int OpSequenceBase::length() const { return _length; }
@@ -128,7 +128,7 @@ STYPE SequencePointChange::proxyGet(int l)  {
 	return parent(0)->get(l);
 }
 
-SequencePointMutator::SequencePointMutator(double cost, double rate, const std::vector<double> &T) : 
+SequencePointMutator::SequencePointMutator(int cost, double rate, const std::vector<double> &T) : 
 OperationMutator<OpSequence>(cost), _rate(rate), _M(T) {
 	// Create random discrete distributions for each character
 	int size = _M.size() >> 2;
@@ -268,7 +268,7 @@ STYPE SequenceInsertion::proxyGet(int i)  {
 	return parent(0)->get(index);
 }
 
-SequenceDeletionMutator::SequenceDeletionMutator(double cost, double rate, int minL, int maxL) :
+SequenceDeletionMutator::SequenceDeletionMutator(int cost, double rate, int minL, int maxL) :
 OperationMutator<OpSequence>(cost), _rate(rate), _minL(minL), _maxL(maxL) {}
 
 OpSequence* SequenceDeletionMutator::mutate( OpSequence& g) const {
@@ -294,7 +294,7 @@ int SequenceDeletionMutator::numMutants(OpSequence& g, long N, double f) const {
 double SequenceDeletionMutator::rate() const { return _rate; }
 
 
-SequenceInsertionMutator::SequenceInsertionMutator(double cost, double rate, int minL, int maxL, const std::vector<double>& distr) :
+SequenceInsertionMutator::SequenceInsertionMutator(int cost, double rate, int minL, int maxL, const std::vector<double>& distr) :
 OperationMutator<OpSequence>(cost), _rate(rate), _minL(minL), _maxL(maxL), _distr(distr) {
 	cumSum(_distr);
 }
@@ -362,6 +362,8 @@ SequenceData* SequenceCrossover::evaluate() {
 
 STYPE SequenceCrossover::proxyGet(int i)  {
 	// See if the index is in the list
+	parent(0)->touch();
+	parent(1)->touch();	
 	for (int j=0; j<_locs.size(); j++) {
 		if (i<j) {
 			return (j%2==0) ? parent(0)->get(i) : parent(1)->get(i);
@@ -370,7 +372,7 @@ STYPE SequenceCrossover::proxyGet(int i)  {
 	return (_locs.size()%2==0) ? parent(0)->get(i) : parent(1)->get(i);
 }
 
-SequenceRecombinator::SequenceRecombinator(double cost, double rate) : OperationRecombinator<OpSequence>(cost), _rate(rate) {}
+SequenceRecombinator::SequenceRecombinator(int cost, double rate) : OperationRecombinator<OpSequence>(cost), _rate(rate) {}
 
 int SequenceRecombinator::numMutants(OpSequence& g, OpSequence& g2, long N) const {
 	double amt = N*g.frequency()*g2.frequency();
