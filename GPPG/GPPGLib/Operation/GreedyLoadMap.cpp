@@ -71,7 +71,7 @@ void GreedyLoad::operationAdded( IOperation* op) {
 
 
 
-void GreedyLoad::generationFinished( const std::set<IOperation*>& active ) {
+void GreedyLoad::generationFinished( OperationGraph* heap, const std::set<IOperation*>& active ) {
 	_elapsedGens++;
 	if (_elapsedGens > _waitGens) {
 		apply( active );

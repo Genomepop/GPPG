@@ -44,7 +44,7 @@ STYPE OpSequenceBase::get(int i) {
 	return data()->get(i);
 }
 
-SequenceRoot::SequenceRoot(SequenceData* d) : OperationRoot<SequenceData, ISequence>(d) {}
+SequenceRoot::SequenceRoot(SequenceData* d) : OperationRoot<SequenceData, ISequence>(d) { setCost(1); }
 
 int SequenceRoot::length() const { return data()->length(); }
 STYPE SequenceRoot::get(int i) { incrRequests(1); return data()->get(i); }

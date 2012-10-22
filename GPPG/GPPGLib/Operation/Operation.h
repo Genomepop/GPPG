@@ -123,7 +123,7 @@ namespace GPPG {
 		 * The cost of applying the operation
 		 */
 		int cost() const;
-		void setCost(double v);
+		void setCost(int v);
 		
 		std::string toString() const;
 		

@@ -172,7 +172,7 @@ void BaseOperation::setFitness(double f) { _fitness = f; }
 
 int BaseOperation::cost() const { return _cost; }
 
-void BaseOperation::setCost(double v) { _cost = v; }
+void BaseOperation::setCost(int v) { _cost = v; if(_cost<=0) _cost=1; }
 
 int BaseOperation::requests() const { return _requests; }
 
@@ -183,9 +183,10 @@ void BaseOperation::setRequests(int i) {
 	_requests = i;
 	if(_requests < 0) _requests = 0;
 	#ifdef UBIGRAPH
-	int s = (_requests > 20) ? 20 : _requests+1;
+	double v = _requests/1.0;
+	v = (v > 10) ? 10 : v+1;
 	if(key() >= 0)
-		ubigraph_set_vertex_attribute(key(), "size", TToStr<int>(s).c_str());
+		ubigraph_set_vertex_attribute(key(), "size", TToStr<double>(v).c_str());
 	#endif
 }
 void BaseOperation::incrRequests(int i) {
@@ -197,7 +198,7 @@ void BaseOperation::decrRequests(int i) {
 
 void BaseOperation::touch() {
 	if( _requests > 0) return;
-	_requests=_cost;
+	setRequests(_cost);
 	if(isCompressed()) {
 		int p = numParents();
 		if(p>0) parent(0)->touch();

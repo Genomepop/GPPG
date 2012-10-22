@@ -9,6 +9,7 @@
 
 #include "CompressionPolicy.h"
 #include "Operation/Operation.h"
+#include "Operation/OperationHeap.h"
 
 using namespace GPPG;
 
@@ -18,6 +19,6 @@ void CompressionPolicy::operationRemoved( IOperation* op ) {}
 
 void CompressionPolicy::decompressionReleased( IOperation* op ) {}
 
-void CompressionPolicy::generationFinished( const std::vector<IOperation*>& ) {}
+void CompressionPolicy::generationFinished( OperationGraph* heap, const std::vector<IOperation*>& ) {}
 
-void CompressionPolicy::generationFinished( const std::set<IOperation*>& ) {}
+void CompressionPolicy::generationFinished( OperationGraph* heap, const std::set<IOperation*>& ) {}

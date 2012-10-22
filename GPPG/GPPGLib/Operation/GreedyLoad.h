@@ -32,7 +32,7 @@ namespace GPPG {
 		
 		void operationAdded(IOperation* op);
 		
-		void generationFinished( const std::set<IOperation*>& active );
+		void generationFinished( OperationGraph* heap, const std::set<IOperation*>& active );
 		
 		/** Force an update by the policy.
 		 * This resets the count of elapsed generations.

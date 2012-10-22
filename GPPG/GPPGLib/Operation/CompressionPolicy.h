@@ -15,6 +15,7 @@
 
 namespace GPPG {
 	class IOperation;
+	class OperationGraph;
 	
 	class ICompressionPolicy {
 	public:
@@ -35,9 +36,9 @@ namespace GPPG {
 		/** Called when a generation, or a time period equivalent to a generation, is complete.
 		 * This provides the policy an opportunity to optimize the compression decisions.
 		 */
-		virtual void generationFinished( const std::set<IOperation*>& ) = 0;
+		virtual void generationFinished( OperationGraph* heap, const std::set<IOperation*>& ) = 0;
 
-		virtual void generationFinished( const std::vector<IOperation*>& ) = 0;
+		virtual void generationFinished( OperationGraph* heap, const std::vector<IOperation*>& ) = 0;
 	};
 	
 	/** This class provides a bare-bones implementation of the CompressionPolicy
@@ -50,9 +51,9 @@ namespace GPPG {
 		
 		void decompressionReleased( IOperation* op );
 		
-		void generationFinished( const std::vector<IOperation*>& );
+		void generationFinished( OperationGraph* heap, const std::vector<IOperation*>& );
 		
-		void generationFinished( const std::set<IOperation*>& );
+		void generationFinished( OperationGraph* heap, const std::set<IOperation*>& );
 	};
 }
 

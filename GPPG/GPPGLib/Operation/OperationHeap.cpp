@@ -175,6 +175,6 @@ void OperationGraph::generationFinished(const std::vector<IGenotype*>& genos) {
 }
 
 void OperationGraph::generationFinished(const std::set<IGenotype*>& genos) {
-	_policy->generationFinished( (const std::set<IOperation*>&) genos );
-	clearRequests();
+	_policy->generationFinished( this, (const std::set<IOperation*>&) genos );
+	//clearRequests();
 }

@@ -45,7 +45,7 @@ void BaseCompressionPolicy::operationRemoved(IOperation* op) {
 	}
 }
 
-void BaseCompressionPolicy::generationFinished( const std::set<IOperation*>& active ) {
+void BaseCompressionPolicy::generationFinished(OperationGraph *heap, const std::set<IOperation*>& active ) {
 	if(_flag == STORE_ACTIVE) {
 		//for(std::set<IOperation*>::iterator it=active.begin(); it!=active.end(); it++) 
 		//	(*it)->setCompressed(false);

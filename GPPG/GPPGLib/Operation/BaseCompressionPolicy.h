@@ -36,7 +36,7 @@ namespace GPPG {
 		 */
 		StoreFlag storeFlag() const;
 		
-		void generationFinished( const std::set<IOperation*>& active );
+		void generationFinished( OperationGraph *heap, const std::set<IOperation*>& active );
 		
 	private:
 		StoreFlag _flag;
