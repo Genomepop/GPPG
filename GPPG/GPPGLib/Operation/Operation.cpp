@@ -66,7 +66,7 @@ std::ostream& operator<<(std::ostream& output, const GPPG::IOperation& op) {
 }
 
 BaseOperation::BaseOperation(int cost) : 
-	_key(-1), _index(-1), _state(-1), _freq(0.0), _total(0), _order(-1), _fitness(1.0), _cost(cost), _load(0), _loadFreq(0), _loadCost(0), _requests(0) {
+	_key(-1), _index(-1), _state(-1), _freq(0.0), _total(0), _order(-1), _fitness(1.0), _cost(cost), _load(0), _loadFreq(0), _loadCost(0), _requests(0), _touch(0) {
 #ifdef UBIGRAPH
 	//ubigraph_new_vertex_w_id( (long)this );
 #endif
@@ -174,19 +174,32 @@ int BaseOperation::cost() const { return _cost; }
 
 void BaseOperation::setCost(int v) { _cost = v; if(_cost<=0) _cost=1; }
 
-int BaseOperation::requests() const { return _requests; }
+int BaseOperation::requests() const { return _requests + _touch; }
 
 void BaseOperation::clearRequests() {
 	setRequests(0);
+	_touch = 0;
 }
+
+void BaseOperation::clearDescendentRequests() {
+	if(_requests == 0 && _touch == 0) return;
+	
+	clearRequests();
+	const std::set<IOperation*>& childs = children();
+	for(std::set<IOperation*>::iterator it=childs.begin(); it!=childs.end(); it++) {
+		if( (*it)->isCompressed() && (*it)->requests()>0)
+			(*it)->clearDescendentRequests();
+	}
+}
+
 void BaseOperation::setRequests(int i) {
 	_requests = i;
 	if(_requests < 0) _requests = 0;
 	#ifdef UBIGRAPH
 	double v = _requests/1.0;
 	v = (v > 10) ? 10 : v+1;
-	if(key() >= 0)
-		ubigraph_set_vertex_attribute(key(), "size", TToStr<double>(v).c_str());
+	//if(key() >= 0) ubigraph_set_vertex_attribute(key(), "size", TToStr<double>(v).c_str());
+	
 	#endif
 }
 void BaseOperation::incrRequests(int i) {
@@ -197,8 +210,8 @@ void BaseOperation::decrRequests(int i) {
 }
 
 void BaseOperation::touch() {
-	if( _requests > 0) return;
-	setRequests(_cost);
+	if( _touch > 0) return;
+	_touch = 1;
 	if(isCompressed()) {
 		int p = numParents();
 		if(p>0) parent(0)->touch();

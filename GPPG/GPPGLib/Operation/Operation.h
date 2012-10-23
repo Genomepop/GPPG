@@ -73,6 +73,7 @@ namespace GPPG {
 		*/
 		virtual int requests() const = 0;
 		virtual void clearRequests() = 0;
+		virtual void clearDescendentRequests() = 0;
 		virtual void setRequests(int i) = 0;
 		virtual void incrRequests(int i) = 0;
 		virtual void decrRequests(int i) = 0;
@@ -112,6 +113,7 @@ namespace GPPG {
 		 
 		int requests() const;
 		void clearRequests();
+		void clearDescendentRequests();
 		void setRequests(int i);
 		void incrRequests(int i);
 		void decrRequests(int i);
@@ -130,6 +132,7 @@ namespace GPPG {
 	protected:
 		double _freq, _total, _fitness;
 		int _index, _order, _key, _state, _requests;
+		unsigned short _touch;
 		double _load, _loadFreq, _loadCost;
 		int _cost;
 	};

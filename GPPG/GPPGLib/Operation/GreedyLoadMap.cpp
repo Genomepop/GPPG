@@ -7,7 +7,7 @@
  *
  */
 
-#include "GreedyLoad.h"
+#include "GreedyLoadMap.h"
 #include "Operation/Operation.h"
 #include "GPPG.h"
 #include <sstream>
@@ -51,10 +51,10 @@ void drawLoad(IOperation* op, double l) {
 #endif
 
 
-GreedyLoad::GreedyLoad(int maxExplicit, int numGens) : 
+GreedyLoadMap::GreedyLoadMap(int maxExplicit, int numGens) : 
 	_root(0),_maxExplicit(maxExplicit), _waitGens(numGens), _elapsedGens(0), _numExplicit(0), _L() {}
 
-void GreedyLoad::decompressionReleased( IOperation* op ) {
+void GreedyLoadMap::decompressionReleased( IOperation* op ) {
 #ifdef DEBUG_0
 	std::cout << "Releasing decompression... " << op->key() << " count=" << _U.count( op ) << std::endl;
 	for (OpIter it=_U.begin(); it!=_U.end(); it++) {
@@ -65,20 +65,20 @@ void GreedyLoad::decompressionReleased( IOperation* op ) {
 	_U.erase( op );
 }
 
-void GreedyLoad::operationAdded( IOperation* op) {
+void GreedyLoadMap::operationAdded( IOperation* op) {
 
 }
 
 
 
-void GreedyLoad::generationFinished( OperationGraph* heap, const std::set<IOperation*>& active ) {
+void GreedyLoadMap::generationFinished( OperationGraph* heap, const std::set<IOperation*>& active ) {
 	_elapsedGens++;
 	if (_elapsedGens > _waitGens) {
 		apply( active );
 	}
 }
 
-void GreedyLoad::apply( const std::set<IOperation*>& active ) {
+void GreedyLoadMap::apply( const std::set<IOperation*>& active ) {
 	_elapsedGens = 0;
 	
 #ifdef UBIGRAPH_GL
@@ -193,7 +193,7 @@ void GreedyLoad::apply( const std::set<IOperation*>& active ) {
 #endif
 }
 
-void GreedyLoad::clearLoadMap() {
+void GreedyLoadMap::clearLoadMap() {
 #ifdef UBIGRAPH_GL
 	map<IOperation*, Load>::iterator it;
 	for(it=_L.begin(); it!=_L.end(); it++)
@@ -202,14 +202,14 @@ void GreedyLoad::clearLoadMap() {
 	_L.clear();
 }
 
-void GreedyLoad::setLoad(IOperation* op, double freq, double cost) {
+void GreedyLoadMap::setLoad(IOperation* op, double freq, double cost) {
 	_L[op] = Load(freq*cost, freq, cost);
 #ifdef UBIGRAPH_GL
 	drawLoad(op, freq*cost);
 #endif
 }
 
-void GreedyLoad::incrLoad(IOperation* op, double freq, double cost) {
+void GreedyLoadMap::incrLoad(IOperation* op, double freq, double cost) {
 	Load& l = _L[op];
 	l.load += freq*cost;
 	l.frequency += freq;
@@ -219,7 +219,7 @@ void GreedyLoad::incrLoad(IOperation* op, double freq, double cost) {
 #endif
 }
 
-void GreedyLoad::decrLoad(IOperation* op, double freq, double cost) {
+void GreedyLoadMap::decrLoad(IOperation* op, double freq, double cost) {
 	Load& l = _L[op];
 	l.load -= freq*cost;
 	l.frequency -= freq;
@@ -229,11 +229,11 @@ void GreedyLoad::decrLoad(IOperation* op, double freq, double cost) {
 #endif
 }
 
-double GreedyLoad::load(IOperation* op) {
+double GreedyLoadMap::load(IOperation* op) {
 	return _L[op].load;
 }
 
-void GreedyLoad::split( IOperation* op, int& s1, int& s2, IOperation*& g1, IOperation*& g2 ) {
+void GreedyLoadMap::split( IOperation* op, int& s1, int& s2, IOperation*& g1, IOperation*& g2 ) {
 	g2 = 0;
 	s2 = 0;
 	
@@ -263,7 +263,7 @@ void GreedyLoad::split( IOperation* op, int& s1, int& s2, IOperation*& g1, IOper
 	}
 }
 
-void GreedyLoad::add( IOperation* op ) {
+void GreedyLoadMap::add( IOperation* op ) {
 	resetAnnotation(op, false);
 	_U.insert( op );
 	//op->setCompressed(false);
@@ -272,7 +272,7 @@ void GreedyLoad::add( IOperation* op ) {
 #endif
 }
 
-void GreedyLoad::remove( IOperation* op, bool cache, bool doRecurse ) {
+void GreedyLoadMap::remove( IOperation* op, bool cache, bool doRecurse ) {
 	_U.erase( op );
 	//op->setCompressed(true);
 #ifdef UBIGRAPH
@@ -280,26 +280,26 @@ void GreedyLoad::remove( IOperation* op, bool cache, bool doRecurse ) {
 #endif
 }
 
-void GreedyLoad::update( ) {
+void GreedyLoadMap::update( ) {
 	
 }
 
-void GreedyLoad::clearCache() {
+void GreedyLoadMap::clearCache() {
 	
 }
 
-void GreedyLoad::move( IOperation* a, IOperation* b ) {
+void GreedyLoadMap::move( IOperation* a, IOperation* b ) {
 	add( b );
 	if (a != _root) {
 		remove( a, true, false );
 	}
 }
 
-bool GreedyLoad::isCompressed(IOperation* op) {
+bool GreedyLoadMap::isCompressed(IOperation* op) {
 	return _U.count(op) == 0;
 }
 
-IOperation* GreedyLoad::uncoveredChild( IOperation* op ) {
+IOperation* GreedyLoadMap::uncoveredChild( IOperation* op ) {
 	IOperation* comp = 0;
 	int numCompressed = 0;
 	IOperation* child;
@@ -318,7 +318,7 @@ IOperation* GreedyLoad::uncoveredChild( IOperation* op ) {
 	return 0;
 }
 
-IOperation* GreedyLoad::getMaxItem( const std::set<IOperation*>& items, bool compare ) {
+IOperation* GreedyLoadMap::getMaxItem( const std::set<IOperation*>& items, bool compare ) {
 	double amt;
 	double maxval = 0;
 	IOperation* maxitem = 0;
@@ -335,7 +335,7 @@ IOperation* GreedyLoad::getMaxItem( const std::set<IOperation*>& items, bool com
 	return maxitem;
 }
 
-IOperation* GreedyLoad::findMaxAdvance( IOperation* op, bool doReset ) {
+IOperation* GreedyLoadMap::findMaxAdvance( IOperation* op, bool doReset ) {
 	IOperation* child = uncoveredChild( op );
 	while (!op->isActive() && child != 0) {
 		// Move it down
@@ -346,7 +346,7 @@ IOperation* GreedyLoad::findMaxAdvance( IOperation* op, bool doReset ) {
 	return op;
 }
 
-void GreedyLoad::advance( IOperation* op ) {
+void GreedyLoadMap::advance( IOperation* op ) {
 	IOperation* t = findMaxAdvance( op, true );
 	if (t != op) {
 		//resetAnnotation( op, true );
@@ -356,7 +356,7 @@ void GreedyLoad::advance( IOperation* op ) {
 
 
 
-void GreedyLoad::resetAnnotation(IOperation* op, bool reset) {
+void GreedyLoadMap::resetAnnotation(IOperation* op, bool reset) {
 	Load& l = _L[op];
 	reset = true;
 	if (reset)
@@ -367,7 +367,7 @@ void GreedyLoad::resetAnnotation(IOperation* op, bool reset) {
 
 }
 
-void GreedyLoad::reverseAnnotate(IOperation* op, double freq, double cost) {
+void GreedyLoadMap::reverseAnnotate(IOperation* op, double freq, double cost) {
 	if (load(op) == 0) return;
 	
 	decrLoad(op, freq, cost );
@@ -377,14 +377,14 @@ void GreedyLoad::reverseAnnotate(IOperation* op, double freq, double cost) {
 	}
 }
 
-void GreedyLoad::annotate(const std::set<IOperation*>& active) {
+void GreedyLoadMap::annotate(const std::set<IOperation*>& active) {
 	for (OpIter it=active.begin(); it!=active.end(); it++) {
 		IOperation* op = *it;
 		innerAnnotate( op, op->frequency(), 1 );
 	}
 }
 
-void GreedyLoad::innerAnnotate(IOperation* op, double freq, double cost ) {
+void GreedyLoadMap::innerAnnotate(IOperation* op, double freq, double cost ) {
 	incrLoad(op, freq, cost ); 
 	/*
 	if (op->isCompressed() && op->numParents() > 0) {
@@ -411,11 +411,11 @@ void GreedyLoad::innerAnnotate(IOperation* op, double freq, double cost ) {
 	
 }
 /*
-void GreedyLoad::resetOp(IOperation* op) {
+void GreedyLoadMap::resetOp(IOperation* op) {
 	setLoad(op,0,0);
 }
 */
-void GreedyLoad::reset(IOperation* op) {
+void GreedyLoadMap::reset(IOperation* op) {
 	if (load(op) > 0 || op->isActive()) {
 		setLoad(op,0,0);
 		for (int i=0; i<op->numParents(); i++) {
@@ -424,7 +424,7 @@ void GreedyLoad::reset(IOperation* op) {
 	}
 }
 
-void GreedyLoad::resetAnnotation(const std::set<IOperation*>& active) {
+void GreedyLoadMap::resetAnnotation(const std::set<IOperation*>& active) {
 
 	for (OpIter it=active.begin(); it!=active.end(); it++) {
 		reset( *it );
@@ -432,6 +432,6 @@ void GreedyLoad::resetAnnotation(const std::set<IOperation*>& active) {
 	
 }
 
-int GreedyLoad::maxUncompressed() const { return _maxExplicit; }
+int GreedyLoadMap::maxUncompressed() const { return _maxExplicit; }
 
-int GreedyLoad::numGenerations() const { return _waitGens; }
+int GreedyLoadMap::numGenerations() const { return _waitGens; }

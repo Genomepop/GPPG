@@ -16,6 +16,7 @@ set( GPPG_HDR
 	Operation/BaseCompressionPolicy.h
 	Operation/CompressionPolicy.h
 	Operation/GreedyLoad.h
+	Operation/GreedyLoadMap.h
 	Operation/Operation.h
 	Operation/OperationHeap.h
 	Operation/Simulator.h
@@ -49,6 +50,7 @@ set( GPPG_SRC
 	Operation/BaseCompressionPolicy.cpp
 	Operation/CompressionPolicy.cpp
 	Operation/GreedyLoad.cpp
+	Operation/GreedyLoadMap.cpp
 	Operation/Operation.cpp
 	Operation/OperationHeap.cpp
 	Operation/Simulator.cpp

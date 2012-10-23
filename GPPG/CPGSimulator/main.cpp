@@ -5,6 +5,7 @@
 using namespace std;
 
 #include "Operation/GreedyLoad.h"
+#include <Operation/GreedyLoadMap.h>
 #include <Model/Sequence/Operation.h>
 #include <Model/Sequence/IO.h>
 

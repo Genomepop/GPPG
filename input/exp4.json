@@ -1,47 +1,47 @@
 {
 	"compression" : 
 	{
-		"k" : 20,
-		"name" : "Store-Root",
-		"t" : 0
+		"k" : 100,
+		"name" : "Greedy-Load",
+		"t" : 10
 	},
 	"generations" : 1000,
 	"genotype" : 
 	{
-		"length" : 10000,
+		"length" : 1e6,
 		"name" : "Sequence"
 	},
-	"individuals" : 100,
+	"individuals" : 1e4,
 	"operators" : 
 	[
 		
 		{
 			"cost" : 1,
 			"name" : "PointMutation",
-			"rate" : 1.000000000000000e-04
+			"rate" : 1.000000000000000e-08
 		},
 		
 		{
 			"cost" : 1,
 			"name" : "Insertion",
-			"rate" : 1.000000000000000e-05,
+			"rate" : 1.000000000000000e-9,
 			"size" : [ 2, 100 ]
 		},
 		
 		{
 			"cost" : 1,
 			"name" : "Deletion",
-			"rate" : 1.000000000000000e-05,
+			"rate" : 1.000000000000000e-9,
 			"size" : [ 2, 100 ]
 		},
 		
 		{
 			"cost" : 100,
 			"name" : "Recombination",
-			"rate" : 1.0e-5
+			"rate" : 1.0e-7
 		}
 		
 	],
-	"scaling" : 1,
+	"scaling" : 1e2,
 	"steps" : 100
 }
