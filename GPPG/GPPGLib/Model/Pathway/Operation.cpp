@@ -48,14 +48,15 @@ int OpPathwayBase::numMotifs() const { return _info.numMotifs(); }
 
 int OpPathwayBase::totalRegions() const { return _info.totalRegions(); }
 
-PTYPE OpPathwayBase::get(int i) const {
+PTYPE OpPathwayBase::get(int i) {
+	incrRequests(1);
 	if (isCompressed()) {
 		return proxyGet(i);
 	}
 	return data()->get(i);
 }
 
-PTYPE OpPathwayBase::getBinding(int i, int j) const {
+PTYPE OpPathwayBase::getBinding(int i, int j)  {
 	return get( _info.offset(i) + j );
 }
 
@@ -75,9 +76,9 @@ int PathwayRoot::numMotifs() const { return data()->numMotifs(); }
 
 int PathwayRoot::totalRegions() const { return data()->totalRegions(); }
 
-PTYPE PathwayRoot::get(int i) const { return data()->get(i); }
+PTYPE PathwayRoot::get(int i)  { incrRequests(1); return data()->get(i); }
 
-PTYPE PathwayRoot::getBinding(int i, int j) const { return data()->getBinding(i,j); }
+PTYPE PathwayRoot::getBinding(int i, int j)  { incrRequests(1); return data()->getBinding(i,j); }
 
 const GlobalInfo& PathwayRoot::info() const { return data()->info(); }
 
@@ -170,7 +171,7 @@ PTYPE BindingSiteChange::getMutation(int i) const { return (*_c)[i]; }
 int BindingSiteChange::getSite(int i) const { return (*_locs)[i]; }
 
 
-PTYPE BindingSiteChange::proxyGet(int l) const {
+PTYPE BindingSiteChange::proxyGet(int l)  {
 	// See if the index is in the list
 	vector<int>::iterator it_loc = _locs->begin();
 	vector<PTYPE>::iterator it_c = _c->begin();

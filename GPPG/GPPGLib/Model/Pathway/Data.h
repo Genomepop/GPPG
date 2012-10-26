@@ -79,11 +79,11 @@ namespace GPPG {
 			
 			/** Gets the item at location i
 			 */
-			virtual PTYPE get(int i) const = 0;
+			virtual PTYPE get(int i)  = 0;
 			
 			/** Get the binding motif for promoter \param i , location \param j.
 			 */
-			virtual PTYPE getBinding(int i, int j) const = 0;
+			virtual PTYPE getBinding(int i, int j)  = 0;
 			
 			virtual const GlobalInfo& info() const = 0;
 			
@@ -117,7 +117,7 @@ namespace GPPG {
 				
 				/** Gets the BS located at region i
 				 */
-				PTYPE get(int i) const;
+				PTYPE get(int i) ;
 				
 				/** Sets the item at location i
 				 */
@@ -131,7 +131,7 @@ namespace GPPG {
 				
 				int numMotifs() const;
 			
-				PTYPE getBinding(int i, int j) const;
+				PTYPE getBinding(int i, int j) ;
 				
 				const GlobalInfo& info() const;
 				

@@ -31,14 +31,14 @@ namespace GPPG {
 				
 				int totalRegions() const;
 				
-				PTYPE get(int i) const;
+				PTYPE get(int i) ;
 				
-				PTYPE getBinding(int i, int j) const;
+				PTYPE getBinding(int i, int j) ;
 				
 				const GlobalInfo& info() const;
 				
 			protected:
-				virtual PTYPE proxyGet(int i) const = 0;
+				virtual PTYPE proxyGet(int i)  = 0;
 				
 				const GlobalInfo& _info;
 			};
@@ -54,9 +54,9 @@ namespace GPPG {
 				
 				int totalRegions() const;
 				
-				PTYPE get(int i) const;
+				PTYPE get(int i) ;
 				
-				PTYPE getBinding(int i, int j) const;
+				PTYPE getBinding(int i, int j) ;
 				
 				const GlobalInfo& info() const;
 			};
@@ -97,7 +97,7 @@ namespace GPPG {
 				
 				
 			protected:
-				PTYPE proxyGet(int i) const;
+				PTYPE proxyGet(int i) ;
 				
 			private:
 				std::vector<int>* _locs;		/* Locations array */

@@ -75,7 +75,7 @@ void PromoterData::set(int i, int j, PTYPE c) {
 	_pool[ _info.offset(i)+j ] = c;
 }
 
-PTYPE PromoterData::get(int i) const { return _pool[i]; }
+PTYPE PromoterData::get(int i)  { return _pool[i]; }
 
 int PromoterData::totalRegions() const { return _info.totalRegions(); }
 
@@ -85,7 +85,7 @@ int PromoterData::numTFs() const { return _info.numTFs(); }
 
 int PromoterData::numMotifs() const { return _info.numMotifs(); }
 
-PTYPE PromoterData::getBinding(int i, int j) const { 
+PTYPE PromoterData::getBinding(int i, int j)  { 
 	return _pool[ _info.offset(i)+j]; 
 }
 

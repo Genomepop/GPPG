@@ -85,7 +85,6 @@ void outputGenotypes( EvoSimulator* sim ) {
 EvoSimulator* createSimulator( const Json::Value& config ) {
 	double scaling = config.get("scaling",1).asDouble();
 	
-	
 	// Set Compression
 	ICompressionPolicy* policy=0;
 	const Json::Value& compression = config["compression"];
@@ -143,7 +142,7 @@ EvoSimulator* createSimulator( const Json::Value& config ) {
 		int numTFs = geno["tfs"].asInt();
 		const Json::Value& regions = geno["regions"];
 		int minRegion = regions[(Json::Value::ArrayIndex)0].asInt();
-		int maxRegion = regions[(Json::Value::ArrayIndex)1].asInt();
+		int maxRegion = regions[1].asInt();
 		GlobalInfo* info = PathwayRootFactory::randomInfo( numGenes, numTFs, minRegion, maxRegion );
 		
 		PathwayRootFactory factory(*info);
