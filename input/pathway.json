@@ -1,19 +1,23 @@
 {
 	"compression" : 
 	{
-		"k" : 100,
+		"k" : 50,
 		"name" : "Greedy-Load",
 		"t" : 10
 	},
 	"generations" : 1000,
+	"individuals" : 1e3,	
+	"scaling" : 1,
+	"steps" : 100,
+
 	"genotype" : 
 	{
 		"name" : "Pathway",
 		"genes" : 100,
-		"tfs" : 30,
-		"regions": [10,100]
+		"tfs" : 100,
+		"regions": [100,100]
 	},
-	"individuals" : 1e2,
+
 	"operators" : 
 	[
 		
@@ -21,10 +25,27 @@
 			"cost" : 1,
 			"name" : "BindingSiteMutation",
 			"gainRate": 1e-5,
-			"lossRate": [1e-5,0.7],
+			"lossRate": [1e-5,0.8],
 			"overlap": 5
 		}
-	],
-	"scaling" : 1,
-	"steps" : 100
+	]
+
+	/*
+	"genotype" : 
+	{
+		"length" : 1e4,
+		"name" : "Sequence"
+	},
+	
+	"operators" : 
+	[
+		
+		{
+			"cost" : 1,
+			"name" : "PointMutation",
+			"rate" : 1e-5
+		}
+		
+	]
+	*/
 }

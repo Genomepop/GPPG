@@ -232,7 +232,7 @@ OpPathway* BindingSiteMutator::mutate( OpPathway& g ) const {
 		numGains = binomial( totalRegions, _gainRates[i] );
 		for (int j=0; j<numGains; j++) {
 			loc = (int)(random01()*totalRegions);
-			c = g.	get( loc );
+			c = g.get( loc );
 			if (c != (PTYPE)i) {
 				// Save loc, ->i
 				sites->push_back((PTYPE)i);

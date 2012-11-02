@@ -316,7 +316,7 @@ namespace GPPG {
 	
 	template <typename T, class P> class OperationRoot : public Operation<T,P> {
 	public:
-		OperationRoot<T,P>(T* data) : Operation<T,P>(0) { setData(data); }
+		OperationRoot<T,P>(T* data) : Operation<T,P>(1) { setData(data); }
 		
 		void setCompressed(bool c) {
 			BaseOperation::setCompressed( false );
