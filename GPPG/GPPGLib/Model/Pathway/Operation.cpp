@@ -195,6 +195,9 @@ BindingSiteMutator::~BindingSiteMutator() {
 
 
 OpPathway* BindingSiteMutator::mutate( OpPathway& g ) const {
+	bool isCompressed = g.isCompressed();
+	if( isCompressed ) g.setCompressed(false);
+	
 	int totalRegions = g.totalRegions();
 	int numMotifs = g.numMotifs();
 	const GlobalInfo& info = g.info();
@@ -240,6 +243,8 @@ OpPathway* BindingSiteMutator::mutate( OpPathway& g ) const {
 			}
 		}
 	}
+	
+	if( isCompressed )  g.setCompressed(true); 
 	
 	// Create mutation
 	BindingSiteChange* bsc = new BindingSiteChange(g, locs, sites);

@@ -1,9 +1,9 @@
 {
 	"compression" : 
 	{
-		"k" : 50,
+		"k" : 100,
 		"name" : "Greedy-Load",
-		"t" : 10
+		"t" : 0
 	},
 	"generations" : 1000,
 	"individuals" : 1e3,	
@@ -13,9 +13,9 @@
 	"genotype" : 
 	{
 		"name" : "Pathway",
-		"genes" : 100,
-		"tfs" : 100,
-		"regions": [100,100]
+		"genes" : 300,
+		"tfs" : 300,
+		"regions": [300,300]
 	},
 
 	"operators" : 
