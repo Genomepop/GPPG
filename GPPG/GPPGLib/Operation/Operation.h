@@ -121,6 +121,7 @@ namespace GPPG {
 		
 		void setCompressed( bool c );
 		
+		const char* exportFormat();
 		/**
 		 * The cost of applying the operation
 		 */

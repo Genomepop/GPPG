@@ -33,7 +33,7 @@ using namespace GPPG::Model::TransReg;
 
 inline double timeToDbl(const timeval& t) { return t.tv_sec + 1.0*t.tv_usec/1e6; }
 
-void recordUsage(ofstream* out, int step, int generation) {
+void recordUsage(ostream* out, int step, int generation) {
 	rusage stats;
 	getrusage( RUSAGE_SELF, &stats );
 	(*out) << step << "," << generation << "," << (clock()*1.0/CLOCKS_PER_SEC) << ","
@@ -50,7 +50,7 @@ void recordUsage(ofstream* out, int step, int generation) {
 
 // http://linux.die.net/man/2/getrusage
 
-void runSimulation( EvoSimulator* sim, long N, long G, int steps, ofstream* out ) {
+void runSimulation( EvoSimulator* sim, long N, long G, int steps, ostream* out ) {
 	cout << "Running Simulation [N="<<N<<", G="<<G<<"]\n";
 
 #ifdef SUPPORTS_RUSAGE
@@ -70,16 +70,19 @@ void runSimulation( EvoSimulator* sim, long N, long G, int steps, ofstream* out 
 	
 }
 
-void outputGenotypes( EvoSimulator* sim ) {
-	cout << "Generation: " << sim->clock() << endl;
+void outputGenotypes( EvoSimulator* sim, ostream& out ) {	
+		
 	set<IGenotype*>::iterator git;
 	const set<IGenotype*>& active = sim->activeGenotypes();
 	int i=0;
 	for (git=active.begin(); git!=active.end(); git++) {
 		IGenotype* g = *git;
-		cout << "Genotype " << i << "/" << g->order() << ": " << g->frequency() << endl;
+		out << ">g"<<i<<"|"<<g->frequency()<<"|"<<g->order()<<endl;
+		out << g->exportFormat();
+		out << endl << endl;
 		i++;
 	}
+	
 }
 
 EvoSimulator* createSimulator( const Json::Value& config ) {
@@ -193,8 +196,15 @@ void createAndRunSimulation( const Json::Value& config ) {
 		delete perfFile;
 	}
 	
-	if( output.isMember("population") ) {
-		outputGenotypes( sim );
+	if( output.isMember("individuals") ) {
+		if( output["individuals"] == "<stdout>") {
+			outputGenotypes( sim, cout );
+		}
+		else {
+			ofstream out(output["individuals"].asCString());
+			outputGenotypes( sim, out);
+			out.close();
+		}
 	}
 	
 	delete sim;

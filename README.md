@@ -15,8 +15,7 @@ Subsequent version will break out the simulator from the COTS library; however, 
 ##UBIGRAPH support
 Ubigraph is a 3D graph visualization server (http://ubietylab.net/ubigraph/).
 GPPGLib supports the visualization of the operation graph over xmlrpc calls to a locally running Ubigraph server (127.0.0.1).
-If you include Ubigraph support, you will need the C libraries necessary to make xmlrpc calls, which include: -lxmlrpc_client -lxmlrpc -lxmlrpc_util 
--lxmlrpc_xmlparse -lxmlrpc_xmltok.  
+If you include Ubigraph support, you will need the C libraries necessary to make xmlrpc calls, which include: `-lxmlrpc_client -lxmlrpc -lxmlrpc_util -lxmlrpc_xmlparse -lxmlrpc_xmltok`.  
 CMake will automatically link to these libraries --- you just need to make sure they are installed.
 
 ##Install

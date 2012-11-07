@@ -49,3 +49,7 @@ void BaseGenotype::setOrder(int i) {
 
 double BaseGenotype::fitness() const { return _fitness; }
 void BaseGenotype::setFitness(double f) { _fitness = f; }
+
+const char* BaseGenotype::exportFormat() {
+	return "No Export Format provided";
+}

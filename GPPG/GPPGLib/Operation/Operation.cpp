@@ -192,6 +192,10 @@ void BaseOperation::clearDescendentRequests() {
 	}
 }
 
+const char* BaseOperation::exportFormat() {
+	return "Operation has no export formats";
+}
+
 void BaseOperation::setRequests(int i) {
 	_requests = i;
 	if(_requests < 0) _requests = 0;

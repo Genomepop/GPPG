@@ -10,6 +10,8 @@
 #ifndef GENOTYPE_
 #define GENOTYPE_
 
+#include <string>
+
 namespace GPPG {
 	class IGenotype {
 	public:
@@ -38,6 +40,8 @@ namespace GPPG {
 		
 		virtual double fitness() const = 0;
 		virtual void setFitness(double f) = 0;
+		
+		virtual const char* exportFormat() = 0;
 	};
 	
 	class BaseGenotype : public IGenotype {
@@ -67,6 +71,8 @@ namespace GPPG {
 		
 		double fitness() const;
 		void setFitness(double f);
+		
+		const char* exportFormat();
 		
 	private:
 		double _freq, _total, _fitness;

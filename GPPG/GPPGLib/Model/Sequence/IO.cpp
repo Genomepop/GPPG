@@ -12,8 +12,6 @@
 using namespace std;
 
 ostream& operator<<(ostream& output, const GPPG::Model::SequenceData& s) {
-	output << "[";
-	//for (int i=0; i<s.length(); i++) output << s.get(i);
-	output << "]";
+	for (int i=0; i<s.length(); i++) output << s.get(i);
 	return output;
 }

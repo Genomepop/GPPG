@@ -44,6 +44,17 @@ STYPE OpSequenceBase::get(int i) {
 	return data()->get(i);
 }
 
+const char* OpSequenceBase::exportFormat() {
+	char seq[length()+1];
+	const char* alpha = "ACTG";
+	SequenceData* sd = evaluate();
+	for(int i=0; i<length(); i++) {
+		seq[i] = itoa(sd->get(i)); //alpha[ (int)sd->get(i) ];
+	}
+	seq[length()]=0;
+	return seq;
+}
+
 SequenceRoot::SequenceRoot(SequenceData* d) : OperationRoot<SequenceData, ISequence>(d) { setCost(1); }
 
 int SequenceRoot::length() const { return data()->length(); }

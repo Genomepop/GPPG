@@ -43,6 +43,7 @@ namespace GPPG {
 			
 			STYPE get(int i);
 			
+			const char* exportFormat();
 		protected:
 			virtual STYPE proxyGet(int i)  = 0;
 			
