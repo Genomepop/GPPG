@@ -10,7 +10,7 @@ Subsequent version will break out the simulator from the COTS library; however, 
 ##Configure
 * download this source
 * generate build files with `cmake .` (or replace `.` with an external build directory)
-* USE_UBIGRAPH supports visualization of the operation graph with the Ubigraph Server
+* `USE_UBIGRAPH` supports visualization of the operation graph with the Ubigraph Server
 
 ##UBIGRAPH support
 Ubigraph is a 3D graph visualization server (http://ubietylab.net/ubigraph/).
@@ -35,7 +35,7 @@ The input file follows JSON (javascript) syntax.  There are several examples whi
 * generations - integer, number of generations
 * scaling - number, scaling factor for simulation input
 * steps - integer, provides printout of progress per step.  If performance is recorded, then this is the number of steps in the performance recording.
-* compression - dictionary, can be {"name":"Store-Active"}, {"name":"Store-Root"}, or {"name":"Greedy-Load", "k":50, "t":5} where k and t are the Greedy-Load parameters
-* genotype - dictionary, can be {"name": "Sequence", "length":100000 } or {"name" : "Pathway",	"genes" : 300,"tfs" : 300,"regions": [100,300]}, where genes is the number of genes, tfs is the number of transcription factors, and regions is the range in promoter size.
+* compression - dictionary, can be `{"name":"Store-Active"}`, `{"name":"Store-Root"}`, or `{"name":"Greedy-Load", "k":50, "t":5}` where k and t are the Greedy-Load parameters
+* genotype - dictionary, can be `{"name": "Sequence", "length":100000 }` or `{"name" : "Pathway", "genes" : 300,"tfs" : 300,"regions": [100,300]}`, where genes is the number of genes, tfs is the number of transcription factors, and regions is the range in promoter size.
 * operators - list, this depends on the genotype --- look at the examples for the different supported operations
 * output - dictionary, if "performance" is a key, then it provides the output file (csv); if "individuals" is provided, then it designates the location to output all the genetic information of each individual
