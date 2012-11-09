@@ -73,6 +73,7 @@ namespace GPPG {
 			
 			SequenceRoot* random() const;
 			
+			
 		private:
 			int _length;
 			std::vector<double> _distr;
@@ -140,6 +141,8 @@ namespace GPPG {
 			
 			SequenceData* evaluate();
 			
+			std::string toString() const;
+			
 		protected:
 			STYPE proxyGet(int i);
 			
@@ -172,6 +175,8 @@ namespace GPPG {
 			~SequenceInsertion();
 			
 			SequenceData* evaluate();
+			
+			std::string toString() const;
 			
 		protected:
 			STYPE proxyGet(int i);
@@ -206,6 +211,7 @@ namespace GPPG {
 			SequenceCrossover();
 			
 			SequenceData* evaluate();
+			std::string toString() const;
 			
 		protected:
 			STYPE proxyGet(int i);

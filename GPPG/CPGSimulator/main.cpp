@@ -77,13 +77,34 @@ void outputGenotypes( EvoSimulator* sim, ostream& out ) {
 	int i=0;
 	for (git=active.begin(); git!=active.end(); git++) {
 		IGenotype* g = *git;
-		out << ">g"<<i<<"|"<<g->frequency()<<"|"<<g->order()<<endl;
+		out << ">g"<<i<<"|"<<g->key() << "|" <<g->frequency()<<"|"<<g->order()<<endl;
 		out << g->exportFormat();
 		out << endl << endl;
 		i++;
 	}
 	
 }
+
+void outputOperations( EvoSimulator* sim, ostream& out ) {	
+		
+	set<IOperation*>::iterator git;
+	OperationGraph* graph = (OperationGraph*)sim->heap();
+	const set<IOperation*>& ops = graph->operations();
+	int i=0;
+	out << "GenotypeOutId,Generation,Type,Cost,IsCompressed,IsActive,Frequency,Parent1,Parent2,NumChildren,Data\n";
+	for (git=ops.begin(); git!=ops.end(); git++) {
+		const IOperation* op = *git;
+		out << op->key() << "," << op->order() << "," << typeid(*op).name() << "," << op->cost() << "," << op->isCompressed() << "," << op->isActive() << "," <<
+			op->frequency() << ",";
+		if( op->numParents() > 0 ) out << op->parent(0)->key();
+		out << ",";
+		if( op->numParents() > 1) out << op->parent(1)->key();
+		out << "," << op->numChildren() << ",\"" << op->toString() << "\"" << endl;
+		i++;
+	}
+	
+}
+
 
 EvoSimulator* createSimulator( const Json::Value& config ) {
 	double scaling = config.get("scaling",1).asDouble();
@@ -205,6 +226,12 @@ void createAndRunSimulation( const Json::Value& config ) {
 			outputGenotypes( sim, out);
 			out.close();
 		}
+	}
+	
+	if( output.isMember("operations") ) {
+		ofstream out(output["operations"].asCString());
+		outputOperations( sim, out);
+		out.close();
 	}
 	
 	delete sim;

@@ -95,6 +95,8 @@ void OperationGraph::clearRequests() {
 		(*sit)->clearRequests();
 }
 
+const std::set<IOperation*>& OperationGraph::operations() const { return _operations; }
+
 /*
 void OperationGraph::removeOperation(IOperation* op) {
 	_policy->operationRemoved( op );

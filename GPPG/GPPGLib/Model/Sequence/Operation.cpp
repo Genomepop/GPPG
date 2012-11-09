@@ -45,14 +45,14 @@ STYPE OpSequenceBase::get(int i) {
 }
 
 const char* OpSequenceBase::exportFormat() {
-	char seq[length()+1];
+	std::stringstream output;
 	const char* alpha = "ACTG";
 	SequenceData* sd = evaluate();
 	for(int i=0; i<length(); i++) {
-		seq[i] = itoa(sd->get(i)); //alpha[ (int)sd->get(i) ];
+		output << alpha[sd->get(i)];
 	}
-	seq[length()]=0;
-	return seq;
+	
+	return output.str().c_str();
 }
 
 SequenceRoot::SequenceRoot(SequenceData* d) : OperationRoot<SequenceData, ISequence>(d) { setCost(1); }
@@ -168,7 +168,7 @@ OpSequence* SequencePointMutator::mutate( OpSequence& g) const {
 	int numLocs = binomial( length, _rate ); 
 	//if (numLocs == 0) return &g; 
 	
-	if (numLocs == 0) numLocs = 1;
+	if (numLocs == 0) return &g;
 	
 #ifdef DEBUG_0
 	std::cout << "SequencePointMutator: mutating..." << std::endl;
@@ -238,6 +238,13 @@ STYPE SequenceDeletion::proxyGet(int i)  {
 	return parent(0)->get(i);
 }
 
+std::string SequenceDeletion::toString() const {
+	std::ostringstream output;
+	output << _span << " nt @ " << _loc;
+	
+	return output.str();
+}
+
 SequenceInsertion::SequenceInsertion(OpSequence& op, int loc, SequenceData* span): 
 	OpSequenceBase(10, op.length()+span->length(), op), _loc(loc), _span(span) {}
 
@@ -277,6 +284,13 @@ STYPE SequenceInsertion::proxyGet(int i)  {
 	}
 	
 	return parent(0)->get(index);
+}
+
+std::string SequenceInsertion::toString() const {
+	std::ostringstream output;
+	output << _span->length() << " nt @ " << _loc;
+	
+	return output.str();
 }
 
 SequenceDeletionMutator::SequenceDeletionMutator(int cost, double rate, int minL, int maxL) :
@@ -381,6 +395,17 @@ STYPE SequenceCrossover::proxyGet(int i)  {
 		}
 	}
 	return (_locs.size()%2==0) ? parent(0)->get(i) : parent(1)->get(i);
+}
+
+std::string SequenceCrossover::toString() const {
+	std::ostringstream output;
+	output << "points=";
+	for (int j=0; j<_locs.size(); j++) {
+		if(j>0) output << ",";
+		output << _locs[j];
+	}
+	
+	return output.str();
 }
 
 SequenceRecombinator::SequenceRecombinator(int cost, double rate) : OperationRecombinator<OpSequence>(cost), _rate(rate) {}

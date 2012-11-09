@@ -1,48 +1,48 @@
 {
 	"compression" : 
 	{
-		"k" : 10,
+		"k" : 100,
 		"name" : "Greedy-Load",
 		"t" : 0
 	},
 	"generations" : 1000,
 	"genotype" : 
 	{
-		"length" : 1e4,
+		"length" : 1e5,
 		"name" : "Sequence"
 	},
-	"individuals" : 1e2,
+	"individuals" : 1e3,
 	"operators" : 
 	[
 		
 		{
 			"cost" : 1,
 			"name" : "PointMutation",
-			"rate" : 1.000000000000000e-08
+			"rate" : 1e-08
 		},
 		
 		{
 			"cost" : 1,
 			"name" : "Insertion",
-			"rate" : 1.000000000000000e-9,
+			"rate" : 1e-9,
 			"size" : [ 2, 100 ]
 		},
 		
 		{
 			"cost" : 1,
 			"name" : "Deletion",
-			"rate" : 1.000000000000000e-9,
+			"rate" : 1e-9,
 			"size" : [ 2, 100 ]
 		},
 		
 		{
 			"cost" : 100,
 			"name" : "Recombination",
-			"rate" : 1.0e-7
+			"rate" : 1e-8
 		}
 		
 	],
 	"scaling" : 1,
 	"steps" : 100,
-	"output" : { "individuals": "<stdout>", "performance": "<stdout>" }
+	"output" : { "individuals": "/Users/truths/tmp/individuals.fasta", "performance": "/Users/truths/tmp/performance.csv", "operations":"/Users/truths/tmp/operations.csv" }
 }

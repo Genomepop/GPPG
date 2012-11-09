@@ -53,6 +53,11 @@ int GlobalInfo::getGeneForRegion(int i) const {
 	return *lower_bound( _offset.begin(), _offset.end(), i );
 }
 
+std::vector<int> GlobalInfo::binding(int i) const {
+	if( _binding.count(i) > 0) 
+		return _binding.find(i)->second;
+	else return std::vector<int>();
+}
 PromoterData::PromoterData(const GlobalInfo& info): _info(info) {
 	_pool = (PTYPE*)malloc(sizeof(PTYPE)*_info.totalRegions());
 }

@@ -37,6 +37,8 @@ namespace GPPG {
 				
 				const GlobalInfo& info() const;
 				
+				const char* exportFormat();
+				
 			protected:
 				virtual PTYPE proxyGet(int i)  = 0;
 				

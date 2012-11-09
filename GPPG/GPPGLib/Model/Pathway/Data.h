@@ -49,6 +49,8 @@ namespace GPPG {
 				
 				int offset(int i) const;
 				
+				std::vector<int> binding(int i) const;
+				
 				/** Retrieve network structure from promoter data
 				 */
 				

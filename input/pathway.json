@@ -1,21 +1,21 @@
 {
 	"compression" : 
 	{
-		"k" : 100,
+		"k" : 10,
 		"name" : "Greedy-Load",
 		"t" : 0
 	},
 	"generations" : 1000,
-	"individuals" : 1e3,	
+	"individuals" : 1e2,	
 	"scaling" : 1,
 	"steps" : 100,
 
 	"genotype" : 
 	{
 		"name" : "Pathway",
-		"genes" : 300,
-		"tfs" : 300,
-		"regions": [300,300]
+		"genes" : 100,
+		"tfs" : 100,
+		"regions": [100,100]
 	},
 
 	"operators" : 
@@ -28,24 +28,12 @@
 			"lossRate": [1e-5,0.8],
 			"overlap": 5
 		}
-	]
+	],
+	"output" : 
+	{ 
+			"individuals": "/Users/truths/tmp/individuals.fasta", 
+			"performance": "/Users/truths/tmp/performance.csv", 
+			"operations":"/Users/truths/tmp/operations.csv" 
+	}
 
-	/*
-	"genotype" : 
-	{
-		"length" : 1e4,
-		"name" : "Sequence"
-	},
-	
-	"operators" : 
-	[
-		
-		{
-			"cost" : 1,
-			"name" : "PointMutation",
-			"rate" : 1e-5
-		}
-		
-	]
-	*/
 }

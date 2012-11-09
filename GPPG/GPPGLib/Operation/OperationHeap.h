@@ -58,7 +58,9 @@ namespace GPPG {
 		virtual void removeOperation(IOperation* op);
 		
 		void clearRequests();
-	
+		
+		const std::set<IOperation*>& operations() const;
+			
 		//void operationAttached(IOperation& parent, IOperation& child);
 		//void operationRemoved(IOperation& parent, IOperation& child);
 		

@@ -62,6 +62,29 @@ PTYPE OpPathwayBase::getBinding(int i, int j)  {
 
 const GlobalInfo& OpPathwayBase::info() const { return _info; }
 
+const char* OpPathwayBase::exportFormat() {
+	std::ostringstream output;
+	PromoterData* pd = evaluate();
+	for(int i=0; i<numGenes(); i++) {
+		// print gene
+		output << _info.getGeneName(i) << "\t[" << i+1 << "]\t";
+		/*
+		std::vector<int> motifs = _info.binding(i);
+		for (int j=0; j<motifs.size(); j++) {
+			if(j>0) output << ",";
+			output << motifs[i];
+		}
+		output << "]\t";
+		*/
+		for(int j=0; j<_info.numRegions(i); j++) {
+			output << "|" << pd->getBinding(i,j);
+		}
+		output << std::endl;
+	}
+	
+	return output.str().c_str();
+}
+
 /**
  ********************************** PATHWAY ROOT ****************************************
  */
@@ -183,6 +206,7 @@ PTYPE BindingSiteChange::proxyGet(int l)  {
 }
 
 
+
 BindingSiteMutator::BindingSiteMutator( double cost, double u, int motifOverlap, const vector<double>& motifGainRates, const vector<double>& motifProbLoss) :
 OperationMutator< OpPathway >(cost), _u(u), _overlap(motifOverlap), _gainRates(motifGainRates), _lossProb(motifProbLoss) {
 	
@@ -245,6 +269,12 @@ OpPathway* BindingSiteMutator::mutate( OpPathway& g ) const {
 	}
 	
 	if( isCompressed )  g.setCompressed(true); 
+	
+	if( sites->size() == 0) {
+		delete locs;
+		delete sites;
+		return &g;
+	}
 	
 	// Create mutation
 	BindingSiteChange* bsc = new BindingSiteChange(g, locs, sites);
