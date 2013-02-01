@@ -1,0 +1,20 @@
+{
+	"compression" : 
+	{
+		"k" : 10,
+		"name" : "Greedy-Load",
+		"t" : 0
+	},
+	"generations" : 1000,
+	"individuals" : 1e2,	
+	"scaling" : 1,
+	"steps" : 100,
+	"evolution" : [ "mutation" ],
+	"genome" : "ecoli_genome.json",	
+	"output" : 
+	{ 
+			"individuals": "/Users/truths/tmp/individuals.fasta", 
+			"performance": "/Users/truths/tmp/performance.csv", 
+			"operations":"/Users/truths/tmp/operations.csv" 
+	}
+}

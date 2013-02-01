@@ -1,0 +1,17 @@
+{
+	"name" : "E coli",
+	"motifs" : [
+		"name": "IUPACseq",
+		"name2": "IUPACseq"
+	],
+	"genes" : [
+		{	"name" : "ubiCA",
+			"upstream": 120,
+			"binding_motifs": ["name"]
+		},
+		{	"name" : "regA",
+			"upstream": 150,
+			"binding_motifs": ["name2"]
+		}
+	]
+}

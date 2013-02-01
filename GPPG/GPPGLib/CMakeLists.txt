@@ -87,10 +87,13 @@ include_directories (${INCL_DIRS})
 #install (FILES ${GPPG_HDR} DESTINATION include)
 #add_library (GPPG ${GPPG_SRC})
 add_executable(CPGSimulator ${GPPG_SOURCE_DIR}/CPGSimulator/main.cpp ${GPPG_SRC})
-install (TARGETS CPGSimulator DESTINATION bin)
+add_executable(RegModel ${GPPG_SOURCE_DIR}/RegModel/main.cpp ${GPPG_SRC})
+install (TARGETS CPGSimulator RegModel DESTINATION bin)
+#install (TARGETS RegModel DESTINATION bin)
 
 if(USE_UBIGRAPH)
 	target_link_libraries (CPGSimulator ${EXTRA_LIBS})
+	target_link_libraries (RegModel ${EXTRA_LIBS})
 endif(USE_UBIGRAPH)
 
 
