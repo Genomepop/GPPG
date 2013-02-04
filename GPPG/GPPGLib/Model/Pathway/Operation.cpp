@@ -56,7 +56,7 @@ PTYPE OpPathwayBase::get(int i) {
 	return data()->get(i);
 }
 
-short OpPathwayBase::numSitesForGene(int i) {
+STYPE OpPathwayBase::numSitesForGene(int i) {
 	incrRequests(1);
 	if (isCompressed()) {
 		return proxyNumSitesForGene(i);
@@ -111,7 +111,7 @@ PTYPE PathwayRoot::get(int i)  { incrRequests(1); return data()->get(i); }
 
 PTYPE PathwayRoot::getBinding(int i, int j)  { incrRequests(1); return data()->getBinding(i,j); }
 
-short PathwayRoot::numSitesForGene(int i) { incrRequests(1); return data()->numSitesForGene(i); }
+STYPE PathwayRoot::numSitesForGene(int i) { incrRequests(1); return data()->numSitesForGene(i); }
 
 const GlobalInfo& PathwayRoot::info() const { return data()->info(); }
 
@@ -121,10 +121,16 @@ const GlobalInfo& PathwayRoot::info() const { return data()->info(); }
 
 PromoterData* randomPromoter(const GlobalInfo& info) {
 	PromoterData* data = new PromoterData( info );
-	data->clearData();
+	//data->clearData();
 	int numMotifs = data->numMotifs();
 	for (int i=0; i<info.numGenes(); i++) {
 		data->set(i, 0, (PTYPE)(random01()*numMotifs)+1);
+	}
+	for (int i=0; i<info.numTFs(); i++) {
+		int tf = info.getTF(i);
+		const vector<int>& motifs = info.bindingMotifsForTF(tf);
+		// Get a motif ID for the TF
+		data->set(i, 0, (PTYPE) (motifs[0]+1) );
 	}
 	
 	return data;
@@ -176,7 +182,8 @@ OpPathwayBase(1, op.info(), op), _locs(locs), _c(dest), _deltaSites(), _noSiteEx
 			_deltaSites[gene] += 1;
 		it_loc++; it_c++;
 	}
-	for(map<int,short>::iterator it_map = _deltaSites.begin(); it_map != _deltaSites.end(); it_map++) {
+	_noSiteExists = false;
+	for(map<int,STYPE>::iterator it_map = _deltaSites.begin(); it_map != _deltaSites.end(); it_map++) {
 		if(it_map->second == 0) {
 			_noSiteExists = true;
 		}
@@ -221,7 +228,7 @@ PTYPE BindingSiteChange::getMutation(int i) const { return (*_c)[i]; }
 
 int BindingSiteChange::getSite(int i) const { return (*_locs)[i]; }
 
-const std::map<int, short>& BindingSiteChange::deltaSites() const { return _deltaSites; }
+const std::map<int, STYPE>& BindingSiteChange::deltaSites() const { return _deltaSites; }
 
 PTYPE BindingSiteChange::proxyGet(int l)  {
 	// See if the index is in the list
@@ -234,7 +241,7 @@ PTYPE BindingSiteChange::proxyGet(int l)  {
 	return parent(0)->get(l);
 }
 
-short BindingSiteChange::proxyNumSitesForGene(int i) {
+STYPE BindingSiteChange::proxyNumSitesForGene(int i) {
 	if( _deltaSites.count(i) )
 		return _deltaSites[i];
 
@@ -299,7 +306,7 @@ OpPathway* BindingSiteMutator::mutate( OpPathway& g ) const {
 			c = g.get( loc );
 			if (c != (PTYPE)i) {
 				// Save loc, ->i
-				sites->push_back((PTYPE)i);
+				sites->push_back((PTYPE)(i+1));
 				locs->push_back(loc);
 			}
 		}

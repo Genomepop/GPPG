@@ -20,6 +20,7 @@ namespace GPPG {
 		namespace TransReg {
 			
 		typedef unsigned short PTYPE;	
+		typedef unsigned short STYPE;
 		
 			class GlobalInfo  {
 			public:
@@ -59,16 +60,22 @@ namespace GPPG {
 				
 				int offset(int i) const;
 				
-				std::vector<int> binding(int i) const;
+				const std::vector<int>& binding(int motifID) const;
+				
+				const std::vector<int>& bindingTFsForTF(int motifID) const;
+				
+				const std::vector<int>& bindingMotifsForTF(int tfID) const;
 				
 				/** Retrieve network structure from promoter data
 				 */
 				
 			private:
+				void initialize();
+				
 				std::vector<std::string> _genes, _motifs;
 				std::vector<int> _regions, _tfs, _offset;
 				// Maps MotifID -> TFIDs, used in creating interaction network
-				std::map< int, std::vector<int> > _binding;
+				std::map< int, std::vector<int> > _binding, _bindingTF;
 				std::map< std::string, std::string > _motifSeq;
 				int _totalRegions;
 			};
@@ -101,7 +108,7 @@ namespace GPPG {
 			
 			/** Gets the number of binding sites in a region
 			 */
-			virtual short numSitesForGene(int i) = 0;
+			virtual STYPE numSitesForGene(int i) = 0;
 			
 			virtual const GlobalInfo& info() const = 0;
 			
@@ -153,13 +160,13 @@ namespace GPPG {
 			
 				PTYPE getBinding(int i, int j) ;
 				
-				short numSitesForGene(int i);
+				STYPE numSitesForGene(int i);
 				
 				const GlobalInfo& info() const;
 				
 			private:
 				PTYPE *_pool;
-				short *_numSites;
+				STYPE *_numSites;
 				const GlobalInfo& _info;
 			};
 		}

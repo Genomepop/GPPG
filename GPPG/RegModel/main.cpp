@@ -248,6 +248,8 @@ void createAndRunSimulation( const Json::Value& config ) {
 
 	runSimulation(sim, config["individuals"].asInt(), config["generations"].asInt(), config.get("steps", 100).asInt(), perfFile);
 	
+	// Export results
+	
 	/*
 	if(perfFile) {
 		perfFile->close();

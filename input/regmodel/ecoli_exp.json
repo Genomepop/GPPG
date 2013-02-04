@@ -10,11 +10,11 @@
 	"scaling" : 1,
 	"steps" : 100,
 	"evolution" : [ "mutation" ],
-	"genome" : "/Users/truths/github/local/GPPG/input/regmodel/ecoli_genome.json",	
+	"genome" : "ecoli_genome.json",	
 	"output" : 
 	{ 
 			"individuals": "/Users/truths/tmp/individuals.fasta", 
-			"performance": "/Users/truths/tmp/performance.csv", 
+			"performance": "performance.csv", 
 			"operations":"/Users/truths/tmp/operations.csv" 
 	}
 }

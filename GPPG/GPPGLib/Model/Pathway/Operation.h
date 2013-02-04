@@ -35,7 +35,7 @@ namespace GPPG {
 				
 				PTYPE getBinding(int i, int j) ;
 				
-				short numSitesForGene(int i);
+				STYPE numSitesForGene(int i);
 				
 				const GlobalInfo& info() const;
 				
@@ -43,7 +43,7 @@ namespace GPPG {
 				
 			protected:
 				virtual PTYPE proxyGet(int i)  = 0;
-				virtual short proxyNumSitesForGene(int i) = 0;
+				virtual STYPE proxyNumSitesForGene(int i) = 0;
 				
 				const GlobalInfo& _info;
 			};
@@ -63,7 +63,7 @@ namespace GPPG {
 				
 				PTYPE getBinding(int i, int j) ;
 				
-				short numSitesForGene(int i);
+				STYPE numSitesForGene(int i);
 				
 				const GlobalInfo& info() const;
 			};
@@ -102,18 +102,18 @@ namespace GPPG {
 				 */
 				int getSite(int i) const;
 				
-				const std::map<int, short>& deltaSites() const;
+				const std::map<int, STYPE>& deltaSites() const;
 				
 				bool areAllGenesRegulated() const;
 				
 			protected:
 				PTYPE proxyGet(int i) ;
-				short proxyNumSitesForGene(int i);
+				STYPE proxyNumSitesForGene(int i);
 				
 			private:
 				std::vector<int>* _locs;		/* Locations array */
 				std::vector<PTYPE>* _c;		/* Characters to be changed to */
-				std::map<int,short> _deltaSites;
+				std::map<int,STYPE> _deltaSites;
 				bool _noSiteExists;
 				
 			};
