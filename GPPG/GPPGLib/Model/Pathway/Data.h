@@ -27,7 +27,15 @@ namespace GPPG {
 						   const std::vector<int>& regions,
 						   const std::vector<std::string>& motifs,
 						   const std::vector<int>& tfs,
-						   const std::map< int, std::vector<int> >& binding);
+						const std::map< int, std::vector<int> >& binding); 
+						
+				GlobalInfo(const std::vector<std::string>& genes,
+						   const std::vector<int>& regions,
+						   const std::vector<std::string>& motifs,
+						   const std::vector<int>& tfs,
+						   const std::map< int, std::vector<int> >& binding,
+							const std::map<std::string, std::string>& motifSeq
+							);
 				
 				int numTFs() const;
 				
@@ -37,7 +45,9 @@ namespace GPPG {
 				
 				const std::string& getGeneName(int i) const;
 				
-				const std::string& getMotifPWM(int i) const;				
+				const std::string& getMotifName(int i) const;				
+				
+				const std::string& getMotifSequence(const std::string& motifName) const;
 				
 				int getTF(int i) const;
 				
@@ -57,7 +67,9 @@ namespace GPPG {
 			private:
 				std::vector<std::string> _genes, _motifs;
 				std::vector<int> _regions, _tfs, _offset;
+				// Maps MotifID -> TFIDs, used in creating interaction network
 				std::map< int, std::vector<int> > _binding;
+				std::map< std::string, std::string > _motifSeq;
 				int _totalRegions;
 			};
 			
@@ -87,12 +99,14 @@ namespace GPPG {
 			 */
 			virtual PTYPE getBinding(int i, int j)  = 0;
 			
+			/** Gets the number of binding sites in a region
+			 */
+			virtual short numSitesForGene(int i) = 0;
+			
 			virtual const GlobalInfo& info() const = 0;
 			
 		};
 		
-
-
 
 			
 			/**
@@ -108,6 +122,10 @@ namespace GPPG {
 				/** Deep-copy
 				 */
 				PromoterData* copy() const;
+				
+				/** Clears all binding site information
+				*/
+				void clearData();
 				
 				/** Get a pointer to the raw sequence data.
 				 */
@@ -135,10 +153,13 @@ namespace GPPG {
 			
 				PTYPE getBinding(int i, int j) ;
 				
+				short numSitesForGene(int i);
+				
 				const GlobalInfo& info() const;
 				
 			private:
 				PTYPE *_pool;
+				short *_numSites;
 				const GlobalInfo& _info;
 			};
 		}

@@ -7,9 +7,12 @@ set( GPPG_HDR
 	Base/GenotypeHeap.h
 	Base/Mutator.h
 	Base/Recombinator.h
+	Base/FitnessFunction.h
 	Base/Simulator.h
 	Model/Pathway/Data.h
+	Model/Pathway/IO.h
 	Model/Pathway/Operation.h
+	Model/Pathway/Fitness.h
 	Model/Sequence/Data.h
 	Model/Sequence/IO.h
 	Model/Sequence/Operation.h
@@ -41,9 +44,12 @@ set( GPPG_SRC
 	Base/GenotypeHeap.cpp
 	Base/Mutator.cpp
 	Base/Recombinator.cpp
+	Base/FitnessFunction.cpp
 	Base/Simulator.cpp
 	Model/Pathway/Data.cpp
+	Model/Pathway/IO.cpp	
 	Model/Pathway/Operation.cpp
+	Model/Pathway/Fitness.cpp	
 	Model/Sequence/Data.cpp
 	Model/Sequence/IO.cpp
 	Model/Sequence/Operation.cpp

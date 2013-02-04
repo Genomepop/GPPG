@@ -1,8 +1,11 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <algorithm>
 
 using namespace std;
+
+#include <Base/FitnessFunction.h>
 
 #include "Operation/GreedyLoad.h"
 #include <Operation/GreedyLoadMap.h>
@@ -16,6 +19,8 @@ using namespace std;
 #include <Simulator/EvoSimulator.h>
 
 #include <Model/Pathway/Operation.h>
+#include <Model/Pathway/IO.h>
+#include <Model/Pathway/Fitness.h>
 #include <Util/json/json.h>
 
 #define SUPPORTS_RUSAGE
@@ -106,7 +111,7 @@ void outputOperations( EvoSimulator* sim, ostream& out ) {
 }
 
 GlobalInfo* readGenomeData(const string& filename) {
-	ifstream t( filename );
+	ifstream t( filename.c_str() );
 	stringstream buffer;
 	buffer << t.rdbuf();
 	Json::Value root;
@@ -117,16 +122,51 @@ GlobalInfo* readGenomeData(const string& filename) {
 		return 0;
 	}
 	
+	cout << root << endl;
+	
 	// Read Motifs
+	Json::Value cmos = root["motifs"];
+	vector<string> motifNames = cmos.getMemberNames(); // list of motif names
+	map<string, string> motifSeq; // Maps motif name -> sequence
+	for(int i=0; i<motifNames.size(); i++) {
+		motifSeq[ motifNames[i] ] = cmos[motifNames[i]].asString();
+	}
 	
 	// Read Genes
+	Json::Value genes = root["genes"];
+	std::vector<string> geneNames; // list of gene names
+	std::vector<int> regions; // list of region length, same length as genes
+	std::map<int, std::vector<int> > binding; // relates binding motif -> tf 
+	std::vector<int> tfs; // list of gene id's which are TFs
+	std::string curr_motif = "";
+	Json::Value gene_motifs;
+	int motif_index;
+	for(int i=0; i<genes.size(); i++) {
+		geneNames.push_back(genes[i]["name"].asString());
+		regions.push_back(genes[i]["upstream"].asInt());
+		if( genes[i].isMember("binding_motifs") && genes[i]["binding_motifs"].size() > 0 ) {
+			gene_motifs = genes[i]["binding_motifs"];
+			tfs.push_back(i); // Store gene index
+			for(int j=0; j<gene_motifs.size(); j++) {
+				curr_motif = gene_motifs[j].asString();
+				if( motifSeq.count( curr_motif) ) {
+					motif_index = find(motifNames.begin(), motifNames.end(), curr_motif ) - motifNames.begin();
+					binding[motif_index].push_back( i ) ;
+				}
+			}
+		}
+	}
 	
 	// Create Global Info
+	GlobalInfo* info = new GlobalInfo(geneNames, regions, motifNames, tfs, binding, motifSeq);
 	
-	return 0;
+	return info;
 }
 
 double IUPACtoGainRate(const string& motif) {
+	for(int i=0; i<motif.length(); i++) {
+		
+	}
 	return 1e-5;
 }
 
@@ -161,26 +201,30 @@ EvoSimulator* createSimulator( const Json::Value& config ) {
 		return 0;
 	}
 	
+	cout << *info << endl;
+	
 	// Use info to generate binding site mutator
 	double u = config["sequence_mutation"].asDouble();
 	int bs_size = config["binding_site_size"].asInt();
 	std::vector<double> gainRates, lossRates;
 	for(int i=0; i<info->numMotifs(); i++) {
-		gainRates.push_back( scaling*IUPACtoGainRate(info->getMotifPWM(i))); // TODO: Do we need to add scaling here?
-		lossRates.push_back( IUPACtoLossRate(info->getMotifPWM(i)));
+		gainRates.push_back( scaling*IUPACtoGainRate(info->getMotifSequence(info->getMotifName(i)) )); // TODO: Do we need to add scaling here?
+		lossRates.push_back( IUPACtoLossRate(info->getMotifSequence(info->getMotifName(i)) ));
 	}
 	
-	sim->addMutator( new BindingSiteMutator( config.get("cost",1).asDouble(), u*scaling, (bs_size-1)/2, 
-											gainRates,
-											lossRates);
+	sim->addMutator( new BindingSiteMutator( config.get("cost",1).asDouble(), u*scaling, (bs_size-1)/2, gainRates, lossRates));
 											
 	// Add viability constraint
 	// TODO: Add viability constraint
+	IFitnessFunction* func = new ConnectedFitness();
+	sim->setFitnessFunction( func );
 	
 	// Use info to generate random network
+	IGenotype* g;
 	PathwayRootFactory factory(*info);
 	g = factory.random();
 	sim->addGenotype( g, 1.0 );
+	cout << "Fitness: " << func->calculate(g) << endl;
 	
 	// Return the simulator!
 	return sim;
@@ -189,19 +233,19 @@ EvoSimulator* createSimulator( const Json::Value& config ) {
 void createAndRunSimulation( const Json::Value& config ) {
 	
 	EvoSimulator* sim = createSimulator( config );
-
+	
 	if (!sim) {
 		cout << "Failed to create simulator\n";
 		return;
 	}
-	
+
 	const Json::Value& output = config["output"];
 	ofstream* perfFile = 0;
 	if( output.isMember("performance") ) {
 		perfFile = new ofstream();
 		perfFile->open( output["performance"].asCString() );
 	}
-	
+
 	runSimulation(sim, config["individuals"].asInt(), config["generations"].asInt(), config.get("steps", 100).asInt(), perfFile);
 	
 	/*

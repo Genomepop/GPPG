@@ -18,6 +18,7 @@ namespace GPPG {
 	class IGenotype;
 	class IGenotypeHeap;
 	class IRecombinator;
+	class IFitnessFunction;
 	
 	class GenotypeSimulator {
 	public:
@@ -29,6 +30,8 @@ namespace GPPG {
 		
 		virtual void addGenotype(IGenotype* g);
 		
+		void setFitnessFunction(IFitnessFunction* f);
+		
 		IGenotypeHeap* heap();
 		
 	protected:
@@ -38,6 +41,7 @@ namespace GPPG {
 		
 		std::set<IMutator*> _mutators;
 		std::set<IRecombinator*> _recombinators;		
+		IFitnessFunction* _fitness_func;
 		//std::set<IGenotype*> _genotypes;
 	
 		IGenotypeHeap* _heap;

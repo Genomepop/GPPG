@@ -56,6 +56,14 @@ PTYPE OpPathwayBase::get(int i) {
 	return data()->get(i);
 }
 
+short OpPathwayBase::numSitesForGene(int i) {
+	incrRequests(1);
+	if (isCompressed()) {
+		return proxyNumSitesForGene(i);
+	}
+	return data()->numSitesForGene(i);
+}
+
 PTYPE OpPathwayBase::getBinding(int i, int j)  {
 	return get( _info.offset(i) + j );
 }
@@ -103,6 +111,8 @@ PTYPE PathwayRoot::get(int i)  { incrRequests(1); return data()->get(i); }
 
 PTYPE PathwayRoot::getBinding(int i, int j)  { incrRequests(1); return data()->getBinding(i,j); }
 
+short PathwayRoot::numSitesForGene(int i) { incrRequests(1); return data()->numSitesForGene(i); }
+
 const GlobalInfo& PathwayRoot::info() const { return data()->info(); }
 
 /**
@@ -111,15 +121,12 @@ const GlobalInfo& PathwayRoot::info() const { return data()->info(); }
 
 PromoterData* randomPromoter(const GlobalInfo& info) {
 	PromoterData* data = new PromoterData( info );
+	data->clearData();
 	int numMotifs = data->numMotifs();
 	for (int i=0; i<info.numGenes(); i++) {
-		for (int j=0; j<info.numRegions(i); j++) {
-			if (j == 0) 
-				data->set(i, j, (PTYPE)(random01()*numMotifs)+1);
-			else
-				data->set(i, j, 0);
-		}
+		data->set(i, 0, (PTYPE)(random01()*numMotifs)+1);
 	}
+	
 	return data;
 }
 
@@ -154,7 +161,28 @@ GlobalInfo* PathwayRootFactory::randomInfo(int numGenes, int numTFs, int minRegi
  ********************************** OPERATIONS *********************************************
  */
 BindingSiteChange::BindingSiteChange(OpPathway& op, std::vector<int>* locs, std::vector<PTYPE>* dest) :
-OpPathwayBase(1, op.info(), op), _locs(locs), _c(dest) {}
+OpPathwayBase(1, op.info(), op), _locs(locs), _c(dest), _deltaSites(), _noSiteExists(false) {
+	vector<int>::iterator it_loc = _locs->begin();
+	vector<PTYPE>::iterator it_c = _c->begin();
+	int gene;
+	while (it_loc != _locs->end() ) {
+		gene = info().getGeneForRegion( *it_loc );
+		if( _deltaSites.count(gene) == 0) 
+			_deltaSites[gene] = op.numSitesForGene(gene);
+		
+		if( *it_c == 0)
+			_deltaSites[gene] -= 1;
+		else
+			_deltaSites[gene] += 1;
+		it_loc++; it_c++;
+	}
+	for(map<int,short>::iterator it_map = _deltaSites.begin(); it_map != _deltaSites.end(); it_map++) {
+		if(it_map->second == 0) {
+			_noSiteExists = true;
+		}
+	}
+	
+}
 
 
 BindingSiteChange::~BindingSiteChange() {
@@ -193,6 +221,7 @@ PTYPE BindingSiteChange::getMutation(int i) const { return (*_c)[i]; }
 
 int BindingSiteChange::getSite(int i) const { return (*_locs)[i]; }
 
+const std::map<int, short>& BindingSiteChange::deltaSites() const { return _deltaSites; }
 
 PTYPE BindingSiteChange::proxyGet(int l)  {
 	// See if the index is in the list
@@ -205,7 +234,15 @@ PTYPE BindingSiteChange::proxyGet(int l)  {
 	return parent(0)->get(l);
 }
 
+short BindingSiteChange::proxyNumSitesForGene(int i) {
+	if( _deltaSites.count(i) )
+		return _deltaSites[i];
 
+	return parent(0)->numSitesForGene(i);
+}
+bool BindingSiteChange::areAllGenesRegulated() const {
+	return _noSiteExists;
+}
 
 BindingSiteMutator::BindingSiteMutator( double cost, double u, int motifOverlap, const vector<double>& motifGainRates, const vector<double>& motifProbLoss) :
 OperationMutator< OpPathway >(cost), _u(u), _overlap(motifOverlap), _gainRates(motifGainRates), _lossProb(motifProbLoss) {

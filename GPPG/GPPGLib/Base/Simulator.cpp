@@ -13,7 +13,7 @@
 #include "Base/Mutator.h"
 #include "Base/GenotypeHeap.h"
 #include "Base/Recombinator.h"
-
+#include "Base/FitnessFunction.h"
 #include "Util/Random.h"
 #include <iostream>
 
@@ -65,9 +65,13 @@ void samplePopulation( std::vector<double>& F, long N, std::vector<double>& res 
 
 }
 
-GenotypeSimulator::GenotypeSimulator(IGenotypeHeap* h): _heap(h), _gcount(0) {}
+GenotypeSimulator::GenotypeSimulator(IGenotypeHeap* h): _heap(h), _gcount(0), _fitness_func(0) {}
 
 IGenotypeHeap* GenotypeSimulator::heap() { return _heap; }
+
+void GenotypeSimulator::setFitnessFunction(IFitnessFunction* f) {
+	_fitness_func = f;
+}
 
 void GenotypeSimulator::addMutator(IMutator* mutator) {
 	_mutators.insert( mutator );
@@ -89,7 +93,12 @@ void GenotypeSimulator::configureGenotype(IGenotype *g) {
 	
 	//TODO: Evaluate phenotype function
 	
-	//TODO: Evaluate fitness function
+	if(_fitness_func) {
+		double fitness = _fitness_func->calculate(g);
+		g->setFitness(fitness);
+	} else {
+		g->setFitness(1.0);
+	}
 	
 	g->setTotal(0);
 	
