@@ -31,6 +31,8 @@ namespace GPPG {
 				
 				int totalRegions() const;
 				
+				int numRegions(int i) const;
+				
 				PTYPE get(int i) ;
 				
 				PTYPE getBinding(int i, int j) ;
@@ -58,6 +60,8 @@ namespace GPPG {
 				int numMotifs() const;
 				
 				int totalRegions() const;
+				
+				int numRegions(int i) const;
 				
 				PTYPE get(int i) ;
 				

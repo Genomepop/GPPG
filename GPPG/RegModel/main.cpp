@@ -75,17 +75,32 @@ void runSimulation( EvoSimulator* sim, long N, long G, int steps, ostream* out )
 	
 }
 
-void outputGenotypes( EvoSimulator* sim, ostream& out ) {	
+void outputGenotype( EvoSimulator* sim, ostream& out ) {	
 		
 	set<IGenotype*>::iterator git;
 	const set<IGenotype*>& active = sim->activeGenotypes();
 	int i=0;
+	IGenotype* maxG = 0;
+	double maxFreq = 0;
 	for (git=active.begin(); git!=active.end(); git++) {
 		IGenotype* g = *git;
-		out << ">g"<<i<<"|"<<g->key() << "|" <<g->frequency()<<"|"<<g->order()<<endl;
-		out << g->exportFormat();
-		out << endl << endl;
-		i++;
+		if(g->frequency() > maxFreq) {
+			maxG = g;
+			maxFreq = g->frequency();
+		}
+	}
+	
+	OpPathway* p = dynamic_cast<OpPathway*>(maxG);
+	if(!p) throw "Expected an OpPathway, but didn't get it!";
+	
+	out << "Gene,Motif,TF,location\n";
+	for(int gi=0; gi<p->numGenes(); gi++) {
+		for(int r=0; r<p->numRegions(gi); r++) {
+			PTYPE c = p->getBinding(gi,r);
+			if(c > 0) {
+				out << p->info().getGeneName(gi) << "," << p->info().getMotifName( c-1 ) << "," << p->info().getGeneName(p->info().binding(c-1)[0]) << "," << r << endl;
+			}
+		}
 	}
 	
 }
@@ -249,30 +264,21 @@ void createAndRunSimulation( const Json::Value& config ) {
 	runSimulation(sim, config["individuals"].asInt(), config["generations"].asInt(), config.get("steps", 100).asInt(), perfFile);
 	
 	// Export results
-	
-	/*
 	if(perfFile) {
 		perfFile->close();
 		delete perfFile;
 	}
 	
-	if( output.isMember("individuals") ) {
-		if( output["individuals"] == "<stdout>") {
-			outputGenotypes( sim, cout );
+	if( output.isMember("result") ) {
+		if( output["result"] == "<stdout>") {
+			outputGenotype( sim, cout );
 		}
 		else {
-			ofstream out(output["individuals"].asCString());
-			outputGenotypes( sim, out);
+			ofstream out(output["result"].asCString());
+			outputGenotype( sim, out);
 			out.close();
 		}
 	}
-	
-	if( output.isMember("operations") ) {
-		ofstream out(output["operations"].asCString());
-		outputOperations( sim, out);
-		out.close();
-	}
-	*/
 	
 	delete sim;
 }

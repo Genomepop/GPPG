@@ -139,6 +139,8 @@ PTYPE PromoterData::get(int i)  { return _pool[i]; }
 
 int PromoterData::totalRegions() const { return _info.totalRegions(); }
 
+int PromoterData::numRegions(int i) const { return _info.numRegions(i) ; }
+
 int PromoterData::numGenes() const { return _info.numGenes(); }
 
 int PromoterData::numTFs() const { return _info.numTFs(); }

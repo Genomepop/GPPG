@@ -48,6 +48,8 @@ int OpPathwayBase::numMotifs() const { return _info.numMotifs(); }
 
 int OpPathwayBase::totalRegions() const { return _info.totalRegions(); }
 
+int OpPathwayBase::numRegions(int i) const { return _info.numRegions(i); }
+
 PTYPE OpPathwayBase::get(int i) {
 	incrRequests(1);
 	if (isCompressed()) {
@@ -106,6 +108,8 @@ int PathwayRoot::numTFs() const { return data()->numTFs(); }
 int PathwayRoot::numMotifs() const { return data()->numMotifs(); }
 
 int PathwayRoot::totalRegions() const { return data()->totalRegions(); }
+
+int PathwayRoot::numRegions(int i) const { return info().numRegions(i); }
 
 PTYPE PathwayRoot::get(int i)  { incrRequests(1); return data()->get(i); }
 

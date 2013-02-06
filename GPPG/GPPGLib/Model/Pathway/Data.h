@@ -98,6 +98,8 @@ namespace GPPG {
 			 */
 			virtual int totalRegions() const = 0;
 			
+			virtual int numRegions(int i) const = 0;
+			
 			/** Gets the item at location i
 			 */
 			virtual PTYPE get(int i)  = 0;
@@ -141,6 +143,8 @@ namespace GPPG {
 				/** Gets the number of regions
 				 */
 				int totalRegions() const;
+				
+				int numRegions(int i) const;
 				
 				/** Gets the BS located at region i
 				 */
