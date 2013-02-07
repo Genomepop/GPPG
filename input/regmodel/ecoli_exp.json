@@ -5,12 +5,14 @@
 		"name" : "Greedy-Load",
 		"t" : 0
 	},
-	"generations" : 1000,
-	"individuals" : 1e5,	
-	"scaling" : 1,
+	"generations" : 5e8,
+	"individuals" : 1e9,	
+	"scaling" : 1e-6,
 	"steps" : 100,
 	"evolution" : [ "mutation" ],
-	"genome" : "/Users/truths/github/local/GPPG/input/regmodel/ecoli_genome.json",	
+	"genome" : "/Users/truths/github/GPPG/input/regmodel/ecoli_genome.json",	
+	"sequence_mutation": 1e-9,
+	"binding_site_size": 21,
 	"output" : 
 	{ 
 			"result": "/Users/truths/tmp/result.csv", 

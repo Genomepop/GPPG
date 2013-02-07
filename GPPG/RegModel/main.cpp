@@ -98,7 +98,8 @@ void outputGenotype( EvoSimulator* sim, ostream& out ) {
 		for(int r=0; r<p->numRegions(gi); r++) {
 			PTYPE c = p->getBinding(gi,r);
 			if(c > 0) {
-				out << p->info().getGeneName(gi) << "," << p->info().getMotifName( c-1 ) << "," << p->info().getGeneName(p->info().binding(c-1)[0]) << "," << r << endl;
+				int motifID = c-1;
+				out << p->info().getGeneName(gi) << "," << p->info().getMotifName( motifID ) << "," << p->info().getGeneName( p->info().binding(motifID)[0] ) << "," << r << endl;
 			}
 		}
 	}
@@ -178,15 +179,42 @@ GlobalInfo* readGenomeData(const string& filename) {
 	return info;
 }
 
+const std::string IUPAC_CODE_1 = "ACTG";
+const std::string IUPAC_CODE_2 = "RYSWKM";
+const std::string IUPAC_CODE_3 = "BDHV";
+const std::string IUPAC_CODE_4 = ".N-";
+
+int IUPACScore(char c) {
+	char d = std::toupper(c);
+	if( IUPAC_CODE_1.find(d) != std::string::npos) return 1;
+	if( IUPAC_CODE_2.find(d) != std::string::npos) return 2;
+	if( IUPAC_CODE_3.find(d) != std::string::npos) return 3;
+	if( IUPAC_CODE_4.find(d) != std::string::npos) return 4;		
+	throw "IUPAC Character is not recognized: " + c;
+}
+
 double IUPACtoGainRate(const string& motif) {
+	double rate = 0.0;
+	
 	for(int i=0; i<motif.length(); i++) {
-		
+		int ic = IUPACScore(motif[i]);
+		double v = (4.0-ic)/4.0; // i'th site doesn't match.
+		v *= IUPACScore(motif[i])/3.0; // mutates to the correct one.
+		for(int j=0; j<motif.length(); j++) {
+			if(j!=i) v *= IUPACScore(motif[j])/4.0; // j'th site matches
+		}
+		rate += v;
 	}
-	return 1e-5;
+	//rate /= 1.0*motif.length();
+	return rate;
 }
 
 double IUPACtoLossRate(const string& motif) {
-	return 1e-5;
+	double rate;
+	for(int i=0; i<motif.length(); i++) {
+		rate += (4-IUPACScore(motif[i]))/3.0;
+	}
+	return rate/(1.0*motif.length());
 }
 
 EvoSimulator* createSimulator( const Json::Value& config ) {
@@ -223,14 +251,15 @@ EvoSimulator* createSimulator( const Json::Value& config ) {
 	int bs_size = config["binding_site_size"].asInt();
 	std::vector<double> gainRates, lossRates;
 	for(int i=0; i<info->numMotifs(); i++) {
-		gainRates.push_back( scaling*IUPACtoGainRate(info->getMotifSequence(info->getMotifName(i)) )); // TODO: Do we need to add scaling here?
-		lossRates.push_back( IUPACtoLossRate(info->getMotifSequence(info->getMotifName(i)) ));
+		const std::string& motif = info->getMotifSequence(info->getMotifName(i));
+		//cout << motif << " -> " << IUPACtoGainRate(motif) << ", " << IUPACtoLossRate(motif) << std::endl;
+		gainRates.push_back( IUPACtoGainRate( motif )*u/scaling); // TODO: Do we need to add scaling here?
+		lossRates.push_back( IUPACtoLossRate(motif ) );
 	}
 	
-	sim->addMutator( new BindingSiteMutator( config.get("cost",1).asDouble(), u*scaling, (bs_size-1)/2, gainRates, lossRates));
+	sim->addMutator( new BindingSiteMutator( config.get("cost",1).asDouble(), u/scaling, (bs_size-1)/2, gainRates, lossRates));
 											
 	// Add viability constraint
-	// TODO: Add viability constraint
 	IFitnessFunction* func = new ConnectedFitness();
 	sim->setFitnessFunction( func );
 	
@@ -239,7 +268,6 @@ EvoSimulator* createSimulator( const Json::Value& config ) {
 	PathwayRootFactory factory(*info);
 	g = factory.random();
 	sim->addGenotype( g, 1.0 );
-	cout << "Fitness: " << func->calculate(g) << endl;
 	
 	// Return the simulator!
 	return sim;
@@ -248,6 +276,7 @@ EvoSimulator* createSimulator( const Json::Value& config ) {
 void createAndRunSimulation( const Json::Value& config ) {
 	
 	EvoSimulator* sim = createSimulator( config );
+	double scaling = config.get("scaling",1).asDouble();
 	
 	if (!sim) {
 		cout << "Failed to create simulator\n";
@@ -261,7 +290,7 @@ void createAndRunSimulation( const Json::Value& config ) {
 		perfFile->open( output["performance"].asCString() );
 	}
 
-	runSimulation(sim, config["individuals"].asInt(), config["generations"].asInt(), config.get("steps", 100).asInt(), perfFile);
+	runSimulation(sim, config["individuals"].asInt()*scaling, config["generations"].asInt()*scaling, config.get("steps", 100).asInt(), perfFile);
 	
 	// Export results
 	if(perfFile) {

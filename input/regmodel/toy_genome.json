@@ -1,0 +1,21 @@
+{
+	"name" : "E coli",
+	"motifs" : {
+		"name": "AwkawyyCTAAG",
+		"name2": "wTATGSrykawyytkCTGt"
+	},
+	"genes" : [
+		{	"name" : "ubiCA",
+			"upstream": 120,
+			"binding_motifs": ["name"]
+		},
+		{
+			"name" : "fis",
+			"upstream" : 1000
+		},
+		{	"name" : "regA",
+			"upstream": 150,
+			"binding_motifs": ["name2"]
+		}
+	]
+}

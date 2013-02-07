@@ -1,21 +1,2387 @@
 {
-	"name" : "E coli",
-	"motifs" : {
-		"name": "ACCGT",
-		"name2": "ATTCG"
-	},
-	"genes" : [
-		{	"name" : "ubiCA",
-			"upstream": 120,
-			"binding_motifs": ["name"]
-		},
-		{
-			"name" : "fis",
-			"upstream" : 1000
-		},
-		{	"name" : "regA",
-			"upstream": 150,
-			"binding_motifs": ["name2"]
-		}
-	]
+    "genes": [
+        {
+            "name": "nfo", 
+            "upstream": 38.5
+        }, 
+        {
+            "binding_motifs": [
+                "m1"
+            ], 
+            "name": "rob", 
+            "upstream": 20.0
+        }, 
+        {
+            "name": "metY-rimP-nusA-infB-rbfA-truB-rpsO-pnp", 
+            "upstream": 201.5
+        }, 
+        {
+            "name": "aspV", 
+            "upstream": 76.0
+        }, 
+        {
+            "name": "ibpAB", 
+            "upstream": 31.0
+        }, 
+        {
+            "name": "xseA", 
+            "upstream": 28.5
+        }, 
+        {
+            "name": "malXY", 
+            "upstream": 101.5
+        }, 
+        {
+            "name": "nupC", 
+            "upstream": 89.5
+        }, 
+        {
+            "name": "zinT", 
+            "upstream": 16.0
+        }, 
+        {
+            "name": "codBA", 
+            "upstream": 58.0
+        }, 
+        {
+            "name": "tnaCAB", 
+            "upstream": 102.5
+        }, 
+        {
+            "name": "yjjP", 
+            "upstream": 174.5
+        }, 
+        {
+            "name": "fhuACDB", 
+            "upstream": 10
+        }, 
+        {
+            "name": "puuDR", 
+            "upstream": 83.0
+        }, 
+        {
+            "name": "katE", 
+            "upstream": 10
+        }, 
+        {
+            "name": "katG", 
+            "upstream": 112.5
+        }, 
+        {
+            "name": "caiTABCDE", 
+            "upstream": 277.5
+        }, 
+        {
+            "name": "fepDGC", 
+            "upstream": 27.0
+        }, 
+        {
+            "name": "ydeP", 
+            "upstream": 109.0
+        }, 
+        {
+            "name": "mpl", 
+            "upstream": 37.5
+        }, 
+        {
+            "name": "kbaZ-agaVWA", 
+            "upstream": 83.0
+        }, 
+        {
+            "name": "recN", 
+            "upstream": 22.5
+        }, 
+        {
+            "name": "torCAD", 
+            "upstream": 78.5
+        }, 
+        {
+            "name": "kbl-tdh", 
+            "upstream": 77.0
+        }, 
+        {
+            "name": "hemH", 
+            "upstream": 55.0
+        }, 
+        {
+            "name": "cyaR", 
+            "upstream": 42.5
+        }, 
+        {
+            "name": "hemL", 
+            "upstream": 165.0
+        }, 
+        {
+            "name": "ryhB", 
+            "upstream": 18.0
+        }, 
+        {
+            "name": "rutABCDEFG", 
+            "upstream": 106.0
+        }, 
+        {
+            "name": "trg", 
+            "upstream": 149.0
+        }, 
+        {
+            "name": "glmY", 
+            "upstream": 221.5
+        }, 
+        {
+            "name": "xerD-dsbC-recJ-prfB-lysS", 
+            "upstream": 391.5
+        }, 
+        {
+            "name": "yjeFE-amiB-mutL-miaA-hfq-hflXKC", 
+            "upstream": 96.5
+        }, 
+        {
+            "name": "cyaA", 
+            "upstream": 10
+        }, 
+        {
+            "name": "ybdN", 
+            "upstream": 368.0
+        }, 
+        {
+            "name": "ybjC-nfsA-rimK-ybjN", 
+            "upstream": 72.0
+        }, 
+        {
+            "name": "ydeH", 
+            "upstream": 41.0
+        }, 
+        {
+            "name": "ascFB", 
+            "upstream": 77.0
+        }, 
+        {
+            "name": "amiA-hemF", 
+            "upstream": 20.5
+        }, 
+        {
+            "name": "sfsA-dksA-gluQ", 
+            "upstream": 65.5
+        }, 
+        {
+            "name": "dcuB-fumB", 
+            "upstream": 157.5
+        }, 
+        {
+            "name": "citCDEFXG", 
+            "upstream": 241.5
+        }, 
+        {
+            "name": "yaeP-rof", 
+            "upstream": 19.5
+        }, 
+        {
+            "name": "udp", 
+            "upstream": 93.5
+        }, 
+        {
+            "name": "yeiP", 
+            "upstream": 44.5
+        }, 
+        {
+            "name": "glmUS", 
+            "upstream": 257.0
+        }, 
+        {
+            "name": "ydeA", 
+            "upstream": 16.0
+        }, 
+        {
+            "name": "trmA", 
+            "upstream": 47.0
+        }, 
+        {
+            "name": "rtcBA", 
+            "upstream": 62.0
+        }, 
+        {
+            "name": "entS", 
+            "upstream": 50.0
+        }, 
+        {
+            "name": "folA", 
+            "upstream": 148.5
+        }, 
+        {
+            "name": "yqjA-mzrA", 
+            "upstream": 47.0
+        }, 
+        {
+            "name": "uhpT", 
+            "upstream": 103.5
+        }, 
+        {
+            "name": "aaeR", 
+            "upstream": 10
+        }, 
+        {
+            "name": "rcsA", 
+            "upstream": 172.0
+        }, 
+        {
+            "name": "proL", 
+            "upstream": 66.0
+        }, 
+        {
+            "name": "focA-pflB", 
+            "upstream": 650.0
+        }, 
+        {
+            "name": "cysK", 
+            "upstream": 79.0
+        }, 
+        {
+            "binding_motifs": [
+                "m58"
+            ], 
+            "name": "cysB", 
+            "upstream": 56.0
+        }, 
+        {
+            "name": "ybjG", 
+            "upstream": 32.0
+        }, 
+        {
+            "name": "uspA", 
+            "upstream": 178.0
+        }, 
+        {
+            "name": "pqiAB", 
+            "upstream": 42.5
+        }, 
+        {
+            "name": "rpoH", 
+            "upstream": 326.0
+        }, 
+        {
+            "name": "yjjZ", 
+            "upstream": 30.0
+        }, 
+        {
+            "name": "gltX", 
+            "upstream": 121.0
+        }, 
+        {
+            "name": "prpBCDE", 
+            "upstream": 147.5
+        }, 
+        {
+            "name": "hflD-purB", 
+            "upstream": 892.5
+        }, 
+        {
+            "name": "metT-leuW-glnUW-metU-glnVX", 
+            "upstream": 68.0
+        }, 
+        {
+            "name": "aaeXAB", 
+            "upstream": 63.5
+        }, 
+        {
+            "name": "glnK-amtB", 
+            "upstream": 87.0
+        }, 
+        {
+            "binding_motifs": [
+                "m70"
+            ], 
+            "name": "lexA-dinF", 
+            "upstream": 63.5
+        }, 
+        {
+            "name": "cspI", 
+            "upstream": 137.0
+        }, 
+        {
+            "name": "gltA", 
+            "upstream": 107.5
+        }, 
+        {
+            "name": "cspD", 
+            "upstream": 234.0
+        }, 
+        {
+            "name": "cspE", 
+            "upstream": 61.5
+        }, 
+        {
+            "name": "yfiD", 
+            "upstream": 176.0
+        }, 
+        {
+            "name": "tolC-ygiABC", 
+            "upstream": 52.5
+        }, 
+        {
+            "name": "yhjA", 
+            "upstream": 86.0
+        }, 
+        {
+            "name": "yeaR-yoaG", 
+            "upstream": 55.0
+        }, 
+        {
+            "name": "ribA", 
+            "upstream": 69.0
+        }, 
+        {
+            "name": "gadBC", 
+            "upstream": 268.5
+        }, 
+        {
+            "name": "thrW", 
+            "upstream": 66.0
+        }, 
+        {
+            "name": "ppiD", 
+            "upstream": 165.0
+        }, 
+        {
+            "name": "livJ", 
+            "upstream": 127.0
+        }, 
+        {
+            "name": "ppiA", 
+            "upstream": 108.0
+        }, 
+        {
+            "name": "moeAB", 
+            "upstream": 211.5
+        }, 
+        {
+            "name": "cho", 
+            "upstream": 10
+        }, 
+        {
+            "name": "mutY-yggX-mltC-nupG", 
+            "upstream": 149.0
+        }, 
+        {
+            "name": "ilvIH", 
+            "upstream": 245.0
+        }, 
+        {
+            "name": "yqjH", 
+            "upstream": 36.5
+        }, 
+        {
+            "name": "rpsU-dnaG-rpoD", 
+            "upstream": 10
+        }, 
+        {
+            "name": "malZ", 
+            "upstream": 73.5
+        }, 
+        {
+            "binding_motifs": [
+                "m92"
+            ], 
+            "name": "malT", 
+            "upstream": 82.5
+        }, 
+        {
+            "name": "araFGH", 
+            "upstream": 165.5
+        }, 
+        {
+            "name": "malS", 
+            "upstream": 231.5
+        }, 
+        {
+            "name": "xylAB", 
+            "upstream": 81.5
+        }, 
+        {
+            "name": "mgtLA", 
+            "upstream": 34.0
+        }, 
+        {
+            "name": "phoH", 
+            "upstream": 31.0
+        }, 
+        {
+            "name": "dinG", 
+            "upstream": 27.5
+        }, 
+        {
+            "name": "rrsA-ileT-alaT-rrlA-rrfA", 
+            "upstream": 133.0
+        }, 
+        {
+            "name": "nanCM", 
+            "upstream": 282.5
+        }, 
+        {
+            "binding_motifs": [
+                "m101"
+            ], 
+            "name": "cpxRA", 
+            "upstream": 67.0
+        }, 
+        {
+            "name": "yfiP-pka", 
+            "upstream": 81.5
+        }, 
+        {
+            "name": "flu", 
+            "upstream": 24.0
+        }, 
+        {
+            "name": "csiD-lhgO-gabDTP", 
+            "upstream": 68.5
+        }, 
+        {
+            "binding_motifs": [
+                "m105"
+            ], 
+            "name": "purR", 
+            "upstream": 240.5
+        }, 
+        {
+            "name": "zwf", 
+            "upstream": 54.0
+        }, 
+        {
+            "binding_motifs": [
+                "m107"
+            ], 
+            "name": "gcvA", 
+            "upstream": 10
+        }, 
+        {
+            "name": "narQ", 
+            "upstream": 10
+        }, 
+        {
+            "name": "nohA-ydfN-tfaQ", 
+            "upstream": 10
+        }, 
+        {
+            "name": "purC", 
+            "upstream": 10
+        }, 
+        {
+            "name": "trxC", 
+            "upstream": 57.0
+        }, 
+        {
+            "name": "purA", 
+            "upstream": 100.0
+        }, 
+        {
+            "name": "trxA", 
+            "upstream": 23.5
+        }, 
+        {
+            "name": "fadIJ", 
+            "upstream": 25.0
+        }, 
+        {
+            "name": "narK", 
+            "upstream": 214.0
+        }, 
+        {
+            "name": "spf", 
+            "upstream": 84.5
+        }, 
+        {
+            "name": "purL", 
+            "upstream": 38.5
+        }, 
+        {
+            "name": "mntH", 
+            "upstream": 81.5
+        }, 
+        {
+            "name": "napFDAGHBC-ccmABCDEFGH", 
+            "upstream": 140.5
+        }, 
+        {
+            "name": "gcd", 
+            "upstream": 73.0
+        }, 
+        {
+            "name": "queA", 
+            "upstream": 58.0
+        }, 
+        {
+            "name": "yiaKLMNO-lyxK-sgbHUE", 
+            "upstream": 168.0
+        }, 
+        {
+            "name": "yjbEFGH", 
+            "upstream": 209.0
+        }, 
+        {
+            "name": "fpr", 
+            "upstream": 58.5
+        }, 
+        {
+            "name": "mntP", 
+            "upstream": 183.5
+        }, 
+        {
+            "name": "narGHJI", 
+            "upstream": 276.0
+        }, 
+        {
+            "name": "azuC", 
+            "upstream": 48.5
+        }, 
+        {
+            "name": "paaZ", 
+            "upstream": 136.5
+        }, 
+        {
+            "name": "cpdB", 
+            "upstream": 44.0
+        }, 
+        {
+            "name": "malEFG", 
+            "upstream": 283.5
+        }, 
+        {
+            "binding_motifs": [
+                "m131"
+            ], 
+            "name": "galR/galS", 
+            "upstream": 164.0
+        }, 
+        {
+            "name": "araBAD", 
+            "upstream": 275.5
+        }, 
+        {
+            "binding_motifs": [
+                "m133"
+            ], 
+            "name": "dnaAN-recF", 
+            "upstream": 289.0
+        }, 
+        {
+            "name": "dinJ-yafQ", 
+            "upstream": 89.5
+        }, 
+        {
+            "name": "aceBAK", 
+            "upstream": 166.5
+        }, 
+        {
+            "binding_motifs": [
+                "m136"
+            ], 
+            "name": "lrp", 
+            "upstream": 108.0
+        }, 
+        {
+            "name": "hslJ", 
+            "upstream": 16.0
+        }, 
+        {
+            "name": "arcZ", 
+            "upstream": 29.0
+        }, 
+        {
+            "name": "yrbL", 
+            "upstream": 28.0
+        }, 
+        {
+            "binding_motifs": [
+                "m140"
+            ], 
+            "name": "arcA", 
+            "upstream": 82.5
+        }, 
+        {
+            "name": "ykgR", 
+            "upstream": 41.5
+        }, 
+        {
+            "name": "yncE", 
+            "upstream": 41.5
+        }, 
+        {
+            "name": "malPQ", 
+            "upstream": 127.5
+        }, 
+        {
+            "name": "pncB", 
+            "upstream": 228.0
+        }, 
+        {
+            "name": "moaABCDE", 
+            "upstream": 259.5
+        }, 
+        {
+            "name": "ubiCA", 
+            "upstream": 12.0
+        }, 
+        {
+            "name": "norVW", 
+            "upstream": 157.5
+        }, 
+        {
+            "name": "fadE", 
+            "upstream": 74.0
+        }, 
+        {
+            "binding_motifs": [
+                "m149"
+            ], 
+            "name": "torR", 
+            "upstream": 11.0
+        }, 
+        {
+            "name": "fadH", 
+            "upstream": 80.5
+        }, 
+        {
+            "name": "uvrB", 
+            "upstream": 20.0
+        }, 
+        {
+            "name": "fadL", 
+            "upstream": 311.0
+        }, 
+        {
+            "name": "lolB-ispE-prs", 
+            "upstream": 48.5
+        }, 
+        {
+            "name": "malK-lamB-malM", 
+            "upstream": 230.5
+        }, 
+        {
+            "name": "fiu", 
+            "upstream": 170.5
+        }, 
+        {
+            "name": "ulaG", 
+            "upstream": 25.0
+        }, 
+        {
+            "name": "ompF", 
+            "upstream": 429.5
+        }, 
+        {
+            "name": "ptsHI-crr", 
+            "upstream": 78.5
+        }, 
+        {
+            "name": "galETKM", 
+            "upstream": 118.0
+        }, 
+        {
+            "name": "tsx", 
+            "upstream": 74.5
+        }, 
+        {
+            "name": "ompC", 
+            "upstream": 519.0
+        }, 
+        {
+            "name": "fimAICDFGH", 
+            "upstream": 341.0
+        }, 
+        {
+            "name": "ssb", 
+            "upstream": 228.0
+        }, 
+        {
+            "name": "tsr", 
+            "upstream": 10
+        }, 
+        {
+            "name": "tisB", 
+            "upstream": 28.0
+        }, 
+        {
+            "name": "artPIQM", 
+            "upstream": 50.5
+        }, 
+        {
+            "name": "feoABC", 
+            "upstream": 128.0
+        }, 
+        {
+            "name": "ygbA", 
+            "upstream": 118.0
+        }, 
+        {
+            "name": "aroF-tyrA", 
+            "upstream": 104.5
+        }, 
+        {
+            "name": "emrKY", 
+            "upstream": 73.5
+        }, 
+        {
+            "name": "gcvB", 
+            "upstream": 53.0
+        }, 
+        {
+            "name": "ydjM", 
+            "upstream": 19.0
+        }, 
+        {
+            "binding_motifs": [
+                "m173"
+            ], 
+            "name": "hipBA", 
+            "upstream": 127.5
+        }, 
+        {
+            "name": "lysT-valT-lysW", 
+            "upstream": 75.0
+        }, 
+        {
+            "binding_motifs": [
+                "m175"
+            ], 
+            "name": "ompR-envZ", 
+            "upstream": 129.0
+        }, 
+        {
+            "name": "nanATEK-yhcH", 
+            "upstream": 79.5
+        }, 
+        {
+            "name": "nadC", 
+            "upstream": 45.5
+        }, 
+        {
+            "name": "ftsK", 
+            "upstream": 10
+        }, 
+        {
+            "name": "cydDC", 
+            "upstream": 126.0
+        }, 
+        {
+            "name": "adrA", 
+            "upstream": 65.5
+        }, 
+        {
+            "binding_motifs": [
+                "m181"
+            ], 
+            "name": "ycjXF-tyrR", 
+            "upstream": 95.5
+        }, 
+        {
+            "name": "flhBAE", 
+            "upstream": 66.5
+        }, 
+        {
+            "name": "psiE", 
+            "upstream": 53.0
+        }, 
+        {
+            "name": "fliLMNOPQR", 
+            "upstream": 64.5
+        }, 
+        {
+            "name": "dapB", 
+            "upstream": 81.5
+        }, 
+        {
+            "name": "ybiT", 
+            "upstream": 97.5
+        }, 
+        {
+            "name": "hlyE", 
+            "upstream": 282.5
+        }, 
+        {
+            "name": "hdeAB-yhiD", 
+            "upstream": 159.0
+        }, 
+        {
+            "name": "dmsABC", 
+            "upstream": 100.5
+        }, 
+        {
+            "name": "fepB", 
+            "upstream": 185.5
+        }, 
+        {
+            "binding_motifs": [
+                "m191"
+            ], 
+            "name": "cytR", 
+            "upstream": 64.5
+        }, 
+        {
+            "name": "chiP-ybfN", 
+            "upstream": 22.0
+        }, 
+        {
+            "binding_motifs": [
+                "m193"
+            ], 
+            "name": "metR", 
+            "upstream": 196.5
+        }, 
+        {
+            "name": "mglBAC", 
+            "upstream": 59.5
+        }, 
+        {
+            "name": "poxB-ltaE-ybjT", 
+            "upstream": 60.5
+        }, 
+        {
+            "name": "yciGFE", 
+            "upstream": 88.5
+        }, 
+        {
+            "name": "ydiU", 
+            "upstream": 44.0
+        }, 
+        {
+            "name": "ytfE", 
+            "upstream": 50.0
+        }, 
+        {
+            "name": "metA", 
+            "upstream": 20.5
+        }, 
+        {
+            "name": "metF", 
+            "upstream": 29.0
+        }, 
+        {
+            "name": "metE", 
+            "upstream": 178.5
+        }, 
+        {
+            "binding_motifs": [
+                "m202"
+            ], 
+            "name": "metJ", 
+            "upstream": 10
+        }, 
+        {
+            "name": "metK", 
+            "upstream": 60.5
+        }, 
+        {
+            "name": "metH", 
+            "upstream": 124.0
+        }, 
+        {
+            "name": "glpTQ", 
+            "upstream": 521.0
+        }, 
+        {
+            "name": "asr", 
+            "upstream": 62.0
+        }, 
+        {
+            "name": "oppABCDF", 
+            "upstream": 619.0
+        }, 
+        {
+            "binding_motifs": [
+                "m208"
+            ], 
+            "name": "glpEGR", 
+            "upstream": 58.5
+        }, 
+        {
+            "name": "dcuD", 
+            "upstream": 100.5
+        }, 
+        {
+            "name": "cpxP", 
+            "upstream": 52.0
+        }, 
+        {
+            "name": "dcuC", 
+            "upstream": 340.0
+        }, 
+        {
+            "name": "recAX", 
+            "upstream": 20.0
+        }, 
+        {
+            "name": "sodB", 
+            "upstream": 61.0
+        }, 
+        {
+            "name": "yeiW", 
+            "upstream": 42.5
+        }, 
+        {
+            "name": "sodA", 
+            "upstream": 99.5
+        }, 
+        {
+            "name": "uvrA", 
+            "upstream": 148.5
+        }, 
+        {
+            "name": "fecABCDE", 
+            "upstream": 29.0
+        }, 
+        {
+            "name": "purHD", 
+            "upstream": 479.0
+        }, 
+        {
+            "name": "hybOABCDEFG", 
+            "upstream": 97.0
+        }, 
+        {
+            "name": "trpLEDCBA", 
+            "upstream": 19.5
+        }, 
+        {
+            "binding_motifs": [
+                "m221"
+            ], 
+            "name": "oxyR", 
+            "upstream": 32.0
+        }, 
+        {
+            "name": "oxyS", 
+            "upstream": 67.0
+        }, 
+        {
+            "name": "nrdHIEF", 
+            "upstream": 61.0
+        }, 
+        {
+            "binding_motifs": [
+                "m224"
+            ], 
+            "name": "argP", 
+            "upstream": 36.5
+        }, 
+        {
+            "binding_motifs": [
+                "m225"
+            ], 
+            "name": "argR", 
+            "upstream": 27.5
+        }, 
+        {
+            "name": "argU", 
+            "upstream": 65.0
+        }, 
+        {
+            "name": "argW", 
+            "upstream": 74.0
+        }, 
+        {
+            "name": "argI", 
+            "upstream": 22.5
+        }, 
+        {
+            "name": "argCBH", 
+            "upstream": 23.0
+        }, 
+        {
+            "name": "waaQGP-rfaS-waaBIJY-rfaZ-waaK", 
+            "upstream": 43.0
+        }, 
+        {
+            "name": "argO", 
+            "upstream": 89.5
+        }, 
+        {
+            "name": "argD", 
+            "upstream": 30.5
+        }, 
+        {
+            "name": "argE", 
+            "upstream": 23.0
+        }, 
+        {
+            "name": "argF", 
+            "upstream": 22.5
+        }, 
+        {
+            "name": "argG", 
+            "upstream": 183.0
+        }, 
+        {
+            "name": "dadAX", 
+            "upstream": 362.5
+        }, 
+        {
+            "name": "glyU", 
+            "upstream": 67.0
+        }, 
+        {
+            "name": "pspG", 
+            "upstream": 87.0
+        }, 
+        {
+            "name": "pgi", 
+            "upstream": 39.5
+        }, 
+        {
+            "name": "glyA", 
+            "upstream": 143.0
+        }, 
+        {
+            "name": "glpFKX", 
+            "upstream": 1123.0
+        }, 
+        {
+            "name": "rrsC-gltU-rrlC-rrfC", 
+            "upstream": 121.0
+        }, 
+        {
+            "name": "phoA-psiF", 
+            "upstream": 31.0
+        }, 
+        {
+            "name": "dsdXA", 
+            "upstream": 117.5
+        }, 
+        {
+            "name": "degP", 
+            "upstream": 223.0
+        }, 
+        {
+            "name": "dinD", 
+            "upstream": 10
+        }, 
+        {
+            "binding_motifs": [
+                "m247"
+            ], 
+            "name": "gadE-mdtEF", 
+            "upstream": 595.5
+        }, 
+        {
+            "name": "bamE", 
+            "upstream": 67.0
+        }, 
+        {
+            "name": "dinI", 
+            "upstream": 14.0
+        }, 
+        {
+            "binding_motifs": [
+                "m250"
+            ], 
+            "name": "melR", 
+            "upstream": 196.0
+        }, 
+        {
+            "name": "dinQ", 
+            "upstream": 100.0
+        }, 
+        {
+            "name": "fepA-entD", 
+            "upstream": 51.5
+        }, 
+        {
+            "name": "gntP", 
+            "upstream": 152.0
+        }, 
+        {
+            "name": "gntT", 
+            "upstream": 242.0
+        }, 
+        {
+            "name": "yjeV", 
+            "upstream": 68.0
+        }, 
+        {
+            "name": "acrAB", 
+            "upstream": 104.5
+        }, 
+        {
+            "name": "tonB", 
+            "upstream": 51.0
+        }, 
+        {
+            "name": "puuA", 
+            "upstream": 194.0
+        }, 
+        {
+            "name": "bhsA", 
+            "upstream": 36.5
+        }, 
+        {
+            "name": "msrA", 
+            "upstream": 40.0
+        }, 
+        {
+            "name": "ilvLXG_1G_2MEDA", 
+            "upstream": 321.0
+        }, 
+        {
+            "name": "serA", 
+            "upstream": 80.0
+        }, 
+        {
+            "name": "aroL-yaiA-aroM", 
+            "upstream": 101.5
+        }, 
+        {
+            "name": "cadBA", 
+            "upstream": 317.0
+        }, 
+        {
+            "name": "tyrB", 
+            "upstream": 42.5
+        }, 
+        {
+            "name": "gltBDF", 
+            "upstream": 352.0
+        }, 
+        {
+            "name": "rcnAB", 
+            "upstream": 46.5
+        }, 
+        {
+            "name": "nuoABCEFGHIJKLMN", 
+            "upstream": 235.5
+        }, 
+        {
+            "name": "molR_1", 
+            "upstream": 12.5
+        }, 
+        {
+            "name": "serT", 
+            "upstream": 61.0
+        }, 
+        {
+            "name": "cysJIH", 
+            "upstream": 124.0
+        }, 
+        {
+            "name": "ssuEADCB", 
+            "upstream": 210.0
+        }, 
+        {
+            "name": "gltI-sroC-gltJKL", 
+            "upstream": 67.5
+        }, 
+        {
+            "name": "tppB", 
+            "upstream": 45.5
+        }, 
+        {
+            "name": "galP", 
+            "upstream": 380.0
+        }, 
+        {
+            "name": "slp-dctR", 
+            "upstream": 120.5
+        }, 
+        {
+            "name": "leuQPV", 
+            "upstream": 71.0
+        }, 
+        {
+            "name": "lacZYA", 
+            "upstream": 494.0
+        }, 
+        {
+            "name": "erpA", 
+            "upstream": 28.0
+        }, 
+        {
+            "name": "adhE", 
+            "upstream": 247.0
+        }, 
+        {
+            "binding_motifs": [
+                "m281"
+            ], 
+            "name": "trpR", 
+            "upstream": 10
+        }, 
+        {
+            "name": "gspCDEFGHIJKLMO", 
+            "upstream": 156.0
+        }, 
+        {
+            "name": "cysDNC", 
+            "upstream": 85.0
+        }, 
+        {
+            "name": "deoCABD", 
+            "upstream": 1156.0
+        }, 
+        {
+            "name": "gyrB", 
+            "upstream": 109.0
+        }, 
+        {
+            "name": "gyrA", 
+            "upstream": 108.0
+        }, 
+        {
+            "name": "yhfA", 
+            "upstream": 101.0
+        }, 
+        {
+            "name": "yneM", 
+            "upstream": 35.0
+        }, 
+        {
+            "name": "nirBDC-cysG", 
+            "upstream": 319.5
+        }, 
+        {
+            "name": "serX", 
+            "upstream": 75.0
+        }, 
+        {
+            "name": "bamA-hlpA-lpxD-fabZ-lpxAB-rnhB-dnaE", 
+            "upstream": 101.0
+        }, 
+        {
+            "name": "sohB", 
+            "upstream": 19.0
+        }, 
+        {
+            "name": "ecnAB", 
+            "upstream": 18.5
+        }, 
+        {
+            "binding_motifs": [
+                "m294"
+            ], 
+            "name": "marRAB", 
+            "upstream": 98.0
+        }, 
+        {
+            "name": "guaBA", 
+            "upstream": 365.5
+        }, 
+        {
+            "name": "treBC", 
+            "upstream": 249.0
+        }, 
+        {
+            "name": "ybfE", 
+            "upstream": 85.5
+        }, 
+        {
+            "name": "tpx", 
+            "upstream": 22.0
+        }, 
+        {
+            "name": "cdd", 
+            "upstream": 103.5
+        }, 
+        {
+            "name": "grxA", 
+            "upstream": 66.0
+        }, 
+        {
+            "name": "acnB", 
+            "upstream": 171.5
+        }, 
+        {
+            "name": "acnA", 
+            "upstream": 51.5
+        }, 
+        {
+            "name": "ydeJ", 
+            "upstream": 404.5
+        }, 
+        {
+            "name": "aldB", 
+            "upstream": 158.0
+        }, 
+        {
+            "name": "aldA", 
+            "upstream": 170.0
+        }, 
+        {
+            "name": "rrsB-gltT-rrlB-rrfB", 
+            "upstream": 143.0
+        }, 
+        {
+            "name": "upp-uraA", 
+            "upstream": 61.5
+        }, 
+        {
+            "name": "dppABCDF", 
+            "upstream": 2010.5
+        }, 
+        {
+            "name": "casABCDE12", 
+            "upstream": 151.0
+        }, 
+        {
+            "name": "nagE", 
+            "upstream": 125.0
+        }, 
+        {
+            "name": "ybgA-phr", 
+            "upstream": 92.0
+        }, 
+        {
+            "name": "pstSCAB-phoU", 
+            "upstream": 70.5
+        }, 
+        {
+            "name": "yojI", 
+            "upstream": 412.5
+        }, 
+        {
+            "name": "osmC", 
+            "upstream": 62.0
+        }, 
+        {
+            "name": "osmE", 
+            "upstream": 112.0
+        }, 
+        {
+            "name": "gatYZABCD", 
+            "upstream": 40.5
+        }, 
+        {
+            "name": "pspABCDE", 
+            "upstream": 119.0
+        }, 
+        {
+            "name": "osmY", 
+            "upstream": 258.0
+        }, 
+        {
+            "name": "yebE", 
+            "upstream": 44.0
+        }, 
+        {
+            "name": "hcp-hcr", 
+            "upstream": 115.0
+        }, 
+        {
+            "name": "serC-aroA", 
+            "upstream": 134.0
+        }, 
+        {
+            "name": "leuX", 
+            "upstream": 75.0
+        }, 
+        {
+            "binding_motifs": [
+                "m323"
+            ], 
+            "name": "crp", 
+            "upstream": 239.0
+        }, 
+        {
+            "name": "aer", 
+            "upstream": 49.5
+        }, 
+        {
+            "name": "dps", 
+            "upstream": 102.0
+        }, 
+        {
+            "name": "fnrS", 
+            "upstream": 42.5
+        }, 
+        {
+            "name": "rrsH-ileV-alaV-rrlH-rrfH", 
+            "upstream": 181.0
+        }, 
+        {
+            "name": "ygjG", 
+            "upstream": 256.0
+        }, 
+        {
+            "name": "aroP", 
+            "upstream": 262.0
+        }, 
+        {
+            "name": "yfgF", 
+            "upstream": 41.5
+        }, 
+        {
+            "name": "tyrP", 
+            "upstream": 64.5
+        }, 
+        {
+            "name": "tomB-hha", 
+            "upstream": 178.0
+        }, 
+        {
+            "name": "rrsD-ileU-alaU-rrlD-rrfD-thrV-rrfF", 
+            "upstream": 174.0
+        }, 
+        {
+            "name": "dctA", 
+            "upstream": 106.0
+        }, 
+        {
+            "binding_motifs": [
+                "m335"
+            ], 
+            "name": "cmk-rpsA-ihfB/thrS-infC-rpmI-rplT-pheMST-ihfA", 
+            "upstream": 447.0
+        }, 
+        {
+            "name": "nlpA", 
+            "upstream": 91.5
+        }, 
+        {
+            "name": "aroG", 
+            "upstream": 38.0
+        }, 
+        {
+            "name": "aroH", 
+            "upstream": 37.5
+        }, 
+        {
+            "name": "ulaABCDEF", 
+            "upstream": 60.5
+        }, 
+        {
+            "name": "yccT", 
+            "upstream": 42.5
+        }, 
+        {
+            "name": "argX-hisR-leuT-proM", 
+            "upstream": 73.0
+        }, 
+        {
+            "name": "uvrD", 
+            "upstream": 11.0
+        }, 
+        {
+            "name": "ybaO", 
+            "upstream": 65.0
+        }, 
+        {
+            "name": "yjjQ-bglJ", 
+            "upstream": 123.5
+        }, 
+        {
+            "name": "manXYZ", 
+            "upstream": 133.0
+        }, 
+        {
+            "name": "glpABC", 
+            "upstream": 221.5
+        }, 
+        {
+            "name": "nrfABCDEFG", 
+            "upstream": 127.0
+        }, 
+        {
+            "binding_motifs": [
+                "m348"
+            ], 
+            "name": "iclR", 
+            "upstream": 54.0
+        }, 
+        {
+            "name": "inaA", 
+            "upstream": 41.5
+        }, 
+        {
+            "name": "uxuAB", 
+            "upstream": 159.5
+        }, 
+        {
+            "name": "hokE", 
+            "upstream": 81.5
+        }, 
+        {
+            "name": "rpoE-rseABC", 
+            "upstream": 67.0
+        }, 
+        {
+            "binding_motifs": [
+                "m353"
+            ], 
+            "name": "rhaSR", 
+            "upstream": 111.5
+        }, 
+        {
+            "name": "preTA", 
+            "upstream": 57.5
+        }, 
+        {
+            "name": "atoDAEB", 
+            "upstream": 138.5
+        }, 
+        {
+            "binding_motifs": [
+                "m356"
+            ], 
+            "name": "fnr", 
+            "upstream": 104.0
+        }, 
+        {
+            "name": "nlpD-rpoS", 
+            "upstream": 202.5
+        }, 
+        {
+            "name": "tyrTV-tpr", 
+            "upstream": 129.0
+        }, 
+        {
+            "name": "modABC", 
+            "upstream": 62.5
+        }, 
+        {
+            "name": "csiE", 
+            "upstream": 42.5
+        }, 
+        {
+            "name": "wrbA-yccJ", 
+            "upstream": 166.5
+        }, 
+        {
+            "name": "ung", 
+            "upstream": 81.0
+        }, 
+        {
+            "name": "thrS-infC-rpmI-rplT-pheMST-ihfA", 
+            "upstream": 127.0
+        }, 
+        {
+            "name": "fdhF", 
+            "upstream": 129.5
+        }, 
+        {
+            "name": "putP", 
+            "upstream": 106.0
+        }, 
+        {
+            "name": "yibD", 
+            "upstream": 115.0
+        }, 
+        {
+            "name": "ruvAB", 
+            "upstream": 72.5
+        }, 
+        {
+            "name": "acrD", 
+            "upstream": 127.5
+        }, 
+        {
+            "name": "flgAMN", 
+            "upstream": 67.5
+        }, 
+        {
+            "name": "artJ", 
+            "upstream": 48.5
+        }, 
+        {
+            "name": "uspB", 
+            "upstream": 54.0
+        }, 
+        {
+            "name": "agaS-kbaY-agaBCDI", 
+            "upstream": 301.0
+        }, 
+        {
+            "name": "exbBD", 
+            "upstream": 46.0
+        }, 
+        {
+            "name": "fliAZY", 
+            "upstream": 225.0
+        }, 
+        {
+            "name": "cydAB", 
+            "upstream": 450.0
+        }, 
+        {
+            "name": "metNIQ", 
+            "upstream": 25.5
+        }, 
+        {
+            "name": "polB", 
+            "upstream": 40.5
+        }, 
+        {
+            "name": "polA", 
+            "upstream": 101.0
+        }, 
+        {
+            "name": "hyaABCDEF", 
+            "upstream": 74.0
+        }, 
+        {
+            "name": "fadBA", 
+            "upstream": 38.0
+        }, 
+        {
+            "name": "ompA", 
+            "upstream": 32.0
+        }, 
+        {
+            "name": "alaWX", 
+            "upstream": 76.0
+        }, 
+        {
+            "name": "cvpA-purF-ubiX", 
+            "upstream": 28.5
+        }, 
+        {
+            "name": "hmp", 
+            "upstream": 100.0
+        }, 
+        {
+            "name": "rrsE-gltV-rrlE-rrfE", 
+            "upstream": 170.0
+        }, 
+        {
+            "binding_motifs": [
+                "m386"
+            ], 
+            "name": "agaR", 
+            "upstream": 31.0
+        }, 
+        {
+            "name": "flxA", 
+            "upstream": 72.0
+        }, 
+        {
+            "name": "metBL", 
+            "upstream": 56.5
+        }, 
+        {
+            "name": "speAB", 
+            "upstream": 11.5
+        }, 
+        {
+            "name": "iraM", 
+            "upstream": 199.5
+        }, 
+        {
+            "binding_motifs": [
+                "m391"
+            ], 
+            "name": "phoBR", 
+            "upstream": 31.0
+        }, 
+        {
+            "binding_motifs": [
+                "m392"
+            ], 
+            "name": "hypABCDE-fhlA", 
+            "upstream": 751.5
+        }, 
+        {
+            "name": "murQP-yfeW", 
+            "upstream": 79.5
+        }, 
+        {
+            "name": "sufABCDSE", 
+            "upstream": 232.0
+        }, 
+        {
+            "name": "purEK", 
+            "upstream": 37.5
+        }, 
+        {
+            "name": "csgBAC", 
+            "upstream": 472.0
+        }, 
+        {
+            "binding_motifs": [
+                "m397"
+            ], 
+            "name": "fldA-uof-fur", 
+            "upstream": 84.5
+        }, 
+        {
+            "name": "bglGFB", 
+            "upstream": 811.5
+        }, 
+        {
+            "name": "pepD", 
+            "upstream": 10
+        }, 
+        {
+            "name": "glgS", 
+            "upstream": 40.5
+        }, 
+        {
+            "name": "yaeQJ-nlpE", 
+            "upstream": 73.5
+        }, 
+        {
+            "name": "gpmA", 
+            "upstream": 10
+        }, 
+        {
+            "name": "spy", 
+            "upstream": 157.5
+        }, 
+        {
+            "name": "efeU_1U_2", 
+            "upstream": 54.5
+        }, 
+        {
+            "name": "yidQ", 
+            "upstream": 254.0
+        }, 
+        {
+            "name": "gapA-yeaD", 
+            "upstream": 41.5
+        }, 
+        {
+            "name": "glnHPQ", 
+            "upstream": 152.0
+        }, 
+        {
+            "name": "dsbG", 
+            "upstream": 77.0
+        }, 
+        {
+            "name": "uidABC", 
+            "upstream": 182.0
+        }, 
+        {
+            "binding_motifs": [
+                "m410"
+            ], 
+            "name": "xylFGHR", 
+            "upstream": 202.5
+        }, 
+        {
+            "name": "rdoA-dsbA", 
+            "upstream": 49.0
+        }, 
+        {
+            "name": "mhpABCDFE", 
+            "upstream": 95.5
+        }, 
+        {
+            "name": "dinB-yafNOP", 
+            "upstream": 10
+        }, 
+        {
+            "name": "ahpCF", 
+            "upstream": 103.5
+        }, 
+        {
+            "name": "tauABCD", 
+            "upstream": 202.0
+        }, 
+        {
+            "name": "flgBCDEFGHIJ", 
+            "upstream": 67.5
+        }, 
+        {
+            "name": "gcvTHP", 
+            "upstream": 264.5
+        }, 
+        {
+            "name": "frdABCD", 
+            "upstream": 118.0
+        }, 
+        {
+            "name": "ycfS", 
+            "upstream": 53.5
+        }, 
+        {
+            "name": "rhaT", 
+            "upstream": 184.0
+        }, 
+        {
+            "name": "fimB", 
+            "upstream": 743.5
+        }, 
+        {
+            "name": "slyB", 
+            "upstream": 33.0
+        }, 
+        {
+            "name": "fes-ybdZ-entF-fepE", 
+            "upstream": 143.5
+        }, 
+        {
+            "name": "uxaB", 
+            "upstream": 146.5
+        }, 
+        {
+            "name": "topA", 
+            "upstream": 276.0
+        }, 
+        {
+            "name": "yecR", 
+            "upstream": 67.5
+        }, 
+        {
+            "name": "fadD-sroD", 
+            "upstream": 106.0
+        }, 
+        {
+            "name": "valUXY-lysV", 
+            "upstream": 114.0
+        }, 
+        {
+            "name": "rplM-rpsI", 
+            "upstream": 17.0
+        }, 
+        {
+            "name": "hofMNOP", 
+            "upstream": 82.0
+        }, 
+        {
+            "name": "fumA", 
+            "upstream": 402.5
+        }, 
+        {
+            "name": "fumC", 
+            "upstream": 66.0
+        }, 
+        {
+            "name": "ptsG", 
+            "upstream": 288.0
+        }, 
+        {
+            "name": "umuDC", 
+            "upstream": 20.5
+        }, 
+        {
+            "name": "amn", 
+            "upstream": 33.0
+        }, 
+        {
+            "name": "pagP", 
+            "upstream": 32.0
+        }, 
+        {
+            "name": "fixABCX", 
+            "upstream": 197.5
+        }, 
+        {
+            "name": "proVWX", 
+            "upstream": 203.0
+        }, 
+        {
+            "name": "paaABCDEFGHIJK", 
+            "upstream": 145.0
+        }, 
+        {
+            "name": "fliFGHIJK", 
+            "upstream": 85.5
+        }, 
+        {
+            "name": "argT-hisJQMP", 
+            "upstream": 83.5
+        }, 
+        {
+            "name": "ychH", 
+            "upstream": 41.5
+        }, 
+        {
+            "name": "fliDST", 
+            "upstream": 68.5
+        }, 
+        {
+            "name": "aspA-dcuA", 
+            "upstream": 112.0
+        }, 
+        {
+            "name": "rhaBAD", 
+            "upstream": 122.5
+        }, 
+        {
+            "name": "nrdAB-yfaE", 
+            "upstream": 360.0
+        }, 
+        {
+            "name": "sulA", 
+            "upstream": 10
+        }, 
+        {
+            "binding_motifs": [
+                "m448"
+            ], 
+            "name": "flhDC", 
+            "upstream": 260.5
+        }, 
+        {
+            "binding_motifs": [
+                "m449"
+            ], 
+            "name": "araC", 
+            "upstream": 234.0
+        }, 
+        {
+            "name": "fhuF", 
+            "upstream": 107.0
+        }, 
+        {
+            "name": "yhhY", 
+            "upstream": 77.0
+        }, 
+        {
+            "name": "araE", 
+            "upstream": 94.5
+        }, 
+        {
+            "name": "araJ", 
+            "upstream": 134.0
+        }, 
+        {
+            "name": "lsrACDBFG-tam", 
+            "upstream": 154.0
+        }, 
+        {
+            "binding_motifs": [
+                "m455"
+            ], 
+            "name": "narXL", 
+            "upstream": 249.0
+        }, 
+        {
+            "name": "fdnGHI", 
+            "upstream": 124.0
+        }, 
+        {
+            "name": "proP", 
+            "upstream": 122.5
+        }, 
+        {
+            "name": "cirA", 
+            "upstream": 35.0
+        }, 
+        {
+            "name": "proK", 
+            "upstream": 76.0
+        }, 
+        {
+            "name": "grpE", 
+            "upstream": 243.5
+        }, 
+        {
+            "name": "sdhCDAB-sucABCD", 
+            "upstream": 468.0
+        }, 
+        {
+            "name": "fhuE", 
+            "upstream": 25.0
+        }, 
+        {
+            "name": "fecIR", 
+            "upstream": 14.0
+        }, 
+        {
+            "binding_motifs": [
+                "m464"
+            ], 
+            "name": "dusB-fis", 
+            "upstream": 278.5
+        }, 
+        {
+            "name": "ynfEFGH-dmsD", 
+            "upstream": 40.5
+        }, 
+        {
+            "name": "icd", 
+            "upstream": 86.5
+        }, 
+        {
+            "name": "omrB", 
+            "upstream": 71.5
+        }, 
+        {
+            "name": "yebG", 
+            "upstream": 10
+        }, 
+        {
+            "name": "omrA", 
+            "upstream": 70.5
+        }, 
+        {
+            "name": "yccA", 
+            "upstream": 53.0
+        }, 
+        {
+            "name": "ugpBAECQ", 
+            "upstream": 52.0
+        }, 
+        {
+            "name": "borD", 
+            "upstream": 33.0
+        }, 
+        {
+            "name": "mgrR", 
+            "upstream": 44.0
+        }, 
+        {
+            "name": "ydhYVWXUT", 
+            "upstream": 57.5
+        }, 
+        {
+            "name": "hycABCDEFGHI", 
+            "upstream": 192.0
+        }, 
+        {
+            "name": "thrU-tyrU-glyT-thrT-tufB", 
+            "upstream": 123.0
+        }, 
+        {
+            "name": "hdeD", 
+            "upstream": 137.0
+        }, 
+        {
+            "name": "acs-yjcH-actP", 
+            "upstream": 265.0
+        }, 
+        {
+            "name": "ndh", 
+            "upstream": 191.0
+        }, 
+        {
+            "name": "symE", 
+            "upstream": 10
+        }, 
+        {
+            "name": "pheV", 
+            "upstream": 75.0
+        }, 
+        {
+            "name": "pheU", 
+            "upstream": 75.0
+        }, 
+        {
+            "name": "carAB", 
+            "upstream": 318.5
+        }, 
+        {
+            "name": "epd-pgk-fbaA", 
+            "upstream": 74.0
+        }, 
+        {
+            "name": "purMN", 
+            "upstream": 27.5
+        }, 
+        {
+            "name": "ybiS", 
+            "upstream": 63.5
+        }, 
+        {
+            "name": "mraZ-rsmH-ftsLI-murEF-mraY-murD-ftsW-murGC-ddlB-ftsQAZ-lpxC", 
+            "upstream": 166.5
+        }, 
+        {
+            "name": "mdh", 
+            "upstream": 87.5
+        }, 
+        {
+            "name": "entCEBAH", 
+            "upstream": 325.5
+        }, 
+        {
+            "name": "melAB", 
+            "upstream": 237.5
+        }, 
+        {
+            "name": "mgrB", 
+            "upstream": 33.0
+        }, 
+        {
+            "name": "folE-yeiB", 
+            "upstream": 49.5
+        }, 
+        {
+            "name": "garPLRK-rnpB", 
+            "upstream": 246.0
+        }, 
+        {
+            "name": "ppdD-hofBC", 
+            "upstream": 20.5
+        }, 
+        {
+            "name": "rrsG-gltW-rrlG-rrfG", 
+            "upstream": 112.0
+        }, 
+        {
+            "name": "hemA-prfA-prmC", 
+            "upstream": 24.5
+        }, 
+        {
+            "binding_motifs": [
+                "m497"
+            ], 
+            "name": "csgDEFG", 
+            "upstream": 610.0
+        }, 
+        {
+            "name": "astCADBE", 
+            "upstream": 275.0
+        }, 
+        {
+            "name": "gdhA", 
+            "upstream": 126.0
+        }, 
+        {
+            "name": "fliE", 
+            "upstream": 102.0
+        }, 
+        {
+            "binding_motifs": [
+                "m501"
+            ], 
+            "name": "phoPQ", 
+            "upstream": 33.0
+        }, 
+        {
+            "name": "abgABT-ogt", 
+            "upstream": 83.0
+        }, 
+        {
+            "binding_motifs": [
+                "m503"
+            ], 
+            "name": "gntRKU", 
+            "upstream": 84.0
+        }, 
+        {
+            "name": "mtr", 
+            "upstream": 106.5
+        }, 
+        {
+            "name": "betT", 
+            "upstream": 45.0
+        }, 
+        {
+            "name": "ftnA", 
+            "upstream": 147.0
+        }, 
+        {
+            "name": "ftnB", 
+            "upstream": 61.0
+        }, 
+        {
+            "binding_motifs": [
+                "m508"
+            ], 
+            "name": "nagBACD", 
+            "upstream": 104.5
+        }, 
+        {
+            "name": "glcDEFGBA", 
+            "upstream": 176.0
+        }, 
+        {
+            "binding_motifs": [
+                "m510"
+            ], 
+            "name": "iscRSUA", 
+            "upstream": 53.0
+        }, 
+        {
+            "name": "micF", 
+            "upstream": 328.5
+        }, 
+        {
+            "name": "nfsB", 
+            "upstream": 43.5
+        }, 
+        {
+            "name": "exuT", 
+            "upstream": 161.5
+        }, 
+        {
+            "name": "cstA", 
+            "upstream": 89.5
+        }, 
+        {
+            "name": "ygaC", 
+            "upstream": 10
+        }, 
+        {
+            "binding_motifs": [
+                "m516"
+            ], 
+            "name": "glnALG", 
+            "upstream": 211.0
+        }, 
+        {
+            "name": "cyoABCDE", 
+            "upstream": 268.5
+        }, 
+        {
+            "binding_motifs": [
+                "m518"
+            ], 
+            "name": "soxS", 
+            "upstream": 25.5
+        }, 
+        {
+            "name": "ampDE", 
+            "upstream": 10
+        }, 
+        {
+            "name": "rnlAB", 
+            "upstream": 29.5
+        }, 
+        {
+            "binding_motifs": [
+                "m521"
+            ], 
+            "name": "nac", 
+            "upstream": 152.0
+        }, 
+        {
+            "name": "nrdDG", 
+            "upstream": 74.0
+        }, 
+        {
+            "name": "gntX-nfuA", 
+            "upstream": 45.5
+        }, 
+        {
+            "name": "hpt", 
+            "upstream": 65.5
+        }, 
+        {
+            "name": "cysPUWAM", 
+            "upstream": 65.0
+        }, 
+        {
+            "name": "fldB", 
+            "upstream": 49.0
+        }, 
+        {
+            "binding_motifs": [
+                "m527"
+            ], 
+            "name": "dgsA-ynfK", 
+            "upstream": 86.5
+        }, 
+        {
+            "name": "motAB-cheAW", 
+            "upstream": 37.0
+        }, 
+        {
+            "name": "nmpC", 
+            "upstream": 161.0
+        }, 
+        {
+            "name": "psd-yjeP", 
+            "upstream": 151.0
+        }, 
+        {
+            "name": "sbmC", 
+            "upstream": 59.0
+        }, 
+        {
+            "name": "idnK", 
+            "upstream": 120.5
+        }, 
+        {
+            "name": "lysP", 
+            "upstream": 82.5
+        }, 
+        {
+            "name": "pyrD", 
+            "upstream": 58.5
+        }, 
+        {
+            "name": "pyrC", 
+            "upstream": 88.5
+        }, 
+        {
+            "name": "lysU", 
+            "upstream": 58.0
+        }, 
+        {
+            "name": "edd-eda", 
+            "upstream": 222.0
+        }, 
+        {
+            "name": "bdm-sra", 
+            "upstream": 41.5
+        }, 
+        {
+            "name": "yhbTS", 
+            "upstream": 28.0
+        }, 
+        {
+            "name": "bacA", 
+            "upstream": 292.0
+        }, 
+        {
+            "name": "glpD", 
+            "upstream": 519.0
+        }, 
+        {
+            "binding_motifs": [
+                "m542"
+            ], 
+            "name": "hns", 
+            "upstream": 307.0
+        }, 
+        {
+            "name": "phoE", 
+            "upstream": 113.0
+        }, 
+        {
+            "name": "ansB", 
+            "upstream": 91.5
+        }
+    ], 
+    "name": "E coli K12", 
+    "motifs": {
+        "m510": "wAtAvCCvmyYrrwwTrStsGggtaw", 
+        "m294": "kyrawmrRtrSsrymwkycwvw", 
+        "m101": "GTwamrykbsGtaamr", 
+        "m107": "mkCckktGysryratmwAttktCcsytScS", 
+        "m105": "asGCAAACGtTTkCstt", 
+        "m356": "tttGatstaaatCaa", 
+        "m250": "GaAramtCwGattTwCtGs", 
+        "m92": "ycmkkGmTymT", 
+        "m353": "wyKmsrwGGKyGssArTd", 
+        "m497": "rYGGsTsabYya", 
+        "m464": "ryyGsybrwwwwttvrsCrrwy", 
+        "m392": "tmktgmkkTkmrwmrmRwmradRvtGwcGAaaksayrtkTt", 
+        "m348": "ryytYYGm", 
+        "m391": "cytktCayrmarctGtvaCmw", 
+        "m397": "atGakaaysrttmkCa", 
+        "m70": "rCTGkayrtmhatmCAGyatw", 
+        "m191": "ksksakbsvAwttykkraryvrktkysMykyghwGySrtrs", 
+        "m193": "rayswkGarmrammyyCrykTCsss", 
+        "m516": "wGCmCcAwawTGGtGCAw", 
+        "m58": "mCkkaktsmtwtyrrmwcktmcwwatCrcymryCsGtytakav", 
+        "m208": "wwwatGykCGwwwhSGmdCrt", 
+        "m221": "bswdsswMgmwyttayCkatygyaymartsramvkrwymrvymvaa", 
+        "m1": "KwawwsGmsrSvdyKSatwrds", 
+        "m225": "ymkwktSmmtawwaaysCa", 
+        "m224": "tkrmCmayaaSCSr", 
+        "m449": "kayssrCyaawctkmtSyr", 
+        "m202": "TrGAYGTCy", 
+        "m323": "wwwtGtGatsyrsrtCaCrtwtt", 
+        "m281": "GwACTmGtkwrCtrGTrCr", 
+        "m136": "grawwwtabbCtk", 
+        "m133": "TrTsSAYaar", 
+        "m503": "tGTtrCsSrTAwCAgdwrvwr", 
+        "m131": "tGkaAvCGrTthCAytg", 
+        "m501": "yyrtttrksvwykGttkA", 
+        "m173": "TATCCsSkmkmGCGGATAa", 
+        "m410": "krysaawwwyYkyaaTyGh", 
+        "m175": "GtwaCmkmwystwaMaktktk", 
+        "m542": "yvtGvmaTrkytSrck", 
+        "m508": "ywttycrYSayrMRAawwrtsykS", 
+        "m521": "CaywwKCdtrtsmkww", 
+        "m386": "rmvdwbCrwtwtswttCGtwtkkyt", 
+        "m527": "ttaTTtyRmwGYGCGaaatwaats", 
+        "m448": "TtwwcSssckawrwarc", 
+        "m518": "ttrryvsrkwrtGsmwway", 
+        "m247": "mYtaGGmkkttRYtAttkavA", 
+        "m455": "kTaCycmk", 
+        "m140": "hysksrykbvkksaswmkktwgwtwacmayhakttaamtmaymkkyracmwwcsbdbvsgbs", 
+        "m181": "awgtGtaawkwaatcttkACrsm", 
+        "m335": "watCarskvvttrm", 
+        "m149": "mKCkRttCAtA"
+    }
 }

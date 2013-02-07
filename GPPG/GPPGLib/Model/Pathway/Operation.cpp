@@ -134,7 +134,7 @@ PromoterData* randomPromoter(const GlobalInfo& info) {
 		int tf = info.getTF(i);
 		const vector<int>& motifs = info.bindingMotifsForTF(tf);
 		// Get a motif ID for the TF
-		data->set(i, 0, (PTYPE) (motifs[0]+1) );
+		data->set(tf, 0, (PTYPE) (motifs[0]+1) );
 	}
 	
 	return data;
