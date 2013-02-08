@@ -90,7 +90,7 @@ namespace GPPG {
 				
 				~BindingSiteChange(); 
 				
-				std::string toString() const;
+				std::string toString() ;
 				
 				PromoterData* evaluate();
 				

@@ -20,7 +20,7 @@ namespace GPPG {
 		namespace TransReg {
 			
 		typedef unsigned short PTYPE;	
-		typedef unsigned short STYPE;
+		typedef short STYPE;
 		
 			class GlobalInfo  {
 			public:
@@ -73,7 +73,7 @@ namespace GPPG {
 				void initialize();
 				
 				std::vector<std::string> _genes, _motifs;
-				std::vector<int> _regions, _tfs, _offset;
+				std::vector<int> _regions, _tfs, _offset, _region2gene;
 				// Maps MotifID -> TFIDs, used in creating interaction network
 				std::map< int, std::vector<int> > _binding, _bindingTF;
 				std::map< std::string, std::string > _motifSeq;

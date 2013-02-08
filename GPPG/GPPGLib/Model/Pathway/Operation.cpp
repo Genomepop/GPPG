@@ -1,4 +1,4 @@
-/*
+ /*
  *  Operation.cpp
  *  Demo
  *
@@ -125,7 +125,7 @@ const GlobalInfo& PathwayRoot::info() const { return data()->info(); }
 
 PromoterData* randomPromoter(const GlobalInfo& info) {
 	PromoterData* data = new PromoterData( info );
-	//data->clearData();
+	data->clearData();
 	int numMotifs = data->numMotifs();
 	for (int i=0; i<info.numGenes(); i++) {
 		data->set(i, 0, (PTYPE)(random01()*numMotifs)+1);
@@ -188,11 +188,13 @@ OpPathwayBase(1, op.info(), op), _locs(locs), _c(dest), _deltaSites(), _noSiteEx
 	}
 	_noSiteExists = false;
 	for(map<int,STYPE>::iterator it_map = _deltaSites.begin(); it_map != _deltaSites.end(); it_map++) {
-		if(it_map->second == 0) {
+		//std::cout << it_map->first << ", " << it_map->second << " ";
+		if(it_map->second <= 0) {
 			_noSiteExists = true;
+			break;
 		}
 	}
-	
+	//std::cout << _noSiteExists << std::endl;
 }
 
 
@@ -217,10 +219,12 @@ PromoterData* BindingSiteChange::evaluate() {
 	return sd;
 }
 
-std::string BindingSiteChange::toString() const {
+std::string BindingSiteChange::toString()  {
 	std::ostringstream output;
 	for (int i=0; i<numSites(); i++) {
-		output << getSite(i) << "->" << getMutation(i);
+		int gi = info().getGeneForRegion(getSite(i));
+		int ri = getSite(i)-info().offset(gi);
+		output << "(" << gi << "," << ri << ")" << parent(0)->get(getSite(i)) << "->" << getMutation(i);
 		if (i < numSites()-1) output << ", ";
 	}
 	return output.str();
@@ -252,7 +256,7 @@ STYPE BindingSiteChange::proxyNumSitesForGene(int i) {
 	return parent(0)->numSitesForGene(i);
 }
 bool BindingSiteChange::areAllGenesRegulated() const {
-	return _noSiteExists;
+	return !_noSiteExists;
 }
 
 BindingSiteMutator::BindingSiteMutator( double cost, double u, int motifOverlap, const vector<double>& motifGainRates, const vector<double>& motifProbLoss) :
@@ -308,7 +312,7 @@ OpPathway* BindingSiteMutator::mutate( OpPathway& g ) const {
 		for (int j=0; j<numGains; j++) {
 			loc = (int)(random01()*totalRegions);
 			c = g.get( loc );
-			if (c != (PTYPE)i) {
+			if (c != (PTYPE)(i+1)) {
 				// Save loc, ->i
 				sites->push_back((PTYPE)(i+1));
 				locs->push_back(loc);
@@ -326,6 +330,7 @@ OpPathway* BindingSiteMutator::mutate( OpPathway& g ) const {
 	
 	// Create mutation
 	BindingSiteChange* bsc = new BindingSiteChange(g, locs, sites);
+	//std::cout << bsc->toString() << std::endl;
 	bsc->setCost( cost() );
 	return bsc;
 }

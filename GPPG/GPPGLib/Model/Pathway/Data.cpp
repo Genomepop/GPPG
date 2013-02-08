@@ -44,7 +44,12 @@ void GlobalInfo::initialize() {
 		offset += _regions[i];
 	}
 	_totalRegions = offset;
-	
+	_region2gene.resize(_totalRegions);
+	for (int i=0; i<_offset.size(); i++) {
+		for (int j=0; j<_regions[i]; j++) {
+			_region2gene[_offset[i]+j] = i;
+		}
+	}
 	// Create TF->Motif
 	for( map<int, vector<int> >::iterator it=_binding.begin(); it!=_binding.end(); it++ ) {
 		vector<int>& v = it->second;
@@ -78,8 +83,10 @@ const std::string& GlobalInfo::getMotifSequence(const std::string& motifName) co
 int GlobalInfo::getTF(int i) const { return _tfs[i]; }
 
 int GlobalInfo::getGeneForRegion(int i) const {
-	return lower_bound( _offset.begin(), _offset.end(), i )-_offset.begin();
+	//return lower_bound( _offset.begin(), _offset.end(), i )-_offset.begin()-1;
+	return _region2gene[i];
 }
+
 
 const std::vector<int>& GlobalInfo::binding(int i) const {
 	return _binding.find(i)->second;
@@ -107,7 +114,7 @@ PromoterData::~PromoterData() {
 PromoterData* PromoterData::copy() const {
 	PromoterData* pd = new PromoterData(_info);
 	memcpy( pd->_pool, _pool, sizeof(PTYPE)*_info.totalRegions());
-	memcpy( pd->_numSites, _numSites, sizeof(short)*_info.numGenes());
+	memcpy( pd->_numSites, _numSites, sizeof(STYPE)*_info.numGenes());
 	return pd;
 }
 
