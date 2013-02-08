@@ -20,7 +20,7 @@ namespace GPPG {
 		namespace TransReg {
 			
 		typedef unsigned short PTYPE;	
-		typedef short STYPE;
+		typedef int STYPE;
 		
 			class GlobalInfo  {
 			public:

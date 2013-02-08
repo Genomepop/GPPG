@@ -200,10 +200,11 @@ void BaseOperation::setRequests(int i) {
 	_requests = i;
 	if(_requests < 0) _requests = 0;
 	#ifdef UBIGRAPH
+	/*
 	double v = _requests/1.0;
 	v = (v > 5) ? 5 : v+1;
 	if(key() >= 0) ubigraph_set_vertex_attribute(key(), "size", TToStr<double>(v).c_str());
-	
+	*/
 	#endif
 }
 void BaseOperation::incrRequests(int i) {

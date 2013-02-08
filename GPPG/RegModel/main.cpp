@@ -138,7 +138,7 @@ GlobalInfo* readGenomeData(const string& filename) {
 		return 0;
 	}
 	
-	cout << root << endl;
+	//cout << root << endl;
 	
 	// Read Motifs
 	Json::Value cmos = root["motifs"];
@@ -244,7 +244,7 @@ EvoSimulator* createSimulator( const Json::Value& config ) {
 		return 0;
 	}
 	
-	cout << *info << endl;
+	//cout << *info << endl;
 	
 	// Use info to generate binding site mutator
 	double u = config["sequence_mutation"].asDouble();
@@ -332,7 +332,7 @@ int main (int argc, char * const argv[])
 		cout << "Failed to parse configuration\n" << reader.getFormatedErrorMessages();
 		return -1;
 	}
-	cout << root << endl;
+	//cout << root << endl;
 	
 	createAndRunSimulation(root);
 	

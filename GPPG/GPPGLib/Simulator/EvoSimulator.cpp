@@ -267,7 +267,7 @@ void EvoSimulator::evolve(long N, long G) {
 			}
 
 			// Store it			
-			//TODO: Put defunct (fitness = 0) genotypes at the back, and valid genotypes in the front, then 
+			// Put defunct (fitness = 0) genotypes at the back, and valid genotypes in the front
 			if(gOut->fitness() > 0) {
 				indOut[valid++] = gOut;
 			} else {
@@ -278,9 +278,14 @@ void EvoSimulator::evolve(long N, long G) {
 		// Resample from the valid genotypes to populate the defunct individuals
 		if(valid == 0) // There are no valid genotypes left!!
 			throw "No valid genotypes left!";
-
-		int rand_g;
-		for(int i=invalid+1; i<N; i++) {
+		/*
+		cout << "[";
+		for(int i=0; i<N; i++) {
+			cout << " " << indOut[i]->order();
+		}
+		cout << "]\n";
+		*/
+		for(int i=valid; i<N; i++) {
 			// Sample from valid portion of array
 			IGenotype* rand_g = indOut[random01()*valid];
 			rand_g->setFrequency( rand_g->frequency() + one_individual );
@@ -288,7 +293,13 @@ void EvoSimulator::evolve(long N, long G) {
 			GenotypeSimulator::removeGenotype( indOut[i] );
 			indOut[i] = rand_g;
 		}
-		
+		/*
+		cout << "[";
+		for(int i=0; i<N; i++) {
+			cout << " " << indOut[i]->fitness();
+		}
+		cout << "]\n";
+		*/
 		// Get rid of genotypes which are not present in the subsequent generation
 		compactActive(N);
 
