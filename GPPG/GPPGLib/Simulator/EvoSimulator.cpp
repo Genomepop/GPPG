@@ -191,7 +191,7 @@ void EvoSimulator::evolve(long N, long G) {
 	else if(_recombinators.size() > 1)
 		throw "There can only be one recombinator right now";
 	
-	int p1,p2;
+	int p1,p2,valid,invalid;
 	IGenotype *g1, *g2, *gOut, *gIn, *gOut_;
 #ifdef DEBUG
 	time_t tstart, tend;
@@ -209,6 +209,8 @@ void EvoSimulator::evolve(long N, long G) {
 		cout <<	_curr_gen << " Resampling " << N << " individuals.\n";
 #endif
 		//#pragma omp parallel for private(p1,p2,g1,g2,gOut,gIn) num_threads(4)
+		valid = 0;
+		invalid = N-1;
 		for (int i=0; i<N; i++) {
 			// For each individual in the next generation, select a random parent
 			//#pragma omp critical
@@ -252,9 +254,11 @@ void EvoSimulator::evolve(long N, long G) {
 			if (gOut != g1 && gOut != g2) {
 				// A new genotype has been created, so we need to record it
 				// We assume that any new genotype has never been seen before
-				gOut->setFrequency(one_individual);
-				GenotypeSimulator::addGenotype(gOut);
-				activateGenotype( gOut, one_individual );
+					GenotypeSimulator::addGenotype(gOut);
+				if (gOut->fitness() > 0) {
+					gOut->setFrequency(one_individual);					
+					activateGenotype( gOut, one_individual );
+				}
 			} else {
 				//#pragma omp critical
 				{
@@ -263,8 +267,26 @@ void EvoSimulator::evolve(long N, long G) {
 			}
 
 			// Store it			
-			//TODO: Put defunct (fitness = 0) genotypes at the back, and valid genotypes in the front, then resample from the valid genotypes to populate the defunct individuals
-			indOut[i] = gOut;
+			//TODO: Put defunct (fitness = 0) genotypes at the back, and valid genotypes in the front, then 
+			if(gOut->fitness() > 0) {
+				indOut[valid++] = gOut;
+			} else {
+				indOut[invalid--] = gOut;
+			}
+		}
+		
+		// Resample from the valid genotypes to populate the defunct individuals
+		if(valid == 0) // There are no valid genotypes left!!
+			throw "No valid genotypes left!";
+
+		int rand_g;
+		for(int i=invalid+1; i<N; i++) {
+			// Sample from valid portion of array
+			IGenotype* rand_g = indOut[random01()*valid];
+			rand_g->setFrequency( rand_g->frequency() + one_individual );
+			//cout << "Resampled " << i << " " << indOut[i]->fitness() << " with " << rand_g->fitness() << endl;
+			GenotypeSimulator::removeGenotype( indOut[i] );
+			indOut[i] = rand_g;
 		}
 		
 		// Get rid of genotypes which are not present in the subsequent generation

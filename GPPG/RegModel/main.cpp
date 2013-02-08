@@ -290,7 +290,7 @@ void createAndRunSimulation( const Json::Value& config ) {
 		perfFile->open( output["performance"].asCString() );
 	}
 
-	runSimulation(sim, config["individuals"].asInt()*scaling, config["generations"].asInt()*scaling, config.get("steps", 100).asInt(), perfFile);
+	runSimulation(sim, config["individuals"].asDouble()*scaling, config["generations"].asDouble()*scaling, config.get("steps", 100).asInt(), perfFile);
 	
 	// Export results
 	if(perfFile) {
